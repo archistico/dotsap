@@ -6,6 +6,7 @@ $f3->set('DEBUG', 3);
 
 // Appuntamenti
 $f3->route('GET @appuntamenti: /appuntamenti', '\App\Appuntamenti->Tabella');
+$f3->route('GET @giorno: /appuntamenti/@giorno', '\App\Appuntamenti->TabellaGiorno');
 
 // Entrate/Uscite
 $f3->route('GET @lista: /lista', '\App\Movimento->Lista');

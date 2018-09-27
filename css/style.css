@@ -1,8 +1,43 @@
 body {
   padding-top: 3.5rem;
+  line-height: 1.0;
 }
 
 .jumbotron {
   padding-top: 1em;
   padding-bottom: 1em;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.tabella-giorno {
+  font-size: 16px;
+  font-weight: bold;
+  background-color: teal;
+  border: 3px;
+  border-color: teal;
+  color: white;
+  text-align: center;
+}
+
+.tabella-orario {
+  font-size: 12px;
+  width: 50px;
+}
+
+.tabella-persona {
+  font-size: 12px;
+  vertical-align: top;
+}
+
+.tabella-btn {
+  font-size: 12px;
+  font-weight: bold;
+  width: 32px;
+}
+
+.btn.btn-rect {
+  border-radius: 0;
 }

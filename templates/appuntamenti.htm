@@ -5,6 +5,48 @@
 </style>
 <div class="row">
     <div class="col-md-12">
-        <a class="btn btn-info btn-block btn-lg" href="">TESTO MOLTO LUNGO</a>
+        <p class="font-weight-bold text-center">
+            <a class="btn" href="{{@BASE}}{{ 'appuntamenti' | alias }}/{{ @lunediPrecedente }}"><i class="fas fa-angle-double-left fa-2x"></i></a>
+            <span class="uppercase">Settimana {{ @lunedi }}/{{ @domenica }}</span>
+            <a class="btn" href="{{@BASE}}{{ 'appuntamenti' | alias }}/{{ @lunediSuccessivo }}"><i class="fas fa-angle-double-right fa-2x"></i></a>
+        </p>
     </div>
 </div>
+
+<!-- DIV CALENDARIO -->
+<div class="row">
+    <repeat group="{{ @giorniAttivi }}" value="{{ @giorno }}">
+        <div class="col-md-3 p-1">
+            <table class="table table-bordered table-sm">
+                <thead>
+                    <tr class="tabella-giorno">
+                        <th scope="col" colspan="3">
+                            <!-- NOME GIORNO E DATA --> {{ @giorno }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <repeat group="{{ @orari }}" value="{{ @ora }}">
+                        <tr>
+                            <th scope="row" class="tabella-orario">
+                                <!-- ORA -->{{ @ora }}
+                            </th>
+                            <check if="{{ @giorno=='Lunedì' }}">
+                                <true>
+                                    <td><span class="tabella-persona">
+                                            <!-- COGNOME NOME --></span><span class="tabella-nota">
+                                            <!-- NOTE --></span></td>
+                                    <td class="tabella-btn"><button type="button" class="btn btn-danger btn-sm btn-block btn-rect">X</button></td>
+                                </true>
+                                <false>
+                                    <td colspan="2"><button type="button" class="btn btn-light btn-sm btn-block btn-rect">+</button></td>
+                                </false>
+                            </check>
+                        </tr>
+                    </repeat>
+                </tbody>
+            </table>
+        </div>
+    </repeat>
+</div>
+<!-- END DIV CALENDARIO -->
