@@ -1,0 +1,6 @@
+{
+    "require": {
+        "bcosca/fatfree": "^3.6",
+        "twbs/bootstrap": "4.1.3"
+    }
+}

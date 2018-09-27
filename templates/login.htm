@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    <!-- Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="{{@BASE}}\css\login.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4">
+            <h1>LOGIN</h1>
+            <form method="POST" action="{{@BASE}}{{ 'loginCheck' | alias }}" name="login_form">
+                <div class="form-group">
+                    <label for="utente">Nome utente</label>
+                    <input type="text" class="form-control" id="utente" placeholder="Nome Utente" name="utente">
+                </div>
+                <div class="form-group">
+                    <label for="p">Password</label>
+                    <input type="password" class="form-control" placeholder="Password" name="p" id="password" onkeydown="if (event.keyCode == 13) { formhash(this.form, this.form.password); this.form.submit(); return false; }">
+                </div>
+                <input type="hidden" name="token" value="{{ @token }}">
+                <input type="hidden" name="password">
+                <input type="button" class="btn btn-primary btn-block btn-lg" value="Login" onclick="formhash(this.form, this.form.password);"
+                />
+            </form>
+        </div>
+
+        <div class="col-md-4"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <!-- bootstrap style-->
+            <F3:repeat group="{{ \App\Flash::instance()->getMessages() }}" value="{{ @msg }}">
+                <div class="alert alert-{{ @msg.status }} alert-dismissable">
+                    {{ @msg.text | esc }}
+                </div>
+            </F3:repeat>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <script src="{{@BASE}}/js/sha512.js"></script>
+    <script>
+        function formhash(form, password) {
+            // Crea un elemento di input che verrà usato come campo di output per la password criptata.
+            var p = document.createElement("input");
+            // Aggiungi un nuovo elemento al tuo form.
+            form.appendChild(p);
+            p.name = "p";
+            p.type = "hidden"
+            p.value = hex_sha512(password.value);
+            // Assicurati che la password non venga inviata in chiaro.
+            password.value = "";
+            // Come ultimo passaggio, esegui il 'submit' del form.
+            form.submit();
+        }
+    </script>
+</body>
+
+</html>

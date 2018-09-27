@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                        <th scope="col">Data</th>
+                    <th scope="col" class="d-none d-sm-table-cell">Categoria</th>
+                    <th scope="col" class="text-right">Importo</th>
+                    <th scope="col" class="d-none d-sm-table-cell">Note</th>
+                    <th scope="col">#</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <repeat group="{{ @lista }}" value="{{ @item }}">
+                    <tr>
+                        <td>{{ @convertiData(@item.giorno) }}</td>
+                        <td class="d-none d-sm-table-cell">{{ @unisci(@item.des1,@item.des2,@item.des3,@item.des4) }}</td>
+                        <td class="text-right">{{ @euro(@item.importo) }}</td>
+                        <td class="d-none d-sm-table-cell">{{ @item.note }}</td>
+                        <th scope="row"><a href="cancella/{{ @item.id }}" class="btn btn-danger btn-sm">X</a></th>
+                    </tr>
+                </repeat>
+            </tbody>
+        </table>
+    </div>
+</div>

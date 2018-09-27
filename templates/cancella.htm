@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="col-md-12">
+        Confermi di voler cancellare il movimento con id: {{ @id }} ?
+        <form method="POST" action="{{@BASE}}{{ 'sopprimi' | alias }}">
+            <input type="hidden" name="id" value="{{ @id }}">
+            <button type="submit" class="btn btn-danger btn-block btn-lg">Cancella</button>
+        </form>
+    </div>
+</div>
