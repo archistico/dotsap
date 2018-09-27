@@ -34,4 +34,9 @@ class ListaOrari
         }
         return $risultato;
     }
+
+    public function GetLista()
+    {
+        return $this->orari;
+    }
 }

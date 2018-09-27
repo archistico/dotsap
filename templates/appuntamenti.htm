@@ -12,11 +12,12 @@
         </p>
     </div>
 </div>
+
 <!-- DIV CALENDARIO -->
 <div class="row">
     <ul>
-    <repeat group="{{ @lista }}" value="{{ @appuntamento }}">
-        <li>{{ @appuntamento.giorno }} {{ @appuntamento.ora }}</li>   
+    <repeat group="{{ @tabella }}" value="{{ @giorno }}">
+        <li>{{ @giorno.data }} {{ @giorno.giorno }} {{ @giorno.ora }} {{ @giorno.ambulatorio }} {{ @giorno.persona }}</li>    
     </repeat>
     </ul>
 </div>
@@ -24,23 +25,23 @@
 
 <!-- DIV CALENDARIO -->
 <div class="row">
-    <repeat group="{{ @giorniAttivi }}" value="{{ @giorno }}">
+    <repeat group="{{ @tabella.giorni }}" value="{{ @giorno }}">
         <div class="col-md-3 p-1">
             <table class="table table-bordered table-sm">
                 <thead>
                     <tr class="tabella-giorno">
                         <th scope="col" colspan="3">
-                            <!-- NOME GIORNO E DATA --> {{ @giorno }}
+                            <!-- NOME GIORNO E DATA --> {{ @giorno.giorno }} - {{ @giorno.data }}
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <repeat group="{{ @orari }}" value="{{ @ora }}">
+                    <repeat group="{{ @listaOrari }}" value="{{ @orario }}">
                         <tr>
                             <th scope="row" class="tabella-orario">
                                 <!-- ORA -->{{ @ora }}
                             </th>
-                            <check if="{{ @giorno=='Lunedì' }}">
+                            <check if="{{ @giorno.giorno=='Lunedì' }}">
                                 <true>
                                     <td><span class="tabella-persona">
                                             <!-- COGNOME NOME --></span><span class="tabella-nota">
