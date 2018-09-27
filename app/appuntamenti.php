@@ -32,8 +32,20 @@ class Appuntamenti
             "18:00","18:15","18:30","18:45",
             "19:00","19:15","19:30","19:45"
         ];
-
         $f3->set('orari', $orari);
+
+        // Lista giorni
+        // AddGiorno('Lunedì', '10/10/2018');
+        // Lista orari per ogni giorno
+        // AddOrario('8:00', 'Persona', 'Note')
+        // ListaVisualizzazione
+        // Add($lunedi, $martedi, $mercoledi, $venerdi)
+
+        $lista = new \App\ListaOrari();
+        $lista->Add(new \App\Orario('Lunedì', '8:00', true));
+        $lista->Add(new \App\Orario('Lunedì', '8:15', true));
+
+        $f3->set('lista', $lista->ToArray());
 
         $f3->set('lunedi', '10-10-2018');
         $f3->set('domenica', '16-10-2018');

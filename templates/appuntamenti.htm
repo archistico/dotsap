@@ -12,6 +12,15 @@
         </p>
     </div>
 </div>
+<!-- DIV CALENDARIO -->
+<div class="row">
+    <ul>
+    <repeat group="{{ @lista }}" value="{{ @appuntamento }}">
+        <li>{{ @appuntamento.giorno }} {{ @appuntamento.ora }}</li>   
+    </repeat>
+    </ul>
+</div>
+<!-- END DIV CALENDARIO -->
 
 <!-- DIV CALENDARIO -->
 <div class="row">
