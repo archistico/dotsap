@@ -1,4 +1,4 @@
-# DOTSAP
+# DOT'S AP
 
 #### Memo
 - git config credential.helper 'store'
