@@ -224,6 +224,7 @@ class Appuntamenti
         $listaAppuntamenti = new \App\ListaAppuntamenti();
         $listaAppuntamenti->Add(new \App\Appuntamento('24/09/2018', '8:30', 'Emilie Rollandin', '', 0, 0, 0));
         $listaAppuntamenti->Add(new \App\Appuntamento('25/09/2018', '9:00', 'Primo', '', 0, 0, 0));
+        $listaAppuntamenti->Add(new \App\Appuntamento('24/09/2018', '9:00', 'Provola', 'punti', 0, 0, 0));
         $listaAppuntamenti->Add(new \App\Appuntamento('25/09/2018', '9:15', 'Secondo', '', 0, 0, 0));
 
         $tabella = new Tabella($listaGiorni, $listaOrari, $listaAppuntamenti);

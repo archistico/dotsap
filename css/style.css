@@ -31,6 +31,12 @@ body {
   vertical-align: top;
 }
 
+.tabella-nota {
+  font-size: 12px;
+  font-style: italic;
+  vertical-align: top;
+}
+
 .tabella-btn {
   font-size: 12px;
   font-weight: bold;
@@ -39,4 +45,8 @@ body {
 
 .btn.btn-rect {
   border-radius: 0;
+}
+
+.btn-gray {
+  background-color: lightgray;
 }

@@ -28,4 +28,14 @@ class ListaGiorni
     {
         return $this->giorni;
     }
+
+    public function CercaGiornoSettimana($data)
+    {
+        // cerca il giorno della settimana
+        foreach($this->giorni as $giorno) {
+            if($giorno->data == $data) {
+                return $giorno->giorno;
+            }
+        }
+    }
 }

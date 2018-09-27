@@ -31,29 +31,35 @@ class Tabella
 
     public function ToArray()
     {
-        $arr = [];
-        $giorni = [];
-        $orari = [];
+        $arrs = [];
+        $giorni = $this->listaGiorni->ToArray();
+        $orari = $this->listaOrari->ToArray();
+        $appuntamenti = $this->listaAppuntamenti->ToArray();
 
-        foreach ($this->listaGiorni->getLista() as $giorno) {
-            foreach ($this->listaOrari->getLista() as $orario) {
-                foreach ($this->listaAppuntamenti->getLista() as $appuntamento) {
-                    $add = [];
-                    if (($giorno->giorno == $orario->giorno) && ($giorno->data == $appuntamento->data) && ($orario->ora == $appuntamento->ora)) {
-                        $add = array_merge($giorno->ToArray(), $orario->ToArray(), $appuntamento->ToArray());
-                    } else {
-                        $add = array_merge($giorno->ToArray(), $orario->ToArray());
+        foreach ($giorni as $giorno) {
+            $arrs[] = [
+                'data' => $giorno['data'],
+                'giorno' => $giorno['giorno'],
+                'orari' => $this->listaOrari->CercaDaGiorno($giorno['giorno']),
+            ];
+        }
+
+        foreach ($appuntamenti as $appuntamento) {
+            // Se stessa data e stessa ora allora aggiungi dati
+            $data = $appuntamento['data'];
+            $ora = $appuntamento['ora'];
+
+            for ($c_giorno = 0; $c_giorno < count($arrs); $c_giorno++) {
+                if($arrs[$c_giorno]['data'] == $data) {
+                    for ($c_ora = 0; $c_ora < count($arrs[$c_giorno]['orari']); $c_ora++) {
+                        if($ora == $arrs[$c_giorno]['orari'][$c_ora]['ora']) {
+                            $arrs[$c_giorno]['orari'][$c_ora] = array_merge($arrs[$c_giorno]['orari'][$c_ora], $appuntamento);
+                        }
                     }
-                    $arr[] = $add;
-                }
-
+                }                
             }
         }
 
-        /* echo "<pre>";
-        var_dump($arr);
-        echo "</pre>"; */
-
-        return $arr;
+        return $arrs;
     }
 }

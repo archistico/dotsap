@@ -30,7 +30,7 @@ class ListaOrari
     {
         $risultato = [];
         foreach ($this->orari as $orario) {
-            $risultato[] = array('giorno'=> $orario->giorno, 'ora'=>$orario->ora, 'attivo'=>$orario->attivo);
+            $risultato[] = array('giorno' => $orario->giorno, 'ora' => $orario->ora, 'attivo' => $orario->attivo);
         }
         return $risultato;
     }
@@ -38,5 +38,16 @@ class ListaOrari
     public function GetLista()
     {
         return $this->orari;
+    }
+
+    public function CercaDaGiorno($giorno)
+    {
+        $risultato = [];
+        foreach ($this->orari as $orario) {
+            if($orario->giorno == $giorno) {
+                $risultato[] = array('ora' => $orario->ora, 'attivo' => $orario->attivo);
+            }
+        }
+        return $risultato;
     }
 }

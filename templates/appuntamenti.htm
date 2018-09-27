@@ -15,17 +15,7 @@
 
 <!-- DIV CALENDARIO -->
 <div class="row">
-    <ul>
     <repeat group="{{ @tabella }}" value="{{ @giorno }}">
-        <li>{{ @giorno.data }} {{ @giorno.giorno }} {{ @giorno.ora }} {{ @giorno.ambulatorio }} {{ @giorno.persona }}</li>    
-    </repeat>
-    </ul>
-</div>
-<!-- END DIV CALENDARIO -->
-
-<!-- DIV CALENDARIO -->
-<div class="row">
-    <repeat group="{{ @tabella.giorni }}" value="{{ @giorno }}">
         <div class="col-md-3 p-1">
             <table class="table table-bordered table-sm">
                 <thead>
@@ -36,20 +26,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <repeat group="{{ @listaOrari }}" value="{{ @orario }}">
+                    <repeat group="{{ @giorno.orari }}" value="{{ @orario }}">
                         <tr>
                             <th scope="row" class="tabella-orario">
-                                <!-- ORA -->{{ @ora }}
+                                <!-- ORA -->{{ @orario.ora }}
                             </th>
-                            <check if="{{ @giorno.giorno=='Lunedì' }}">
+                            <check if="{{ @orario.persona!='' }}">
                                 <true>
-                                    <td><span class="tabella-persona">
-                                            <!-- COGNOME NOME --></span><span class="tabella-nota">
-                                            <!-- NOTE --></span></td>
+                                    <td>
+                                        <span class="tabella-persona">{{ @orario.persona }}</span>
+                                        <check if="{{ @orario.nota!='' }}">
+                                            <true>
+                                                <span class="tabella-nota">({{ @orario.nota }})</span>
+                                            </true>
+                                        </check>
+                                    </td>
                                     <td class="tabella-btn"><button type="button" class="btn btn-danger btn-sm btn-block btn-rect">X</button></td>
                                 </true>
                                 <false>
-                                    <td colspan="2"><button type="button" class="btn btn-light btn-sm btn-block btn-rect">+</button></td>
+                                    <check if="{{ @orario.attivo==true }}">
+                                        <true>
+                                            <td colspan="2"><button type="button" class="btn btn-light btn-sm btn-block btn-rect">+</button></td>
+                                        </true>
+                                        <false>
+                                            <td colspan="2"><button type="button" class="btn btn-gray btn-sm btn-block btn-rect">+</button></td>
+                                        </false>
+                                    </check>
                                 </false>
                             </check>
                         </tr>
