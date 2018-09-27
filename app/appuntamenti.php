@@ -16,7 +16,7 @@ class Appuntamenti
     public function Tabella($f3)
     {
         $f3->set('titolo', 'Appuntamenti');
-        $f3->set('contenuto', 'nuovo.htm');
+        $f3->set('contenuto', 'appuntamenti.htm');
         echo \Template::instance()->render('templates/base.htm');
     }
     
