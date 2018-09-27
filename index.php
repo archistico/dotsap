@@ -4,6 +4,10 @@ $f3 = \Base::instance();
 $f3->set('CACHE', true);
 $f3->set('DEBUG', 3);
 
+// Appuntamenti
+$f3->route('GET @appuntamenti: /appuntamenti', '\App\Appuntamenti->Tabella');
+
+// Entrate/Uscite
 $f3->route('GET @lista: /lista', '\App\Movimento->Lista');
 $f3->route('GET @home: /', '\App\Movimento->Homepage');
 $f3->route('GET @nuovo: /nuovo', '\App\Movimento->Nuovo');

@@ -2,31 +2,31 @@
   <ul class="navbar-nav mr-auto">
     <li class="nav-item">
       <a class="nav-link <check if=" {{ @titolo=='Home' }} "><true>active</true></check> " href="{{@BASE}}{{ 'home' | alias }}">
-        <span data-feather="home"></span>
         Home
       </a>
     </li>
     <li class="nav-item">
+      <a class="nav-link <check if=" {{ @titolo=='Appuntamenti' }} "><true>active</true></check>" href="{{@BASE}}{{ 'appuntamenti' | alias }}">
+        Appuntamenti
+      </a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link <check if=" {{ @titolo=='Nuovo' }} "><true>active</true></check>" href="{{@BASE}}{{ 'nuovo' | alias }}">
-        <span data-feather="file"></span>
-        Nuovo
+        Nuovo movimento
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link <check if=" {{ @titolo=='Lista' }} "><true>active</true></check>" href="{{@BASE}}{{ 'lista' | alias }}">
-        <span data-feather="layers"></span>
-        Lista
+        Lista movimenti
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link <check if=" {{ @titolo=='Utente' }} "><true>active</true></check>" href="{{@BASE}}{{ 'utente' | alias }}">
-        <span data-feather="file"></span>
-        Utente
+        Utenti
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link <check if=" {{ @titolo=='Logout' }} "><true>active</true></check>" href="{{@BASE}}{{ 'logout' | alias }}">
-        <span data-feather="layers"></span>
         Logout
       </a>
 </li>
