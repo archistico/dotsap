@@ -76,21 +76,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{@BASE}}{{ 'appuntamentomodifica' | alias }}">
+                <form method="POST" action="{{@BASE}}{{ 'appuntamentomodifica' | alias }}" id="form_rimuovi">
                     <div class="form-group">
                         <h3 id="modal-info"></h3>
                         <h3 id="modal-persona"></h3>
                     </div>
-                    <input type="hidden" name="" value="" id="">
-                    <input type="hidden" name="" value="" id="">
-                    <input type="hidden" name="" value="" id="">
+                    <input type="hidden" name="tipologia" value="" id="tipologia">
+                    <input type="hidden" name="data" value="" id="data">
+                    <input type="hidden" name="ora" value="" id="ora">
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Indietro</button>
-                <button type="button" class="btn btn-danger">Annullo</button>
-                <button type="button" class="btn btn-danger">Fatto</button>
-                <button type="button" class="btn btn-danger">Non presentato</button>
+                <button type="button" class="btn btn-danger" id="btn_annullo">Annullo</button>
+                <button type="button" class="btn btn-warning" id="btn_nonpresentato">Non presentato</button>
+                <button type="button" class="btn btn-success" id="btn_fatto">Fatto</button>
             </div>
         </div>
     </div>
