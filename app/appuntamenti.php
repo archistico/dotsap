@@ -251,8 +251,11 @@ class Appuntamenti
 
     public function Modifica($f3)
     {
+        echo $f3->get('POST.tipologia')."<br>";
+        echo $f3->get('POST.data')."<br>";
+        echo $f3->get('POST.ora')."<br>";
         // ridirigi sulla tabella con la data odierna
-        $f3->reroute('/appuntamenti/2018');
+        //$f3->reroute('/appuntamenti/2018');
     }
     
 }
