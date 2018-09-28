@@ -41,7 +41,9 @@
                                             </true>
                                         </check>
                                     </td>
-                                    <td class="tabella-btn"><button type="button" class="btn btn-danger btn-sm btn-block btn-rect">X</button></td>
+                                    <td class="tabella-btn"><button type="button" class="btn btn-danger btn-sm btn-block btn-rect"
+                                            data-toggle="modal" data-target="#rimuoviModal" data-persona="{{ @orario.persona }}"
+                                            data-ora="{{ @orario.ora }}" data-data="{{ @giorno.data }}">X</button></td>
                                 </true>
                                 <false>
                                     <check if="{{ @orario.attivo==true }}">
@@ -62,3 +64,34 @@
     </repeat>
 </div>
 <!-- END DIV CALENDARIO -->
+
+
+<div class="modal fade" id="rimuoviModal" tabindex="-1" role="dialog" aria-labelledby="rimuoviModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rimuoviModalLabel">Attenzione</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{@BASE}}{{ 'appuntamentomodifica' | alias }}">
+                    <div class="form-group">
+                        <h3 id="modal-info"></h3>
+                        <h3 id="modal-persona"></h3>
+                    </div>
+                    <input type="hidden" name="" value="" id="">
+                    <input type="hidden" name="" value="" id="">
+                    <input type="hidden" name="" value="" id="">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Indietro</button>
+                <button type="button" class="btn btn-danger">Annullo</button>
+                <button type="button" class="btn btn-danger">Fatto</button>
+                <button type="button" class="btn btn-danger">Non presentato</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -226,6 +226,7 @@ class Appuntamenti
         $listaAppuntamenti->Add(new \App\Appuntamento('25/09/2018', '9:00', 'Primo', '', 0, 0, 0));
         $listaAppuntamenti->Add(new \App\Appuntamento('24/09/2018', '9:00', 'Provola', 'punti', 0, 0, 0));
         $listaAppuntamenti->Add(new \App\Appuntamento('25/09/2018', '9:15', 'Secondo', '', 0, 0, 0));
+        $listaAppuntamenti->Add(new \App\Appuntamento('24/09/2018', '9:30', 'Terzo', '', 0, 0, 0));
 
         $tabella = new Tabella($listaGiorni, $listaOrari, $listaAppuntamenti);
         $f3->set('tabella', $tabella->ToArray());
@@ -237,11 +238,18 @@ class Appuntamenti
         $f3->set('lunediSuccessivo', '2018-01-01');
 
         $f3->set('titolo', 'Appuntamenti');
+        $f3->set('script', 'appuntamenti.js');
         $f3->set('contenuto', 'appuntamenti.htm');
         echo \Template::instance()->render('templates/base.htm');
     }
 
     public function Tabella($f3)
+    {
+        // ridirigi sulla tabella con la data odierna
+        $f3->reroute('/appuntamenti/2018');
+    }
+
+    public function Modifica($f3)
     {
         // ridirigi sulla tabella con la data odierna
         $f3->reroute('/appuntamenti/2018');
