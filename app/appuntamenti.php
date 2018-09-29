@@ -257,5 +257,13 @@ class Appuntamenti
         // ridirigi sulla tabella con la data odierna
         //$f3->reroute('/appuntamenti/2018');
     }
+
+    public function Aggiungi($f3)
+    {
+        echo $f3->get('POST.data')."<br>";
+        echo $f3->get('POST.ora')."<br>";
+        // ridirigi sulla tabella con la data odierna
+        //$f3->reroute('/appuntamenti/2018');
+    }
     
 }

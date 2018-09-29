@@ -45,7 +45,7 @@ class ListaOrari
         $risultato = [];
         foreach ($this->orari as $orario) {
             if($orario->giorno == $giorno) {
-                $risultato[] = array('ora' => $orario->ora, 'attivo' => $orario->attivo);
+                $risultato[] = array('ora' => $orario->ora, 'attivo' => $orario->attivo, 'ambulatorio' => $orario->ambulatorio);
             }
         }
         return $risultato;

@@ -33,3 +33,25 @@ function btn_nonpresentato() {
     document.getElementById("tipologia").value='nonpresentato';
     document.getElementById("form_rimuovi").submit();
 }
+
+$('#aggiungiModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); 
+
+    var data = button.data('adddata'); 
+    var ora = button.data('addora'); 
+    var giorno = button.data('addgiorno');
+    var ambulatorio = button.data('addambulatorio'); 
+
+    var modal = $(this)
+    
+    modal.find('#modal-add-data').text(giorno + " " + data);
+    modal.find('#modal-add-ora').text('Ore: ' + ora);
+    modal.find('#modal-add-ambulatorio').text('Ambulatorio: ' + ambulatorio);
+
+    document.getElementById("add-ora").value=ora;
+    document.getElementById("add-data").value=data;
+});
+
+function btn_aggiungi() {
+    document.getElementById("form_aggiungi").submit();
+}

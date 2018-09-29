@@ -48,10 +48,18 @@
                                 <false>
                                     <check if="{{ @orario.attivo==true }}">
                                         <true>
-                                            <td colspan="2"><button type="button" class="btn btn-light btn-sm btn-block btn-rect">+</button></td>
+                                            <td colspan="2">
+                                                <button type="button" class="btn btn-light btn-sm btn-block btn-rect" data-toggle="modal" data-target="#aggiungiModal" data-addambulatorio="{{ @orario.ambulatorio }}" data-addora="{{ @orario.ora }}" data-adddata="{{ @giorno.data }}" data-addgiorno="{{ @giorno.giorno }}">
+                                                    +
+                                                </button>
+                                            </td>
                                         </true>
                                         <false>
-                                            <td colspan="2"><button type="button" class="btn btn-gray btn-sm btn-block btn-rect">+</button></td>
+                                            <td colspan="2">
+                                                <button type="button" class="btn btn-gray btn-sm btn-block btn-rect" data-toggle="modal" data-target="#aggiungiModal" data-addambulatorio="{{ @orario.ambulatorio }}" data-addora="{{ @orario.ora }}" data-adddata="{{ @giorno.data }}" data-addgiorno="{{ @giorno.giorno }}">
+                                                    +
+                                                </button>
+                                            </td>
                                         </false>
                                     </check>
                                 </false>
@@ -65,7 +73,7 @@
 </div>
 <!-- END DIV CALENDARIO -->
 
-
+<!-- MOD RIMUOVI -->
 <div class="modal fade" id="rimuoviModal" tabindex="-1" role="dialog" aria-labelledby="rimuoviModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -95,3 +103,35 @@
         </div>
     </div>
 </div>
+<!-- MOD RIMUOVI FINE -->
+
+<!-- MOD AGGIUNGI -->
+<div class="modal fade" id="aggiungiModal" tabindex="-1" role="dialog" aria-labelledby="aggiungiModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="aggiungiModalLabel">Nuovo appuntamento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{@BASE}}{{ 'appuntamentoaggiungi' | alias }}" id="form_aggiungi">
+                    <div class="form-group">
+                        <h3 id="modal-add-data"></h3>
+                        <h3 id="modal-add-ora"></h3>
+                        <h3 id="modal-add-ambulatorio"></h3>
+                    </div>
+                    
+                    <input type="hidden" name="data" value="" id="add-data">
+                    <input type="hidden" name="ora" value="" id="add-ora">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Indietro</button>
+                <button type="button" class="btn btn-success" id="btn_aggiungi" onclick="btn_aggiungi()">Registra</button>
+                </div>
+        </div>
+    </div>
+</div>
+<!-- MOD AGGIUNGI FINE -->
