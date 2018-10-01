@@ -30,7 +30,20 @@ class ListaOrari
     {
         $risultato = [];
         foreach ($this->orari as $orario) {
-            $risultato[] = array('giorno' => $orario->giorno, 'ora' => $orario->ora, 'attivo' => $orario->attivo);
+            $risultato[] = array('giorno' => $orario->giorno, 'ora' => $orario->ora, 'ambulatorio' => $orario->ambulatorio, 'attivo' => $orario->attivo);
+        }
+        return $risultato;
+    }
+
+    public function ToSQL()
+    {
+        $risultato = [];
+        foreach ($this->orari as $orario) {
+            if($orario->attivo == true) {
+                $risultato[] = "INSERT INTO orario VALUES (NULL, '$orario->giorno', '$orario->ora', '$orario->ambulatorio', 1);";
+            } else {
+                $risultato[] = "INSERT INTO orario VALUES (NULL, '$orario->giorno', '$orario->ora', '$orario->ambulatorio', 0);";
+            }
         }
         return $risultato;
     }
