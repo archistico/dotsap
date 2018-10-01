@@ -15,14 +15,15 @@ class Appuntamenti
         }
     }
 
-    public function TabellaGiorno($f3)
+    public function TabellaGiorno($f3, $params)
     {
+        $settimana = new \App\Settimana($params['data']);
 
         $listaGiorni = new \App\ListaGiorni();
-        $listaGiorni->Add(new \App\Giorno('24/09/2018', 'Lunedì'));
-        $listaGiorni->Add(new \App\Giorno('25/09/2018', 'Martedì'));
-        $listaGiorni->Add(new \App\Giorno('26/09/2018', 'Mercoledì'));
-        $listaGiorni->Add(new \App\Giorno('28/09/2018', 'Venerdì'));
+        $listaGiorni->Add(new \App\Giorno($settimana->lunedi->format('d/m/Y'), 'Lunedì'));
+        $listaGiorni->Add(new \App\Giorno($settimana->martedi->format('d/m/Y'), 'Martedì'));
+        $listaGiorni->Add(new \App\Giorno($settimana->mercoledi->format('d/m/Y'), 'Mercoledì'));
+        $listaGiorni->Add(new \App\Giorno($settimana->venerdi->format('d/m/Y'), 'Venerdì'));
 
         $listaOrari = new \App\ListaOrari();
 
@@ -240,11 +241,11 @@ class Appuntamenti
         $tabella = new Tabella($listaGiorni, $listaOrari, $listaAppuntamenti);
         $f3->set('tabella', $tabella->ToArray());
 
-        $f3->set('lunedi', '10-10-2018');
-        $f3->set('domenica', '16-10-2018');
+        $f3->set('lunedi', $settimana->lunedi->format('d-m-Y'));
+        $f3->set('domenica', $settimana->domenica->format('d-m-Y'));
 
-        $f3->set('lunediPrecedente', '2018-01-01');
-        $f3->set('lunediSuccessivo', '2018-01-01');
+        $f3->set('lunediPrecedente', $settimana->lunediPrecedente->format('d-m-Y'));
+        $f3->set('lunediSuccessivo', $settimana->lunediSuccessivo->format('d-m-Y'));
 
         $f3->set('titolo', 'Appuntamenti');
         $f3->set('script', 'appuntamenti.js');
@@ -254,8 +255,9 @@ class Appuntamenti
 
     public function Tabella($f3)
     {
-        // ridirigi sulla tabella con la data odierna
-        $f3->reroute('/appuntamenti/2018');
+        $oggi = new \Datetime();
+        $dmy = $oggi->format('d-m-Y');
+        $f3->reroute('/appuntamenti/'.$dmy);
     }
 
     public function Modifica($f3)
