@@ -20,7 +20,7 @@ $('#rimuoviModal').on('show.bs.modal', function (event) {
 });
 
 function btn_annullo() {
-    document.getElementById("tipologia").value='annullo';
+    document.getElementById("tipologia").value='annullato';
     document.getElementById("form_rimuovi").submit();
 }
 
@@ -30,7 +30,7 @@ function btn_fatto() {
 }
 
 function btn_nonpresentato() {
-    document.getElementById("tipologia").value='nonpresentato';
+    document.getElementById("tipologia").value='assente';
     document.getElementById("form_rimuovi").submit();
 }
 
@@ -53,5 +53,6 @@ $('#aggiungiModal').on('show.bs.modal', function (event) {
 });
 
 function btn_aggiungi() {
+    // controllare che il nome e cognome siano inseriti
     document.getElementById("form_aggiungi").submit();
 }
