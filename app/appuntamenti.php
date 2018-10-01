@@ -262,6 +262,8 @@ class Appuntamenti
     {
         echo $f3->get('POST.data')."<br>";
         echo $f3->get('POST.ora')."<br>";
+        echo $f3->get('POST.persona')."<br>";
+        echo $f3->get('POST.note')."<br>";
         // ridirigi sulla tabella con la data odierna
         //$f3->reroute('/appuntamenti/2018');
     }
