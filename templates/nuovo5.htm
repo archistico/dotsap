@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <p>Nuovo movimento</p>
+        <p>Nuovo movimento: {{ @categoria1 }} / {{ @categoria2 }} / {{ @categoria3 }} / {{ @categoria4 }}</p>
         <form method="POST" action="{{@BASE}}{{ 'registra' | alias }}">
             <div class="form-group">
                 <label for="InputData">Data</label>

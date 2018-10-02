@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-md-12">
-        <p>Nuovo movimento</p>
+        <p>Nuovo movimento: {{ @categoria1 }}</p>
         <repeat group="{{ @categoria2 }}" value="{{ @item }}">
-            <a class="btn btn-info btn-block btn-lg" href="{{@BASE}}{{ 'nuovo' | alias }}/{{ @cat1 }}/{{ @item.id }}">{{ @item.cat1 }} / {{ @item.cat2 }}</a>
+            <a class="btn btn-info btn-block btn-lg" href="{{@BASE}}{{ 'nuovo' | alias }}/{{ @cat1 }}/{{ @item.id }}">{{ @item.cat2 }}</a>
         </repeat>
     </div>
 </div>
