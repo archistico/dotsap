@@ -78,12 +78,31 @@ class Intervallo
         return $this->secondi + $this->minuti * 60 + $this->ore * 60 * 60 + $this->giorni * 60 * 60 * 24;
     }
 
-    public function SecondiInIntervallo($secondi)
+    public function SecondiInIntervallo($inputSeconds) 
     {
-        $this->giorni = floor($secondi / 86400);
-        $this->ore = floor($secondi / 3600);
-        $this->minuti = floor(($secondi / 60) % 60);
-        $this->secondi = $secondi % 60;
+        $secondsInAMinute = 60;
+        $secondsInAnHour = 60 * $secondsInAMinute;
+        $secondsInADay = 24 * $secondsInAnHour;
+    
+        // Extract days
+        $days = floor($inputSeconds / $secondsInADay);
+    
+        // Extract hours
+        $hourSeconds = $inputSeconds % $secondsInADay;
+        $hours = floor($hourSeconds / $secondsInAnHour);
+    
+        // Extract minutes
+        $minuteSeconds = $hourSeconds % $secondsInAnHour;
+        $minutes = floor($minuteSeconds / $secondsInAMinute);
+    
+        // Extract the remaining seconds
+        $remainingSeconds = $minuteSeconds % $secondsInAMinute;
+        $seconds = ceil($remainingSeconds);
+    
+        $this->giorni = (int)$days;
+        $this->ore = (int)$hours;
+        $this->minuti = (int)$minutes;
+        $this->secondi = (int)$seconds;
     }
 
     public function Media($it, $num)
