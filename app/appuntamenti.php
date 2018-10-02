@@ -15,6 +15,73 @@ class Appuntamenti
         }
     }
 
+    public function Homepage($f3)
+    {
+        $db = new \DB\SQL('sqlite:.database.sqlite');
+
+        $sql = 'SELECT SUM(importo) AS somma';
+        $sql .= ' FROM movimenti';
+        $sql .= ' WHERE cat1 = 2';
+        $risultato = $db->exec($sql);
+        $totentrate = $risultato[0]['somma'];
+
+        $sql = 'SELECT SUM(importo) AS somma';
+        $sql .= ' FROM movimenti';
+        $sql .= ' WHERE cat1 = 1';
+        $risultato = $db->exec($sql);
+        $totuscite = $risultato[0]['somma'];
+
+        $differenza = $totentrate + $totuscite;
+
+        $sql = 'SELECT categoria1.descrizione AS des1, categoria2.descrizione AS des2, SUM(importo) AS subtotale';
+        $sql .= ' FROM movimenti';
+        $sql .= ' JOIN categoria1 ON movimenti.cat1 = categoria1.id';
+        $sql .= ' JOIN categoria2 ON movimenti.cat2 = categoria2.id';
+        $sql .= ' WHERE movimenti.cat1 = 1';
+        $sql .= ' GROUP BY categoria2.id';
+        $f3->set('listauscite2', $db->exec($sql));
+
+        $sql = 'SELECT categoria1.descrizione AS des1, categoria2.descrizione AS des2, SUM(importo) AS subtotale';
+        $sql .= ' FROM movimenti';
+        $sql .= ' JOIN categoria1 ON movimenti.cat1 = categoria1.id';
+        $sql .= ' JOIN categoria2 ON movimenti.cat2 = categoria2.id';
+        $sql .= ' WHERE movimenti.cat1 = 2';
+        $sql .= ' GROUP BY categoria2.id';
+        $f3->set('listaentrate2', $db->exec($sql));
+
+        $f3->set('totentrate', $totentrate);
+        $f3->set('totuscite', $totuscite);
+        $f3->set('differenza', $differenza);
+
+        $f3->set('euro', function ($i) {
+            if ($i >= 0) {
+                return "+" . number_format((float) $i, 2, '.', '') . " €";
+            } else {
+                return number_format((float) $i, 2, '.', '') . " €";
+            }
+        }
+        );
+
+        $sql = "SELECT COUNT(*) as countfatti FROM appuntamenti WHERE annullato = 0 AND fatto = 1 AND assente = 0";
+        $risultato = $db->exec($sql);
+        $fatti = $risultato[0]['countfatti'];
+        $f3->set('fatti', $fatti);
+
+        $sql = "SELECT COUNT(*) as countannullati FROM appuntamenti WHERE annullato = 1 AND fatto = 0 AND assente = 0";
+        $risultato = $db->exec($sql);
+        $annullati = $risultato[0]['countannullati'];
+        $f3->set('annullati', $annullati);
+
+        $sql = "SELECT COUNT(*) as countassenti FROM appuntamenti WHERE annullato = 0 AND fatto = 0 AND assente = 1";
+        $risultato = $db->exec($sql);
+        $assenti = $risultato[0]['countassenti'];
+        $f3->set('assenti', $assenti);
+
+        $f3->set('titolo', 'Home');
+        $f3->set('contenuto', 'homepage.htm');
+        echo \Template::instance()->render('templates/base.htm');
+    }
+
     public function TabellaGiorno($f3, $params)
     {
         $settimana = new \App\Settimana($params['data']);
@@ -257,7 +324,7 @@ class Appuntamenti
     {
         $oggi = new \Datetime();
         $dmy = $oggi->format('d-m-Y');
-        $f3->reroute('/appuntamenti/'.$dmy);
+        $f3->reroute('/appuntamenti/' . $dmy);
     }
 
     public function Modifica($f3)
@@ -292,7 +359,7 @@ class Appuntamenti
         $db->commit();
 
         // ridirigi sulla tabella con la data odierna
-        $f3->reroute('/appuntamenti/'.$lunedi);
+        $f3->reroute('/appuntamenti/' . $lunedi);
     }
 
     public function Aggiungi($f3)
@@ -313,7 +380,7 @@ class Appuntamenti
         $db->commit();
 
         // ridirigi sulla tabella con la data odierna
-        $f3->reroute('/appuntamenti/'.$lunedi);
+        $f3->reroute('/appuntamenti/' . $lunedi);
     }
 
 }

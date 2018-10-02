@@ -4,6 +4,8 @@ $f3 = \Base::instance();
 $f3->set('CACHE', true);
 $f3->set('DEBUG', 3);
 
+$f3->route('GET @home: /', '\App\Appuntamenti->Homepage');
+
 // Appuntamenti
 $f3->route('GET @appuntamenti: /appuntamenti', '\App\Appuntamenti->Tabella');
 $f3->route('GET @giorno: /appuntamenti/@data', '\App\Appuntamenti->TabellaGiorno');
@@ -12,7 +14,6 @@ $f3->route('POST @appuntamentoaggiungi: /appuntamenti/aggiungi', '\App\Appuntame
 
 // Entrate/Uscite
 $f3->route('GET @lista: /lista', '\App\Movimento->Lista');
-$f3->route('GET @home: /', '\App\Movimento->Homepage');
 $f3->route('GET @nuovo: /nuovo', '\App\Movimento->Nuovo');
 $f3->route('GET @nuovo2: /nuovo/@num', '\App\Movimento->Nuovo2');
 $f3->route('GET @nuovo3: /nuovo/@cat1/@cat2', '\App\Movimento->Nuovo3');
