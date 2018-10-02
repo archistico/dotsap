@@ -77,6 +77,11 @@ class Appuntamenti
         $assenti = $risultato[0]['countassenti'];
         $f3->set('assenti', $assenti);
 
+        $sql = "SELECT COUNT(*) as countprenotati FROM appuntamenti WHERE annullato = 0 AND fatto = 0 AND assente = 0";
+        $risultato = $db->exec($sql);
+        $prenotati = $risultato[0]['countprenotati'];
+        $f3->set('prenotati', $prenotati);
+
         $f3->set('titolo', 'Home');
         $f3->set('contenuto', 'homepage.htm');
         echo \Template::instance()->render('templates/base.htm');

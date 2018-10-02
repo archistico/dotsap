@@ -1,23 +1,31 @@
 <h2>Appuntamenti</h2>
 <div class="row">
-    <div class="col-md-4">
-        <div class="alert alert-success" role="alert">
-            <h4 class="alert-heading"><i class="fas fa-file-medical"></i> Visitati</h4>
+    <div class="col-md-3">
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading"><i class="fas fa-pills"></i> Visitati</h4>
             <p>Totale delle visite eseguite</p>
             <hr>
             <h5 class="mb-0">{{ @fatti }}</h5>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="alert alert-danger" role="alert">
+    <div class="col-md-3">
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading"><i class="fas fa-file-medical"></i> Prenotati</h4>
+            <p>Totale mutuati prenotati</p>
+            <hr>
+            <h5 class="mb-0">{{ @prenotati }}</h5>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="alert alert-primary" role="alert">
             <h4 class="alert-heading"><i class="fas fa-ban"></i> Annullati</h4>
             <p>Totale delle visite annullate</p>
             <hr>
             <h5 class="mb-0">{{ @annullati }}</h5>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="alert alert-dark" role="alert">
+    <div class="col-md-3">
+        <div class="alert alert-primary" role="alert">
             <h4 class="alert-heading"><i class="fas fa-eye-slash"></i> Assenti</h4>
             <p>Totale degli assenti</p>
             <hr>
