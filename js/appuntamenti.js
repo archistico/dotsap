@@ -7,7 +7,7 @@ $('#rimuoviModal').on('show.bs.modal', function (event) {
     modal.find('.modal-title').text('Attenzione');
     modal.find('#modal-info').text('Rimuovo appuntamento del: ' + data + ' delle ore ' + ora + '?');
     modal.find('#modal-persona').text('Prenotato: ' + persona);
-
+    
     /*
     <input type="hidden" name="tipologia" value="" id="tipologia">
     <input type="hidden" name="data" value="" id="data">
@@ -34,6 +34,11 @@ function btn_nonpresentato() {
     document.getElementById("form_rimuovi").submit();
 }
 
+function btn_cancella() {
+    document.getElementById("tipologia").value = 'cancella';
+    document.getElementById("form_rimuovi").submit();
+}
+
 $('#aggiungiModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
 
@@ -50,6 +55,10 @@ $('#aggiungiModal').on('show.bs.modal', function (event) {
 
     document.getElementById("add-ora").value = ora;
     document.getElementById("add-data").value = data;
+
+    setTimeout(function (){
+        document.getElementById("persona").focus();
+    }, 500);
 });
 
 function btn_aggiungi() {

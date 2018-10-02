@@ -273,6 +273,9 @@ class Appuntamenti
         $jd = juliantojd($data_array[1], $data_array[0], $data_array[2]);
 
         switch ($tipologia) {
+            case "cancella":
+                $sql = "DELETE FROM appuntamenti WHERE data=$jd AND ora='$ora'";
+                break;
             case "annullato":
                 $sql = "UPDATE appuntamenti SET annullato = 1 WHERE data=$jd AND ora='$ora'";
                 break;

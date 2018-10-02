@@ -97,7 +97,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Indietro</button>
-                <button type="button" class="btn btn-danger" id="btn_annullo" onclick="btn_annullo()">Annullo</button>
+                <button type="button" class="btn btn-danger" id="btn_annullo" onclick="btn_cancella()">Cancella</button>
+                <button type="button" class="btn btn-danger" id="btn_annullo" onclick="btn_annullo()">Annullato</button>
                 <button type="button" class="btn btn-warning" id="btn_nonpresentato" onclick="btn_nonpresentato()">Assente</button>
                 <button type="button" class="btn btn-success" id="btn_fatto" onclick="btn_fatto()">Fatto</button>
             </div>
@@ -128,7 +129,7 @@
                     <hr>
                         <div class="form-group">
                             <label for="InputNote">Mutuato</label>
-                            <input type="text" class="form-control" id="persona" placeholder="Cognome Nome" name="persona" required>
+                            <input type="text" class="form-control" id="persona" placeholder="Cognome Nome" name="persona" required autofocus>
                         </div>
                         <div class="form-group">
                             <label for="InputNote">Note</label>
