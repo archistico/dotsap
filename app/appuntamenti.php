@@ -86,14 +86,13 @@ class Appuntamenti
         $sql = "SELECT * FROM appuntamenti WHERE NOT inizio = '' AND NOT fine = '' AND fatto = 1";
         $risultato = $db->exec($sql);
         
-        
+        $totale = new \App\Intervallo();
         foreach($risultato as $listaAppuntamenti) {
-            // 2018-10-02T18:18:34+02:00
-            //$inizio = Carbon::parse($listaAppuntamenti['inizio']);
-            //$fine = Carbon::parse($listaAppuntamenti['fine']);  
+            $diff = \App\Utilita::TimeDiffToIntervallo($listaAppuntamenti['inizio'], $listaAppuntamenti['fine']);
+            $totale->Somma($diff);
         }
 
-        $f3->set('totalevisitato', 'da calcolare');
+        $f3->set('totalevisitato', $totale->ToString());
         $f3->set('titolo', 'Home');
         $f3->set('contenuto', 'homepage.htm');
         echo \Template::instance()->render('templates/base.htm');
