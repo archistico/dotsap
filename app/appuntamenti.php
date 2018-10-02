@@ -267,6 +267,7 @@ class Appuntamenti
         $tipologia = $f3->get('POST.tipologia');
         $data = $f3->get('POST.data');
         $ora = $f3->get('POST.ora');
+        $lunedi = $f3->get('POST.tabelladata');
 
         $data_array = explode("/", $data);
         $jd = juliantojd($data_array[1], $data_array[0], $data_array[2]);
@@ -288,7 +289,7 @@ class Appuntamenti
         $db->commit();
 
         // ridirigi sulla tabella con la data odierna
-        $f3->reroute('/appuntamenti/2018');
+        $f3->reroute('/appuntamenti/'.$lunedi);
     }
 
     public function Aggiungi($f3)
@@ -297,6 +298,7 @@ class Appuntamenti
         $ora = $f3->get('POST.ora');
         $persona = $f3->get('POST.persona');
         $note = $f3->get('POST.note');
+        $lunedi = $f3->get('POST.tabelladata');
 
         $db = new \DB\SQL('sqlite:.database.sqlite');
         $data_array = explode("/", $data);
@@ -308,7 +310,7 @@ class Appuntamenti
         $db->commit();
 
         // ridirigi sulla tabella con la data odierna
-        $f3->reroute('/appuntamenti/2018');
+        $f3->reroute('/appuntamenti/'.$lunedi);
     }
 
 }
