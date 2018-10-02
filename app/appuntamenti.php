@@ -87,12 +87,18 @@ class Appuntamenti
         $risultato = $db->exec($sql);
         
         $totale = new \App\Intervallo();
+        $mediavisite = new \App\Intervallo();
+        $numerovisite = 0;
         foreach($risultato as $listaAppuntamenti) {
             $diff = \App\Utilita::TimeDiffToIntervallo($listaAppuntamenti['inizio'], $listaAppuntamenti['fine']);
             $totale->Somma($diff);
+            $numerovisite++;
         }
+        
+        $mediavisite->Media($totale, $numerovisite);
 
         $f3->set('totalevisitato', $totale->ToString());
+        $f3->set('mediavisite', $mediavisite->ToString());
         $f3->set('titolo', 'Home');
         $f3->set('contenuto', 'homepage.htm');
         echo \Template::instance()->render('templates/base.htm');

@@ -19,10 +19,10 @@ class Intervallo
 
     public function Make($giorni, $ore, $minuti, $secondi)
     {
-        $this->giorni = (int)$giorni;
-        $this->ore = (int)$ore;
-        $this->minuti = (int)$minuti;
-        $this->secondi = (int)$secondi;
+        $this->giorni = (int) $giorni;
+        $this->ore = (int) $ore;
+        $this->minuti = (int) $minuti;
+        $this->secondi = (int) $secondi;
     }
 
     public function AddSecondi($secondi)
@@ -60,7 +60,7 @@ class Intervallo
         $this->giorni += $giorni;
     }
 
-    public function ToString() 
+    public function ToString()
     {
         return "$this->giorni giorni, $this->ore ore, $this->minuti minuti e $this->secondi secondi";
     }
@@ -71,5 +71,37 @@ class Intervallo
         $this->AddMinuti($intervallo->minuti);
         $this->AddOre($intervallo->ore);
         $this->AddGiorni($intervallo->giorni);
+    }
+
+    public function ConvertiInSecondi()
+    {
+        return $this->secondi + $this->minuti * 60 + $this->ore * 60 * 60 + $this->giorni * 60 * 60 * 24;
+    }
+
+    public function SecondiInIntervallo($secondi)
+    {
+        $this->giorni = floor($secondi / 86400);
+        $this->ore = floor($secondi / 3600);
+        $this->minuti = floor(($secondi / 60) % 60);
+        $this->secondi = $secondi % 60;
+    }
+
+    public function Media($it, $num)
+    {
+        $this->giorni = 0;
+        $this->ore = 0;
+        $this->minuti = 0;
+        $this->secondi = 0;
+
+        // Converto tutto in secondi
+        $secondi = $it->ConvertiInSecondi();
+        if($secondi > 0 && $num >0) {
+            $media = (int) round($secondi / $num, 0);    
+        } else {
+            return $this;
+        }
+
+        $this->SecondiInIntervallo($media);
+        return $this;
     }
 }
