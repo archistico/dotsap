@@ -1,6 +1,8 @@
 <?php
 namespace App;
 
+use Carbon\Carbon;
+
 class Appuntamenti
 {
     // Bisogna essere loggati
@@ -86,16 +88,13 @@ class Appuntamenti
         $sql = "SELECT * FROM appuntamenti WHERE NOT inizio = '' AND NOT fine = '' AND fatto = 1";
         $risultato = $db->exec($sql);
         
-        $total = new \DateTime('00:00');
-        $maxvisita = new \DateInterval('P0M');
-        $minvisita = new \DateInterval('P0M');
-
         foreach($risultato as $listaAppuntamenti) {
-            $diff = \App\Utilita::TimeDiffToDateinterval($listaAppuntamenti['inizio'], $listaAppuntamenti['fine']);
-            $total->add($diff);
+            $inizio = Carbon::createFromFormat('Y-m-d H', $listaAppuntamenti['inizio']);
+            $fine = Carbon::createFromFormat('Y-m-d H', $listaAppuntamenti['fine']);
+            
         }
 
-        $f3->set('totalevisitato', $total->format("H:i:s"));
+        $f3->set('totalevisitato', '');
         $f3->set('titolo', 'Home');
         $f3->set('contenuto', 'homepage.htm');
         echo \Template::instance()->render('templates/base.htm');
