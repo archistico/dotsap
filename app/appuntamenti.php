@@ -1,10 +1,6 @@
 <?php
 namespace App;
 
-use Carbon\Carbon;
-use Carbon\CarbonInterval;
-
-
 class Appuntamenti
 {
     // Bisogna essere loggati
