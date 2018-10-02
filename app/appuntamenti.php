@@ -82,6 +82,20 @@ class Appuntamenti
         $prenotati = $risultato[0]['countprenotati'];
         $f3->set('prenotati', $prenotati);
 
+        // Calcolo durata media, massima e minima visita, totale
+        $sql = "SELECT * FROM appuntamenti WHERE NOT inizio = '' AND NOT fine = '' AND fatto = 1";
+        $risultato = $db->exec($sql);
+        
+        $total = new \DateTime('00:00');
+        $maxvisita = new \DateInterval('P0M');
+        $minvisita = new \DateInterval('P0M');
+
+        foreach($risultato as $listaAppuntamenti) {
+            $diff = \App\Utilita::TimeDiffToDateinterval($listaAppuntamenti['inizio'], $listaAppuntamenti['fine']);
+            $total->add($diff);
+        }
+
+        $f3->set('totalevisitato', $total->format("H:i:s"));
         $f3->set('titolo', 'Home');
         $f3->set('contenuto', 'homepage.htm');
         echo \Template::instance()->render('templates/base.htm');
@@ -359,7 +373,6 @@ class Appuntamenti
                 $sql = "UPDATE appuntamenti SET fatto = 1, fine='$timestamp' WHERE data=$jd AND ora='$ora' AND fatto = 0 AND annullato = 0 AND assente = 0";
                 break;
             case "parti":
-                //echo \App\Utilita::TimeDiffToMinutes('2018-10-02T15:00:00+02:00','2018-10-02T16:20:00+02:00');
                 $sql = "UPDATE appuntamenti SET inizio='$timestamp' WHERE data=$jd AND ora='$ora' AND fatto = 0 AND annullato = 0 AND assente = 0";
                 break;
         }

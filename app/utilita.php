@@ -11,4 +11,11 @@ class Utilita
         // Converti tutto il minuti
         return $diff->format("%H:%I:%S");
     }
+
+    public static function TimeDiffToDateinterval($inizio, $fine) 
+    {
+        $data_inizio = new \DateTime($inizio);
+        $diff = $data_inizio->diff(new \DateTime($fine));
+        return $diff;
+    }
 }
