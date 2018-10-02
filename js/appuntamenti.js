@@ -1,18 +1,12 @@
 $('#rimuoviModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); // Button that triggered the modal
-    var data = button.data('data'); // Extract info from data-* attributes
-    var ora = button.data('ora'); // Extract info from data-* attributes
-    var persona = button.data('persona'); // Extract info from data-* attributes
+    var button = $(event.relatedTarget);
+    var data = button.data('data');
+    var ora = button.data('ora');
+    var persona = button.data('persona');
     var modal = $(this)
     modal.find('.modal-title').text('Attenzione');
     modal.find('#modal-info').text('Rimuovo appuntamento del: ' + data + ' delle ore ' + ora + '?');
     modal.find('#modal-persona').text('Prenotato: ' + persona);
-    
-    /*
-    <input type="hidden" name="tipologia" value="" id="tipologia">
-    <input type="hidden" name="data" value="" id="data">
-    <input type="hidden" name="ora" value="" id="ora">
-    */
 
     document.getElementById("tipologia").value = 0;
     document.getElementById("data").value = data;
@@ -56,7 +50,7 @@ $('#aggiungiModal').on('show.bs.modal', function (event) {
     document.getElementById("add-ora").value = ora;
     document.getElementById("add-data").value = data;
 
-    setTimeout(function (){
+    setTimeout(function () {
         document.getElementById("persona").focus();
     }, 500);
 });
@@ -74,4 +68,33 @@ $(document).ready(function () {
     if (sessionStorage.scrollTop != "undefined") {
         $(window).scrollTop(sessionStorage.scrollTop);
     }
+});
+
+$('.parti').on("click", function (event) {
+    var button = $(event.currentTarget);
+    var data = button.data('data');
+    var ora = button.data('ora');
+
+    var form = document.createElement("form");
+    var datainput = document.createElement("input");
+    var orainput = document.createElement("input");
+    var lunediinput = document.createElement("input");
+
+    form.method = "POST";
+    form.action = "{{@BASE}}{{ 'appuntamentoparti' | alias }}";
+
+    datainput.value = data;
+    datainput.name = "data";
+    form.appendChild(datainput);
+
+    orainput.value = ora;
+    orainput.name = "ora";
+    form.appendChild(orainput);
+
+    lunediinput.value = '{{ @lunedi }}';
+    lunediinput.name = "tabelladata";
+    form.appendChild(lunediinput);
+
+    document.body.appendChild(form);
+    form.submit();
 });

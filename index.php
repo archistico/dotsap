@@ -11,6 +11,7 @@ $f3->route('GET @appuntamenti: /appuntamenti', '\App\Appuntamenti->Tabella');
 $f3->route('GET @giorno: /appuntamenti/@data', '\App\Appuntamenti->TabellaGiorno');
 $f3->route('POST @appuntamentomodifica: /appuntamenti/modifica', '\App\Appuntamenti->Modifica');
 $f3->route('POST @appuntamentoaggiungi: /appuntamenti/aggiungi', '\App\Appuntamenti->Aggiungi');
+$f3->route('POST @appuntamentoparti: /appuntamenti/parti', '\App\Appuntamenti->Parti');
 
 // Entrate/Uscite
 $f3->route('GET @lista: /lista', '\App\Movimento->Lista');

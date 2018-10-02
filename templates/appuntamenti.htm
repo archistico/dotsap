@@ -20,8 +20,8 @@
             <table class="table table-bordered table-sm">
                 <thead>
                     <tr class="tabella-giorno">
-                        <th scope="col" colspan="3">
-                            <!-- NOME GIORNO E DATA --> {{ @giorno.giorno }} - {{ @giorno.data }}
+                        <th scope="col" colspan="4">
+                            {{ @giorno.giorno }} - {{ @giorno.data }}
                         </th>
                     </tr>
                 </thead>
@@ -41,22 +41,36 @@
                                             </true>
                                         </check>
                                     </td>
-                                    <td class="tabella-btn"><button type="button" class="btn btn-danger btn-sm btn-block btn-rect"
+                                    <td class="tabella-btn">
+                                        <button type="button" class="parti btn btn-info btn-sm btn-block btn-rect" data-ora="{{ @orario.ora }}"
+                                            data-data="{{ @giorno.data }}">
+                                            <i class="fa fa-clock"></i></button>
+                                    </td>
+                                    <td class="tabella-btn">
+                                        <button type="button" class="btn btn-danger btn-sm btn-block btn-rect"
                                             data-toggle="modal" data-target="#rimuoviModal" data-persona="{{ @orario.persona }}"
-                                            data-ora="{{ @orario.ora }}" data-data="{{ @giorno.data }}">X</button></td>
+                                            data-ora="{{ @orario.ora }}" data-data="{{ @giorno.data }}">X
+                                        </button>
+                                    </td>
                                 </true>
                                 <false>
                                     <check if="{{ @orario.attivo==true }}">
                                         <true>
-                                            <td colspan="2">
-                                                <button type="button" class="btn btn-light btn-sm btn-block btn-rect" data-toggle="modal" data-target="#aggiungiModal" data-addambulatorio="{{ @orario.ambulatorio }}" data-addora="{{ @orario.ora }}" data-adddata="{{ @giorno.data }}" data-addgiorno="{{ @giorno.giorno }}">
+                                            <td colspan="3">
+                                                <button type="button" class="btn btn-light btn-sm btn-block btn-rect"
+                                                    data-toggle="modal" data-target="#aggiungiModal"
+                                                    data-addambulatorio="{{ @orario.ambulatorio }}" data-addora="{{ @orario.ora }}"
+                                                    data-adddata="{{ @giorno.data }}" data-addgiorno="{{ @giorno.giorno }}">
                                                     +
                                                 </button>
                                             </td>
                                         </true>
                                         <false>
-                                            <td colspan="2">
-                                                <button type="button" class="btn btn-gray btn-sm btn-block btn-rect" data-toggle="modal" data-target="#aggiungiModal" data-addambulatorio="{{ @orario.ambulatorio }}" data-addora="{{ @orario.ora }}" data-adddata="{{ @giorno.data }}" data-addgiorno="{{ @giorno.giorno }}">
+                                            <td colspan="3">
+                                                <button type="button" class="btn btn-gray btn-sm btn-block btn-rect"
+                                                    data-toggle="modal" data-target="#aggiungiModal"
+                                                    data-addambulatorio="{{ @orario.ambulatorio }}" data-addora="{{ @orario.ora }}"
+                                                    data-adddata="{{ @giorno.data }}" data-addgiorno="{{ @giorno.giorno }}">
                                                     +
                                                 </button>
                                             </td>
@@ -121,21 +135,22 @@
                 <form method="POST" action="{{@BASE}}{{ 'appuntamentoaggiungi' | alias }}" id="form_aggiungi">
                     <div class="form-group">
                         <p>
-                        <span id="modal-add-data"></span><br>
-                        <span id="modal-add-ora"></span><br>
-                        <span id="modal-add-ambulatorio"></span>
-                    </p>
+                            <span id="modal-add-data"></span><br>
+                            <span id="modal-add-ora"></span><br>
+                            <span id="modal-add-ambulatorio"></span>
+                        </p>
                     </div>
                     <hr>
-                        <div class="form-group">
-                            <label for="InputNote">Mutuato</label>
-                            <input type="text" class="form-control" id="persona" placeholder="Cognome Nome" name="persona" required autofocus>
-                        </div>
-                        <div class="form-group">
-                            <label for="InputNote">Note</label>
-                            <input type="text" class="form-control" id="note" placeholder="Note" name="note">
-                        </div>
-                        
+                    <div class="form-group">
+                        <label for="InputNote">Mutuato</label>
+                        <input type="text" class="form-control" id="persona" placeholder="Cognome Nome" name="persona"
+                            required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="InputNote">Note</label>
+                        <input type="text" class="form-control" id="note" placeholder="Note" name="note">
+                    </div>
+
                     <input type="hidden" name="data" value="" id="add-data">
                     <input type="hidden" name="ora" value="" id="add-ora">
                     <input type="hidden" name="tabelladata" value="{{ @lunedi }}">
@@ -144,7 +159,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Indietro</button>
                 <button type="button" class="btn btn-success" id="btn_aggiungi" onclick="btn_aggiungi()">Registra</button>
-                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -143,7 +143,7 @@ class Appuntamenti
         $listaOrari->Add(new \App\Orario('Lunedì', '18:15', 'Saint-Vincent', true));
         $listaOrari->Add(new \App\Orario('Lunedì', '18:30', 'Saint-Vincent', true));
         $listaOrari->Add(new \App\Orario('Lunedì', '18:45', 'Saint-Vincent', true));
-        $listaOrari->Add(new \App\Orario('Lunedì', '19:00', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Lunedì', '19:00', '', false));
         $listaOrari->Add(new \App\Orario('Lunedì', '19:15', '', false));
         $listaOrari->Add(new \App\Orario('Lunedì', '19:30', '', false));
         $listaOrari->Add(new \App\Orario('Lunedì', '19:45', '', false));
@@ -346,16 +346,16 @@ class Appuntamenti
 
         switch ($tipologia) {
             case "cancella":
-                $sql = "DELETE FROM appuntamenti WHERE data=$jd AND ora='$ora'";
+                $sql = "DELETE FROM appuntamenti WHERE data=$jd AND ora='$ora' AND fatto = 0 AND annullato = 0 AND assente = 0";
                 break;
             case "annullato":
-                $sql = "UPDATE appuntamenti SET annullato = 1 WHERE data=$jd AND ora='$ora'";
+                $sql = "UPDATE appuntamenti SET annullato = 1 WHERE data=$jd AND ora='$ora' AND fatto = 0 AND annullato = 0 AND assente = 0";
                 break;
             case "assente":
-                $sql = "UPDATE appuntamenti SET assente = 1 WHERE data=$jd AND ora='$ora'";
+                $sql = "UPDATE appuntamenti SET assente = 1 WHERE data=$jd AND ora='$ora' AND fatto = 0 AND annullato = 0 AND assente = 0";
                 break;
             case "fatto":
-                $sql = "UPDATE appuntamenti SET fatto = 1 WHERE data=$jd AND ora='$ora'";
+                $sql = "UPDATE appuntamenti SET fatto = 1 WHERE data=$jd AND ora='$ora' AND fatto = 0 AND annullato = 0 AND assente = 0";
                 break;
         }
 
@@ -380,7 +380,7 @@ class Appuntamenti
         $jd = juliantojd($data_array[1], $data_array[0], $data_array[2]);
 
         $db->begin();
-        $sql = "INSERT into appuntamenti values(null, $jd, '$ora', '$persona', '$note', 0, 0, 0)";
+        $sql = "INSERT into appuntamenti values(null, $jd, '$ora', '$persona', '$note', 0, 0, 0, null, null)";
         $db->exec($sql);
         $db->commit();
 
@@ -388,4 +388,27 @@ class Appuntamenti
         $f3->reroute('/appuntamenti/' . $lunedi);
     }
 
+    public function Parti($f3)
+    {
+        $db = new \DB\SQL('sqlite:.database.sqlite');
+
+        $data = $f3->get('POST.data');
+        $ora = $f3->get('POST.ora');
+        $lunedi = $f3->get('POST.tabelladata');
+
+        $data_array = explode("/", $data);
+        $jd = juliantojd($data_array[1], $data_array[0], $data_array[2]);
+
+        $timestamp = date(DATE_RFC3339);
+        //echo \App\Utilita::TimeDiffToMinutes('2018-10-02T15:00:00+02:00','2018-10-02T16:20:00+02:00');
+
+        $sql = "UPDATE appuntamenti SET inizio='$timestamp' WHERE data=$jd AND ora='$ora' AND fatto = 0 AND annullato = 0 AND assente = 0";
+        
+        $db->begin();
+        $db->exec($sql);
+        $db->commit();
+
+        // ridirigi sulla tabella con la data odierna
+        $f3->reroute('/appuntamenti/' . $lunedi);
+    }
 }
