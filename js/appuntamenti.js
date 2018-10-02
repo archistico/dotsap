@@ -4,8 +4,7 @@ $('#rimuoviModal').on('show.bs.modal', function (event) {
     var ora = button.data('ora');
     var persona = button.data('persona');
     var modal = $(this)
-    modal.find('.modal-title').text('Attenzione');
-    modal.find('#modal-info').text('Rimuovo appuntamento del: ' + data + ' delle ore ' + ora + '?');
+    modal.find('#modal-info').text('Modifico visita del: ' + data + ' delle ore ' + ora + ' ?');
     modal.find('#modal-persona').text('Prenotato: ' + persona);
 
     document.getElementById("tipologia").value = 0;
@@ -30,6 +29,11 @@ function btn_nonpresentato() {
 
 function btn_cancella() {
     document.getElementById("tipologia").value = 'cancella';
+    document.getElementById("form_rimuovi").submit();
+}
+
+function btn_parti() {
+    document.getElementById("tipologia").value = 'parti';
     document.getElementById("form_rimuovi").submit();
 }
 
@@ -68,33 +72,4 @@ $(document).ready(function () {
     if (sessionStorage.scrollTop != "undefined") {
         $(window).scrollTop(sessionStorage.scrollTop);
     }
-});
-
-$('.parti').on("click", function (event) {
-    var button = $(event.currentTarget);
-    var data = button.data('data');
-    var ora = button.data('ora');
-
-    var form = document.createElement("form");
-    var datainput = document.createElement("input");
-    var orainput = document.createElement("input");
-    var lunediinput = document.createElement("input");
-
-    form.method = "POST";
-    form.action = "{{@BASE}}{{ 'appuntamentoparti' | alias }}";
-
-    datainput.value = data;
-    datainput.name = "data";
-    form.appendChild(datainput);
-
-    orainput.value = ora;
-    orainput.name = "ora";
-    form.appendChild(orainput);
-
-    lunediinput.value = '{{ @lunedi }}';
-    lunediinput.name = "tabelladata";
-    form.appendChild(lunediinput);
-
-    document.body.appendChild(form);
-    form.submit();
 });
