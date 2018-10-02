@@ -7,39 +7,12 @@ namespace Composer\Autoload;
 class ComposerStaticInit80d6f561a6ab3b460c1d13ad53cdca96
 {
     public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '45e8c92354af155465588409ef796dbc' => __DIR__ . '/..' . '/bcosca/fatfree/lib/base.php',
-    );
-
-    public static $prefixLengthsPsr4 = array (
-        'S' => 
-        array (
-            'Symfony\\Polyfill\\Mbstring\\' => 26,
-            'Symfony\\Component\\Translation\\' => 30,
-        ),
-    );
-
-    public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Mbstring\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-        ),
-        'Symfony\\Component\\Translation\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/translation',
-        ),
-    );
-
-    public static $fallbackDirsPsr4 = array (
-        0 => __DIR__ . '/..' . '/nesbot/carbon/src',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit80d6f561a6ab3b460c1d13ad53cdca96::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit80d6f561a6ab3b460c1d13ad53cdca96::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit80d6f561a6ab3b460c1d13ad53cdca96::$fallbackDirsPsr4;
 
         }, null, ClassLoader::class);
     }

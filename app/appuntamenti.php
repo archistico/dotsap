@@ -2,6 +2,8 @@
 namespace App;
 
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
+
 
 class Appuntamenti
 {
@@ -88,13 +90,14 @@ class Appuntamenti
         $sql = "SELECT * FROM appuntamenti WHERE NOT inizio = '' AND NOT fine = '' AND fatto = 1";
         $risultato = $db->exec($sql);
         
+        
         foreach($risultato as $listaAppuntamenti) {
-            $inizio = Carbon::createFromFormat('Y-m-d H', $listaAppuntamenti['inizio']);
-            $fine = Carbon::createFromFormat('Y-m-d H', $listaAppuntamenti['fine']);
-            
+            // 2018-10-02T18:18:34+02:00
+            //$inizio = Carbon::parse($listaAppuntamenti['inizio']);
+            //$fine = Carbon::parse($listaAppuntamenti['fine']);  
         }
 
-        $f3->set('totalevisitato', '');
+        $f3->set('totalevisitato', 'da calcolare');
         $f3->set('titolo', 'Home');
         $f3->set('contenuto', 'homepage.htm');
         echo \Template::instance()->render('templates/base.htm');
