@@ -277,6 +277,9 @@ class Movimento
 
         $importo = str_replace(',', '.', (string)$importo);
 
+        $note = str_replace('"', "", $note);
+        $note = str_replace("'", "", $note);
+
         $db->begin();
         $sql = "INSERT into movimenti values(null, '$jd', '$importo', '$note', '$cat1', '$cat2', '$cat3', '$cat4')";
         

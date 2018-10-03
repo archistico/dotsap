@@ -400,6 +400,12 @@ class Appuntamenti
         $data_array = explode("/", $data);
         $jd = juliantojd($data_array[1], $data_array[0], $data_array[2]);
 
+        $persona = str_replace('"', "", $persona);
+        $persona = str_replace("'", "", $persona);
+
+        $note = str_replace('"', "", $note);
+        $note = str_replace("'", "", $note);
+
         $db->begin();
         $sql = "INSERT into appuntamenti values(null, $jd, '$ora', '$persona', '$note', 0, 0, 0, null, null)";
         $db->exec($sql);
