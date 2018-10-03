@@ -255,6 +255,7 @@ class Movimento
 
         $db = new \DB\SQL('sqlite:.database.sqlite');
 
+        /*
         $rcat1 = $db->exec("SELECT * FROM categoria1 WHERE id = $cat1");
         $categoria .= $rcat1[0]['descrizione'];
         $rcat2 = $db->exec("SELECT * FROM categoria2 WHERE id = $cat2");
@@ -268,13 +269,17 @@ class Movimento
         $f3->set('importo', $importo);
         $f3->set('data', $data);
         $f3->set('note', $note);
+        */
 
         // 2018-09-13
         $data_array = explode("-", $data);
         $jd = juliantojd($data_array[1], $data_array[2], $data_array[0]);
 
+        $importo = str_replace(',', '.', (string)$importo);
+
         $db->begin();
-        $sql = "INSERT into movimenti values(null, $jd, $importo, '$note', $cat1, $cat2, $cat3, $cat4)";
+        $sql = "INSERT into movimenti values(null, '$jd', '$importo', '$note', '$cat1', '$cat2', '$cat3', '$cat4')";
+        
         $db->exec($sql);
         $db->commit();
 
