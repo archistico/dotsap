@@ -75,6 +75,9 @@ class Auth
             $token = $f3->get('POST.token');
             $csrf = $f3->get('SESSION.csrf');
 
+            $utente = str_replace('"', "", $utente);
+            $utente = str_replace("'", "", $utente);
+
             // Resetta il csrf per evitare il doppio invio
             $f3->set('SESSION.csrf', $session->csrf());
 
