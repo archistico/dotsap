@@ -41,4 +41,11 @@ class Utilita
         $diff = $data_inizio->diff(new \DateTime($fine));
         return $diff;
     }
+
+    public static function PulisciStringa($testo)
+    {
+        $testo = str_replace('"', "", $testo);
+        $testo = str_replace("'", "", $testo);
+        return $testo;
+    }
 }

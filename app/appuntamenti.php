@@ -85,17 +85,38 @@ class Appuntamenti
         // Calcolo durata media, massima e minima visita, totale
         $sql = "SELECT * FROM appuntamenti WHERE NOT inizio = '' AND NOT fine = '' AND fatto = 1";
         $risultato = $db->exec($sql);
-        
+
         $totale = new \App\Intervallo();
         $mediavisite = new \App\Intervallo();
         $numerovisite = 0;
-        foreach($risultato as $listaAppuntamenti) {
+        foreach ($risultato as $listaAppuntamenti) {
             $diff = \App\Utilita::TimeDiffToIntervallo($listaAppuntamenti['inizio'], $listaAppuntamenti['fine']);
             $totale->Somma($diff);
             $numerovisite++;
         }
-        
+
         $mediavisite->Media($totale, $numerovisite);
+
+        // Carica TODO
+        $listaTodoSegreteria = new \App\listaTodo();
+        $listaTodoMedico = new \App\listaTodo();
+
+        $sql = "SELECT * FROM todo WHERE chi='Segreteria'";
+        $risultato = $db->exec($sql);
+
+        foreach($risultato as $todo) {
+            $listaTodoSegreteria->Add(new \App\Todo($todo['id'], $todo['todo'], $todo['chi']));
+        }
+
+        $sql = "SELECT * FROM todo WHERE chi='Medico'";
+        $risultato = $db->exec($sql);
+
+        foreach($risultato as $todo) {
+            $listaTodoMedico->Add(new \App\Todo($todo['id'], $todo['todo'], $todo['chi']));
+        }
+
+        $f3->set('listaTodoMedico', $listaTodoMedico->ToArray());
+        $f3->set('listaTodoSegreteria', $listaTodoSegreteria->ToArray());
 
         $f3->set('totalevisitato', $totale->ToString());
         $f3->set('mediavisite', $mediavisite->ToString());

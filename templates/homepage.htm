@@ -35,17 +35,71 @@
 </div>
 <div class="row">
     <div class="col-md-6">
-            <h4>Totale visitato</h4>
-            <p class="mb-0">{{ @totalevisitato }}</p>
+        <h4>Totale visitato</h4>
+        <p class="mb-0">{{ @totalevisitato }}</p>
     </div>
     <div class="col-md-6">
-            <h4>Durata media visite</h4>
-            <p class="mb-0">{{ @mediavisite }}</p>
+        <h4>Durata media visite</h4>
+        <p class="mb-0">{{ @mediavisite }}</p>
     </div>
 </div>
+<hr>
+<h2>Da fare</h2>
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <h4>Segreteria</h4>
+        <form method="POST" action="{{@BASE}}{{ 'todoaggiungi' | alias }}" class="mb-4">
+            <div class="form-row align-items-center">
+                <div class="col-sm-8 my-1">
+                    <input type="text" class="form-control" id="todo" placeholder="Da fare ..." name="todo">
+                    <input type="hidden" name="chi" value="Segreteria">
+                </div>
+                <div class="col-sm-4 my-1">
+                    <button type="submit" class="btn btn-primary btn-block">Registra</button>
+                </div>
+            </div>
+        </form>
 
+        <table class="table table-striped">
+            <tbody>
+                <repeat group="{{ @listaTodoSegreteria }}" value="{{ @todo }}">
+                    <tr>
+                        <td>{{ @todo.todo }}</td>
+                        <th scope="row" class="tabella-btn"><a href="todo/cancella/{{ @todo.id }}" class="btn btn-danger btn-sm">X</a></th>
+                    </tr>
+                </repeat>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h4>Medico</h4>
+        <form method="POST" action="{{@BASE}}{{ 'todoaggiungi' | alias }}" class="mb-4">
+            <div class="form-row align-items-center">
+                <div class="col-sm-8 my-1">
+                    <input type="text" class="form-control" id="todo" placeholder="Da fare ..." name="todo">
+                    <input type="hidden" name="chi" value="Medico">
+                </div>
+                <div class="col-sm-4 my-1">
+                    <button type="submit" class="btn btn-primary btn-block">Registra</button>
+                </div>
+            </div>
+        </form>
+        <table class="table table-striped">
+            <tbody>
+                <repeat group="{{ @listaTodoMedico }}" value="{{ @todo }}">
+                    <tr>
+                        <td>{{ @todo.todo }}</td>
+                        <th scope="row" class="tabella-btn"><a href="todo/cancella/{{ @todo.id }}" class="btn btn-danger btn-sm">X</a></th>
+                    </tr>
+                </repeat>
+            </tbody>
+        </table>
+    </div>
+</div>
 <hr>
 <h2>Movimenti</h2>
+<hr>
 <div class="row">
     <div class="col-md-4">
         <div class="alert alert-success" role="alert">

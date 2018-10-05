@@ -13,6 +13,10 @@ $f3->route('POST @appuntamentomodifica: /appuntamenti/modifica', '\App\Appuntame
 $f3->route('POST @appuntamentoaggiungi: /appuntamenti/aggiungi', '\App\Appuntamenti->Aggiungi');
 $f3->route('POST @appuntamentoparti: /appuntamenti/parti', '\App\Appuntamenti->Parti');
 
+// Todo
+$f3->route('GET @todocancella: /todo/cancella/@id', '\App\Todo->Cancella');
+$f3->route('POST @todoaggiungi: /todo/aggiungi', '\App\Todo->Aggiungi');
+
 // Entrate/Uscite
 $f3->route('GET @lista: /lista', '\App\Movimento->Lista');
 $f3->route('GET @nuovo: /nuovo', '\App\Movimento->Nuovo');
