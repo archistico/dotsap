@@ -78,31 +78,36 @@ class Intervallo
         return $this->secondi + $this->minuti * 60 + $this->ore * 60 * 60 + $this->giorni * 60 * 60 * 24;
     }
 
-    public function SecondiInIntervallo($inputSeconds) 
+    public static function IntervalloInSecondi($intervallo)
+    {
+        return $intervallo->secondi + $intervallo->minuti * 60 + $intervallo->ore * 60 * 60 + $intervallo->giorni * 60 * 60 * 24;
+    }
+
+    public function SecondiInIntervallo($inputSeconds)
     {
         $secondsInAMinute = 60;
         $secondsInAnHour = 60 * $secondsInAMinute;
         $secondsInADay = 24 * $secondsInAnHour;
-    
+
         // Extract days
         $days = floor($inputSeconds / $secondsInADay);
-    
+
         // Extract hours
         $hourSeconds = $inputSeconds % $secondsInADay;
         $hours = floor($hourSeconds / $secondsInAnHour);
-    
+
         // Extract minutes
         $minuteSeconds = $hourSeconds % $secondsInAnHour;
         $minutes = floor($minuteSeconds / $secondsInAMinute);
-    
+
         // Extract the remaining seconds
         $remainingSeconds = $minuteSeconds % $secondsInAMinute;
         $seconds = ceil($remainingSeconds);
-    
-        $this->giorni = (int)$days;
-        $this->ore = (int)$hours;
-        $this->minuti = (int)$minutes;
-        $this->secondi = (int)$seconds;
+
+        $this->giorni = (int) $days;
+        $this->ore = (int) $hours;
+        $this->minuti = (int) $minutes;
+        $this->secondi = (int) $seconds;
     }
 
     public function Media($it, $num)
@@ -114,13 +119,20 @@ class Intervallo
 
         // Converto tutto in secondi
         $secondi = $it->ConvertiInSecondi();
-        if($secondi > 0 && $num >0) {
-            $media = (int) round($secondi / $num, 0);    
+        if ($secondi > 0 && $num > 0) {
+            $media = (int) round($secondi / $num, 0);
         } else {
             return $this;
         }
 
         $this->SecondiInIntervallo($media);
         return $this;
+    }
+
+    public function MediaSenzaAnomalie($lista)
+    {
+        $msa_secondi = \App\Media::MediaSenzaAnomalie($lista);
+        // converti in intervallo
+        $this->SecondiInIntervallo($msa_secondi);
     }
 }

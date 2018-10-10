@@ -86,16 +86,17 @@ class Appuntamenti
         $sql = "SELECT * FROM appuntamenti WHERE NOT inizio = '' AND NOT fine = '' AND fatto = 1";
         $risultato = $db->exec($sql);
 
+        $listaMSA = [];
         $totale = new \App\Intervallo();
         $mediavisite = new \App\Intervallo();
-        $numerovisite = 0;
+        
         foreach ($risultato as $listaAppuntamenti) {
             $diff = \App\Utilita::TimeDiffToIntervallo($listaAppuntamenti['inizio'], $listaAppuntamenti['fine']);
             $totale->Somma($diff);
-            $numerovisite++;
+            $listaMSA[] = \App\Intervallo::IntervalloInSecondi($diff);
         }
 
-        $mediavisite->Media($totale, $numerovisite);
+        $mediavisite->MediaSenzaAnomalie($listaMSA);
 
         // Carica TODO
         $listaTodoSegreteria = new \App\listaTodo();
