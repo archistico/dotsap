@@ -346,7 +346,7 @@ class Appuntamenti
             $str = jdtojulian($appuntamentoDB['data']);
             $dmy = \DateTime::createFromFormat('m/d/Y', $str)->format('d/m/Y');
 
-            $listaAppuntamenti->Add(new \App\Appuntamento($dmy, $appuntamentoDB['ora'], $appuntamentoDB['persona'], $appuntamentoDB['note'], $appuntamentoDB['annullato'], $appuntamentoDB['assente'], $appuntamentoDB['fatto']));
+            $listaAppuntamenti->Add(new \App\Appuntamento($dmy, $appuntamentoDB['ora'], $appuntamentoDB['persona'], $appuntamentoDB['note'], $appuntamentoDB['annullato'], $appuntamentoDB['assente'], $appuntamentoDB['fatto'], $appuntamentoDB['inizio']));
         }
 
         $tabella = new Tabella($listaGiorni, $listaOrari, $listaAppuntamenti);

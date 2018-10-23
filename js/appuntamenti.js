@@ -3,9 +3,17 @@ $('#rimuoviModal').on('show.bs.modal', function (event) {
     var data = button.data('data');
     var ora = button.data('ora');
     var persona = button.data('persona');
+    var inizio = button.data('inizio');
     var modal = $(this)
     modal.find('#modal-info').text('Modifico visita del: ' + data + ' delle ore ' + ora + ' ?');
     modal.find('#modal-persona').text('Prenotato: ' + persona);
+
+    // controllo che il campo inizio visita sia compilato, se si rendo hidden il button
+    if(!inizio || 0 === inizio.length) {
+        document.getElementById("btn_parti").style.visibility = 'visible';
+    } else {
+        document.getElementById("btn_parti").style.visibility = 'hidden';
+    }
 
     document.getElementById("tipologia").value = 0;
     document.getElementById("data").value = data;

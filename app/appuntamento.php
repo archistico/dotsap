@@ -11,8 +11,9 @@ class Appuntamento
     public $fatto;
     public $assente;
     public $annullato;
+    public $inizio;
 
-    public function __construct($data, $ora, $persona, $nota, $fatto, $assente, $annullato) 
+    public function __construct($data, $ora, $persona, $nota, $fatto, $assente, $annullato, $inizio) 
     {
         $this->data = $data;
         $this->ora = $ora;
@@ -21,6 +22,7 @@ class Appuntamento
         $this->fatto = $fatto;
         $this->assente = $assente;
         $this->annullato = $annullato;
+        $this->inizio = $inizio;
     }
 
     public function ToArray()
@@ -31,7 +33,8 @@ class Appuntamento
                 'nota'    => $this->nota, 
                 'fatto'   => $this->fatto, 
                 'assente' => $this->assente, 
-                'annulato'=> $this->annulato 
+                'annulato'=> $this->annulato,
+                'inizio'=> $this->inizio 
             ];
     }
 }
