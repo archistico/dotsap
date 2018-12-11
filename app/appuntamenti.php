@@ -436,4 +436,29 @@ class Appuntamenti
         // ridirigi sulla tabella con la data odierna
         $f3->reroute('/appuntamenti/' . $lunedi);
     }
+
+    public function Lista($f3, $params)
+    {
+        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $sql = "SELECT * FROM appuntamenti";
+        $appuntamentiDB = $db->exec($sql);
+        
+        $listaAppuntamenti = new \App\ListaAppuntamenti();
+
+        foreach ($appuntamentiDB as $appuntamentoDB) {
+
+            $str = jdtojulian($appuntamentoDB['data']);
+            $dmy = \DateTime::createFromFormat('m/d/Y', $str)->format('d/m/Y');
+
+            $listaAppuntamenti->Add(new \App\Appuntamento($dmy, $appuntamentoDB['ora'], $appuntamentoDB['persona'], $appuntamentoDB['note'], $appuntamentoDB['annullato'], $appuntamentoDB['assente'], $appuntamentoDB['fatto'], $appuntamentoDB['inizio']));
+        }
+
+        //$tabella = new Tabella($listaGiorni, $listaOrari, $listaAppuntamenti);
+        //$f3->set('tabella', $tabella->ToArray());        
+
+        $f3->set('titolo', 'Appuntamenti');
+        $f3->set('script', '');
+        $f3->set('contenuto', 'appuntamenti_lista.htm');
+        echo \Template::instance()->render('templates/base.htm');
+    }
 }
