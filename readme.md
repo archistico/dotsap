@@ -1,7 +1,7 @@
 # DOT'S AP
 
 #### Install
-- change temp.database.sqlite -> .database.sqlite
+- extract database.zip -> .database.sqlite
   
 #### Memo
 - git config credential.helper 'store'
