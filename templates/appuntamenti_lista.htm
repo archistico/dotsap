@@ -15,7 +15,18 @@
                 </tr>
             </thead>
             <tbody>
-                
+                <repeat group="{{ @apps }}" value="{{ @app }}">
+                    <tr>
+                        <td>{{ @app.data }}</td>
+                        <td>{{ @app.ora }}</td>
+                        <td>{{ @app.persona }}</td>
+                        <td>{{ @app.note }}</td>
+                        <td>{{ @app.annullato }} {{ @app.assente }} {{ @app.fatto }}</td>
+                        <td>{{ @app.inizio }}</td>
+                        <td>{{ @app.fine }}</td>
+                        <td></td>
+                    </tr>
+                </repeat>
             </tbody>
         </table>
     </div>

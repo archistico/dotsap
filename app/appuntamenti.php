@@ -443,18 +443,41 @@ class Appuntamenti
         $sql = "SELECT * FROM appuntamenti";
         $appuntamentiDB = $db->exec($sql);
         
-        $listaAppuntamenti = new \App\ListaAppuntamenti();
+        $apps = array();
 
         foreach ($appuntamentiDB as $appuntamentoDB) {
 
             $str = jdtojulian($appuntamentoDB['data']);
             $dmy = \DateTime::createFromFormat('m/d/Y', $str)->format('d/m/Y');
 
-            $listaAppuntamenti->Add(new \App\Appuntamento($dmy, $appuntamentoDB['ora'], $appuntamentoDB['persona'], $appuntamentoDB['note'], $appuntamentoDB['annullato'], $appuntamentoDB['assente'], $appuntamentoDB['fatto'], $appuntamentoDB['inizio']));
+            if($appuntamentoDB['inizio']) {
+                $dmyInizio = \DateTime::createFromFormat('Y-m-d\TH:i:sP', $appuntamentoDB['inizio'])->format('H:i:s');
+            } else {
+                $dmyInizio = "";
+            }
+
+            if($appuntamentoDB['fine']) {
+                $dmyFine = \DateTime::createFromFormat('Y-m-d\TH:i:sP', $appuntamentoDB['fine'])->format('H:i:s');
+            } else {
+                $dmyFine = "";
+            }
+
+            $app = [
+                "data" => $dmy,
+                "ora" => $appuntamentoDB['ora'],
+                "persona" => $appuntamentoDB['persona'],
+                "note" => $appuntamentoDB['note'],
+                "annullato" => $appuntamentoDB['annullato'],
+                "assente" => $appuntamentoDB['assente'],
+                "fatto" => $appuntamentoDB['fatto'],
+                "inizio" => $dmyInizio,
+                "fine" => $dmyFine,
+            ];
+
+            $apps[] = $app;
         }
 
-        //$tabella = new Tabella($listaGiorni, $listaOrari, $listaAppuntamenti);
-        //$f3->set('tabella', $tabella->ToArray());        
+        $f3->set('apps', $apps);
 
         $f3->set('titolo', 'Appuntamenti');
         $f3->set('script', '');
