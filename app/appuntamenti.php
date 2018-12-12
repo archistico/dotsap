@@ -462,6 +462,9 @@ class Appuntamenti
                 $dmyFine = "";
             }
 
+            $diff = \App\Utilita::TimeDiffToIntervallo($appuntamentoDB['inizio'], $appuntamentoDB['fine']);
+            $durata = \App\Intervallo::IntervalloInSecondi($diff);
+            
             $app = [
                 "data" => $dmy,
                 "ora" => $appuntamentoDB['ora'],
@@ -472,6 +475,7 @@ class Appuntamenti
                 "fatto" => $appuntamentoDB['fatto'],
                 "inizio" => $dmyInizio,
                 "fine" => $dmyFine,
+                "durata" => $durata
             ];
 
             $apps[] = $app;

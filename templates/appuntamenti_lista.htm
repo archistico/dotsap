@@ -10,7 +10,7 @@
                     <th scope="col" class="d-none d-sm-table-cell">Flag</th>
                     <th scope="col" class="d-none d-sm-table-cell">Inizio</th>
                     <th scope="col" class="d-none d-sm-table-cell">Fine</th>
-                    <th scope="col" class="d-none d-sm-table-cell">Durata</th>
+                    <th scope="col" class="d-none d-sm-table-cell">Durata [s]</th>
                     <th scope="col">#</th>
                 </tr>
             </thead>
@@ -24,7 +24,7 @@
                         <td>{{ @app.annullato }} {{ @app.assente }} {{ @app.fatto }}</td>
                         <td>{{ @app.inizio }}</td>
                         <td>{{ @app.fine }}</td>
-                        <td></td>
+                        <td>{{ @app.durata }}</td>
                     </tr>
                 </repeat>
             </tbody>
