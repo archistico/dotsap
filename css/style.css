@@ -50,3 +50,8 @@ body {
 .btn-gray {
   background-color: lightgray;
 }
+
+.tabella-testo-mini {
+  font-size: 0.80rem;
+  line-height: 1;
+}
