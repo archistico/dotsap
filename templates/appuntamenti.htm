@@ -4,13 +4,16 @@
     }
 </style>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
         <p class="font-weight-bold text-center">
             <a class="btn" href="{{@BASE}}{{ 'appuntamenti' | alias }}/{{ @lunediPrecedente }}"><i class="fas fa-angle-double-left fa-2x"></i></a>
             <span class="uppercase">Dal {{ @lunedi }} al {{ @domenica }}</span>
             <a class="btn" href="{{@BASE}}{{ 'appuntamenti' | alias }}/{{ @lunediSuccessivo }}"><i class="fas fa-angle-double-right fa-2x"></i></a>
         </p>
     </div>
+    <div class="col-md-4">
+        <a class="btn" href="{{@BASE}}{{ 'appuntamentilista' | alias }}"><i class="fas fa-cog"></i> Lista completa</a>
+    </div>            
 </div>
 
 <!-- DIV CALENDARIO -->
