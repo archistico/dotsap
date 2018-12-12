@@ -1,5 +1,10 @@
 <div class="row">
   <div class="col-md-12">
+    Media Ritardi: {{ @ritardo }}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
     <table class="table table-striped tabella-testo-mini">
       <thead>
         <tr>
@@ -11,6 +16,7 @@
           <th scope="col" class="d-none d-sm-table-cell">Inizio</th>
           <th scope="col" class="d-none d-sm-table-cell">Fine</th>
           <th scope="col" class="d-none d-sm-table-cell">Durata [s]</th>
+          <th scope="col" class="d-none d-sm-table-cell">Ritardo [s]</th>
           <th scope="col">#</th>
         </tr>
       </thead>
@@ -35,6 +41,8 @@
             <td>{{ @app.inizio }}</td>
             <td>{{ @app.fine }}</td>
             <td>{{ @app.durata }}</td>
+            <td>{{ @app.ritardo }}</td>
+            <td> </td>
           </tr>
         </repeat>
       </tbody>

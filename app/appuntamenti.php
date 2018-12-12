@@ -444,6 +444,8 @@ class Appuntamenti
         $appuntamentiDB = $db->exec($sql);
         
         $apps = array();
+        $totaleConteggioRitardi = 0;
+        $totaleRitardi = 0;
 
         foreach ($appuntamentiDB as $appuntamentoDB) {
 
@@ -462,8 +464,42 @@ class Appuntamenti
                 $dmyFine = "";
             }
 
-            $diff = \App\Utilita::TimeDiffToIntervallo($appuntamentoDB['inizio'], $appuntamentoDB['fine']);
-            $durata = \App\Intervallo::IntervalloInSecondi($diff);
+            // Calcola durata
+            if(!empty($appuntamentoDB['inizio']) && !empty($appuntamentoDB['fine'])) {
+                $diff = \App\Utilita::TimeDiffToIntervallo($appuntamentoDB['inizio'], $appuntamentoDB['fine']);
+                $durata = \App\Intervallo::IntervalloInSecondi($diff);
+            } else {
+                $durata = 0;
+            }
+
+            // Calcolo ritardo della partenza dal orario definito
+            $ritardo = 0;
+            if(!empty($appuntamentoDB['inizio'])) {
+                $temp_data = jdtojulian($appuntamentoDB['data']);
+                $temp_data_dt = \DateTime::createFromFormat('m/d/Y', $temp_data);
+
+                $temp_ora = $appuntamentoDB['ora'];
+                $temp = $temp_data_dt->format('d/m/Y') . " " . $temp_ora;
+
+                $ritardo_orastabilita_dt = \DateTime::createFromFormat('d/m/Y H:i', $temp);
+                $ritardo_orastabilita = $ritardo_orastabilita_dt->format('Y-m-d\TH:i:sP');
+
+                $ritardo_orainizio = $appuntamentoDB['inizio'];
+                $ritardo_orainizio_dt = \DateTime::createFromFormat('Y-m-d\TH:i:sP', $ritardo_orainizio);
+
+                if($ritardo_orainizio_dt > $ritardo_orastabilita_dt) {
+                    $diff = \App\Utilita::TimeDiffToIntervallo($ritardo_orainizio, $ritardo_orastabilita);
+                    $ritardo = \App\Intervallo::IntervalloInSecondi($diff);
+
+                    $totaleConteggioRitardi += 1;
+                    $totaleRitardi += $ritardo;
+                } else {
+                    $ritardo = "Anticipo";
+                }
+                
+            } else {
+                $ritardo = 0;
+            }
             
             $app = [
                 "data" => $dmy,
@@ -475,13 +511,22 @@ class Appuntamenti
                 "fatto" => $appuntamentoDB['fatto'],
                 "inizio" => $dmyInizio,
                 "fine" => $dmyFine,
-                "durata" => $durata
+                "durata" => $durata,
+                "ritardo" => $ritardo,
+                "t" => $t
             ];
 
             $apps[] = $app;
         }
 
+        if($totaleRitardi!=0 && $totaleConteggioRitardi !=0 ) {
+            $ritardo_media = $totaleRitardi / $totaleConteggioRitardi;
+        } else {
+            $ritardo_media = "-1";
+        }
+
         $f3->set('apps', $apps);
+        $f3->set('ritardo', $ritardo_media);
 
         $f3->set('titolo', 'Appuntamenti');
         $f3->set('script', '');
