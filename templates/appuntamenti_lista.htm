@@ -1,33 +1,43 @@
 <div class="row">
-    <div class="col-md-12">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Data</th>
-                    <th scope="col">Ora</th>
-                    <th scope="col">Persona</th>
-                    <th scope="col" class="d-none d-sm-table-cell">Note</th>
-                    <th scope="col" class="d-none d-sm-table-cell">Flag</th>
-                    <th scope="col" class="d-none d-sm-table-cell">Inizio</th>
-                    <th scope="col" class="d-none d-sm-table-cell">Fine</th>
-                    <th scope="col" class="d-none d-sm-table-cell">Durata [s]</th>
-                    <th scope="col">#</th>
-                </tr>
-            </thead>
-            <tbody>
-                <repeat group="{{ @apps }}" value="{{ @app }}">
-                    <tr>
-                        <td>{{ @app.data }}</td>
-                        <td>{{ @app.ora }}</td>
-                        <td>{{ @app.persona }}</td>
-                        <td>{{ @app.note }}</td>
-                        <td>{{ @app.annullato }} {{ @app.assente }} {{ @app.fatto }}</td>
-                        <td>{{ @app.inizio }}</td>
-                        <td>{{ @app.fine }}</td>
-                        <td>{{ @app.durata }}</td>
-                    </tr>
-                </repeat>
-            </tbody>
-        </table>
-    </div>
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Data</th>
+          <th scope="col">Ora</th>
+          <th scope="col">Persona</th>
+          <th scope="col" class="d-none d-sm-table-cell">Note</th>
+          <th scope="col" class="d-none d-sm-table-cell">Flag</th>
+          <th scope="col" class="d-none d-sm-table-cell">Inizio</th>
+          <th scope="col" class="d-none d-sm-table-cell">Fine</th>
+          <th scope="col" class="d-none d-sm-table-cell">Durata [s]</th>
+          <th scope="col">#</th>
+        </tr>
+      </thead>
+      <tbody>
+        <repeat group="{{ @apps }}" value="{{ @app }}">
+          <tr>
+            <td>{{ @app.data }}</td>
+            <td>{{ @app.ora }}</td>
+            <td>{{ @app.persona }}</td>
+            <td>{{ @app.note }}</td>
+            <td>
+              <check if="{{ @app.annullato==1 }}">
+                <true> <i class="far fa-bell-slash"></i> </true>
+              </check>
+              <check if="{{ @app.assente==1 }}">
+                <true> <i class="far fa-meh-blank"></i> </true>
+              </check>
+              <check if="{{ @app.fatto==1 }}">
+                <true> <i class="far fa-check-circle"></i> </true>
+              </check>
+            </td>
+            <td>{{ @app.inizio }}</td>
+            <td>{{ @app.fine }}</td>
+            <td>{{ @app.durata }}</td>
+          </tr>
+        </repeat>
+      </tbody>
+    </table>
+  </div>
 </div>
