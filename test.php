@@ -2,6 +2,8 @@
 require 'vendor/autoload.php';
 $f3 = \Base::instance();
 
+echo "<h1>TEST</h1>";
+
 function hello() {
     return 'Hello, World';
 }
@@ -34,12 +36,25 @@ $test->expect(
     'String length is 13'
 );
 
+$pass = 0;
+$fail = 0;
 // Display the results; not MVC but let's keep it simple
 foreach ($test->results() as $result) {
     echo $result['text'].'<br>';
-    if ($result['status'])
+    if ($result['status']){
         echo "<span style='color: green'> + Pass</span><br>";
-    else
+        $pass+=1;
+    }
+    else {
         echo "<span style='color: red'> - Fail (".$result['source'].")</span><br>";
+        $fail+=1;
+    }
     echo '<br>';
+}
+
+echo "<strong>Pass: $pass / Fail: $fail</strong> => ";
+if($fail == 0) {
+    echo "<span style='color: green'>Passed</span>";
+} else {
+    echo "<span style='color: red'>Failed</span>";
 }
