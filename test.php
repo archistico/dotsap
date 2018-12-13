@@ -30,6 +30,27 @@ $test->expect(
     "1 min. 30 s"
 );
 
+$t2 = new \App\Intervallo();
+$t2->AddSecondi(100);
+$test->expect(
+    $t2->ToMinutiSecondi() == "1 min. 40 s",
+    "1 min. 40 s"
+);
+
+$t3 = new \App\Intervallo();
+$t3->AddSecondi(120);
+$test->expect(
+    $t3->ToMinutiSecondi() == "2 min. 0 s",
+    "2 min. 0 s"
+);
+
+$t4 = new \App\Intervallo();
+$t4->AddSecondi(129);
+$test->expect(
+    $t4->ToMinutiSecondi() == "2 min. 9 s",
+    "2 min. 9 s"
+);
+
 // -------------------------------------------
 //                  RISULTATI
 // -------------------------------------------
