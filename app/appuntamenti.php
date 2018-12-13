@@ -440,7 +440,7 @@ class Appuntamenti
     public function Lista($f3, $params)
     {
         $db = new \DB\SQL('sqlite:.database.sqlite');
-        $sql = "SELECT * FROM appuntamenti";
+        $sql = "SELECT * FROM appuntamenti ORDER BY data ASC, ora ASC";
         $appuntamentiDB = $db->exec($sql);
         
         $apps = array();
