@@ -468,6 +468,8 @@ class Appuntamenti
             if(!empty($appuntamentoDB['inizio']) && !empty($appuntamentoDB['fine'])) {
                 $diff = \App\Utilita::TimeDiffToIntervallo($appuntamentoDB['inizio'], $appuntamentoDB['fine']);
                 $durata = \App\Intervallo::IntervalloInSecondi($diff);
+                $durata = $diff->ToMinutiSecondi();
+                
             } else {
                 $durata = 0;
             }
@@ -494,6 +496,8 @@ class Appuntamenti
 
                     $totaleConteggioRitardi += 1;
                     $totaleRitardi += $ritardo;
+
+                    $ritardo = $diff->ToMinutiSecondi();
                 } else {
                     //$t = $ritardo_orainizio . " | ".$ritardo_orastabilita;
                     $ritardo = "Anticipo";
@@ -523,12 +527,15 @@ class Appuntamenti
 
         if($totaleRitardi!=0 && $totaleConteggioRitardi !=0 ) {
             $ritardo_media = $totaleRitardi / $totaleConteggioRitardi;
+            $secondi = new \App\Intervallo();
+            $secondi->AddSecondi($ritardo_media);
+            $ritardo_media_str=$secondi->ToMinutiSecondi();
         } else {
-            $ritardo_media = "-1";
+            $ritardo_media_str = "Non calcolata";
         }
 
         $f3->set('apps', $apps);
-        $f3->set('ritardo', number_format((float) $ritardo_media, 0, '.', '').' secondi');
+        $f3->set('ritardo', $ritardo_media_str);
 
         $f3->set('titolo', 'Appuntamenti');
         $f3->set('script', '');

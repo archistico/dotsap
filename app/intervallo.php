@@ -65,6 +65,12 @@ class Intervallo
         return "$this->giorni giorni, $this->ore ore, $this->minuti minuti e $this->secondi secondi";
     }
 
+    public function ToMinutiSecondi()
+    {
+        $totaleMinuti = $this->giorni * 24 * 60 + $this->ore * 60 + $this->minuti;
+        return "$totaleMinuti min. $this->secondi s";
+    }
+
     public function Somma($intervallo)
     {
         $this->AddSecondi($intervallo->secondi);
