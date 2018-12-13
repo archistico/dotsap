@@ -528,7 +528,7 @@ class Appuntamenti
         if($totaleRitardi!=0 && $totaleConteggioRitardi !=0 ) {
             $ritardo_media = $totaleRitardi / $totaleConteggioRitardi;
             $secondi = new \App\Intervallo();
-            $secondi->AddSecondi($ritardo_media);
+            $secondi->AddSecondi(round($ritardo_media));
             $ritardo_media_str=$secondi->ToMinutiSecondi();
         } else {
             $ritardo_media_str = "Non calcolata";

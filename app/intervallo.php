@@ -27,11 +27,19 @@ class Intervallo
 
     public function AddSecondi($secondi)
     {
-        if (($this->secondi + $secondi) <= 59) {
-            $this->secondi += $secondi;
-        } else {
-            $this->secondi = $this->secondi + $secondi - 60;
-            $this->minuti += 1;
+        $sec = $secondi;
+        while($sec > 0) {
+            if(($this->secondi + $sec) <= 59) {
+                $this->secondi += $sec;
+                $sec -= $sec;
+            } else {
+                if((60-$this->secondi)>0) {
+                    $add = 60-$this->secondi;
+                    $this->secondi = 0;
+                    $this->minuti += 1;
+                    $sec -= $add;
+                }       
+            }
         }
     }
 
