@@ -474,6 +474,7 @@ class Appuntamenti
 
             // Calcolo ritardo della partenza dal orario definito
             $ritardo = 0;
+            $t = "";
             if(!empty($appuntamentoDB['inizio'])) {
                 $temp_data = jdtojulian($appuntamentoDB['data']);
                 $temp_data_dt = \DateTime::createFromFormat('m/d/Y', $temp_data);
@@ -484,8 +485,8 @@ class Appuntamenti
                 $ritardo_orastabilita_dt = \DateTime::createFromFormat('d/m/Y H:i', $temp);
                 $ritardo_orastabilita = $ritardo_orastabilita_dt->format('Y-m-d\TH:i:sP');
 
-                $ritardo_orainizio = $appuntamentoDB['inizio'];
-                $ritardo_orainizio_dt = \DateTime::createFromFormat('Y-m-d\TH:i:sP', $ritardo_orainizio);
+                $ritardo_orainizio = substr($appuntamentoDB['inizio'], 0, -6); // ritaglia 2018-10-09T12:09:04+02:00
+                $ritardo_orainizio_dt = \DateTime::createFromFormat('Y-m-d\TH:i:s', $ritardo_orainizio);
 
                 if($ritardo_orainizio_dt > $ritardo_orastabilita_dt) {
                     $diff = \App\Utilita::TimeDiffToIntervallo($ritardo_orainizio, $ritardo_orastabilita);
@@ -494,13 +495,14 @@ class Appuntamenti
                     $totaleConteggioRitardi += 1;
                     $totaleRitardi += $ritardo;
                 } else {
+                    //$t = $ritardo_orainizio . " | ".$ritardo_orastabilita;
                     $ritardo = "Anticipo";
                 }
                 
             } else {
                 $ritardo = 0;
             }
-            
+
             $app = [
                 "data" => $dmy,
                 "ora" => $appuntamentoDB['ora'],
@@ -526,7 +528,7 @@ class Appuntamenti
         }
 
         $f3->set('apps', $apps);
-        $f3->set('ritardo', $ritardo_media);
+        $f3->set('ritardo', number_format((float) $ritardo_media, 0, '.', '').' secondi');
 
         $f3->set('titolo', 'Appuntamenti');
         $f3->set('script', '');
