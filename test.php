@@ -1,44 +1,41 @@
 <?php
+// Set up
 require 'vendor/autoload.php';
 $f3 = \Base::instance();
+$test=new Test;
 
 echo "<h1>TEST</h1>";
 
-function hello() {
-    return 'Hello, World';
-}
+// -------------------------------------------
+//                    TEST
+// -------------------------------------------
 
-// Set up
-$test=new Test;
+$t1 = new \App\Intervallo();
+$t1->AddSecondi(50);
 
-// This is where the tests begin
 $test->expect(
-    is_callable('hello'),
-    'hello() is a function'
+    $t1->ToMinutiSecondi() == "0 min. 50 s",
+    "0 min. 50 s"
 );
 
-// Another test
-$hello=hello();
+$t1->AddSecondi(10);
 $test->expect(
-    !empty($hello),
-    'Something was returned'
+    $t1->ToMinutiSecondi() == "1 min. 0 s",
+    "1 min. 0 s"
 );
 
-// This test should succeed
+$t1->AddSecondi(30);
 $test->expect(
-    is_string($hello),
-    'Return value is a string'
+    $t1->ToMinutiSecondi() == "1 min. 30 s",
+    "1 min. 30 s"
 );
 
-// This test is bound to fail
-$test->expect(
-    strlen($hello)==13,
-    'String length is 13'
-);
+// -------------------------------------------
+//                  RISULTATI
+// -------------------------------------------
 
 $pass = 0;
 $fail = 0;
-// Display the results; not MVC but let's keep it simple
 foreach ($test->results() as $result) {
     echo $result['text'].'<br>';
     if ($result['status']){
