@@ -15,7 +15,7 @@ class Movimento
     
     public function Homepage($f3)
     {
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
 
         $sql = 'SELECT SUM(importo) AS somma';
         $sql .= ' FROM movimenti';
@@ -66,7 +66,7 @@ class Movimento
 
     public function Lista($f3)
     {
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
         $sql = "SELECT movimenti.id, movimenti.giorno, movimenti.importo, movimenti.note,";
         $sql .= " categoria1.descrizione AS des1,";
         $sql .= " categoria2.descrizione AS des2,";
@@ -111,7 +111,7 @@ class Movimento
 
     public function Nuovo($f3)
     {
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
         $f3->set('categoria1', $db->exec('SELECT * FROM categoria1 ORDER BY categoria1.descrizione ASC'));
 
         $f3->set('titolo', 'Nuovo');
@@ -123,7 +123,7 @@ class Movimento
     {
         $cat1 = $params['num'];
 
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
 
         $sql = 'SELECT categoria1.descrizione AS categoria1 FROM categoria1 WHERE categoria1.id=' . $cat1;
         $risultato = $db->exec($sql);
@@ -143,7 +143,7 @@ class Movimento
         $cat1 = $params['cat1'];
         $cat2 = $params['cat2'];
 
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
 
         $sql = 'SELECT categoria1.descrizione AS categoria1 FROM categoria1 WHERE categoria1.id=' . $cat1;
         $risultato = $db->exec($sql);
@@ -172,7 +172,7 @@ class Movimento
         $cat2 = $params['cat2'];
         $cat3 = $params['cat3'];
 
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
 
         $sql = 'SELECT categoria1.descrizione AS categoria1 FROM categoria1 WHERE categoria1.id=' . $cat1;
         $risultato = $db->exec($sql);
@@ -209,7 +209,7 @@ class Movimento
         $cat3 = $params['cat3'];
         $cat4 = $params['cat4'];
 
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
         
         $sql = 'SELECT categoria1.descrizione AS categoria1 FROM categoria1 WHERE categoria1.id=' . $cat1;
         $risultato = $db->exec($sql);
@@ -253,7 +253,7 @@ class Movimento
 
         $categoria = "";
 
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
 
         /*
         $rcat1 = $db->exec("SELECT * FROM categoria1 WHERE id = $cat1");
@@ -300,7 +300,7 @@ class Movimento
     public function Sopprimi($f3, $params)
     {
         $id = $f3->get('POST.id');
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
         $db->begin();
         $sql = "DELETE FROM movimenti WHERE movimenti.id = $id";
         $db->exec($sql);

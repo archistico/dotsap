@@ -17,7 +17,7 @@ class Appuntamenti
 
     public function Homepage($f3)
     {
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
 
         $sql = 'SELECT SUM(importo) AS somma';
         $sql .= ' FROM movimenti';
@@ -131,10 +131,11 @@ class Appuntamenti
         $settimana = new \App\Settimana($params['data']);
 
         $listaGiorni = new \App\ListaGiorni();
-        $listaGiorni->Add(new \App\Giorno($settimana->lunedi->format('d/m/Y'), 'Lunedì'));
+        //$listaGiorni->Add(new \App\Giorno($settimana->lunedi->format('d/m/Y'), 'Lunedì'));
         $listaGiorni->Add(new \App\Giorno($settimana->martedi->format('d/m/Y'), 'Martedì'));
         $listaGiorni->Add(new \App\Giorno($settimana->mercoledi->format('d/m/Y'), 'Mercoledì'));
-        $listaGiorni->Add(new \App\Giorno($settimana->venerdi->format('d/m/Y'), 'Venerdì'));
+        $listaGiorni->Add(new \App\Giorno($settimana->giovedi->format('d/m/Y'), 'Giovedì'));
+        //$listaGiorni->Add(new \App\Giorno($settimana->venerdi->format('d/m/Y'), 'Venerdì'));
 
         $listaOrari = new \App\ListaOrari();
 
@@ -142,21 +143,21 @@ class Appuntamenti
         $listaOrari->Add(new \App\Orario('Lunedì', '8:15', '', false));
         $listaOrari->Add(new \App\Orario('Lunedì', '8:30', '', false));
         $listaOrari->Add(new \App\Orario('Lunedì', '8:45', '', false));
-        $listaOrari->Add(new \App\Orario('Lunedì', '9:00', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Lunedì', '9:15', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Lunedì', '9:30', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Lunedì', '9:45', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Lunedì', '10:00', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Lunedì', '10:15', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Lunedì', '10:30', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Lunedì', '10:45', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Lunedì', '11:00', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Lunedì', '11:15', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Lunedì', '11:30', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Lunedì', '11:45', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Lunedì', '12:00', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Lunedì', '12:15', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Lunedì', '12:30', 'Chatillon', true));
+        $listaOrari->Add(new \App\Orario('Lunedì', '9:00', '', false));
+        $listaOrari->Add(new \App\Orario('Lunedì', '9:15', '', false));
+        $listaOrari->Add(new \App\Orario('Lunedì', '9:30', '', false));
+        $listaOrari->Add(new \App\Orario('Lunedì', '9:45', '', false));
+        $listaOrari->Add(new \App\Orario('Lunedì', '10:00', '', false));
+        $listaOrari->Add(new \App\Orario('Lunedì', '10:15', '', false));
+        $listaOrari->Add(new \App\Orario('Lunedì', '10:30', '', false));
+        $listaOrari->Add(new \App\Orario('Lunedì', '10:45', '', false));
+        $listaOrari->Add(new \App\Orario('Lunedì', '11:00', '', false));
+        $listaOrari->Add(new \App\Orario('Lunedì', '11:15', '', false));
+        $listaOrari->Add(new \App\Orario('Lunedì', '11:30', '', false));
+        $listaOrari->Add(new \App\Orario('Lunedì', '11:45', '', false));
+        $listaOrari->Add(new \App\Orario('Lunedì', '12:00', '', false));
+        $listaOrari->Add(new \App\Orario('Lunedì', '12:15', '', false));
+        $listaOrari->Add(new \App\Orario('Lunedì', '12:30', '', false));
         $listaOrari->Add(new \App\Orario('Lunedì', '12:45', '', false));
         $listaOrari->Add(new \App\Orario('Lunedì', '13:00', '', false));
         $listaOrari->Add(new \App\Orario('Lunedì', '13:15', '', false));
@@ -189,8 +190,8 @@ class Appuntamenti
 
         $listaOrari->Add(new \App\Orario('Martedì', '8:00', '', false));
         $listaOrari->Add(new \App\Orario('Martedì', '8:15', '', false));
-        $listaOrari->Add(new \App\Orario('Martedì', '8:30', 'Saint-Vincent', true));
-        $listaOrari->Add(new \App\Orario('Martedì', '8:45', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Martedì', '8:30', '', false));
+        $listaOrari->Add(new \App\Orario('Martedì', '8:45', '', false));
         $listaOrari->Add(new \App\Orario('Martedì', '9:00', 'Saint-Vincent', true));
         $listaOrari->Add(new \App\Orario('Martedì', '9:15', 'Saint-Vincent', true));
         $listaOrari->Add(new \App\Orario('Martedì', '9:30', 'Saint-Vincent', true));
@@ -206,7 +207,7 @@ class Appuntamenti
         $listaOrari->Add(new \App\Orario('Martedì', '12:00', 'Saint-Vincent', true));
         $listaOrari->Add(new \App\Orario('Martedì', '12:15', 'Saint-Vincent', true));
         $listaOrari->Add(new \App\Orario('Martedì', '12:30', 'Saint-Vincent', true));
-        $listaOrari->Add(new \App\Orario('Martedì', '12:45', '', false));
+        $listaOrari->Add(new \App\Orario('Martedì', '12:45', 'Saint-Vincent', true));
         $listaOrari->Add(new \App\Orario('Martedì', '13:00', '', false));
         $listaOrari->Add(new \App\Orario('Martedì', '13:15', '', false));
         $listaOrari->Add(new \App\Orario('Martedì', '13:30', '', false));
@@ -238,8 +239,8 @@ class Appuntamenti
 
         $listaOrari->Add(new \App\Orario('Mercoledì', '8:00', '', false));
         $listaOrari->Add(new \App\Orario('Mercoledì', '8:15', '', false));
-        $listaOrari->Add(new \App\Orario('Mercoledì', '8:30', 'Saint-Vincent', true));
-        $listaOrari->Add(new \App\Orario('Mercoledì', '8:45', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Mercoledì', '8:30', '', false));
+        $listaOrari->Add(new \App\Orario('Mercoledì', '8:45', '', false));
         $listaOrari->Add(new \App\Orario('Mercoledì', '9:00', 'Saint-Vincent', true));
         $listaOrari->Add(new \App\Orario('Mercoledì', '9:15', 'Saint-Vincent', true));
         $listaOrari->Add(new \App\Orario('Mercoledì', '9:30', 'Saint-Vincent', true));
@@ -255,7 +256,7 @@ class Appuntamenti
         $listaOrari->Add(new \App\Orario('Mercoledì', '12:00', 'Saint-Vincent', true));
         $listaOrari->Add(new \App\Orario('Mercoledì', '12:15', 'Saint-Vincent', true));
         $listaOrari->Add(new \App\Orario('Mercoledì', '12:30', 'Saint-Vincent', true));
-        $listaOrari->Add(new \App\Orario('Mercoledì', '12:45', '', false));
+        $listaOrari->Add(new \App\Orario('Mercoledì', '12:45', 'Saint-Vincent', true));
         $listaOrari->Add(new \App\Orario('Mercoledì', '13:00', '', false));
         $listaOrari->Add(new \App\Orario('Mercoledì', '13:15', '', false));
         $listaOrari->Add(new \App\Orario('Mercoledì', '13:30', '', false));
@@ -285,6 +286,55 @@ class Appuntamenti
         $listaOrari->Add(new \App\Orario('Mercoledì', '19:30', '', false));
         $listaOrari->Add(new \App\Orario('Mercoledì', '19:45', '', false));
 
+        $listaOrari->Add(new \App\Orario('Giovedì', '8:00', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '8:15', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '8:30', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '8:45', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '9:00', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '9:15', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '9:30', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '9:45', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '10:00', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '10:15', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '10:30', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '10:45', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '11:00', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '11:15', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '11:30', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '11:45', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '12:00', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '12:15', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '12:30', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '12:45', 'Saint-Vincent', true));
+        $listaOrari->Add(new \App\Orario('Giovedì', '13:00', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '13:15', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '13:30', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '13:45', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '14:00', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '14:15', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '14:30', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '14:45', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '15:00', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '15:15', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '15:30', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '15:45', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '16:00', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '16:15', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '16:30', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '16:45', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '17:00', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '17:15', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '17:30', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '17:45', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '18:00', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '18:15', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '18:30', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '18:45', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '19:00', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '19:15', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '19:30', '', false));
+        $listaOrari->Add(new \App\Orario('Giovedì', '19:45', '', false));
+
         $listaOrari->Add(new \App\Orario('Venerdì', '8:00', '', false));
         $listaOrari->Add(new \App\Orario('Venerdì', '8:15', '', false));
         $listaOrari->Add(new \App\Orario('Venerdì', '8:30', '', false));
@@ -309,26 +359,26 @@ class Appuntamenti
         $listaOrari->Add(new \App\Orario('Venerdì', '13:15', '', false));
         $listaOrari->Add(new \App\Orario('Venerdì', '13:30', '', false));
         $listaOrari->Add(new \App\Orario('Venerdì', '13:45', '', false));
-        $listaOrari->Add(new \App\Orario('Venerdì', '14:00', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Venerdì', '14:15', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Venerdì', '14:30', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Venerdì', '14:45', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Venerdì', '15:00', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Venerdì', '15:15', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Venerdì', '15:30', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Venerdì', '15:45', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Venerdì', '16:00', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Venerdì', '16:15', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Venerdì', '16:30', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Venerdì', '16:45', 'Chatillon', true));
-        $listaOrari->Add(new \App\Orario('Venerdì', '17:00', '', false));
-        $listaOrari->Add(new \App\Orario('Venerdì', '17:15', '', false));
-        $listaOrari->Add(new \App\Orario('Venerdì', '17:30', '', false));
-        $listaOrari->Add(new \App\Orario('Venerdì', '17:45', '', false));
-        $listaOrari->Add(new \App\Orario('Venerdì', '18:00', '', false));
-        $listaOrari->Add(new \App\Orario('Venerdì', '18:15', '', false));
-        $listaOrari->Add(new \App\Orario('Venerdì', '18:30', '', false));
-        $listaOrari->Add(new \App\Orario('Venerdì', '18:45', '', false));
+        $listaOrari->Add(new \App\Orario('Venerdì', '14:00', '', false));
+        $listaOrari->Add(new \App\Orario('Venerdì', '14:15', '', false));
+        $listaOrari->Add(new \App\Orario('Venerdì', '14:30', '', false));
+        $listaOrari->Add(new \App\Orario('Venerdì', '14:45', '', false));
+        $listaOrari->Add(new \App\Orario('Venerdì', '15:00', '', false));
+        $listaOrari->Add(new \App\Orario('Venerdì', '15:15', '', false));
+        $listaOrari->Add(new \App\Orario('Venerdì', '15:30', '', false));
+        $listaOrari->Add(new \App\Orario('Venerdì', '15:45', '', false));
+        $listaOrari->Add(new \App\Orario('Venerdì', '16:00', '', false));
+        $listaOrari->Add(new \App\Orario('Venerdì', '16:15', '', false));
+        $listaOrari->Add(new \App\Orario('Venerdì', '16:30', '', false));
+        $listaOrari->Add(new \App\Orario('Venerdì', '16:45', '', false));
+        $listaOrari->Add(new \App\Orario('Venerdì', '17:00', 'Pontey', true));
+        $listaOrari->Add(new \App\Orario('Venerdì', '17:15', 'Pontey', true));
+        $listaOrari->Add(new \App\Orario('Venerdì', '17:30', 'Pontey', true));
+        $listaOrari->Add(new \App\Orario('Venerdì', '17:45', 'Pontey', true));
+        $listaOrari->Add(new \App\Orario('Venerdì', '18:00', 'Pontey', true));
+        $listaOrari->Add(new \App\Orario('Venerdì', '18:15', 'Pontey', true));
+        $listaOrari->Add(new \App\Orario('Venerdì', '18:30', 'Pontey', true));
+        $listaOrari->Add(new \App\Orario('Venerdì', '18:45', 'Pontey', true));
         $listaOrari->Add(new \App\Orario('Venerdì', '19:00', '', false));
         $listaOrari->Add(new \App\Orario('Venerdì', '19:15', '', false));
         $listaOrari->Add(new \App\Orario('Venerdì', '19:30', '', false));
@@ -337,7 +387,7 @@ class Appuntamenti
         // Data Orario Persona Nota Fatto Assente Annullato
         $listaAppuntamenti = new \App\ListaAppuntamenti();
 
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
         $sql = "SELECT * FROM appuntamenti WHERE annullato = 0 AND fatto = 0 AND assente = 0";
         $appuntamentiDB = $db->exec($sql);
 
@@ -373,7 +423,7 @@ class Appuntamenti
 
     public function Modifica($f3)
     {
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
 
         $tipologia = $f3->get('POST.tipologia');
         $data = $f3->get('POST.data');
@@ -418,12 +468,14 @@ class Appuntamenti
         $note = $f3->get('POST.note');
         $lunedi = $f3->get('POST.tabelladata');
 
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
         $data_array = explode("/", $data);
         $jd = juliantojd($data_array[1], $data_array[0], $data_array[2]);
 
         $persona = str_replace('"', "", $persona);
         $persona = str_replace("'", "", $persona);
+        $persona = strtolower($persona);
+        $persona = ucwords($persona);
 
         $note = str_replace('"', "", $note);
         $note = str_replace("'", "", $note);
@@ -439,13 +491,15 @@ class Appuntamenti
 
     public function Lista($f3, $params)
     {
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
         $sql = "SELECT * FROM appuntamenti ORDER BY data ASC, ora ASC";
         $appuntamentiDB = $db->exec($sql);
         
         $apps = array();
         $totaleConteggioRitardi = 0;
         $totaleRitardi = 0;
+
+        $numeroApp = array();
 
         foreach ($appuntamentiDB as $appuntamentoDB) {
 
@@ -522,6 +576,9 @@ class Appuntamenti
                 "t" => $t
             ];
 
+            $persona = $appuntamentoDB['persona'];
+            $numeroApp[$persona] += 1;
+
             $apps[] = $app;
         }
 
@@ -534,8 +591,12 @@ class Appuntamenti
             $ritardo_media_str = "Non calcolata";
         }
 
+        arsort($numeroApp);
+        $numeroApp = array_slice($numeroApp, 0, 20);
+
         $f3->set('apps', $apps);
         $f3->set('ritardo', $ritardo_media_str);
+        $f3->set('numeroApp', $numeroApp);
 
         $f3->set('titolo', 'Appuntamenti');
         $f3->set('script', '');

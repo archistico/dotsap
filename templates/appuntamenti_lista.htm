@@ -1,10 +1,33 @@
 <div class="row">
   <div class="col-md-12">
+    <h3>Lista accessi per persona <em>(primi 20)</em></h3>
+    <table class="table table-striped tabella-testo-mini">
+      <thead>
+      <tr>
+        <th scope="col">Persona</th>
+        <th scope="col">Numero Appuntamenti</th>
+      </tr>
+      </thead>
+      <tbody>
+      <repeat group="{{ @numeroApp }}" key="{{ @persona }}" value="{{ @napp }}">
+        <tr>
+          <td>{{ @persona }}</td>
+          <td>{{ @napp }}</td>
+        </tr>
+      </repeat>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Lista accessi per data</h3>
     Media Ritardi: {{ @ritardo }}
   </div>
 </div>
 <div class="row">
   <div class="col-md-12">
+
     <table class="table table-striped tabella-testo-mini">
       <thead>
         <tr>

@@ -33,7 +33,7 @@ class Todo
 
     public function Cancella($f3, $params)
     {
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
 
         $id = $params['id'];
         $sql = "DELETE FROM todo WHERE id=$id";
@@ -55,7 +55,7 @@ class Todo
         $todo = \App\Utilita::PulisciStringa($todo);
 
         if (isset($todo) && isset($chi)) {
-            $db = new \DB\SQL('sqlite:.database.sqlite');
+            $db = new \DB\SQL('sqlite:db/database.sqlite');
             $db->begin();
             $sql = "INSERT into todo values(null, '$todo', '$chi')";
             $db->exec($sql);

@@ -39,4 +39,7 @@ $f3->route('GET @utentenuovo: /utente/nuovo', '\App\Admin->UtenteNuovo');
 $f3->route('GET @utentecancella: /utente/cancella/@user_id', '\App\Admin->UtenteCancella');
 $f3->route('POST @utenteregistra: /utente/registra', '\App\Admin->UtenteRegistra');
 
+// Crypt
+$f3->route('GET @crypt: /crypt', '\App\Crypt->Show');
+
 $f3->run();

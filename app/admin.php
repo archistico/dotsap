@@ -24,7 +24,7 @@ class Admin
 
     public function UtenteLista($f3, $args)
     {
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
         $sql = "SELECT user_id from users";
         $f3->set('lista', $db->exec($sql));
         $f3->set('titolo', 'Utente');
@@ -39,7 +39,7 @@ class Admin
             $utente = $f3->get('POST.utente');
             $utente = str_replace(" ", "_", $utente);
             $password_hash = $f3->get('POST.p');
-            $db = new \DB\SQL('sqlite:.database.sqlite');
+            $db = new \DB\SQL('sqlite:db/database.sqlite');
             $db->begin();
             $sql = "INSERT INTO users VALUES('$utente', '$password_hash')";
             $db->exec($sql);
@@ -52,7 +52,7 @@ class Admin
     {
         $utente = $f3->get('PARAMS.user_id');
 
-        $db = new \DB\SQL('sqlite:.database.sqlite');
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
         $db->begin();
         $sql = "DELETE FROM users WHERE users.user_id = '$utente'";
         $db->exec($sql);

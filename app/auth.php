@@ -48,7 +48,7 @@ class Auth
             $password = trim($f3->get($sessionPassword));
 
             if (isset($utente) && isset($password)) {
-                $db = new \DB\SQL('sqlite:.database.sqlite');
+                $db = new \DB\SQL('sqlite:db/database.sqlite');
                 $users = new \DB\SQL\Mapper($db, 'users');
                 $auth = new \Auth($users, array('id' => 'user_id', 'pw' => 'password'));
                 $login_result = $auth->login($utente, $password);
@@ -84,7 +84,7 @@ class Auth
             // CONTROLLA SE NON SONO SOTTO ATTACCO CSRF
             if ($token === $csrf) {
 
-                $db = new \DB\SQL('sqlite:.database.sqlite');
+                $db = new \DB\SQL('sqlite:db/database.sqlite');
                 $users = new \DB\SQL\Mapper($db, 'users');
                 $auth = new \Auth($users, array('id' => 'user_id', 'pw' => 'password'));
                 $login_result = $auth->login($utente, $password);
