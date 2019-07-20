@@ -29,6 +29,10 @@ $f3->route('POST @registra: /registra', '\App\Movimento->Registra');
 $f3->route('GET @cancella: /cancella/@id', '\App\Movimento->Cancella');
 $f3->route('POST @sopprimi: /sopprimi', '\App\Movimento->Sopprimi');
 
+// Privacy
+$f3->route('GET @privacy: /privacy', '\App\Privacy->Home');
+$f3->route('GET @makepdf: /privacy/makepdf', '\App\Privacy->MakePDF');
+
 // Autenticazione
 $f3->route('GET @login: /login', '\App\Auth->Login');
 $f3->route('POST @loginCheck: /loginCheck', '\App\Auth->LoginCheck');

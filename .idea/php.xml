@@ -5,6 +5,7 @@
       <path value="$PROJECT_DIR$/vendor/bcosca/fatfree" />
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
+      <path value="$PROJECT_DIR$/vendor/setasign/fpdf" />
     </include_path>
   </component>
 </project>
