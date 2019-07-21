@@ -17,8 +17,21 @@ class Privacy
 
     public function Home($f3)
     {
+        $listaAlfabetica = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z"];
+        $f3->set('lista', $listaAlfabetica);
+
         $f3->set('titolo', 'Privacy');
         $f3->set('contenuto', 'privacy.htm');
+        echo \Template::instance()->render('templates/base.htm');
+    }
+
+    public function Lista($f3, $params)
+    {
+        $lettera = $params['lettera'];
+        $f3->set('lettera', $lettera);
+
+        $f3->set('titolo', 'Privacy');
+        $f3->set('contenuto', 'privacylista.htm');
         echo \Template::instance()->render('templates/base.htm');
     }
 

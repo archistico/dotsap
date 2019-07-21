@@ -31,6 +31,7 @@ $f3->route('POST @sopprimi: /sopprimi', '\App\Movimento->Sopprimi');
 
 // Privacy
 $f3->route('GET @privacy: /privacy', '\App\Privacy->Home');
+$f3->route('GET @privacylista: /privacy/@lettera', '\App\Privacy->Lista');
 $f3->route('GET @makepdf: /privacy/makepdf', '\App\Privacy->MakePDF');
 
 // Autenticazione
