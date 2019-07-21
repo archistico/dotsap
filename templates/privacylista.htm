@@ -5,14 +5,18 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col">Nome utente</th>
+                <th scope="col">ID</th>
+                <th scope="col">COGNOME NOME</th>
+                <th scope="col">CODICE FISCALE</th>
                 <th scope="col" style="width: 50px">#</th>
             </tr>
             </thead>
             <tbody>
-            <repeat group="{{ @lista }}" value="{{ @utente }}">
+            <repeat group="{{ @lista }}" value="{{ @paziente }}">
                 <tr>
-                    <td>{{ @utente }}</td>
+                    <td>{{ @paziente.id }}</td>
+                    <td>{{ @paziente.nomecompleto }}</td>
+                    <td>{{ @paziente.codicefiscale }}</td>
                     <th scope="row">
                         <a href="{{@BASE}}" class="btn btn-danger btn-sm">PDF</a>
                     </th>

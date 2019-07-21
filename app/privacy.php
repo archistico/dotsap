@@ -30,7 +30,10 @@ class Privacy
         $lettera = $params['lettera'];
         $f3->set('lettera', $lettera);
 
-        $lista = ["Pippo", "Pluto", "Paperino"];
+        $lista = [
+            (new \App\Paziente(1, "Pippo", "nome pippo", "PPPNNN11A11E333H"))->ToArray(),
+            (new \App\Paziente(2, "Minnie", "nome Minnie", "MMMNNN11A11E333H"))->ToArray(),
+        ];
 
         $f3->set('lista', $lista);
         $f3->set('titolo', 'Privacy');
