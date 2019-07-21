@@ -1,6 +1,24 @@
 <div class="row">
     <div class="col-md-12">
-        <h3>Lettera</h3>
-        {{ @lettera }}
+        <h3>Cognomi che iniziano con: {{ @lettera }}</h3>
+        <br>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Nome utente</th>
+                <th scope="col" style="width: 50px">#</th>
+            </tr>
+            </thead>
+            <tbody>
+            <repeat group="{{ @lista }}" value="{{ @utente }}">
+                <tr>
+                    <td>{{ @utente }}</td>
+                    <th scope="row">
+                        <a href="{{@BASE}}" class="btn btn-danger btn-sm">PDF</a>
+                    </th>
+                </tr>
+            </repeat>
+            </tbody>
+        </table>
     </div>
 </div>

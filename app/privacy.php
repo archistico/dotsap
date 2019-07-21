@@ -30,6 +30,9 @@ class Privacy
         $lettera = $params['lettera'];
         $f3->set('lettera', $lettera);
 
+        $lista = ["Pippo", "Pluto", "Paperino"];
+
+        $f3->set('lista', $lista);
         $f3->set('titolo', 'Privacy');
         $f3->set('contenuto', 'privacylista.htm');
         echo \Template::instance()->render('templates/base.htm');
