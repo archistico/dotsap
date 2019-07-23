@@ -5,29 +5,35 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col">ID</th>
+                <th scope="col" class="d-none d-sm-block">ID</th>
                 <th scope="col">COGNOME NOME</th>
-                <th scope="col">DATA NASCITA</th>
-                <th scope="col">FIRMATA</th>
-                <th scope="col">MODIFICA</th>
+                <th scope="col" class="d-none d-sm-block">DATA NASCITA</th>
+                <th scope="col">FIRMA</th>
+
                 <th scope="col" style="width: 50px">#</th>
             </tr>
             </thead>
             <tbody>
             <repeat group="{{ @lista }}" value="{{ @paziente }}">
                 <tr>
-                    <td>{{ @paziente.id }}</td>
+                    <td class="d-none d-sm-block">{{ @paziente.id }}</td>
                     <td>{{ @paziente.nomecompleto }}</td>
-                    <td>{{ @paziente.datanascita }}</td>
+                    <td class="d-none d-sm-block">{{ @paziente.datanascita }}</td>
                     <td>
-                    <check if="{{ @paziente.firmato==1 }}">
-                        <true> {{ @paziente.data }} - <i class="fas fa-check-square"></i> </true>
-                        <false> <i class="fas fa-exclamation-triangle"></i> </false>
+                    <check if="{{ @paziente.firmata==1 }}">
+                        <true> <i class="fas fa-check-square text-success bg-white"></i> {{ @paziente.datafirma }} </true>
+                        <false> <i class="fas fa-exclamation-triangle text-danger bg-white"></i> </false>
                     </check>
                     </td>
-                    <td><a href="{{@BASE}}/privacy/modifica/{{ @paziente.id }}" class="btn btn-danger btn-sm"><i class="fas fa-pencil-alt"></i></a></td>
                     <th scope="row">
-                        <a href="{{@BASE}}/privacy/pdf/{{ @paziente.id }}" class="btn btn-info btn-sm" target="_blank">PDF</a>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-danger btn-sm btn-block btn-rect"
+                                    data-toggle="modal" data-target="#modificaModal"
+                                    data-id="{{ @paziente.id }}" data-nome="{{ @paziente.nome }}" data-cognome="{{ @paziente.cognome }}">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                            <a href="{{@BASE}}/privacy/pdf/{{ @paziente.id }}" class="btn btn-info btn-sm btn-rect" target="_blank">PDF</a>
+                        </div>
                     </th>
                 </tr>
             </repeat>
@@ -35,3 +41,66 @@
         </table>
     </div>
 </div>
+
+<!-- MOD AGGIUNGI -->
+<div class="modal fade" id="modificaModal" tabindex="-1" role="dialog" aria-labelledby="modificaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="aggiungiModalLabel">Modifica</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{@BASE}}{{ 'privacymodifica' | alias }}" id="form_modifica">
+                    <div class="form-group">
+                        <h4><span id="modalcognome"></span> <span id="modalnome"></span></h4>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="datafirma">Data firma</label>
+                        <input type="date" class="form-control" id="datafirma" name="datafirma" required autofocus>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="segreteria" value="segreteria" id="segreteria" checked>
+                        <label class="form-check-label" for="segreteria">
+                            Segreteria
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="sostituti" value="sostituti" id="sostituti" checked>
+                        <label class="form-check-label" for="sostituti">
+                            Sostituti
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="associati" value="associati" id="associati" checked>
+                        <label class="form-check-label" for="associati">
+                            Associati
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="consulenti" value="consulenti" id="consulenti" checked>
+                        <label class="form-check-label" for="consulenti">
+                            Consulenti fiscali
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="softwarehouse" value="softwarehouse" id="softwarehouse" checked>
+                        <label class="form-check-label" for="softwarehouse">
+                            Software house
+                        </label>
+                    </div>
+                    <input type="hidden" name="input-id" value="" id="input-id">
+                    <input type="hidden" name="input-lettera" value="{{ @lettera }}" id="input-lettera">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Indietro</button>
+                <button type="button" class="btn btn-success" id="btn_aggiungi" onclick="btn_modifica()">Modifica</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MOD AGGIUNGI FINE -->

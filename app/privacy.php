@@ -34,6 +34,7 @@ class Privacy
 
         $f3->set('lista', $lista);
         $f3->set('titolo', 'Privacy');
+        $f3->set('script', 'privacy.js');
         $f3->set('contenuto', 'privacylista.htm');
         echo \Template::instance()->render('templates/base.htm');
     }
@@ -119,7 +120,11 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $txt = iconv('UTF-8', 'windows-1252', $txt);
         $pdf->MultiCell(0,5, $txt);
 
-        $txt = "Data " .date("d/m/Y"). "                            Firma";
+        if($paz->getFirmata()) {
+            $txt = "Data " .$paz->getData(). "                            Firma";
+        } else {
+            $txt = "Data " .date("d/m/Y"). "                            Firma";
+        }
         $txt = iconv('UTF-8', 'windows-1252', $txt);
         $pdf->Ln(2);
         $pdf->MultiCell(0,5, $txt);
@@ -131,11 +136,95 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $pdf->Rect(13,121, 3,3, 'D'); $pdf->Rect(38,121, 3,3, 'D');
         $pdf->Rect(13,141, 3,3, 'D'); $pdf->Rect(38,141, 3,3, 'D');
 
-        $pdf->Output();
+        // Se c'è la data segna altrimenti lascia vuoto
+        if($paz->getFirmata()) {
+            $x = 13;
+            $y = 81;
+            $inc = 3;
+            $falso = 25;
+            if ($paz->segreteria == 1) {
+                $pdf->Line($x, $y, $x + $inc, $y + $inc);
+                $pdf->Line($x, $y + $inc, $x + $inc, $y);
+            } else {
+                $pdf->Line($x + $falso, $y, $x + $inc + $falso, $y + $inc);
+                $pdf->Line($x + $falso, $y + $inc, $x + $inc + $falso, $y);
+            }
+
+            $x = 13;
+            $y = 91;
+            $inc = 3;
+            $falso = 25;
+            if ($paz->sostituti == 1) {
+                $pdf->Line($x, $y, $x + $inc, $y + $inc);
+                $pdf->Line($x, $y + $inc, $x + $inc, $y);
+            } else {
+                $pdf->Line($x + $falso, $y, $x + $inc + $falso, $y + $inc);
+                $pdf->Line($x + $falso, $y + $inc, $x + $inc + $falso, $y);
+            }
+
+            $x = 13;
+            $y = 106;
+            $inc = 3;
+            $falso = 25;
+            if ($paz->associazione == 1) {
+                $pdf->Line($x, $y, $x + $inc, $y + $inc);
+                $pdf->Line($x, $y + $inc, $x + $inc, $y);
+            } else {
+                $pdf->Line($x + $falso, $y, $x + $inc + $falso, $y + $inc);
+                $pdf->Line($x + $falso, $y + $inc, $x + $inc + $falso, $y);
+            }
+
+            $x = 13;
+            $y = 121;
+            $inc = 3;
+            $falso = 25;
+            if ($paz->consulenti == 1) {
+                $pdf->Line($x, $y, $x + $inc, $y + $inc);
+                $pdf->Line($x, $y + $inc, $x + $inc, $y);
+            } else {
+                $pdf->Line($x + $falso, $y, $x + $inc + $falso, $y + $inc);
+                $pdf->Line($x + $falso, $y + $inc, $x + $inc + $falso, $y);
+            }
+
+            $x = 13;
+            $y = 141;
+            $inc = 3;
+            $falso = 25;
+            if ($paz->associazione == 1) {
+                $pdf->Line($x, $y, $x + $inc, $y + $inc);
+                $pdf->Line($x, $y + $inc, $x + $inc, $y);
+            } else {
+                $pdf->Line($x + $falso, $y, $x + $inc + $falso, $y + $inc);
+                $pdf->Line($x + $falso, $y + $inc, $x + $inc + $falso, $y);
+            }
+        }
+
+
+        $pdf->Output('', "Privacy - ".$paz->cognome." ".$paz->nome.".pdf");
     }
 
-    public function Modifica($f3, $params)
+    private function ConvertBool($a)
     {
-        $f3->reroute('/privacy');
+        if(!is_null($a)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public function Modifica($f3)
+    {
+        $lettera = $f3->get('POST.input-lettera');
+        $id = $f3->get('POST.input-id');
+        $datafirma = $f3->get('POST.datafirma');
+        $segreteria = $f3->get('POST.segreteria');
+        $sostituti = $f3->get('POST.sostituti');
+        $associati = $f3->get('POST.associati');
+        $consulenti = $f3->get('POST.consulenti');
+        $softwarehouse = $f3->get('POST.softwarehouse');
+
+        Paziente::ModifyPrivacyByID($id, $datafirma, $this->ConvertBool($segreteria), $this->ConvertBool($sostituti), $this->ConvertBool($associati), $this->ConvertBool($consulenti), $this->ConvertBool($softwarehouse));
+
+        $f3->reroute('/privacy/'.$lettera);
     }
 }
