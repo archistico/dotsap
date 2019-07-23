@@ -117,6 +117,24 @@ class Paziente {
         $db->commit();
     }
 
+    public static function ContaTotalePazienti()
+    {
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
+
+        $sql = "SELECT COUNT(id) as totale FROM pazienti;";
+        $risSql = $db->exec($sql);
+        return $risSql[0]["totale"];
+    }
+
+    public static function ContaTotaleFirmate()
+    {
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
+
+        $sql = "SELECT COUNT(*) as totale FROM pazienti WHERE data IS NOT NULL AND data!='';";
+        $risSql = $db->exec($sql);
+        return $risSql[0]["totale"];
+    }
+
     public function getPrefisso()
     {
         if($this->sesso == 'M') {

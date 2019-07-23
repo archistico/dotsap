@@ -20,6 +20,20 @@ class Privacy
         $listaAlfabetica = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z"];
         $f3->set('lista', $listaAlfabetica);
 
+        $totaleprivacy = Paziente::ContaTotalePazienti();
+        $totalefirmate = Paziente::ContaTotaleFirmate();
+
+        $f3->set('totaleprivacy', $totaleprivacy);
+        $f3->set('totalefirmate', $totalefirmate);
+        $f3->set('totalemancanti', $totaleprivacy - $totalefirmate);
+
+        if($totaleprivacy == 0) {
+            $percentuale = 0;
+        } else {
+            $percentuale = round(($totalefirmate/$totaleprivacy)*100);
+        }
+        $f3->set('percentuale', $percentuale);
+
         $f3->set('titolo', 'Privacy');
         $f3->set('contenuto', 'privacy.htm');
         echo \Template::instance()->render('templates/base.htm');
@@ -31,8 +45,9 @@ class Privacy
         $f3->set('lettera', $lettera);
 
         $lista = Paziente::ReadByLetter($lettera);
-
         $f3->set('lista', $lista);
+
+        // Generali
         $f3->set('titolo', 'Privacy');
         $f3->set('script', 'privacy.js');
         $f3->set('contenuto', 'privacylista.htm');
