@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f599319-f4bb-4e64-98b8-a1b1eccdc03d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/js/hashes.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/privacy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/privacy.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/db/database.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/sha512.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.htm" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/utentenuovo.htm" beforeDir="false" afterPath="$PROJECT_DIR$/templates/utentenuovo.htm" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,17 +36,14 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/privacy.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="666">
-              <caret line="121" column="40" selection-start-line="121" selection-start-column="40" selection-end-line="121" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -73,6 +73,9 @@
         <option value="$PROJECT_DIR$/app/paziente.php" />
         <option value="$PROJECT_DIR$/templates/privacylista.htm" />
         <option value="$PROJECT_DIR$/app/privacy.php" />
+        <option value="$PROJECT_DIR$/js/hashes.min.js" />
+        <option value="$PROJECT_DIR$/templates/utentenuovo.htm" />
+        <option value="$PROJECT_DIR$/templates/login.htm" />
       </list>
     </option>
   </component>
@@ -84,7 +87,7 @@
       <path value="$PROJECT_DIR$/vendor/setasign/fpdf" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="1298" />
     <option name="height" value="1040" />
   </component>
@@ -105,6 +108,16 @@
               <item name="dotsap" type="b2602c69:ProjectViewProjectNode" />
               <item name="dotsap" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dotsap" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dotsap" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dotsap" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dotsap" type="462c0819:PsiDirectoryNode" />
+              <item name="tmp" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -170,17 +183,16 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34400000" />
+    <option name="totallyTimeSpent" value="35844000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16151386" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -259,9 +271,6 @@
           <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/utentenuovo.htm">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/nuovo3.htm">
       <provider selected="true" editor-type-id="text-editor" />
@@ -377,6 +386,36 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="666">
           <caret line="121" column="40" selection-start-line="121" selection-start-column="40" selection-end-line="121" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tmp/35em8kp5m4oww.153hjpwu4wh8c.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tmp/35em8kp5m4oww.xuqd9s4kgkr7.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/hashes.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="23738" selection-start-line="1" selection-start-column="23738" selection-end-line="1" selection-end-column="23738" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/utentenuovo.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="27" column="45" lean-forward="true" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/login.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="58" column="36" selection-start-line="58" selection-start-column="36" selection-end-line="58" selection-end-column="36" />
         </state>
       </provider>
     </entry>
