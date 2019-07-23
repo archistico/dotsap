@@ -1,10 +1,39 @@
 <?php
-namespace App;
+require 'vendor/autoload.php';
+$f3 = \Base::instance();
+
+define('FILE_NAME', "pazienti.txt");
+
+echo "Leggo il file ".FILE_NAME."\n";
+$handle = fopen(FILE_NAME, "r");
+if ($handle) {
+    while (($line = fgets($handle)) !== false) {
+        $parti = preg_split("/[\t]/", $line);
+
+        for($i=0; $i<count($parti); $i++) {
+            $parti[$i] = pulisciStringa($parti[$i]);
+        }
+
+        $cognome = Maiuscola($parti[0]);
+        $nome = Maiuscola($parti[1]);
+        $datanascita = $parti[2];
+        $sesso = $parti[3];
+        $codicefiscale = $parti[4];
+        $indirizzo = Maiuscola($parti[9]);
+        $citta = Maiuscola($parti[10]);
+        $telefono = $parti[12];
+
+        $paz = new Paziente($cognome, $nome, $datanascita, $sesso, $codicefiscale, $indirizzo, $citta, $telefono);
+        $paz->AddDB();
+    }
+    fclose($handle);
+} else {
+    echo "Errore nella lettura del file";
+}
 
 class Paziente {
 
     // dati paziente
-    public $id;
     public $cognome;
     public $nome;
     public $datanascita;
@@ -22,9 +51,7 @@ class Paziente {
     public $consulenti;
     public $softwarehouse;
 
-    public function __construct($id, $cognome, $nome, $datanascita, $sesso, $codicefiscale, $indirizzo, $citta, $telefono)
-    {
-        $this->id = $id;
+    public function __construct($cognome, $nome, $datanascita, $sesso, $codicefiscale, $indirizzo, $citta, $telefono) {
         $this->cognome = $cognome;
         $this->nome = $nome;
         $this->datanascita = $datanascita;
@@ -42,8 +69,7 @@ class Paziente {
         $this->softwarehouse = 0;
     }
 
-    public function AddDB()
-    {
+    public function AddDB() {
         $db = new \DB\SQL('sqlite:db/database.sqlite');
 
         $sql = 'INSERT into pazienti values(null, "'.$this->cognome.'", "'.$this->nome.'", "'.$this->datanascita.'", "'.$this->sesso.'", "'.$this->codicefiscale.'", "'.$this->indirizzo.'", "'.$this->citta.'", "'.$this->telefono.'", "'.$this->data.'", "'.$this->segreteria.'", "'.$this->associazione.'", "'.$this->sostituti.'", "'.$this->consulenti.'", "'.$this->softwarehouse.'")';
@@ -52,36 +78,6 @@ class Paziente {
         $db->exec($sql);
         $db->commit();
 
-    }
-
-    public static function ReadByLetter($lettera)
-    {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
-        $risposta = [];
-
-        $sql = "SELECT * FROM pazienti WHERE cognome LIKE '$lettera%'";
-        $pazientiArray = $db->exec($sql);
-
-        foreach($pazientiArray as $paz) {
-            $risposta[] = (new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"]))->ToArray();
-        }
-
-        // Ordina in base a cognome
-        usort($risposta, function ($a, $b) {
-            return strcmp($a["nomecompleto"], $b["nomecompleto"]);
-        });
-
-        return $risposta;
-    }
-
-    public static function ReadByID($id)
-    {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
-
-        $sql = "SELECT * FROM pazienti WHERE id = '$id'";
-        $pazientiArray = $db->exec($sql);
-        $paz = $pazientiArray[0];
-        return new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"]);
     }
 
     public function getPrefisso()
@@ -104,10 +100,8 @@ class Paziente {
     public function ToArray()
     {
         return [
-            'id'            => $this->id,
             'cognome'       => $this->cognome,
             'nome'          => $this->nome,
-            'nomecompleto'  => $this->cognome . " ". $this->nome,
             'datanascita'   => $this->datanascita,
             'sesso'         => $this->sesso,
             'codicefiscale' => $this->codicefiscale,
@@ -124,4 +118,33 @@ class Paziente {
             'softwarehouse' => $this->softwarehouse,
         ];
     }
+}
+
+function pulisciStringa($text)
+{
+    if(!empty($text)) {
+        $text = str_replace("- ", " - ", $text);
+        $text = str_replace(" -", " - ", $text);
+        $text = str_replace("     ", " ", $text);
+        $text = str_replace("    ", " ", $text);
+        $text = str_replace("   ", " ", $text);
+        $text = str_replace("  ", " ", $text);
+        $text = str_replace("\"", "", $text);
+
+        $text = str_replace(array("\n", "\r"), "", $text);
+        if(!empty($text)) {
+            $text = trim($text);
+        }
+    }
+    return $text;
+}
+
+function Maiuscola($text)
+{
+    if(!empty($text)) {
+        $text = ucwords(strtolower($text));
+        $text = implode('-', array_map('ucfirst', explode('-', $text)));
+        $text = implode('\'', array_map('ucfirst', explode('\'', $text)));
+    }
+    return $text;
 }

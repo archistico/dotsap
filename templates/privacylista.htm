@@ -7,7 +7,9 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">COGNOME NOME</th>
-                <th scope="col">CODICE FISCALE</th>
+                <th scope="col">DATA NASCITA</th>
+                <th scope="col">FIRMATA</th>
+                <th scope="col">MODIFICA</th>
                 <th scope="col" style="width: 50px">#</th>
             </tr>
             </thead>
@@ -16,9 +18,16 @@
                 <tr>
                     <td>{{ @paziente.id }}</td>
                     <td>{{ @paziente.nomecompleto }}</td>
-                    <td>{{ @paziente.codicefiscale }}</td>
+                    <td>{{ @paziente.datanascita }}</td>
+                    <td>
+                    <check if="{{ @paziente.firmato==1 }}">
+                        <true> {{ @paziente.data }} - <i class="fas fa-check-square"></i> </true>
+                        <false> <i class="fas fa-exclamation-triangle"></i> </false>
+                    </check>
+                    </td>
+                    <td><a href="{{@BASE}}/privacy/modifica/{{ @paziente.id }}" class="btn btn-danger btn-sm"><i class="fas fa-pencil-alt"></i></a></td>
                     <th scope="row">
-                        <a href="{{@BASE}}" class="btn btn-danger btn-sm">PDF</a>
+                        <a href="{{@BASE}}/privacy/pdf/{{ @paziente.id }}" class="btn btn-info btn-sm" target="_blank">PDF</a>
                     </th>
                 </tr>
             </repeat>
