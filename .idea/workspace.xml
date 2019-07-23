@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f599319-f4bb-4e64-98b8-a1b1eccdc03d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/js/privacy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/paziente.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/paziente.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/privacy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/privacy.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/db/database.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/appuntamenti.htm" beforeDir="false" afterPath="$PROJECT_DIR$/templates/appuntamenti.htm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.htm" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.htm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/privacylista.htm" beforeDir="false" afterPath="$PROJECT_DIR$/templates/privacylista.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.htm" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.htm" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +33,7 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -73,7 +67,6 @@
         <option value="$PROJECT_DIR$/import.php" />
         <option value="$PROJECT_DIR$/js/hashes.min.js" />
         <option value="$PROJECT_DIR$/templates/utentenuovo.htm" />
-        <option value="$PROJECT_DIR$/templates/login.htm" />
         <option value="$PROJECT_DIR$/templates/base.htm" />
         <option value="$PROJECT_DIR$/templates/appuntamenti.htm" />
         <option value="$PROJECT_DIR$/js/privacy.js" />
@@ -81,6 +74,7 @@
         <option value="$PROJECT_DIR$/app/privacy.php" />
         <option value="$PROJECT_DIR$/app/paziente.php" />
         <option value="$PROJECT_DIR$/templates/privacylista.htm" />
+        <option value="$PROJECT_DIR$/templates/login.htm" />
       </list>
     </option>
   </component>
@@ -101,7 +95,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -124,10 +117,16 @@
               <item name="dotsap" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="dotsap" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dotsap" type="462c0819:PsiDirectoryNode" />
+              <item name="tmp" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -184,16 +183,17 @@
       <workItem from="1563651758686" duration="650000" />
       <workItem from="1563734859142" duration="2460000" />
       <workItem from="1563865051083" duration="14762000" />
+      <workItem from="1563904634841" duration="136000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44794000" />
+    <option name="totallyTimeSpent" value="44930000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16151386" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16311301" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -341,13 +341,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/login.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="58" column="36" selection-start-line="58" selection-start-column="36" selection-end-line="58" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/login.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -445,6 +438,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="591">
           <caret line="151" column="48" selection-start-line="151" selection-start-column="48" selection-end-line="151" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/login.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="40" column="135" selection-start-line="40" selection-start-column="135" selection-end-line="40" selection-end-column="135" />
         </state>
       </provider>
     </entry>
