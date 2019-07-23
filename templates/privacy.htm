@@ -2,8 +2,17 @@
     <div class="col-md-12">
         <h3>Lista iniziali cognomi</h3>
         <repeat group="{{ @lista }}" value="{{ @lettera }}">
-            <a href="{{@BASE}}/privacy/{{ @lettera }}">{{ @lettera }}</a>
+            <a href="{{@BASE}}/privacy/{{ @lettera }}" class="display-4">{{ @lettera }}</a>
         </repeat>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h3>Statistiche</h3>
+        <p>Privacy totali: <br>
+            Privacy firmate: <br>
+            Privacy mancanti: </p>
     </div>
 </div>
 
