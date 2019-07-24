@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-md-12">
+        <form method="POST" action="{{@BASE}}{{ 'privacynew' | alias }}">
+            <div class="form-group">
+                <label for="Cognome">Cognome</label>
+                <input type="text" class="form-control" id="Cognome" placeholder="Cognome" name="cognome" lang="it" required>
+            </div>
+            <div class="form-group">
+                <label for="Nome">Nome</label>
+                <input type="text" class="form-control" id="Nome" placeholder="Nome" name="nome" lang="it" required>
+            </div>
+            <div class="form-group">
+                <label for="CodiceFiscale">Codice fiscale</label>
+                <input type="text" class="form-control" id="CodiceFiscale" placeholder="Codice fiscale" name="codicefiscale" required>
+            </div>
+            <div class="form-group">
+                <label for="Indirizzo">Indirizzo</label>
+                <input type="text" class="form-control" id="Indirizzo" placeholder="Indirizzo" name="indirizzo" required>
+            </div>
+            <div class="form-group">
+                <label for="Citta">Città</label>
+                <input type="text" class="form-control" id="Citta" placeholder="Città" name="citta" required>
+            </div>
+            <div class="form-group">
+                <label for="InputData">Data nascita</label>
+                <input type="date" class="form-control" id="InputData" placeholder="Data" name="data" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Registra</button>
+        </form>
+    </div>
+</div>

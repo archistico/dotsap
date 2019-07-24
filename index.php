@@ -34,6 +34,7 @@ $f3->route('GET @privacy: /privacy', '\App\Privacy->Home');
 $f3->route('GET @privacylista: /privacy/@lettera', '\App\Privacy->Lista');
 $f3->route('GET @privacypdf: /privacy/pdf/@id', '\App\Privacy->MakePDF');
 $f3->route('POST @privacymodifica: /privacy/modifica', '\App\Privacy->Modifica');
+$f3->route('GET @privacynew: /privacy/new', '\App\Privacy->PazienteNew');
 
 // Autenticazione
 $f3->route('GET @login: /login', '\App\Auth->Login');

@@ -242,4 +242,11 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
 
         $f3->reroute('/privacy/'.$lettera);
     }
+
+    public function PazienteNew($f3)
+    {
+        $f3->set('titolo', 'Nuovo Paziente');
+        $f3->set('contenuto', 'privacynew.htm');
+        echo \Template::instance()->render('templates/base.htm');
+    }
 }
