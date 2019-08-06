@@ -48,4 +48,20 @@ class Utilita
         $testo = str_replace("'", "", $testo);
         return $testo;
     }
+
+    public static function PulisciStringaVirgolette($testo)
+    {
+        $testo = str_replace('"', "", $testo);
+        return $testo;
+    }
+
+    public static function ConvertToDMY($testo)
+    {
+        if(is_null($testo) || empty($testo)) {
+            return null;
+        } else {
+            $data = \DateTime::createFromFormat('Y-m-d', $testo);
+            return $data->format('d/m/Y');
+        }
+    }
 }

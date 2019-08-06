@@ -6,6 +6,17 @@
 
 <div class="row">
     <div class="col-md-12">
+        <!-- bootstrap style-->
+        <F3:repeat group="{{ \App\Flash::instance()->getMessages() }}" value="{{ @msg }}">
+            <div class="alert alert-{{ @msg.status }} alert-dismissable">
+                {{ @msg.text | esc }}
+            </div>
+        </F3:repeat>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
         <h3>Lista iniziali cognomi</h3>
         <repeat group="{{ @lista }}" value="{{ @lettera }}">
             <a href="{{@BASE}}/privacy/{{ @lettera }}" class="display-4">{{ @lettera }}</a>
@@ -52,16 +63,5 @@
         <div class="progress" style="height: 25px;">
             <div class="progress-bar" role="progressbar" style="width: {{ @percentuale }}%;" aria-valuenow="{{ @percentuale }}" aria-valuemin="0" aria-valuemax="100">{{ @percentuale }}%</div>
         </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-        <!-- bootstrap style-->
-        <F3:repeat group="{{ \App\Flash::instance()->getMessages() }}" value="{{ @msg }}">
-            <div class="alert alert-{{ @msg.status }} alert-dismissable">
-                {{ @msg.text | esc }}
-            </div>
-        </F3:repeat>
     </div>
 </div>

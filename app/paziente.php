@@ -45,14 +45,15 @@ class Paziente {
 
     public function AddDB()
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
-
-        $sql = 'INSERT into pazienti values(null, "'.$this->cognome.'", "'.$this->nome.'", "'.$this->datanascita.'", "'.$this->sesso.'", "'.$this->codicefiscale.'", "'.$this->indirizzo.'", "'.$this->citta.'", "'.$this->telefono.'", "'.$this->data.'", "'.$this->segreteria.'", "'.$this->associazione.'", "'.$this->sostituti.'", "'.$this->consulenti.'", "'.$this->softwarehouse.'")';
-
-        $db->begin();
-        $db->exec($sql);
-        $db->commit();
-
+        try {
+            $db = new \DB\SQL('sqlite:db/database.sqlite');
+            $sql = 'INSERT into pazienti values(null, "' . $this->cognome . '", "' . $this->nome . '", "' . $this->datanascita . '", "' . $this->sesso . '", "' . $this->codicefiscale . '", "' . $this->indirizzo . '", "' . $this->citta . '", "' . $this->telefono . '", "' . $this->data . '", "' . $this->segreteria . '", "' . $this->associazione . '", "' . $this->sostituti . '", "' . $this->consulenti . '", "' . $this->softwarehouse . '")';
+            $db->begin();
+            $db->exec($sql);
+            $db->commit();
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
     }
 
     public function getData()

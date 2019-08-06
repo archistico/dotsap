@@ -249,4 +249,23 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $f3->set('contenuto', 'privacynew.htm');
         echo \Template::instance()->render('templates/base.htm');
     }
+
+    public function PazienteSave($f3)
+    {
+        $cognome = Utilita::PulisciStringaVirgolette($f3->get('POST.cognome'));
+        $nome = Utilita::PulisciStringaVirgolette($f3->get('POST.nome'));
+        $cf = Utilita::PulisciStringaVirgolette($f3->get('POST.codicefiscale'));
+        $indirizzo = Utilita::PulisciStringaVirgolette($f3->get('POST.indirizzo'));
+        $citta = Utilita::PulisciStringaVirgolette($f3->get('POST.citta'));
+        $sesso = Utilita::PulisciStringaVirgolette($f3->get('POST.sesso'));
+        $datanascita = Utilita::ConvertToDMY($f3->get('POST.datanascita'));
+
+        $p = new \App\Paziente(null, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, "");
+        $p->AddDB();
+
+        \App\Flash::instance()->addMessage('Paziente aggiunto', 'success');
+
+        $f3->reroute('/privacy');
+
+    }
 }
