@@ -89,6 +89,29 @@ class Paziente {
         return $risposta;
     }
 
+    public static function Search($testoRicerca)
+    {
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $risposta = [];
+
+        $sql = "SELECT * FROM pazienti WHERE cognome LIKE '$testoRicerca%' OR nome  LIKE '$testoRicerca%';";
+        $pazientiArray = $db->exec($sql);
+
+        foreach($pazientiArray as $paz) {
+            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"]);
+            $t->data = $paz["data"];
+            $t->datafirma = $t->getData();
+            $risposta[] = $t->ToArray();
+        }
+
+        // Ordina in base a cognome
+        usort($risposta, function ($a, $b) {
+            return strcmp($a["nomecompleto"], $b["nomecompleto"]);
+        });
+
+        return $risposta;
+    }
+
     public static function ReadByID($id)
     {
         $db = new \DB\SQL('sqlite:db/database.sqlite');

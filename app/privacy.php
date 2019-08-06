@@ -268,4 +268,24 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $f3->reroute('/privacy');
 
     }
+
+    public function PazienteSearch($f3)
+    {
+        $f3->set('titolo', 'Cerca Paziente');
+        $f3->set('contenuto', 'privacysearch.htm');
+        echo \Template::instance()->render('templates/base.htm');
+    }
+
+    public function PazienteSearchList($f3)
+    {
+        $testoRicerca = Utilita::PulisciStringaVirgolette($f3->get('POST.nome'));
+        $lista = Paziente::Search($testoRicerca);
+        $f3->set('lista', $lista);
+
+        // Generali
+        $f3->set('titolo', 'Privacy');
+        $f3->set('script', 'privacy.js');
+        $f3->set('contenuto', 'privacysearchlist.htm');
+        echo \Template::instance()->render('templates/base.htm');
+    }
 }
