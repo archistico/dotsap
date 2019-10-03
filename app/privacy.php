@@ -294,10 +294,14 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
     {
         $sizeFontGrande = 10;
         $sizeFontPiccolo = 8;
-
+        $altezze_linea = 8;
+        $larghezza_nome = 65;
+        $larghezza_data = 20;
+        $larghezza_privacy = 22;
+        
         $pdf = new \FPDF();
         $pdf->AddPage();
-        $pdf->SetMargins(12, 12, 12);
+        $pdf->SetMargins(8, 15, 8);
         $pdf->SetFont('Arial','B',$sizeFontGrande);
         $pdf->Cell(0,10,"TABELLA PRIVACY", '', '', 'C');
         $pdf->Ln(10);
@@ -305,6 +309,34 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         //$txt = "Gentile";
         //$txt = iconv('UTF-8', 'windows-1252', $txt);
         //$pdf->MultiCell(0,5, $txt);
+
+        /* INTESTAZIONE TABELLA */
+
+        $pdf->Cell($larghezza_nome,$altezze_linea,'Cognome nome',1,0,'C');
+        $pdf->Cell($larghezza_data,$altezze_linea,'Data',1,0,'C');
+        $pdf->Cell($larghezza_privacy,$altezze_linea,'Segreteria',1,0,'C');
+        $pdf->Cell($larghezza_privacy,$altezze_linea,'Sostituti',1,0,'C');
+        $pdf->Cell($larghezza_privacy,$altezze_linea,'Associazione',1,0,'C');
+        $pdf->Cell($larghezza_privacy,$altezze_linea,'Commercialista',1,0,'C');
+        $pdf->Cell($larghezza_privacy,$altezze_linea,'Software house',1,1,'C');
+
+        /* INSERIMENTO PAZIENTI */
+
+        $cognomenome = "Rollandin Emilie";
+        $data = "01/01/2019";
+        $privacy_collaboratori = true?"X":"-";
+        $privacy_sostituti = true?"X":"-";
+        $privacy_associazione = true?"X":"-";
+        $privacy_commercialista = true?"X":"-";
+        $privacy_software = true?"X":"-";
+
+        $pdf->Cell($larghezza_nome,$altezze_linea, $cognomenome,1,0,'L');
+        $pdf->Cell($larghezza_data,$altezze_linea, $data,1,0,'C');
+        $pdf->Cell($larghezza_privacy,$altezze_linea,$privacy_collaboratori,1,0,'C');
+        $pdf->Cell($larghezza_privacy,$altezze_linea,$privacy_sostituti,1,0,'C');
+        $pdf->Cell($larghezza_privacy,$altezze_linea,$privacy_associazione,1,0,'C');
+        $pdf->Cell($larghezza_privacy,$altezze_linea,$privacy_commercialista,1,0,'C');
+        $pdf->Cell($larghezza_privacy,$altezze_linea,$privacy_software,1,1,'C');
 
         $titolo = "Privacy firmate del ".date("d-m-Y");
         $pdf->SetTitle($titolo);
