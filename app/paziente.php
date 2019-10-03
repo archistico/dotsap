@@ -200,4 +200,13 @@ class Paziente {
             'softwarehouse' => $this->softwarehouse,
         ];
     }
+
+    public static function AllSigned()
+    {
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
+
+        $sql = "SELECT * FROM pazienti WHERE data IS NOT NULL AND data != '' ORDER BY data ASC, cognome ASC, nome ASC";
+        
+        return $db->exec($sql);
+    }
 }

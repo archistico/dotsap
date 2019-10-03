@@ -27,10 +27,10 @@ class Privacy
         $f3->set('totalefirmate', $totalefirmate);
         $f3->set('totalemancanti', $totaleprivacy - $totalefirmate);
 
-        if($totaleprivacy == 0) {
+        if ($totaleprivacy == 0) {
             $percentuale = 0;
         } else {
-            $percentuale = round(($totalefirmate/$totaleprivacy)*100);
+            $percentuale = round(($totalefirmate / $totaleprivacy) * 100);
         }
         $f3->set('percentuale', $percentuale);
 
@@ -65,94 +65,99 @@ class Privacy
         $pdf = new \FPDF();
         $pdf->AddPage();
         $pdf->SetMargins(12, 12, 12);
-        $pdf->SetFont('Arial','B',$sizeFontGrande);
-        $pdf->Cell(0,10,"INFORMATIVA PER IL TRATTAMENTO DEI DATI SENSIBILI", '', '', 'C');
+        $pdf->SetFont('Arial', 'B', $sizeFontGrande);
+        $pdf->Cell(0, 10, "INFORMATIVA PER IL TRATTAMENTO DEI DATI SENSIBILI", '', '', 'C');
         $pdf->Ln(10);
-        $pdf->SetFont('Arial','',$sizeFontPiccolo);
-        $txt = "Gentile ".$paz->getPrefisso().", ai sensi del Regolamento UE 2016/679, relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonché alla libera circolazione di tali dati, il trattamento dei dati e delle informazioni che La riguardano sarà effettuato in conformità ai principi di liceità, correttezza e trasparenza, in maniera compatibile, nonché adeguata, pertinente e limitata a quanto necessario rispetto alle finalità di tale trattamento e sicura. In particolare, i Suoi dati personali di carattere genetico, biometrico e intesi a identificare in modo univoco una persona fisica, nonché quelli relativi alla Sua salute o alla Sua vita sessuale o al Suo orientamento sessuale potranno essere trattati, oltre che negli specifici casi disciplinati dall'art. 9 del Regolamento UE succitato, previa prestazione del consenso esplicito da parte Sua. Ai sensi degli artt. 13 e 14 del Reg. UE 2016/679 Le forniamo, quindi, le seguenti informazioni:";
+        $pdf->SetFont('Arial', '', $sizeFontPiccolo);
+        $txt = "Gentile " . $paz->getPrefisso() . ", ai sensi del Regolamento UE 2016/679, relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonché alla libera circolazione di tali dati, il trattamento dei dati e delle informazioni che La riguardano sarà effettuato in conformità ai principi di liceità, correttezza e trasparenza, in maniera compatibile, nonché adeguata, pertinente e limitata a quanto necessario rispetto alle finalità di tale trattamento e sicura. In particolare, i Suoi dati personali di carattere genetico, biometrico e intesi a identificare in modo univoco una persona fisica, nonché quelli relativi alla Sua salute o alla Sua vita sessuale o al Suo orientamento sessuale potranno essere trattati, oltre che negli specifici casi disciplinati dall'art. 9 del Regolamento UE succitato, previa prestazione del consenso esplicito da parte Sua. Ai sensi degli artt. 13 e 14 del Reg. UE 2016/679 Le forniamo, quindi, le seguenti informazioni:";
         $txt = iconv('UTF-8', 'windows-1252', $txt);
-        $pdf->MultiCell(0,5, $txt);
+        $pdf->MultiCell(0, 5, $txt);
 
-        $txt = "a) i dati sensibili da Lei forniti verranno trattati per le seguenti finalità: ottemperanza agli obiettivi ed alle cure erogate dal S.S.N.; 
-b) titolare del trattamento è la dottoressa CHRISTINE ROLLANDIN (CF: RLLCRS84C65E379H); 
+        $txt = "a) i dati sensibili da Lei forniti verranno trattati per le seguenti finalità: ottemperanza agli obiettivi ed alle cure erogate dal S.S.N.;
+b) titolare del trattamento è la dottoressa CHRISTINE ROLLANDIN (CF: RLLCRS84C65E379H);
 c) destinatari dei Suoi dati personali, in ragione della organizzazione del presente studio medico, saranno i seguenti soggetti: ";
         $txt = iconv('UTF-8', 'windows-1252', $txt);
-        $pdf->MultiCell(0,5, $txt);
+        $pdf->MultiCell(0, 5, $txt);
 
         $txt = "• ai Suoi dati personali e sensibili, per ragioni che attengono alla migliore esecuzione dell'incarico professionale attribuito al medico, potranno avere accesso i collaboratori e/o i segretari presenti nello studio medico, nonché eventuali infermieri:
-       Acconsento             Non Acconsento 
+       Acconsento             Non Acconsento
 • ai Suoi dati personali e sensibili per ragioni di cura della Sua persona potranno avere accesso altri medici sostituti presenti nello studio medico:
-       Acconsento             Non Acconsento 
+       Acconsento             Non Acconsento
 • ai Suoi dati personali e sensibili per ragioni di cura della Sua persona potranno avere accesso altri medici di medicina generale componenti l'associazione:
-       Acconsento             Non Acconsento  
+       Acconsento             Non Acconsento
 • ai Suoi dati personali e sensibili, per ragioni che attengono la migliore organizzazione del lavoro prestato dal medico, potranno avere accesso i consulenti fiscali da quest'ultimo nominati, nei limiti in cui ciò si renda utile e necessario per l'adempimento dell'incarico professionale:
-       Acconsento             Non Acconsento  
+       Acconsento             Non Acconsento
 • ai Suoi dati personali e sensibili, per ragioni che attengono la migliore organizzazione del lavoro prestato dal medico, potranno avere accesso i consulenti informatici / software house da quest'ultimo nominati, nei limiti in cui ciò si renda utile e necessario per l'adempimento dell'incarico professionale (assistenza, manutenzione e fornitura anche in remoto dei sistemi informatici):
        Acconsento             Non Acconsento ";
         $txt = iconv('UTF-8', 'windows-1252', $txt);
-        $pdf->MultiCell(0,5, $txt);
+        $pdf->MultiCell(0, 5, $txt);
 
-        $txt = "d) è in suo diritto delegare soggetti terzi, di sua fiducia, al ritiro o alla consegna di documentazione sanitaria che la riguarda, soggetti che verranno, anche verbalmente, indicati al medico o ai suoi collaboratori e sostituti, con esonero di ogni responsabilità al riguardo nei confronti del medico; 
+        $txt = "d) è in suo diritto delegare soggetti terzi, di sua fiducia, al ritiro o alla consegna di documentazione sanitaria che la riguarda, soggetti che verranno, anche verbalmente, indicati al medico o ai suoi collaboratori e sostituti, con esonero di ogni responsabilità al riguardo nei confronti del medico;
 e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari anche regionali imposte al medico di medicina generale, tempo per tempo vigenti, essere inoltrati o comunicati ad Enti o soggetti terzi (quali a titolo meramente esemplificativo, ASL, Regione, Ministeri etc.) e che il medico, successivamente alla trasmissione del dato è esente da responsabilità per l'uso, la perdita o la alterazione del dato personale o sensibile da parte di tali soggetti terzi. La informiamo, altresì, che, nel caso in cui Lei fornirà i dati personali di cui sopra: ";
         $txt = iconv('UTF-8', 'windows-1252', $txt);
-        $pdf->MultiCell(0,5, $txt);
+        $pdf->MultiCell(0, 5, $txt);
 
-        $txt = "• i Suoi dati personali saranno conservati per il seguente periodo: 10 anni; 
-• è Suo diritto chiedere al titolare del trattamento l'accesso ai dati personali e la rettifica o la cancellazione degli stessi; 
-• è altresì Suo diritto chiedere al titolare del trattamento, anche rispetto a singole categorie di persone che possono essere destinatari dei Suoi dati, la limitazione, del trattamento che La riguarda, ovvero di opporsi al trattamento, o ancora di ottenere la portabilità dei dati in questione; 
-• è inoltre Suo diritto revocare il consenso al trattamento dei dati precedentemente fornito ed è Suo diritto proporre reclamo all'autorità di controllo; 
-• il trattamento dei dati personali e sensibili di cui sopra discende dall'adempimento di un obbligo legale, per cui dalla mancata comunicazione di tali dati (anche se derivante dal rifiuto di prestare il consenso, ovvero dalla revoca dello stesso) potrà discendere l'impossibilità giuridica di effettuare le prestazioni che costituiscono la base legale del trattamento dei Suoi dati; 
+        $txt = "• i Suoi dati personali saranno conservati per il seguente periodo: 10 anni;
+• è Suo diritto chiedere al titolare del trattamento l'accesso ai dati personali e la rettifica o la cancellazione degli stessi;
+• è altresì Suo diritto chiedere al titolare del trattamento, anche rispetto a singole categorie di persone che possono essere destinatari dei Suoi dati, la limitazione, del trattamento che La riguarda, ovvero di opporsi al trattamento, o ancora di ottenere la portabilità dei dati in questione;
+• è inoltre Suo diritto revocare il consenso al trattamento dei dati precedentemente fornito ed è Suo diritto proporre reclamo all'autorità di controllo;
+• il trattamento dei dati personali e sensibili di cui sopra discende dall'adempimento di un obbligo legale, per cui dalla mancata comunicazione di tali dati (anche se derivante dal rifiuto di prestare il consenso, ovvero dalla revoca dello stesso) potrà discendere l'impossibilità giuridica di effettuare le prestazioni che costituiscono la base legale del trattamento dei Suoi dati;
 • è Suo diritto accedere ai dati personali trattati e conseguire le informazioni di cui all'art. 15 del Regolamento UE 2016/679, nonché ottenere copia degli stessi, laddove in caso di ulteriori copie il titolare del trattamento Le potrà richiedere il pagamento di un contributo spese ragionevole. ";
         $txt = iconv('UTF-8', 'windows-1252', $txt);
-        $pdf->MultiCell(0,5, $txt);
+        $pdf->MultiCell(0, 5, $txt);
 
         $txt = "CONSENSO PER IL TRATTAMENTO DEI DATI PERSONALI";
-        $pdf->SetFont('Arial','B',$sizeFontGrande);
-        $pdf->Cell(0,10,$txt, '', '', 'C');
+        $pdf->SetFont('Arial', 'B', $sizeFontGrande);
+        $pdf->Cell(0, 10, $txt, '', '', 'C');
         $pdf->Ln(10);
 
-        $pdf->SetFont('Arial','',$sizeFontPiccolo);
+        $pdf->SetFont('Arial', '', $sizeFontPiccolo);
         // COGNOME NOME
-        if($paz->sesso == "M") {
-            $txt = "Il sottoscritto: ". strtoupper($paz->cognome). " " . strtoupper($paz->nome). " - nato il ". $paz->datanascita . " - Residente: " . $paz->indirizzo . " - " . $paz->citta;;
+        if ($paz->sesso == "M") {
+            $txt = "Il sottoscritto: " . strtoupper($paz->cognome) . " " . strtoupper($paz->nome) . " - nato il " . $paz->datanascita . " - Residente: " . $paz->indirizzo . " - " . $paz->citta;
         } else {
-            $txt = "La sottoscritta: ". strtoupper($paz->cognome). " " . strtoupper($paz->nome). " - nata il ". $paz->datanascita . " - Residente: " . $paz->indirizzo . " - " . $paz->citta;;
+            $txt = "La sottoscritta: " . strtoupper($paz->cognome) . " " . strtoupper($paz->nome) . " - nata il " . $paz->datanascita . " - Residente: " . $paz->indirizzo . " - " . $paz->citta;
         }
         $txt = iconv('UTF-8', 'windows-1252', $txt);
-        $pdf->MultiCell(0,5, $txt);
-        $pdf->SetFont('Arial','',$sizeFontPiccolo);
+        $pdf->MultiCell(0, 5, $txt);
+        $pdf->SetFont('Arial', '', $sizeFontPiccolo);
         $txt = "Codice fiscale: " . $paz->codicefiscale;
         $txt = iconv('UTF-8', 'windows-1252', $txt);
-        $pdf->MultiCell(0,5, $txt);
+        $pdf->MultiCell(0, 5, $txt);
 
         $txt = "ACCONSENTE";
-        $pdf->SetFont('Arial','B',$sizeFontPiccolo);
-        $pdf->Cell(0,10,$txt, '', '', 'C');
+        $pdf->SetFont('Arial', 'B', $sizeFontPiccolo);
+        $pdf->Cell(0, 10, $txt, '', '', 'C');
         $pdf->Ln(10);
 
-        $pdf->SetFont('Arial','',$sizeFontPiccolo);
+        $pdf->SetFont('Arial', '', $sizeFontPiccolo);
         $txt = "al trattamento dei propri dati personali, ai sensi degli arti. 6 e 7 del Regolamento UE 2016/679, secondo quanto indicato nell'informativa allegata, che dichiara di avere ricevuto in maniera chiara ed esplicita e di avere compiutamente compreso.";
         $txt = iconv('UTF-8', 'windows-1252', $txt);
-        $pdf->MultiCell(0,5, $txt);
+        $pdf->MultiCell(0, 5, $txt);
 
-        if($paz->getFirmata()) {
-            $txt = "Data " .$paz->getData(). "                            Firma";
+        if ($paz->getFirmata()) {
+            $txt = "Data " . $paz->getData() . "                            Firma";
         } else {
-            $txt = "Data " .date("d/m/Y"). "                            Firma";
+            $txt = "Data " . date("d/m/Y") . "                            Firma";
         }
         $txt = iconv('UTF-8', 'windows-1252', $txt);
         $pdf->Ln(2);
-        $pdf->MultiCell(0,5, $txt);
+        $pdf->MultiCell(0, 5, $txt);
 
         // rettangolini
-        $pdf->Rect(13,81, 3,3, 'D'); $pdf->Rect(38,81, 3,3, 'D');
-        $pdf->Rect(13,91, 3,3, 'D'); $pdf->Rect(38,91, 3,3, 'D');
-        $pdf->Rect(13,106, 3,3, 'D'); $pdf->Rect(38,106, 3,3, 'D');
-        $pdf->Rect(13,121, 3,3, 'D'); $pdf->Rect(38,121, 3,3, 'D');
-        $pdf->Rect(13,141, 3,3, 'D'); $pdf->Rect(38,141, 3,3, 'D');
+        $pdf->Rect(13, 81, 3, 3, 'D');
+        $pdf->Rect(38, 81, 3, 3, 'D');
+        $pdf->Rect(13, 91, 3, 3, 'D');
+        $pdf->Rect(38, 91, 3, 3, 'D');
+        $pdf->Rect(13, 106, 3, 3, 'D');
+        $pdf->Rect(38, 106, 3, 3, 'D');
+        $pdf->Rect(13, 121, 3, 3, 'D');
+        $pdf->Rect(38, 121, 3, 3, 'D');
+        $pdf->Rect(13, 141, 3, 3, 'D');
+        $pdf->Rect(38, 141, 3, 3, 'D');
 
         // Se c'è la data segna altrimenti lascia vuoto
-        if($paz->getFirmata()) {
+        if ($paz->getFirmata()) {
             $x = 13;
             $y = 81;
             $inc = 3;
@@ -214,14 +219,14 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
             }
         }
 
-        $titolo = "Privacy - ".$paz->cognome." ".$paz->nome;
+        $titolo = "Privacy - " . $paz->cognome . " " . $paz->nome;
         $pdf->SetTitle($titolo);
-        $pdf->Output('', $titolo.".pdf");
+        $pdf->Output('', $titolo . ".pdf");
     }
 
     private function ConvertBool($a)
     {
-        if(!is_null($a)) {
+        if (!is_null($a)) {
             return 1;
         } else {
             return 0;
@@ -241,7 +246,7 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
 
         Paziente::ModifyPrivacyByID($id, $datafirma, $this->ConvertBool($segreteria), $this->ConvertBool($sostituti), $this->ConvertBool($associati), $this->ConvertBool($consulenti), $this->ConvertBool($softwarehouse));
 
-        $f3->reroute('/privacy/'.$lettera);
+        $f3->reroute('/privacy/' . $lettera);
     }
 
     public function PazienteNew($f3)
@@ -301,48 +306,52 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $larghezza_nome = 65;
         $larghezza_data = 20;
         $larghezza_privacy = 22;
+
+        $lista = Paziente::AllSigned();
         
         $pdf = new \FPDF();
         $pdf->AddPage();
         $pdf->SetMargins(8, 15, 8);
-        $pdf->SetFont('Arial','B',$sizeFontGrande);
-        $pdf->Cell(0,10,"TABELLA PRIVACY", '', '', 'C');
+        $pdf->SetFont('Arial', 'B', $sizeFontGrande);
+        $pdf->Cell(0, 10, "TABELLA PRIVACY", '', '', 'C');
         $pdf->Ln(10);
-        $pdf->SetFont('Arial','',$sizeFontPiccolo);
-        //$txt = "Gentile";
-        //$txt = iconv('UTF-8', 'windows-1252', $txt);
-        //$pdf->MultiCell(0,5, $txt);
+        $pdf->SetFont('Arial', '', $sizeFontPiccolo);
 
-        /* INTESTAZIONE TABELLA */
+        // INTESTAZIONE TABELLA 
 
-        $pdf->Cell($larghezza_nome,$altezze_linea,'Cognome nome',1,0,'C');
-        $pdf->Cell($larghezza_data,$altezze_linea,'Data',1,0,'C');
-        $pdf->Cell($larghezza_privacy,$altezze_linea,'Segreteria',1,0,'C');
-        $pdf->Cell($larghezza_privacy,$altezze_linea,'Sostituti',1,0,'C');
-        $pdf->Cell($larghezza_privacy,$altezze_linea,'Associazione',1,0,'C');
-        $pdf->Cell($larghezza_privacy,$altezze_linea,'Commercialista',1,0,'C');
-        $pdf->Cell($larghezza_privacy,$altezze_linea,'Software house',1,1,'C');
+        $pdf->Cell($larghezza_nome, $altezze_linea, 'Cognome nome', 1, 0, 'C');
+        $pdf->Cell($larghezza_data, $altezze_linea, 'Data', 1, 0, 'C');
+        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Segreteria', 1, 0, 'C');
+        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Sostituti', 1, 0, 'C');
+        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Associazione', 1, 0, 'C');
+        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Commercialista', 1, 0, 'C');
+        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Software house', 1, 1, 'C');
 
-        /* INSERIMENTO PAZIENTI */
+        // INSERIMENTO PAZIENTI 
 
-        $cognomenome = "Rollandin Emilie";
-        $data = "01/01/2019";
-        $privacy_collaboratori = true?"X":"-";
-        $privacy_sostituti = true?"X":"-";
-        $privacy_associazione = true?"X":"-";
-        $privacy_commercialista = true?"X":"-";
-        $privacy_software = true?"X":"-";
+        $lista = Paziente::AllSigned();
 
-        $pdf->Cell($larghezza_nome,$altezze_linea, $cognomenome,1,0,'L');
-        $pdf->Cell($larghezza_data,$altezze_linea, $data,1,0,'C');
-        $pdf->Cell($larghezza_privacy,$altezze_linea,$privacy_collaboratori,1,0,'C');
-        $pdf->Cell($larghezza_privacy,$altezze_linea,$privacy_sostituti,1,0,'C');
-        $pdf->Cell($larghezza_privacy,$altezze_linea,$privacy_associazione,1,0,'C');
-        $pdf->Cell($larghezza_privacy,$altezze_linea,$privacy_commercialista,1,0,'C');
-        $pdf->Cell($larghezza_privacy,$altezze_linea,$privacy_software,1,1,'C');
+        foreach ($lista as $paz) {
+            $cognomenome = iconv('UTF-8', 'windows-1252', $paz['cognome']." ".$paz['nome']);
+            $data = $paz['data'];
+            $privacy_collaboratori = $paz["segreteria"]==1 ? "X" : "-";
+            $privacy_sostituti = $paz["sostituti"]==1 ? "X" : "-";
+            $privacy_associazione = $paz["associazione"]==1 ? "X" : "-";
+            $privacy_commercialista = $paz["consulenti"]==1 ? "X" : "-";
+            $privacy_software = $paz["softwarehouse"]==1 ? "X" : "-";
 
-        $titolo = "Privacy firmate del ".date("d-m-Y");
+            $pdf->Cell($larghezza_nome, $altezze_linea, $cognomenome, 1, 0, 'L');
+            $pdf->Cell($larghezza_data, $altezze_linea, $data, 1, 0, 'C');
+            $pdf->Cell($larghezza_privacy, $altezze_linea, $privacy_collaboratori, 1, 0, 'C');
+            $pdf->Cell($larghezza_privacy, $altezze_linea, $privacy_sostituti, 1, 0, 'C');
+            $pdf->Cell($larghezza_privacy, $altezze_linea, $privacy_associazione, 1, 0, 'C');
+            $pdf->Cell($larghezza_privacy, $altezze_linea, $privacy_commercialista, 1, 0, 'C');
+            $pdf->Cell($larghezza_privacy, $altezze_linea, $privacy_software, 1, 1, 'C');
+        }
+
+        $titolo = "Privacy firmate del " . date("d-m-Y");
         $pdf->SetTitle($titolo);
-        $pdf->Output('', $titolo.".pdf");
+        $pdf->Output('', $titolo . ".pdf");
+        
     }
 }
