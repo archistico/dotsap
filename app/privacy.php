@@ -302,7 +302,7 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
     {
         $sizeFontGrande = 10;
         $sizeFontPiccolo = 8;
-        $altezze_linea = 8;
+        $altezze_linea = 6;
         $larghezza_nome = 65;
         $larghezza_data = 20;
         $larghezza_privacy = 22;
