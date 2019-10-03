@@ -214,8 +214,9 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
             }
         }
 
-
-        $pdf->Output('', "Privacy - ".$paz->cognome." ".$paz->nome.".pdf");
+        $titolo = "Privacy - ".$paz->cognome." ".$paz->nome;
+        $pdf->SetTitle($titolo);
+        $pdf->Output('', $titolo.".pdf");
     }
 
     private function ConvertBool($a)
@@ -287,5 +288,26 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $f3->set('script', 'privacy.js');
         $f3->set('contenuto', 'privacysearchlist.htm');
         echo \Template::instance()->render('templates/base.htm');
+    }
+
+    public function TablePDF($f3)
+    {
+        $sizeFontGrande = 10;
+        $sizeFontPiccolo = 8;
+
+        $pdf = new \FPDF();
+        $pdf->AddPage();
+        $pdf->SetMargins(12, 12, 12);
+        $pdf->SetFont('Arial','B',$sizeFontGrande);
+        $pdf->Cell(0,10,"TABELLA PRIVACY", '', '', 'C');
+        $pdf->Ln(10);
+        $pdf->SetFont('Arial','',$sizeFontPiccolo);
+        //$txt = "Gentile";
+        //$txt = iconv('UTF-8', 'windows-1252', $txt);
+        //$pdf->MultiCell(0,5, $txt);
+
+        $titolo = "Privacy firmate del ".date("d-m-Y");
+        $pdf->SetTitle($titolo);
+        $pdf->Output('', $titolo.".pdf");
     }
 }

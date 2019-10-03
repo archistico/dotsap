@@ -1,4 +1,16 @@
 <div class="row">
+    <div class="col-md-4">
+        <a href="{{@BASE}}{{ 'privacynew' | alias }}" class="btn btn-primary btn-block btn-lg">NUOVO PAZIENTE</a>
+    </div>
+    <div class="col-md-4">
+        <a href="{{@BASE}}{{ 'privacysearch' | alias }}" class="btn btn-primary btn-block btn-lg">CERCA PAZIENTE</a><br>
+    </div>
+    <div class="col-md-4">
+        <a href="{{@BASE}}{{ 'privacytable' | alias }}" class="btn btn-primary btn-block btn-lg">TABELLA</a><br>
+    </div>
+</div>
+
+<div class="row">
     <div class="col-md-12">
         <h3>Cognomi che iniziano con: {{ @lettera }}</h3>
         <br>
