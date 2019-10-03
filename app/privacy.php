@@ -261,6 +261,9 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $sesso = Utilita::PulisciStringaVirgolette($f3->get('POST.sesso'));
         $datanascita = Utilita::ConvertToDMY($f3->get('POST.datanascita'));
 
+        $cognome = ucwords(strtolower($cognome));
+        $nome = ucwords(strtolower($nome));
+
         $p = new \App\Paziente(null, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, "");
         $p->AddDB();
 
