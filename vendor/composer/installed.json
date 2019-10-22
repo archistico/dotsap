@@ -1,23 +1,23 @@
 [
     {
         "name": "bcosca/fatfree",
-        "version": "3.6.4",
-        "version_normalized": "3.6.4.0",
+        "version": "3.6.5",
+        "version_normalized": "3.6.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/bcosca/fatfree.git",
-            "reference": "dee4d73918a42076d5ac7db64d6d39706c7f328a"
+            "reference": "a841d838e8f146486d85e4947fb92e2fa78fdeb8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/bcosca/fatfree/zipball/dee4d73918a42076d5ac7db64d6d39706c7f328a",
-            "reference": "dee4d73918a42076d5ac7db64d6d39706c7f328a",
+            "url": "https://api.github.com/repos/bcosca/fatfree/zipball/a841d838e8f146486d85e4947fb92e2fa78fdeb8",
+            "reference": "a841d838e8f146486d85e4947fb92e2fa78fdeb8",
             "shasum": ""
         },
         "require": {
             "php": ">=5.4"
         },
-        "time": "2018-04-19T17:23:25+00:00",
+        "time": "2018-12-24T13:43:34+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -34,17 +34,17 @@
     },
     {
         "name": "phpseclib/phpseclib",
-        "version": "2.0.15",
-        "version_normalized": "2.0.15.0",
+        "version": "2.0.23",
+        "version_normalized": "2.0.23.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpseclib/phpseclib.git",
-            "reference": "11cf67cf78dc4acb18dc9149a57be4aee5036ce0"
+            "reference": "c78eb5058d5bb1a183133c36d4ba5b6675dfa099"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/11cf67cf78dc4acb18dc9149a57be4aee5036ce0",
-            "reference": "11cf67cf78dc4acb18dc9149a57be4aee5036ce0",
+            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/c78eb5058d5bb1a183133c36d4ba5b6675dfa099",
+            "reference": "c78eb5058d5bb1a183133c36d4ba5b6675dfa099",
             "shasum": ""
         },
         "require": {
@@ -62,7 +62,7 @@
             "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
             "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
         },
-        "time": "2019-03-10T16:53:45+00:00",
+        "time": "2019-09-17T03:41:22+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

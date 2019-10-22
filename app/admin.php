@@ -38,10 +38,12 @@ class Admin
             // CARICA I DATI INVIATI E DI SESSIONE
             $utente = $f3->get('POST.utente');
             $utente = str_replace(" ", "_", $utente);
-            $password_hash = $f3->get('POST.p');
+            $password = $f3->get('POST.p');
+            $hash = hash('sha512', $password, false);
+
             $db = new \DB\SQL('sqlite:db/database.sqlite');
             $db->begin();
-            $sql = "INSERT INTO users VALUES('$utente', '$password_hash')";
+            $sql = "INSERT INTO users VALUES('$utente', '$hash')";
             $db->exec($sql);
             $db->commit();
             $f3->reroute('/utente');

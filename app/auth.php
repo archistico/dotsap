@@ -22,9 +22,8 @@ class Auth
         $session = new \Session();
         $csrf = $f3->get('COOKIE.sessionName');
 
-        $csrfArray = explode(".", $csrf);
-        $sessionUserid = "SESSION." . $csrfArray[0];
-        $sessionPassword = "SESSION." . $csrfArray[1];
+        $sessionUserid = "SESSION.UserID." . $csrf;
+        $sessionPassword = "SESSION.Password." . $csrf;
 
         $f3->set('COOKIE.sessionName', null);
         $f3->set($sessionUserid, null);
@@ -40,25 +39,29 @@ class Auth
         $csrf = $f3->get('COOKIE.sessionName');
 
         if (isset($csrf)) {
-            $csrfArray = explode(".", $csrf);
-            $sessionUserid = "SESSION." . $csrfArray[0];
-            $sessionPassword = "SESSION." . $csrfArray[1];
+            $sessionUserid = "SESSION.UserID." . $csrf;
+            $sessionPassword = "SESSION.Password." . $csrf;
+          
+            if ( ($f3->get($sessionUserid)!==null) && ($f3->get($sessionPassword)!==null) ) {
 
-            $utente = trim($f3->get($sessionUserid));
-            $password = trim($f3->get($sessionPassword));
-
-            if (isset($utente) && isset($password)) {
+                $utente = trim($f3->get($sessionUserid));
+                $password = trim($f3->get($sessionPassword));
+                
                 $db = new \DB\SQL('sqlite:db/database.sqlite');
                 $users = new \DB\SQL\Mapper($db, 'users');
                 $auth = new \Auth($users, array('id' => 'user_id', 'pw' => 'password'));
-                $login_result = $auth->login($utente, $password);
+
+                $hash = hash('sha512', $password, false);
+                $login_result = $auth->login($utente, $hash);
 
                 return $login_result;
             } else {
+                \App\Flash::instance()->addMessage('Errore di autenticazione', 'danger');
                 return false;
             }
         }
-        echo "false";
+        
+        \App\Flash::instance()->addMessage('Richieste multiple non valide', 'danger');
         return false;
     }
 
@@ -87,15 +90,15 @@ class Auth
                 $db = new \DB\SQL('sqlite:db/database.sqlite');
                 $users = new \DB\SQL\Mapper($db, 'users');
                 $auth = new \Auth($users, array('id' => 'user_id', 'pw' => 'password'));
-                $login_result = $auth->login($utente, $password);
+
+                $hash = hash('sha512', $password, false);
+                $login_result = $auth->login($utente, $hash);
 
                 if ($login_result) {
 
                     $f3->set('COOKIE.sessionName', $csrf);
-
-                    $csrfArray = explode(".", $csrf);
-                    $sessionUserid = "SESSION." . $csrfArray[0];
-                    $sessionPassword = "SESSION." . $csrfArray[1];
+                    $sessionUserid = "SESSION.UserID." . $csrf;
+                    $sessionPassword = "SESSION.Password." . $csrf;
 
                     $f3->set($sessionUserid, $utente);
                     $f3->set($sessionPassword, $password);
@@ -106,8 +109,8 @@ class Auth
                     $f3->reroute('/login');
                 }
             } else {
-                echo 'CSRF attack!<br>';
-                die();
+                \App\Flash::instance()->addMessage('Richieste multiple non valide', 'danger');
+                $f3->reroute('/login');
             }
         }
     }

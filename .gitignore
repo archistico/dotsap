@@ -1,5 +1,4 @@
 tmp/
-.htaccess
 .database_test.zip
 db/temp.sqlite
 pazienti.txt

@@ -3,6 +3,14 @@ namespace App;
 
 class Utilita
 {
+    public static function dump($nome, $variabile)
+    {
+        echo "<h4>$nome</h4>";
+        echo "<pre>";
+        var_dump($variabile);
+        echo "</pre>";
+    }
+
     public static function TimeDiffToMinutes($inizio, $fine)
     {
         $data_inizio = new \DateTime($inizio);

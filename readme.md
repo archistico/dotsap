@@ -7,7 +7,23 @@
 - git config credential.helper 'store'
 - Per gestire il db -> sqlitebrowser
 - Sistemare diritti di scrittura
+- admin / admin
 
+### Add .htaccess
+RewriteEngine On  
+RewriteBase /dotsap/  
+RewriteRule ^(app|dict|ns|tmp)\/|\.ini$ - [R=404]  
+  
+RewriteCond %{REQUEST_FILENAME} !-l  
+RewriteCond %{REQUEST_FILENAME} !-f  
+RewriteCond %{REQUEST_FILENAME} !-d  
+RewriteRule .* /dotsap/index.php [L,QSA]  
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]  
+  
+#### Nella sottocartella DB .htaccess
+  
+Require local  
+  
 ### SQL
 CREATE TABLE "appuntamenti" ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `data` INTEGER NOT NULL, `ora` INTEGER NOT NULL, `persona` TEXT NOT NULL, `note` TEXT, `annullato` INTEGER NOT NULL, `assente` INTEGER NOT NULL, `fatto` INTEGER NOT NULL, `inizio` TEXT, `fine` TEXT );  
 CREATE TABLE categoria1( id INTEGER PRIMARY KEY, descrizione TEXT NOT NULL );  
