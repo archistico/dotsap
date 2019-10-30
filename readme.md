@@ -1,8 +1,19 @@
 # DOT'S AP
 
-#### Install
-- extract database.zip -> .database.sqlite
-  
+#### Configure Apache2
+- mkdir /home/archemi/logs
+- sudo a2enmod rewrite
+- cd /etc/apache2/sites-available
+- copy 001-dotsap.conf (folder conf)
+- apache2ctl configtest
+- sudo nano /etc/hosts
+- add 127.0.0.1 dotsap.local
+- sudo a2ensite 001-dotsap.conf
+- sudo a2enmod rewrite
+- sudo service apache2 restart
+- sudo apt install php-sqlite3
+- sudo service apache2 restart
+
 #### Memo
 - git config credential.helper 'store'
 - Per gestire il db -> sqlitebrowser
