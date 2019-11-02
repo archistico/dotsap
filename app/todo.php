@@ -43,7 +43,7 @@ class Todo
         $db->commit();
 
         // ridirigi
-        $f3->reroute('/');
+        $f3->reroute('/appuntamenti');
     }
 
     public function Aggiungi($f3)
@@ -63,6 +63,6 @@ class Todo
         }
 
         // ridirigi
-        $f3->reroute('/');
+        $f3->reroute('/appuntamenti');
     }
 }

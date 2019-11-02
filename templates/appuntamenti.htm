@@ -19,7 +19,7 @@
 <!-- DIV CALENDARIO -->
 <div class="row">
     <repeat group="{{ @tabella }}" value="{{ @giorno }}">
-        <div class="col-md-4 p-1">
+        <div class="col-lg-2 p-1">
             <table class="table table-bordered table-sm">
                 <thead>
                     <tr class="tabella-giorno">
@@ -83,6 +83,56 @@
             </table>
         </div>
     </repeat>
+    <!-- TODO -->
+    <div class="col-lg-2 p-1">
+        <h5>Segreteria</h5>
+        <form method="POST" action="{{@BASE}}{{ 'todoaggiungi' | alias }}" class="mb-4">
+            <div class="form-row align-items-center">
+                <div class="col-sm-8 my-1">
+                    <input type="text" class="form-control" id="todo" placeholder="Da fare ..." name="todo">
+                    <input type="hidden" name="chi" value="Segreteria">
+                </div>
+                <div class="col-sm-4 my-1">
+                    <button type="submit" class="btn btn-primary btn-block">Registra</button>
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-striped">
+            <tbody>
+                <repeat group="{{ @listaTodoSegreteria }}" value="{{ @todo }}">
+                    <tr>
+                        <td>{{ @todo.todo }}</td>
+                        <th scope="row" class="tabella-btn"><a href="{{@BASE}}{{ 'todocancella', 'id='.@todo.id | alias }}" class="btn btn-danger btn-sm">X</a></th>
+                    </tr>
+                </repeat>
+            </tbody>
+        </table>
+        <hr>
+        <h5>Medico</h5>
+        <form method="POST" action="{{@BASE}}{{ 'todoaggiungi' | alias }}" class="mb-4">
+            <div class="form-row align-items-center">
+                <div class="col-sm-8 my-1">
+                    <input type="text" class="form-control" id="todo" placeholder="Da fare ..." name="todo">
+                    <input type="hidden" name="chi" value="Medico">
+                </div>
+                <div class="col-sm-4 my-1">
+                    <button type="submit" class="btn btn-primary btn-block">Registra</button>
+                </div>
+            </div>
+        </form>
+        <table class="table table-striped">
+            <tbody>
+                <repeat group="{{ @listaTodoMedico }}" value="{{ @todo }}">
+                    <tr>
+                        <td>{{ @todo.todo }}</td>
+                        <th scope="row" class="tabella-btn"><a href="{{@BASE}}{{ 'todocancella', 'id='.@todo.id | alias }}" class="btn btn-danger btn-sm">X</a></th>
+                    </tr>
+                </repeat>
+            </tbody>
+        </table>
+    </div>
+    <!-- END TODO -->
 </div>
 <!-- END DIV CALENDARIO -->
 

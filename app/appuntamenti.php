@@ -98,27 +98,6 @@ class Appuntamenti
 
         $mediavisite->MediaSenzaAnomalie($listaMSA);
 
-        // Carica TODO
-        $listaTodoSegreteria = new \App\listaTodo();
-        $listaTodoMedico = new \App\listaTodo();
-
-        $sql = "SELECT * FROM todo WHERE chi='Segreteria'";
-        $risultato = $db->exec($sql);
-
-        foreach($risultato as $todo) {
-            $listaTodoSegreteria->Add(new \App\Todo($todo['id'], $todo['todo'], $todo['chi']));
-        }
-
-        $sql = "SELECT * FROM todo WHERE chi='Medico'";
-        $risultato = $db->exec($sql);
-
-        foreach($risultato as $todo) {
-            $listaTodoMedico->Add(new \App\Todo($todo['id'], $todo['todo'], $todo['chi']));
-        }
-
-        $f3->set('listaTodoMedico', $listaTodoMedico->ToArray());
-        $f3->set('listaTodoSegreteria', $listaTodoSegreteria->ToArray());
-
         $f3->set('totalevisitato', $totale->ToString());
         $f3->set('mediavisite', $mediavisite->ToString());
         $f3->set('titolo', 'Home');
@@ -131,11 +110,11 @@ class Appuntamenti
         $settimana = new \App\Settimana($params['data']);
 
         $listaGiorni = new \App\ListaGiorni();
-        //$listaGiorni->Add(new \App\Giorno($settimana->lunedi->format('d/m/Y'), 'Lunedì'));
+        $listaGiorni->Add(new \App\Giorno($settimana->lunedi->format('d/m/Y'), 'Lunedì'));
         $listaGiorni->Add(new \App\Giorno($settimana->martedi->format('d/m/Y'), 'Martedì'));
         $listaGiorni->Add(new \App\Giorno($settimana->mercoledi->format('d/m/Y'), 'Mercoledì'));
         $listaGiorni->Add(new \App\Giorno($settimana->giovedi->format('d/m/Y'), 'Giovedì'));
-        //$listaGiorni->Add(new \App\Giorno($settimana->venerdi->format('d/m/Y'), 'Venerdì'));
+        $listaGiorni->Add(new \App\Giorno($settimana->venerdi->format('d/m/Y'), 'Venerdì'));
 
         $listaOrari = new \App\ListaOrari();
 
@@ -186,7 +165,6 @@ class Appuntamenti
         $listaOrari->Add(new \App\Orario('Lunedì', '19:00', '', false));
         $listaOrari->Add(new \App\Orario('Lunedì', '19:15', '', false));
         $listaOrari->Add(new \App\Orario('Lunedì', '19:30', '', false));
-        $listaOrari->Add(new \App\Orario('Lunedì', '19:45', '', false));
 
         $listaOrari->Add(new \App\Orario('Martedì', '8:00', '', false));
         $listaOrari->Add(new \App\Orario('Martedì', '8:15', '', false));
@@ -235,7 +213,6 @@ class Appuntamenti
         $listaOrari->Add(new \App\Orario('Martedì', '19:00', '', false));
         $listaOrari->Add(new \App\Orario('Martedì', '19:15', '', false));
         $listaOrari->Add(new \App\Orario('Martedì', '19:30', '', false));
-        $listaOrari->Add(new \App\Orario('Martedì', '19:45', '', false));
 
         $listaOrari->Add(new \App\Orario('Mercoledì', '8:00', '', false));
         $listaOrari->Add(new \App\Orario('Mercoledì', '8:15', '', false));
@@ -284,7 +261,6 @@ class Appuntamenti
         $listaOrari->Add(new \App\Orario('Mercoledì', '19:00', '', false));
         $listaOrari->Add(new \App\Orario('Mercoledì', '19:15', '', false));
         $listaOrari->Add(new \App\Orario('Mercoledì', '19:30', '', false));
-        $listaOrari->Add(new \App\Orario('Mercoledì', '19:45', '', false));
 
         $listaOrari->Add(new \App\Orario('Giovedì', '8:00', '', false));
         $listaOrari->Add(new \App\Orario('Giovedì', '8:15', '', false));
@@ -333,7 +309,6 @@ class Appuntamenti
         $listaOrari->Add(new \App\Orario('Giovedì', '19:00', '', false));
         $listaOrari->Add(new \App\Orario('Giovedì', '19:15', '', false));
         $listaOrari->Add(new \App\Orario('Giovedì', '19:30', '', false));
-        $listaOrari->Add(new \App\Orario('Giovedì', '19:45', '', false));
 
         $listaOrari->Add(new \App\Orario('Venerdì', '8:00', '', false));
         $listaOrari->Add(new \App\Orario('Venerdì', '8:15', '', false));
@@ -382,7 +357,6 @@ class Appuntamenti
         $listaOrari->Add(new \App\Orario('Venerdì', '19:00', '', false));
         $listaOrari->Add(new \App\Orario('Venerdì', '19:15', '', false));
         $listaOrari->Add(new \App\Orario('Venerdì', '19:30', '', false));
-        $listaOrari->Add(new \App\Orario('Venerdì', '19:45', '', false));
 
         // Data Orario Persona Nota Fatto Assente Annullato
         $listaAppuntamenti = new \App\ListaAppuntamenti();
@@ -400,6 +374,32 @@ class Appuntamenti
         }
 
         $tabella = new Tabella($listaGiorni, $listaOrari, $listaAppuntamenti);
+
+        // -------------------------
+        
+        // Carica TODO
+        $listaTodoSegreteria = new \App\listaTodo();
+        $listaTodoMedico = new \App\listaTodo();
+
+        $sql = "SELECT * FROM todo WHERE chi='Segreteria'";
+        $risultato = $db->exec($sql);
+
+        foreach($risultato as $todo) {
+            $listaTodoSegreteria->Add(new \App\Todo($todo['id'], $todo['todo'], $todo['chi']));
+        }
+
+        $sql = "SELECT * FROM todo WHERE chi='Medico'";
+        $risultato = $db->exec($sql);
+
+        foreach($risultato as $todo) {
+            $listaTodoMedico->Add(new \App\Todo($todo['id'], $todo['todo'], $todo['chi']));
+        }
+
+        $f3->set('listaTodoMedico', $listaTodoMedico->ToArray());
+        $f3->set('listaTodoSegreteria', $listaTodoSegreteria->ToArray());
+
+        // -------------------------
+
         $f3->set('tabella', $tabella->ToArray());
 
         $f3->set('lunedi', $settimana->lunedi->format('d-m-Y'));
