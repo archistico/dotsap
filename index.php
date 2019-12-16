@@ -2,7 +2,7 @@
 require 'vendor/autoload.php';
 $f3 = \Base::instance();
 $f3->set('CACHE', true);
-$f3->set('DEBUG', 3);
+$f3->set('DEBUG', 0);
 
 $f3->route('GET @home: /', '\App\Appuntamenti->Homepage');
 
@@ -52,5 +52,11 @@ $f3->route('POST @utenteregistra: /utente/registra', '\App\Admin->UtenteRegistra
 
 // Crypt
 $f3->route('GET @crypt: /crypt', '\App\Crypt->Show');
+
+// Se errori
+$f3->set('ONERROR',function($f3){
+    $f3->reroute('/login');
+    // $f3->error(403, "Rifare il login");
+});
 
 $f3->run();
