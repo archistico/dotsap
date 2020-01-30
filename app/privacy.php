@@ -80,15 +80,15 @@ c) destinatari dei Suoi dati personali, in ragione della organizzazione del pre
         $pdf->MultiCell(0, 5, $txt);
 
         $txt = "• per ragioni che attengono alla migliore esecuzione dell'incarico professionale attribuito al medico, potranno avere accesso i collaboratori e/o i segretari presenti nello studio medico, nonché eventuali infermieri:
-       Acconsento             Non Acconsento
+        Acconsento             Non Acconsento
 • per ragioni di cura della Sua persona potranno avere accesso altri medici sostituti presenti nello studio medico:
-       Acconsento             Non Acconsento
+        Acconsento             Non Acconsento
 • per ragioni di cura della Sua persona potranno avere accesso altri medici di medicina generale componenti l'associazione:
-       Acconsento             Non Acconsento
+        Acconsento             Non Acconsento
 • per ragioni che attengono la migliore organizzazione del lavoro prestato dal medico, potranno avere accesso i consulenti fiscali da quest'ultimo nominati, nei limiti in cui ciò si renda utile e necessario per l'adempimento dell'incarico professionale:
-       Acconsento             Non Acconsento
+        Acconsento             Non Acconsento
 • per ragioni che attengono la migliore organizzazione del lavoro prestato dal medico, potranno avere accesso i consulenti informatici / software house da quest'ultimo nominati, nei limiti in cui ciò si renda utile e necessario per l'adempimento dell'incarico professionale (assistenza, manutenzione e fornitura anche in remoto dei sistemi informatici):
-       Acconsento             Non Acconsento 
+        Acconsento             Non Acconsento 
 Se desidera ricevere sul suo indirizzo di posta elettronica la registrazione e autorizzare l'utilizzo da parte del Titolare della piattaforma Millebook indichi l'email a cui inviare i dati identificativi per l'accesso: ________________________________________________________";
 
         $txt = iconv('UTF-8', 'windows-1252', $txt);
