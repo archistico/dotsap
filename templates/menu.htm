@@ -11,6 +11,11 @@
       </a>
     </li>
     <li class="nav-item">
+      <a class="nav-link <check if=" {{ @titolo=='Ricette' }} "><true>active</true></check>" href="{{@BASE}}{{ 'ricettalista' | alias }}">
+        Ricette
+      </a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link <check if=" {{ @titolo=='Lista' }} "><true>active</true></check>" href="{{@BASE}}{{ 'lista' | alias }}">
         Movimenti
       </a>

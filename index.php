@@ -18,6 +18,12 @@ $f3->route('POST @appuntamentoparti: /appuntamenti/parti', '\App\Appuntamenti->P
 $f3->route('GET @todocancella: /todo/cancella/@id', '\App\Todo->Cancella');
 $f3->route('POST @todoaggiungi: /todo/aggiungi', '\App\Todo->Aggiungi');
 
+// Ricette
+$f3->route('GET @ricettalista: /ricetta/lista', '\App\Ricetta->Lista');
+$f3->route('GET @ricettanuova: /ricetta/nuova', '\App\Ricetta->Nuova');
+$f3->route('POST @ricettaaggiungi: /ricetta/aggiungi', '\App\Ricetta->Aggiungi');
+$f3->route('GET @ricettacancella: /ricetta/cancella/@id', '\App\Ricetta->Cancella');
+
 // Entrate/Uscite
 $f3->route('GET @lista: /lista', '\App\Movimento->Lista');
 $f3->route('GET @nuovo: /nuovo', '\App\Movimento->Nuovo');

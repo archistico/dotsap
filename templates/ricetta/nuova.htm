@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-md-12">
+        <form method="POST" action="{{@BASE}}{{ 'ricettaaggiungi' | alias }}">
+            <div class="form-group">
+                <label for="InputPaziente">Paziente</label>
+                <input type="text" class="form-control" id="InputPaziente" placeholder="Cognome e nome" name="paziente">
+            </div>
+            <div class="form-group">
+                <label for="InputFarmaco">Farmaci</label>
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 1" name="farmaco1">
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 2" name="farmaco2">
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 3" name="farmaco3">
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 4" name="farmaco4">
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 5" name="farmaco5">
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 6" name="farmaco6">
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 7" name="farmaco7">
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 8" name="farmaco8">
+                <input type="text" class="form-control" placeholder="Farmaco 9" name="farmaco9">
+            </div>
+            <div class="form-group">
+                <label for="InputNote">Note</label>
+                <input type="text" class="form-control" id="InputNote" placeholder="Note" name="note">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Registra</button>
+        </form>
+    </div>
+</div>

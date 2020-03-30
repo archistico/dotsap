@@ -51,7 +51,7 @@ class Paziente {
             $db->begin();
             $db->exec($sql);
             $db->commit();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
     }
