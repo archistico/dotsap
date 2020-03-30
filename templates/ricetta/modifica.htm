@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-12">
+        <form method="POST" action="{{@BASE}}{{ 'ricettamodificapost' | alias }}">
+            <div class="form-group">
+                <label for="InputPaziente">Paziente</label>
+                <input type="text" class="form-control" id="InputPaziente" placeholder="Cognome e nome" name="paziente" value="{{ @richiesta.paziente }}">
+            </div>
+            <div class="form-group">
+                <label for="InputFarmaco">Farmaci</label>
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 1" name="farmaco1" value="{{ @richiesta.farmaco1 }}">
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 2" name="farmaco2" value="{{ @richiesta.farmaco2 }}">
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 3" name="farmaco3" value="{{ @richiesta.farmaco3 }}">
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 4" name="farmaco4" value="{{ @richiesta.farmaco4 }}">
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 5" name="farmaco5" value="{{ @richiesta.farmaco5 }}">
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 6" name="farmaco6" value="{{ @richiesta.farmaco6 }}">
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 7" name="farmaco7" value="{{ @richiesta.farmaco7 }}">
+                <input type="text" class="form-control mb-2" placeholder="Farmaco 8" name="farmaco8" value="{{ @richiesta.farmaco8 }}">
+                <input type="text" class="form-control" placeholder="Farmaco 9" name="farmaco9" value="{{ @richiesta.farmaco9 }}">
+            </div>
+            <div class="form-group">
+                <label for="InputNote">Note</label>
+                <input type="text" class="form-control" id="InputNote" placeholder="Note" name="note" value="{{ @richiesta.note }}">
+            </div>
+            <input type="hidden" name="id" value="{{ @richiesta.id }}">
+            <input type="hidden" name="data" value="{{ @richiesta.data }}">
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Modifica</button>
+        </form>
+    </div>
+</div>

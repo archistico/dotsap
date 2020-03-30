@@ -23,6 +23,8 @@ $f3->route('GET @ricettalista: /ricetta/lista', '\App\Ricetta->Lista');
 $f3->route('GET @ricettanuova: /ricetta/nuova', '\App\Ricetta->Nuova');
 $f3->route('POST @ricettaaggiungi: /ricetta/aggiungi', '\App\Ricetta->Aggiungi');
 $f3->route('GET @ricettacancella: /ricetta/cancella/@id', '\App\Ricetta->Cancella');
+$f3->route('GET @ricettamodifica: /ricetta/modifica/@id', '\App\Ricetta->Modifica');
+$f3->route('POST @ricettamodificapost: /ricetta/modifica/@id', '\App\Ricetta->ModificaPost');
 
 // Entrate/Uscite
 $f3->route('GET @lista: /lista', '\App\Movimento->Lista');
