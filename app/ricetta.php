@@ -39,6 +39,23 @@ class Ricetta
         echo \Template::instance()->render('templates/base.htm');
     }
 
+    public function ListaFatte($f3)
+    {
+        $lista = \App\Richiesta::LoadAllFatte();
+
+        for($c=0;$c<count($lista); $c++){
+            $data = \DateTime::createFromFormat('Y/m/d H:i', $lista[$c]["data"]);
+            if($data) {
+                $lista[$c]["data"] = $data->format('d/m/Y H:i');
+            }
+        }
+
+        $f3->set('lista', $lista);
+        $f3->set('titolo', 'Ricette');
+        $f3->set('contenuto', '/ricetta/listafatte.htm');
+        echo \Template::instance()->render('templates/base.htm');
+    }
+
     public function Aggiungi($f3)
     {
         $paziente = \App\Utilita::PulisciStringa($f3->get('POST.paziente'));

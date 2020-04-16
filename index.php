@@ -20,6 +20,7 @@ $f3->route('GET @todocancella: /todo/cancella/@id', '\App\Todo->Cancella');
 $f3->route('POST @todoaggiungi: /todo/aggiungi', '\App\Todo->Aggiungi');
 
 // Ricette
+$f3->route('GET @ricettalistafatte: /ricetta/listafatte', '\App\Ricetta->ListaFatte');
 $f3->route('GET @ricettalista: /ricetta/lista', '\App\Ricetta->Lista');
 $f3->route('GET @ricettanuova: /ricetta/nuova', '\App\Ricetta->Nuova');
 $f3->route('POST @ricettaaggiungi: /ricetta/aggiungi', '\App\Ricetta->Aggiungi');

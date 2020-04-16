@@ -3,12 +3,21 @@ namespace App;
 
 class Utilita
 {
-    public static function dump($nome, $variabile)
+    public static function Dump($variabile, $nome="")
     {
         echo "<h4>$nome</h4>";
         echo "<pre>";
         var_dump($variabile);
         echo "</pre>";
+    }
+
+    public static function DumpDie($variabile, $nome="")
+    {
+        echo "<h4>$nome</h4>";
+        echo "<pre>";
+        var_dump($variabile);
+        echo "</pre>";
+        die();
     }
 
     public static function TimeDiffToMinutes($inizio, $fine)
@@ -61,6 +70,16 @@ class Utilita
     {
         $testo = str_replace('"', "", $testo);
         return $testo;
+    }
+
+    public static function Anonimize($text) {
+        // Da: Pippo Pluto A: Pi. Pl.
+        $parti = explode(" ", $text);
+        $risultato = "";
+        foreach ($parti as $p) {
+            $risultato .= " ".(strlen($p) > 2 ? substr($p,0,2)."." : $p);
+        }
+        return trim($risultato);
     }
 
     public static function ConvertToDMY($testo)

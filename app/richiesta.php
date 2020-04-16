@@ -55,14 +55,43 @@ class Richiesta
         return $db->exec($sql);
     }
 
+    public static function LoadAllFatte()
+    {
+        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $sql = "SELECT * FROM richieste_eliminate";
+        return $db->exec($sql);
+    }
+
     public static function Cancella($id)
     {
         $db = new \DB\SQL('sqlite:db/database.sqlite');
 
-        $sql = "DELETE FROM richieste WHERE id=$id";
+        $r = \App\Richiesta::Carica($id);
+
+        $paziente = Utilita::Anonimize($r[0]["paziente"]);
+        $dataoggi = date('Y/m/d H:i');
+        $note = "Fatta il: ".$dataoggi." - ".$r[0]["note"];
 
         $db->begin();
-        $db->exec($sql);
+        $db->exec("DELETE FROM richieste WHERE id=$id");
+        $db->exec(
+            'INSERT INTO richieste_eliminate VALUES (:id, :paziente, :data, :farmaco1, :farmaco2, :farmaco3, :farmaco4, :farmaco5, :farmaco6, :farmaco7, :farmaco8, :farmaco9, :note)',
+            array(
+                ':id'=>null,
+                ':paziente'=> $paziente,
+                ':data'=> $r[0]["data"],
+                ':farmaco1'=> $r[0]["farmaco1"],
+                ':farmaco2'=> $r[0]["farmaco2"],
+                ':farmaco3'=> $r[0]["farmaco3"],
+                ':farmaco4'=> $r[0]["farmaco4"],
+                ':farmaco5'=> $r[0]["farmaco5"],
+                ':farmaco6'=> $r[0]["farmaco6"],
+                ':farmaco7'=> $r[0]["farmaco7"],
+                ':farmaco8'=> $r[0]["farmaco8"],
+                ':farmaco9'=> $r[0]["farmaco9"],
+                ':note'=> $note
+            )
+        );
         $db->commit();
     }
 
