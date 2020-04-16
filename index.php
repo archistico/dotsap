@@ -2,7 +2,7 @@
 require 'vendor/autoload.php';
 $f3 = \Base::instance();
 $f3->set('CACHE', true);
-$f3->set('DEBUG', 0);
+$f3->set('DEBUG', 3);
 $f3->set('ANNO', date("Y"));
 
 $f3->route('GET @home: /', '\App\Appuntamenti->Homepage');
@@ -58,6 +58,9 @@ $f3->route('GET @utente: /utente', '\App\Admin->UtenteLista');
 $f3->route('GET @utentenuovo: /utente/nuovo', '\App\Admin->UtenteNuovo');
 $f3->route('GET @utentecancella: /utente/cancella/@user_id', '\App\Admin->UtenteCancella');
 $f3->route('POST @utenteregistra: /utente/registra', '\App\Admin->UtenteRegistra');
+
+// Creazione database e tabelle
+$f3->route('GET @migrazioni: /migrazioni', 'App\Migrazioni->All');
 
 // Crypt
 $f3->route('GET @crypt: /crypt', '\App\Crypt->Show');

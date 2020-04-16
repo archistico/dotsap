@@ -1,0 +1,10 @@
+<dl class="row">
+    <dt class="col-sm-2 text-muted">Risultato</dt>
+    <dd class="col-sm-10">
+        <ul class="list-unstyled">
+            <repeat group="{{ @messaggi }}" value="{{ @m }}">
+                <li>{{ @m | raw }}</li>
+            </repeat>
+        </ul>
+    </dd>
+</dl>
