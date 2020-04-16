@@ -66,9 +66,11 @@ $f3->route('GET @migrazioni: /migrazioni', 'App\Migrazioni->All');
 $f3->route('GET @crypt: /crypt', '\App\Crypt->Show');
 
 // Se errori
+/*
 $f3->set('ONERROR',function($f3){
     $f3->reroute('/login');
     // $f3->error(403, "Rifare il login");
 });
+*/
 
 $f3->run();

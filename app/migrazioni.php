@@ -23,10 +23,10 @@ class Migrazioni
         $exist = $this->db->exec($sql_exist);
 
         if (!$exist) {
-            $risultato = $this->db->exec($sql);
-            if (!$risultato) {
+            try {
+                $this->db->exec($sql);
                 $this->messaggi[] = "<i class='fas fa-check'></i> Creazione tabella $nometabella riuscita";
-            } else {
+            } catch (\PDOException $e) {
                 $this->messaggi[] = "<i class='fas fa-times'></i> Creazione tabella $nometabella fallita";
             }
         } else {
@@ -39,10 +39,10 @@ class Migrazioni
         $exist = $this->db->exec($sql_exist);
 
         if ($exist) {
-            $risultato = $this->db->exec("DROP TABLE '$nometabella';");
-            if (!$risultato) {
+            try {
+                $this->db->exec("DROP TABLE '$nometabella';");
                 $this->messaggi[] = "<i class='fas fa-check'></i> Cancellazione tabella $nometabella riuscita";
-            } else {
+            } catch (\PDOException $e) {
                 $this->messaggi[] = "<i class='fas fa-times'></i> Cancellazione tabella $nometabella fallita";
             }
         } else {
@@ -53,6 +53,8 @@ class Migrazioni
     public function All($f3)
     {
         $this->db = new \DB\SQL('sqlite:db/database.sqlite');
+        $this->db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+        $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
         //----------- CREAZIONE TABELLE -----------------
 
