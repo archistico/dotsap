@@ -70,6 +70,7 @@ class Migrazioni
         $this->CreazioneTabella( "richieste", "CREATE TABLE IF NOT EXISTS 'richieste' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'paziente' TEXT NOT NULL, 'data' TEXT NOT NULL, 'farmaco1' TEXT, 'farmaco2' TEXT, 'farmaco3' TEXT, 'farmaco4' TEXT, 'farmaco5' TEXT, 'farmaco6' TEXT, 'farmaco7' TEXT, 'farmaco8' TEXT, 'farmaco9' TEXT, 'note' TEXT );");
         $this->CreazioneTabella( "appuntamenti", "CREATE TABLE IF NOT EXISTS 'appuntamenti' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'data' INTEGER NOT NULL, 'ora' INTEGER NOT NULL, 'persona' TEXT NOT NULL, 'note' TEXT, 'annullato' INTEGER NOT NULL, 'assente' INTEGER NOT NULL, 'fatto' INTEGER NOT NULL, 'inizio' TEXT, 'fine' TEXT );");
         $this->CreazioneTabella( "users", "CREATE TABLE IF NOT EXISTS 'users' ( 'user_id' TEXT NOT NULL UNIQUE, 'password' TEXT NOT NULL, PRIMARY KEY('user_id') );");
+        $this->CreazioneTabella( "logs", "CREATE TABLE IF NOT EXISTS 'logs' ('id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'data' TEXT NOT NULL, 'ip' TEXT NOT NULL, 'user' TEXT NOT NULL, 'message' TEXT NOT NULL);");
 
         //$this->CancellaTabella( "richieste_eliminate");
         $this->CreazioneTabella( "richieste_eliminate", "CREATE TABLE IF NOT EXISTS 'richieste_eliminate' ( id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'paziente' TEXT NOT NULL, 'data' TEXT NOT NULL, 'farmaco1' TEXT, 'farmaco2' TEXT, 'farmaco3' TEXT, 'farmaco4' TEXT, 'farmaco5' TEXT, 'farmaco6' TEXT, 'farmaco7' TEXT, 'farmaco8' TEXT, 'farmaco9' TEXT, 'note' TEXT );");

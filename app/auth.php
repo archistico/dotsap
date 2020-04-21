@@ -29,6 +29,8 @@ class Auth
         $f3->set($sessionUserid, null);
         $f3->set($sessionPassword, null);
 
+        \App\Log::SaveMessage("-", "logout");
+
         \App\Flash::instance()->addMessage('Logout avvenuto', 'success');
         $f3->reroute('/login');
     }
@@ -103,12 +105,18 @@ class Auth
                     $f3->set($sessionUserid, $utente);
                     $f3->set($sessionPassword, $password);
 
+                    \App\Log::SaveMessage($utente, "login effettuato");
+
                     $f3->reroute('/');
                 } else {
+                    \App\Log::SaveMessage($utente, "login errato");
+
                     \App\Flash::instance()->addMessage('Nome utente o password non corretta', 'danger');
                     $f3->reroute('/login');
                 }
             } else {
+                \App\Log::SaveMessage($utente, "login errato - richiesta multipla");
+
                 \App\Flash::instance()->addMessage('Richieste multiple non valide', 'danger');
                 $f3->reroute('/login');
             }
