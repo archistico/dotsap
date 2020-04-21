@@ -1,0 +1,12 @@
+<repeat group="{{ @lista }}" value="{{ @log }}">
+    <dl class="row">
+        <dt class="col-sm-2 text-muted">Data</dt>
+        <dd class="col-sm-10">{{ @log.data }}</dd>
+        <dt class="col-sm-2 text-muted">IP</dt>
+        <dd class="col-sm-10">{{ @log.ip }}</dd>
+        <dt class="col-sm-2 text-muted">User</dt>
+        <dd class="col-sm-10">{{ @log.user }}</dd>
+        <dt class="col-sm-2 text-muted">Message</dt>
+        <dd class="col-sm-10">{{ @log.message }}</dd>
+    </dl>
+</repeat>

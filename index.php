@@ -60,6 +60,9 @@ $f3->route('GET @utentenuovo: /utente/nuovo', '\App\Admin->UtenteNuovo');
 $f3->route('GET @utentecancella: /utente/cancella/@user_id', '\App\Admin->UtenteCancella');
 $f3->route('POST @utenteregistra: /utente/registra', '\App\Admin->UtenteRegistra');
 
+// Log
+$f3->route('GET @logs: /logs', '\App\Logs->Show');
+
 // Creazione database e tabelle
 $f3->route('GET @migrazioni: /migrazioni', 'App\Migrazioni->All');
 
@@ -67,11 +70,9 @@ $f3->route('GET @migrazioni: /migrazioni', 'App\Migrazioni->All');
 $f3->route('GET @crypt: /crypt', '\App\Crypt->Show');
 
 // Se errori
-/*
 $f3->set('ONERROR',function($f3){
     $f3->reroute('/login');
     // $f3->error(403, "Rifare il login");
 });
-*/
 
 $f3->run();

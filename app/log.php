@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 class Log
@@ -30,17 +31,18 @@ class Log
         $db->exec(
             'INSERT INTO logs VALUES (:id, :data, :ip, :user, :message)',
             array(
-                ':id'=>null,
-                ':data'=> $this->data,
-                ':ip'=> $this->ip,
-                ':user'=> $this->user,
-                ':message'=> $this->message
+                ':id' => null,
+                ':data' => $this->data,
+                ':ip' => $this->ip,
+                ':user' => $this->user,
+                ':message' => $this->message
             )
         );
         $db->commit();
     }
 
-    public static function SaveMessage($user, $message) {
+    public static function SaveMessage($user, $message)
+    {
         $l = new \App\Log(date('Y/m/d H:i'), $_SERVER['REMOTE_ADDR'], $user, $message);
         $l->Save();
     }
@@ -48,7 +50,7 @@ class Log
     public static function LoadAll()
     {
         $db = new \DB\SQL('sqlite:db/database.sqlite');
-        $sql = "SELECT * FROM logs";
+        $sql = "SELECT * FROM logs ORDER BY data DESC";
         return $db->exec($sql);
     }
 }
