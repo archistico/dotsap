@@ -4,3 +4,4 @@ db/temp.sqlite
 pazienti.txt
 /.idea/
 .idea/workspace.xml
+env.php

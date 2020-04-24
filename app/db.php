@@ -29,7 +29,7 @@ class DB extends \Prefab
         );
         */
 
-        $DB_SQLITE_FILE = "db/database.sqlite";
+        $DB_SQLITE_FILE = env('APP_DB_FILE');
         $this->dbconn = new \DB\SQL('sqlite:'.$DB_SQLITE_FILE);
     }
 

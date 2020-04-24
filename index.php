@@ -4,11 +4,23 @@ $f3 = \Base::instance();
 $f3->set('CACHE', true);
 $f3->set('DEBUG', 3);
 $f3->set('ANNO', date("Y"));
-$f3->set('RESPONSABILE', "dott.ssa CHRISTINE ROLLANDIN (CF: RLLCRS84C65E379H)");
 
-/* SET IN APP\DB DATABASE FILE
-$DB_SQLITE_FILE = "db/database.sqlite";
-*/
+if(file_exists('./env.php')) {
+    include './env.php';
+}
+
+if(!function_exists('env')) {
+    function env($key, $default = null)
+    {
+        $value = getenv($key);
+
+        if ($value === false) {
+            return $default;
+        }
+
+        return $value;
+    }
+}
 
 $f3->route('GET @home: /', '\App\Appuntamenti->Homepage');
 
@@ -79,5 +91,11 @@ $f3->set('ONERROR',function($f3){
     $f3->reroute('/login');
     // $f3->error(403, "Rifare il login");
 });
+
+$f3->route('GET /env',
+    function() {
+        echo env('APP_RESPONSABILE');
+    }
+);
 
 $f3->run();
