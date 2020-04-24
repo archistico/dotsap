@@ -26,7 +26,7 @@ class Log
 
     public function Save()
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
         $db->begin();
         $db->exec(
             'INSERT INTO logs VALUES (:id, :data, :ip, :user, :message)',
@@ -49,7 +49,7 @@ class Log
 
     public static function LoadAll()
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
         $sql = "SELECT * FROM logs ORDER BY data DESC";
         return $db->exec($sql);
     }

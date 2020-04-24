@@ -46,7 +46,7 @@ class Paziente {
     public function AddDB()
     {
         try {
-            $db = new \DB\SQL('sqlite:db/database.sqlite');
+            $db = (\App\Db::getInstance())->connect();
             $sql = 'INSERT into pazienti values(null, "' . $this->cognome . '", "' . $this->nome . '", "' . $this->datanascita . '", "' . $this->sesso . '", "' . $this->codicefiscale . '", "' . $this->indirizzo . '", "' . $this->citta . '", "' . $this->telefono . '", "' . $this->data . '", "' . $this->segreteria . '", "' . $this->associazione . '", "' . $this->sostituti . '", "' . $this->consulenti . '", "' . $this->softwarehouse . '")';
             $db->begin();
             $db->exec($sql);
@@ -68,7 +68,7 @@ class Paziente {
 
     public static function ReadByLetter($lettera)
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
         $risposta = [];
 
         $sql = "SELECT * FROM pazienti WHERE cognome LIKE '$lettera%'";
@@ -91,7 +91,7 @@ class Paziente {
 
     public static function Search($testoRicerca)
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
         $risposta = [];
 
         $sql = "SELECT * FROM pazienti WHERE cognome LIKE '$testoRicerca%' OR nome  LIKE '$testoRicerca%';";
@@ -114,7 +114,7 @@ class Paziente {
 
     public static function ReadByID($id)
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
 
         $sql = "SELECT * FROM pazienti WHERE id = '$id'";
         $pazientiArray = $db->exec($sql);
@@ -132,7 +132,7 @@ class Paziente {
 
     public static function ModifyPrivacyByID($id, $datafirma, $segreteria, $sostituti, $associati, $consulenti, $softwarehouse)
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
 
         $sql = "UPDATE pazienti SET data='$datafirma', segreteria='$segreteria', sostituti='$sostituti', associazione='$associati', consulenti='$consulenti', softwarehouse='$softwarehouse'  WHERE id='$id';";
 
@@ -143,7 +143,7 @@ class Paziente {
 
     public static function ContaTotalePazienti()
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
 
         $sql = "SELECT COUNT(id) as totale FROM pazienti;";
         $risSql = $db->exec($sql);
@@ -152,7 +152,7 @@ class Paziente {
 
     public static function ContaTotaleFirmate()
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
 
         $sql = "SELECT COUNT(*) as totale FROM pazienti WHERE data IS NOT NULL AND data!='';";
         $risSql = $db->exec($sql);
@@ -203,7 +203,7 @@ class Paziente {
 
     public static function AllSigned()
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
 
         $sql = "SELECT * FROM pazienti WHERE data IS NOT NULL AND data != '' ORDER BY data ASC, cognome ASC, nome ASC";
         

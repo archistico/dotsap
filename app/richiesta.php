@@ -25,7 +25,7 @@ class Richiesta
 
     public function Save()
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
         $db->begin();
         $db->exec(
                 'INSERT INTO richieste VALUES (:id, :paziente, :data, :farmaco1, :farmaco2, :farmaco3, :farmaco4, :farmaco5, :farmaco6, :farmaco7, :farmaco8, :farmaco9, :note)',
@@ -50,21 +50,21 @@ class Richiesta
 
     public static function LoadAll()
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
         $sql = "SELECT * FROM richieste";
         return $db->exec($sql);
     }
 
     public static function LoadAllFatte()
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
         $sql = "SELECT * FROM richieste_eliminate";
         return $db->exec($sql);
     }
 
     public static function Cancella($id)
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
 
         $r = \App\Richiesta::Carica($id);
 
@@ -97,14 +97,14 @@ class Richiesta
 
     public static function Carica($id)
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
         $sql = "SELECT * FROM richieste WHERE id=$id";
         return $db->exec($sql);
     }
 
     public static function Modifica($id, $paziente, $data, $farmaco1, $farmaco2, $farmaco3, $farmaco4, $farmaco5, $farmaco6, $farmaco7, $farmaco8, $farmaco9, $note)
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
         $db->begin();
         $db->exec(
                 'UPDATE richieste SET paziente=:paziente, data=:data, farmaco1=:farmaco1, farmaco2=:farmaco2, farmaco3=:farmaco3, farmaco4=:farmaco4, farmaco5=:farmaco5, farmaco6=:farmaco6, farmaco7=:farmaco7, farmaco8=:farmaco8, farmaco9=:farmaco9, note=:note WHERE id=:id',

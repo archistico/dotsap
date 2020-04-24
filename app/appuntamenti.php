@@ -17,7 +17,7 @@ class Appuntamenti
 
     public function Homepage($f3)
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
 
         $sql = 'SELECT SUM(importo) AS somma';
         $sql .= ' FROM movimenti';
@@ -142,7 +142,7 @@ class Appuntamenti
         // Data Orario Persona Nota Fatto Assente Annullato
         $listaAppuntamenti = new \App\ListaAppuntamenti();
 
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
         $sql = "SELECT * FROM appuntamenti WHERE annullato = 0 AND fatto = 0 AND assente = 0";
         $appuntamentiDB = $db->exec($sql);
 
@@ -204,7 +204,7 @@ class Appuntamenti
 
     public function Modifica($f3)
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
 
         $tipologia = $f3->get('POST.tipologia');
         $data = $f3->get('POST.data');
@@ -249,7 +249,7 @@ class Appuntamenti
         $note = $f3->get('POST.note');
         $lunedi = $f3->get('POST.tabelladata');
 
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
         $data_array = explode("/", $data);
         $jd = juliantojd($data_array[1], $data_array[0], $data_array[2]);
 
@@ -272,7 +272,7 @@ class Appuntamenti
 
     public function Lista($f3, $params)
     {
-        $db = new \DB\SQL('sqlite:db/database.sqlite');
+        $db = (\App\Db::getInstance())->connect();
         $sql = "SELECT * FROM appuntamenti ORDER BY data ASC, ora ASC";
         $appuntamentiDB = $db->exec($sql);
         

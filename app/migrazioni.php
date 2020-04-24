@@ -52,7 +52,7 @@ class Migrazioni
 
     public function All($f3)
     {
-        $this->db = new \DB\SQL('sqlite:db/database.sqlite');
+        $this->db = (\App\Db::getInstance())->connect();
         $this->db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
         $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
