@@ -6,6 +6,10 @@ $f3->set('DEBUG', 3);
 $f3->set('ANNO', date("Y"));
 $f3->set('RESPONSABILE', "dott.ssa CHRISTINE ROLLANDIN (CF: RLLCRS84C65E379H)");
 
+/* SET IN APP\DB DATABASE FILE
+$DB_SQLITE_FILE = "db/database.sqlite";
+*/
+
 $f3->route('GET @home: /', '\App\Appuntamenti->Homepage');
 
 // Appuntamenti
