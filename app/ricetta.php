@@ -58,17 +58,17 @@ class Ricetta
 
     public function Aggiungi($f3)
     {
-        $paziente = \App\Utilita::PulisciStringa($f3->get('POST.paziente'));
+        $paziente = ucwords(\App\Utilita::PulisciStringa($f3->get('POST.paziente')));
 
-        $farmaco1 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco1'));
-        $farmaco2 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco2'));
-        $farmaco3 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco3'));
-        $farmaco4 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco4'));
-        $farmaco5 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco5'));
-        $farmaco6 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco6'));
-        $farmaco7 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco7'));
-        $farmaco8 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco8'));
-        $farmaco9 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco9'));
+        $farmaco1 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco1')));
+        $farmaco2 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco2')));
+        $farmaco3 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco3')));
+        $farmaco4 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco4')));
+        $farmaco5 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco5')));
+        $farmaco6 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco6')));
+        $farmaco7 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco7')));
+        $farmaco8 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco8')));
+        $farmaco9 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco9')));
 
         $note = \App\Utilita::PulisciStringa($f3->get('POST.note'));
 
@@ -119,17 +119,17 @@ class Ricetta
         $id = \App\Utilita::PulisciStringa($f3->get('POST.id'));
         $data = \App\Utilita::PulisciStringa($f3->get('POST.data'));
 
-        $paziente = \App\Utilita::PulisciStringa($f3->get('POST.paziente'));
+        $paziente = ucwords(\App\Utilita::PulisciStringa($f3->get('POST.paziente')));
 
-        $farmaco1 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco1'));
-        $farmaco2 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco2'));
-        $farmaco3 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco3'));
-        $farmaco4 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco4'));
-        $farmaco5 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco5'));
-        $farmaco6 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco6'));
-        $farmaco7 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco7'));
-        $farmaco8 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco8'));
-        $farmaco9 = \App\Utilita::PulisciStringa($f3->get('POST.farmaco9'));
+        $farmaco1 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco1')));
+        $farmaco2 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco2')));
+        $farmaco3 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco3')));
+        $farmaco4 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco4')));
+        $farmaco5 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco5')));
+        $farmaco6 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco6')));
+        $farmaco7 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco7')));
+        $farmaco8 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco8')));
+        $farmaco9 = ucfirst(\App\Utilita::PulisciStringa($f3->get('POST.farmaco9')));
 
         $note = \App\Utilita::PulisciStringa($f3->get('POST.note'));
         

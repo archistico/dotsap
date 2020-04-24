@@ -124,6 +124,7 @@ class Appuntamenti
         
         $app_check = new \App\Appuntamento_check($orari_check);
         $app_check
+            ->AddGiornata("Lunedì", "Moron", "10:00", "11:00", [])
             ->AddGiornata("Lunedì", "St-Vincent", "17:00", "19:00", ["17:00" => "---", "18:00" => "---", "18:40" => "---", "18:50" => "---"])
             ->AddGiornata("Martedì", "St-Vincent", "9:00", "13:00", ["9:00" => "---", "10:00" => "---", "10:15" => "---", "11:00" => "---", "12:00" => "---", "12:40" => "---", "12:50" => "---"])
             ->AddGiornata("Mercoledì", "Chatillon", "9:00", "13:00", ["9:00" => "---", "10:00" => "---", "10:15" => "---", "10:30" => "Lumiere", "11:00" => "---", "12:00" => "---", "12:40" => "---", "12:50" => "Lumiere"])
@@ -256,16 +257,19 @@ class Appuntamenti
         $persona = str_replace('"', "", $persona);
         $persona = str_replace("'", "", $persona);
         $persona = strtolower($persona);
-        $persona = ucwords($persona);
+        $persona = ucwords(trim($persona));
 
         $note = str_replace('"', "", $note);
         $note = str_replace("'", "", $note);
+        $note = trim($note);
 
-        $db->begin();
-        $sql = "INSERT into appuntamenti values(null, $jd, '$ora', '$persona', '$note', 0, 0, 0, null, null)";
-        $db->exec($sql);
-        $db->commit();
-
+        if(!empty($persona)) {
+            $db->begin();
+            $sql = "INSERT into appuntamenti values(null, $jd, '$ora', '$persona', '$note', 0, 0, 0, null, null)";
+            $db->exec($sql);
+            $db->commit();
+        }
+        
         // ridirigi sulla tabella con la data odierna
         $f3->reroute('/appuntamenti/' . $lunedi);
     }
