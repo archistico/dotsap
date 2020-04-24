@@ -26,13 +26,13 @@ class Paziente {
     public function __construct($id, $cognome, $nome, $datanascita, $sesso, $codicefiscale, $indirizzo, $citta, $telefono)
     {
         $this->id = $id;
-        $this->cognome = $cognome;
-        $this->nome = $nome;
+        $this->cognome = ucwords($cognome);
+        $this->nome = ucwords($nome);
         $this->datanascita = $datanascita;
-        $this->sesso = $sesso;
-        $this->codicefiscale = $codicefiscale;
-        $this->indirizzo = $indirizzo;
-        $this->citta = $citta;
+        $this->sesso = strtoupper($sesso);
+        $this->codicefiscale = strtoupper($codicefiscale);
+        $this->indirizzo = ucwords($indirizzo);
+        $this->citta = ucwords($citta);
         $this->telefono = $telefono;
 
         $this->data = null;
