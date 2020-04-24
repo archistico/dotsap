@@ -73,8 +73,9 @@ class Privacy
         $txt = iconv('UTF-8', 'windows-1252', $txt);
         $pdf->MultiCell(0, 5, $txt);
 
+        $responsabile = $f3->get("RESPONSABILE");
         $txt = "a) i dati sensibili da Lei forniti verranno trattati per le seguenti finalità: ottemperanza agli obiettivi ed alle cure erogate dal S.S.N.;
-b) titolare del trattamento è la dottoressa CHRISTINE ROLLANDIN (CF: RLLCRS84C65E379H);
+b) titolare del trattamento è: $responsabile;
 c) destinatari dei Suoi dati personali, in ragione della organizzazione del presente studio medico, saranno i seguenti soggetti: ";
         $txt = iconv('UTF-8', 'windows-1252', $txt);
         $pdf->MultiCell(0, 5, $txt);
