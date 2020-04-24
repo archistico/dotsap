@@ -120,7 +120,7 @@ class Appuntamenti
         $listaOrari = new \App\ListaOrari();
 
         $orari_check = new \App\Orari_check();
-        $orari_check->OrarioByArray(8, 19, ["00", "10", "20", "30", "40", "50"]);
+        $orari_check->OrarioByArray(env('APP_ORARIO_INIZIO'), env('APP_ORARIO_FINE'), json_decode(env('APP_ORARIO_SUDDIVISIONE')));
         
         $app_check = new \App\Appuntamento_check($orari_check);
         $app_check
