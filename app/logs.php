@@ -4,6 +4,18 @@ namespace App;
 
 class Logs
 {
+    // Bisogna essere loggati
+    public function beforeroute($f3)
+    {
+        $auth = \App\Auth::Autentica($f3);
+        if (!$auth) {
+            $f3->set('logged', false);
+            $f3->reroute('/login');
+        } else {
+            $f3->set('logged', true);
+        }
+    }
+    
     public function Show($f3)
     {
         $lista = \App\Log::LoadAll();
