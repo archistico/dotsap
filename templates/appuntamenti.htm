@@ -141,12 +141,9 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="btn btn-info btn-block" id="btn_parti" onclick="btn_parti()">Inizia visita</button>
-            </div>
-            <div class="modal-body">
                 <form method="POST" action="{{@BASE}}{{ 'appuntamentomodifica' | alias }}" id="form_rimuovi">
                     <div class="form-group">
-                        <h3 id="modal-info"></h3>
+                        <h5 id="modal-info"></h5>
                         <h3 id="modal-persona"></h3>
                     </div>
                     <input type="hidden" name="tipologia" value="" id="tipologia">
@@ -154,6 +151,9 @@
                     <input type="hidden" name="ora" value="" id="ora">
                     <input type="hidden" name="tabelladata" value="{{ @lunedi }}">
                 </form>
+            </div>
+            <div class="modal-body">
+                <button type="button" class="btn btn-info btn-block" id="btn_parti" onclick="btn_parti()">Inizia visita</button>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Indietro</button>
