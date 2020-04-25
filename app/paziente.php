@@ -141,6 +141,17 @@ class Paziente {
         $db->commit();
     }
 
+    public static function CancellaByID($id)
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "DELETE FROM pazienti WHERE id='$id';";
+
+        $db->begin();
+        $db->exec($sql);
+        $db->commit();
+    }
+
     public static function ContaTotalePazienti()
     {
         $db = (\App\Db::getInstance())->connect();

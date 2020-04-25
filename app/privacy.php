@@ -231,7 +231,7 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
             return 0;
         }
     }
-
+    
     public function Modifica($f3)
     {
         $lettera = $f3->get('POST.input-lettera');
@@ -352,5 +352,28 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $pdf->SetTitle($titolo);
         $pdf->Output('', $titolo . ".pdf");
         
+    }
+
+    public function PazienteCancella($f3, $params)
+    {
+        $id = $params['id'];
+        
+        $paziente = \App\Paziente::ReadByID($id);
+        $f3->set('paziente', $paziente->ToArray());
+
+        // Generali
+        $f3->set('titolo', 'Privacy');
+        $f3->set('contenuto', 'privacycancella.htm');
+        echo \Template::instance()->render('templates/base.htm');
+    }
+
+    public function Cancella($f3, $params)
+    {
+        $id = $f3->get('POST.id');
+        \App\Paziente::CancellaByID($id);
+
+        \App\Flash::instance()->addMessage("Paziente #$id cancellato", 'success');
+        
+        $f3->reroute('/privacy');
     }
 }

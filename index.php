@@ -67,6 +67,9 @@ $f3->route('GET @privacysearch: /privacy/search', '\App\Privacy->PazienteSearch'
 $f3->route('POST @privacysearchlist: /privacy/search', '\App\Privacy->PazienteSearchList');
 $f3->route('GET @privacytable: /privacy/table', '\App\Privacy->TablePDF');
 
+$f3->route('GET @privacycancella: /privacy/cancella/@id', '\App\Privacy->PazienteCancella');
+$f3->route('POST @privacycancella: /privacy/cancella', '\App\Privacy->Cancella');
+
 // Autenticazione
 $f3->route('GET @login: /login', '\App\Auth->Login');
 $f3->route('POST @loginCheck: /loginCheck', '\App\Auth->LoginCheck');

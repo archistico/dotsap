@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1>ATTENZIONE!</h1>
+        Confermi di voler cancellare il paziente:
+        <ul>
+            <li>id: #{{ @paziente.id }}</li>
+            <li>cognome: {{ @paziente.cognome }}</li>
+            <li>nome: {{ @paziente.nome }}</li>
+            <li>data di nascita: {{ @paziente.datanascita }}</li>
+            <li>residente: {{ @paziente.citta }}</li>
+          </ul>        
+        <br>
+        <form method="POST" action="{{@BASE}}{{ 'privacycancella' | alias }}">
+            <input type="hidden" name="id" value="{{ @paziente.id }}">
+            <button type="submit" class="btn btn-danger btn-block btn-lg">Cancella</button>
+        </form>
+    </div>
+</div>

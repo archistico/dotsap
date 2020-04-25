@@ -37,12 +37,13 @@
                     </td>
                     <th scope="row">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-danger btn-sm btn-block btn-rect"
+                            <button type="button" class="btn btn-warning btn-sm btn-block btn-rect"
                                     data-toggle="modal" data-target="#modificaModal"
                                     data-id="{{ @paziente.id }}" data-nome="{{ @paziente.nome }}" data-cognome="{{ @paziente.cognome }}">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
                             <a href="{{@BASE}}/privacy/pdf/{{ @paziente.id }}" class="btn btn-info btn-sm btn-rect" target="_blank">PDF</a>
+                            <a href="{{@BASE}}/privacy/cancella/{{ @paziente.id }}" class="btn btn-danger btn-sm btn-rect"><i class="fas fa-times"></i></a>
                         </div>
                     </th>
                 </tr>
