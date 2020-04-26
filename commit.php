@@ -18,12 +18,13 @@ echo "|--------- NUOVO COMMIT --------|\n";
 echo "|-------------------------------|\n";
 echo "Nome: $nomeCommit\n";
 exec("git add .");
+exec('git commit -m"'.$nomeCommit.'"');
+exec("git push origin master");
 
 if (!empty($tag)) {
     echo "Tag: $tag\n";
-    exec("git tag -a \"v$tag\" -m \"version v$tag\"");
+    $comando = 'git tag -a "v'.$tag.'" -m "version v'.$tag.'"';
+    exec($comando);
 }
 
-exec('git commit -m"'.$nomeCommit.'"');
-exec("git push origin master");
 exec("git describe --all --long | cut -d '/' -f 2 > version.txt");
