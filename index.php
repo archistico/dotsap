@@ -1,9 +1,5 @@
 <?php
 require 'vendor/autoload.php';
-$f3 = \Base::instance();
-$f3->set('CACHE', true);
-$f3->set('DEBUG', 3);
-$f3->set('ANNO', date("Y"));
 
 if(file_exists('./env.php')) {
     include './env.php';
@@ -21,6 +17,20 @@ if(!function_exists('env')) {
         return $value;
     }
 }
+
+// ----------------------
+//   FAT FREE FRAMEWORK
+// ----------------------
+
+$f3 = \Base::instance();
+$f3->set('CACHE', true);
+$f3->set('DEBUG', 3);
+$f3->set('ANNO', date("Y"));
+$f3->set('APP_VERSIONE', env("APP_VERSIONE"));
+
+// ----------------------
+//         ROUTE
+// ----------------------
 
 $f3->route('GET @home: /', '\App\Appuntamenti->Homepage');
 

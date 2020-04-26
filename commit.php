@@ -27,4 +27,4 @@ if (!empty($tag)) {
     exec($comando);
 }
 
-exec("git describe > version.txt");
+//exec("git describe > version.txt");
