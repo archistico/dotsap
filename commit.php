@@ -27,4 +27,4 @@ if (!empty($tag)) {
     exec($comando);
 }
 
-exec("git describe --all --long | cut -d '/' -f 2 > version.txt");
+exec("git describe > version.txt");
