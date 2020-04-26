@@ -1,6 +1,7 @@
 <?php
 
 $nomeCommit = addslashes((string)$argv[1]);
+echo count($argv);
 
 echo "|-------------------------------|\n";
 echo "|--------- NUOVO COMMIT --------|\n";
