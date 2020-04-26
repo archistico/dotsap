@@ -5,6 +5,8 @@ body {
 
 body {
   background-color: #f5f5f5;
+  background-image: url("../img/background.jpg");
+  background-repeat: repeat;
 }
 
 input[type="button"] {
