@@ -107,7 +107,14 @@ $f3->set('ONERROR',function($f3){
 
 $f3->route('GET /env',
     function() {
-        echo env('APP_RESPONSABILE');
+        //json_decode(env('APP_AMBULATORI'))
+        $arr_ambulatori = json_decode(env('APP_AMBULATORI'));
+        
+        foreach($arr_ambulatori as $a) {
+            foreach ($a->riservati as $key => $value) {
+                echo "$key => $value\n";
+            }
+        }
     }
 );
 

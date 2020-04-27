@@ -123,13 +123,17 @@ class Appuntamenti
         $orari_check->OrarioByArray(env('APP_ORARIO_INIZIO'), env('APP_ORARIO_FINE'), json_decode(env('APP_ORARIO_SUDDIVISIONE')));
         
         $app_check = new \App\Appuntamento_check($orari_check);
-        $app_check
-            ->AddGiornata("Lunedì", "St-Vincent", "17:00", "19:00", ["17:00" => "---", "18:00" => "---", "18:40" => "---", "18:50" => "---"])
-            ->AddGiornata("Martedì", "St-Vincent", "9:00", "13:00", ["9:00" => "---", "10:00" => "---", "10:15" => "---", "11:00" => "---", "12:00" => "---", "12:40" => "---", "12:50" => "---"])
-            ->AddGiornata("Mercoledì", "Chatillon", "9:00", "13:00", ["9:00" => "---", "10:00" => "---", "10:15" => "---", "10:30" => "Lumiere", "11:00" => "---", "12:00" => "---", "12:40" => "---", "12:50" => "Lumiere"])
-            ->AddGiornata("Giovedì", "St-Vincent", "9:00", "13:00", ["9:00" => "---", "10:00" => "---", "10:15" => "---", "11:00" => "---", "12:00" => "---", "12:40" => "---", "12:50" => "---"])
-            ->AddGiornata("Venerdì", "Pontey", "17:00", "19:00", ["17:00" => "---", "18:00" => "---", "18:40" => "---", "18:50" => "---"]);
-                
+
+        $arr_ambulatori = json_decode(env('APP_AMBULATORI'));
+        foreach($arr_ambulatori as $a) {
+            $riservati = array();
+            foreach ($a->riservati as $key => $value) {
+                $riservati[$key] = $value;
+            }
+
+            $app_check->AddGiornata($a->giorno, $a->luogo, $a->inizio, $a->fine, $riservati);
+        }
+               
         $giorni_settimana = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"];
         $orario_giornaliero = $orari_check->getOrari();
 
