@@ -64,6 +64,10 @@ if (!empty($tag)) {
 
                 fwrite($fw, $newfiletext);
                 fclose($fw);
+
+                $comando = 'git tag -a "v' . "$major.$minor.$patch" . '" -m "version v' . "$major.$minor.$patch" . '"';
+                exec($comando);
+
             } catch (Exception $e) {
                 $Result["message"] = 'Error : ' . $e;
             }
