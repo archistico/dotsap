@@ -62,13 +62,14 @@ class Utilita
     public static function PulisciStringa($testo)
     {
         $testo = str_replace('"', "", $testo);
-        $testo = str_replace("'", "", $testo);
+        $testo = str_replace("'", "`", $testo);
         return $testo;
     }
 
     public static function PulisciStringaVirgolette($testo)
     {
         $testo = str_replace('"', "", $testo);
+        $testo = str_replace("'", "`", $testo);
         return $testo;
     }
 

@@ -268,12 +268,18 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $cognome = ucwords(strtolower($cognome));
         $nome = ucwords(strtolower($nome));
 
+        $indirizzo = ucwords(strtolower($indirizzo));
+        $citta = ucwords(strtolower($citta));
+
         $telefono = Utilita::PulisciStringaVirgolette($f3->get('POST.telefono'));
         $lavoro = Utilita::PulisciStringaVirgolette($f3->get('POST.lavoro'));
         $note = Utilita::PulisciStringaVirgolette($f3->get('POST.note'));
         $stato = Utilita::PulisciStringaVirgolette($f3->get('POST.stato'));
 
-        $p = new \App\Paziente(null, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $stato);
+        $email = Utilita::PulisciStringaVirgolette($f3->get('POST.email'));
+        $email = strtolower($email);
+
+        $p = new \App\Paziente(null, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $stato, $email);
         $p->AddDB();
 
         \App\Flash::instance()->addMessage('Paziente aggiunto', 'success');

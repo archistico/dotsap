@@ -95,6 +95,7 @@ class Migrazioni
         $this->AggiornaTabella( "pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'lavoro' TEXT;");
         $this->AggiornaTabella( "pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'stato' TEXT;");
         $this->AggiornaTabella( "pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'note' TEXT;");
+        $this->AggiornaTabella( "pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'email' TEXT;");
 
         $f3->set('messaggi', $this->messaggi);
         $f3->set('titolo', 'Migrazioni');

@@ -86,9 +86,15 @@ class Covid
         $cognome = ucwords(strtolower($cognome));
         $nome = ucwords(strtolower($nome));
 
+        $indirizzo = ucwords(strtolower($indirizzo));
+        $citta = ucwords(strtolower($citta));
+
         $telefono = Utilita::PulisciStringaVirgolette($f3->get('POST.telefono'));
         $lavoro = Utilita::PulisciStringaVirgolette($f3->get('POST.lavoro'));
         $stato = Utilita::PulisciStringaVirgolette($f3->get('POST.stato'));
+
+        $email = Utilita::PulisciStringaVirgolette($f3->get('POST.email'));
+        $email = strtolower($email);
 
         // SEGNA LE MODIFICHE NELLE NOTE
         $paziente = \App\Paziente::ReadByID($id);
@@ -100,7 +106,7 @@ class Covid
             $note = Utilita::PulisciStringaVirgolette($f3->get('POST.note')) . "\nModifica: " . date("d/m/Y") . " | Stato: ".$statoprecedente." -> ".$stato;
         }
 
-        $p = new \App\Paziente($id, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $stato);
+        $p = new \App\Paziente($id, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $stato, $email);
         $p->UpdateDB();
 
         \App\Flash::instance()->addMessage('Paziente modificato', 'success');

@@ -1,67 +1,116 @@
 <div class="row">
     <div class="col-md-12">
         <form method="POST" action="{{@BASE}}{{ 'privacynew' | alias }}">
-            <div class="form-group">
-                <label for="Cognome">Cognome</label>
-                <input type="text" class="form-control" id="Cognome" placeholder="Cognome" name="cognome" lang="it" required>
+            <input type="hidden" name="id" value="{{ @p.id }}">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Cognome">Cognome</label>
+                        <input type="text" class="form-control" id="Cognome" placeholder="Inserisci il cognome" name="cognome" lang="it" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Nome">Nome</label>
+                        <input type="text" class="form-control" id="Nome" placeholder="Inserisci il nome" name="nome" lang="it" required>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="Nome">Nome</label>
-                <input type="text" class="form-control" id="Nome" placeholder="Nome" name="nome" lang="it" required>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="InputData">Data nascita</label>
+                        <input type="date" class="form-control" id="InputData" name="datanascita" required>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="InputSesso">Sesso</label>
+                        <select class="form-control" id="InputSesso" placeholder="Sesso M/F" name="sesso" required>
+                            <option value="M">M</option>
+                            <option value="F">F</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="CodiceFiscale">Codice fiscale</label>
+                        <input type="text" class="form-control" id="CodiceFiscale" placeholder="Inserisci il codice fiscale" name="codicefiscale">
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="CodiceFiscale">Codice fiscale</label>
-                <input type="text" class="form-control" id="CodiceFiscale" placeholder="Codice fiscale" name="codicefiscale">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Indirizzo">Indirizzo</label>
+                        <input type="text" class="form-control" id="Indirizzo" placeholder="Inserisci l'indirizzo" name="indirizzo">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Citta">Città</label>
+                        <input type="text" class="form-control" id="Citta" placeholder="Inserisci la città" name="citta">
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="Indirizzo">Indirizzo</label>
-                <input type="text" class="form-control" id="Indirizzo" placeholder="Indirizzo" name="indirizzo">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Telefono">Telefono</label>
+                        <input type="text" class="form-control" id="telefono" placeholder="Inserisci il numero di telefono" name="telefono">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="text" class="form-control" id="Email" placeholder="Inserisci l'email" name="email">
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="Citta">Città</label>
-                <input type="text" class="form-control" id="Citta" placeholder="Città" name="citta">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="InputStato">Stato Covid19</label>
+                        <select class="form-control" id="InputStato" placeholder="Stato covid" name="stato" required>
+                            <option value="Ignoto">Ignoto</option>
+                            <option value="Sospetto in attesa di tampone">Sospetto in attesa di tampone</option>
+                            <option value="Sospetto non in attesa di tampone">Sospetto non in attesa di tampone</option>
+                            <option value="Negativo">Negativo</option>
+                            <option value="Isolamento">Isolamento</option>
+                            <option value="Positivo">Positivo</option>
+                            <option value="Primo Tampone negativo">Primo Tampone negativo</option>
+                            <option value="Secondo Tampone negativo">Secondo Tampone negativo</option>
+                            <option value="Terzo Tampone negativo">Terzo Tampone negativo</option>
+                            <option value="Guarito">Guarito</option>
+                            <option value="Deceduto">Deceduto</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Lavoro">Lavoro</label>
+                        <input type="text" class="form-control" id="lavoro" placeholder="Inserisci il lavoro" name="lavoro">
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="InputData">Data nascita</label>
-                <input type="date" class="form-control" id="InputData" placeholder="Data" name="datanascita" required>
-            </div>
-            <div class="form-group">
-                <label for="InputSesso">Sesso</label>
-                <select class="form-control" id="InputSesso" placeholder="Sesso M/F" name="sesso" required>
-                    <option value="M">M</option>
-                    <option value="F">F</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="Telefono">Telefono</label>
-                <input type="text" class="form-control" id="telefono" placeholder="Telefono" name="telefono">
-            </div>
-            <div class="form-group">
-                <label for="Lavoro">Lavoro</label>
-                <input type="text" class="form-control" id="lavoro" placeholder="Lavoro" name="lavoro">
-            </div>
-            <div class="form-group">
-                <label for="InputStato">Stato Covid19</label>
-                <select class="form-control" id="InputStato" placeholder="Stato covid" name="stato" required>
-                    <option value="Ignoto">Ignoto</option>
-                    <option value="Sospetto in attesa di tampone">Sospetto in attesa di tampone</option>
-                    <option value="Sospetto non in attesa di tampone">Sospetto non in attesa di tampone</option>
-                    <option value="Negativo">Negativo</option>
-                    <option value="Isolamento">Isolamento</option>
-                    <option value="Positivo">Positivo</option>
-                    <option value="Primo Tampone negativo">Primo Tampone negativo</option>
-                    <option value="Secondo Tampone negativo">Secondo Tampone negativo</option>
-                    <option value="Terzo Tampone negativo">Terzo Tampone negativo</option>
-                    <option value="Guarito">Guarito</option>
-                    <option value="Deceduto">Deceduto</option>
-                </select>
-            </div>
+
             <div class="form-group">
                 <label for="Note">Note</label>
                 <textarea class="form-control" id="note" placeholder="Note" name="note" rows="5"></textarea>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'privacy' | alias }}">Annulla</a>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Registra</button>
+                </div>
+            </div>
 
-            <button type="submit" class="btn btn-primary btn-block btn-lg">Registra</button>
         </form>
     </div>
 </div>
+
