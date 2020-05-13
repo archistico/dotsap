@@ -90,6 +90,12 @@ $f3->route('GET @utentenuovo: /utente/nuovo', '\App\Admin->UtenteNuovo');
 $f3->route('GET @utentecancella: /utente/cancella/@user_id', '\App\Admin->UtenteCancella');
 $f3->route('POST @utenteregistra: /utente/registra', '\App\Admin->UtenteRegistra');
 
+// Covid
+$f3->route('GET @covid: /covid', '\App\Covid->Home');
+$f3->route('GET @covidshow: /covid/show/@id', '\App\Covid->Show');
+$f3->route('GET @covidedit: /covid/edit/@id', '\App\Covid->Edit');
+$f3->route('POST @covideditsql: /covid/edit/sql', '\App\Covid->EditSQL');
+
 // Log
 $f3->route('GET @logs: /logs', '\App\Logs->Show');
 
@@ -101,7 +107,7 @@ $f3->route('GET @crypt: /crypt', '\App\Crypt->Show');
 
 // Se errori
 $f3->set('ONERROR',function($f3){
-    $f3->reroute('/login');
+    $f3->reroute('/');
     // $f3->error(403, "Rifare il login");
 });
 
