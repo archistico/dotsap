@@ -108,16 +108,6 @@ class Paziente {
         }
     }
 
-    public function getDataToInput()
-    {
-        if(is_null($this->datanascita) || empty($this->datanascita)) {
-            return null;
-        } else {
-            $data = \DateTime::createFromFormat('d/m/Y', $this->datanascita);
-            return $data->format('Y-m-d');
-        }
-    }
-
     public static function ReadByLetter($lettera)
     {
         $db = (\App\Db::getInstance())->connect();
@@ -275,7 +265,6 @@ class Paziente {
             'nome'          => $this->nome,
             'nomecompleto'  => $this->cognome . " ". $this->nome,
             'datanascita'   => $this->datanascita,
-            'datanascitaI'  => $this->getDataToInput(),
             'sesso'         => $this->sesso,
             'codicefiscale' => $this->codicefiscale,
             'prefisso'      => $this->getPrefisso(),

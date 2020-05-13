@@ -81,7 +81,7 @@ class Covid
         $indirizzo = Utilita::PulisciStringaVirgolette($f3->get('POST.indirizzo'));
         $citta = Utilita::PulisciStringaVirgolette($f3->get('POST.citta'));
         $sesso = Utilita::PulisciStringaVirgolette($f3->get('POST.sesso'));
-        $datanascita = Utilita::ConvertToDMY($f3->get('POST.datanascita'));
+        $datanascita = Utilita::PulisciStringaVirgolette($f3->get('POST.datanascita'));
 
         $cognome = ucwords(strtolower($cognome));
         $nome = ucwords(strtolower($nome));
