@@ -34,6 +34,22 @@ class Migrazioni
         }
     }
 
+    public function AggiornaTabella($nometabella, $sql) {
+        $sql_exist="SELECT * FROM sqlite_master WHERE name ='$nometabella' and type='table'; ";
+        $exist = $this->db->exec($sql_exist);
+
+        if ($exist) {
+            try {
+                $this->db->exec($sql);
+                $this->messaggi[] = "<i class='fas fa-check'></i> Modifica della tabella $nometabella riuscita";
+            } catch (\PDOException $e) {
+                $this->messaggi[] = "<i class='fas fa-times'></i> Modifica della tabella $nometabella fallita";
+            }
+        } else {
+            $this->messaggi[] = "<i class='fas fa-ellipsis-h'></i> Tabella $nometabella non esiste";
+        }
+    }
+
     public function CancellaTabella($nometabella) {
         $sql_exist="SELECT * FROM sqlite_master WHERE name ='$nometabella' and type='table'; ";
         $exist = $this->db->exec($sql_exist);
@@ -76,6 +92,9 @@ class Migrazioni
         $this->CreazioneTabella( "richieste_eliminate", "CREATE TABLE IF NOT EXISTS 'richieste_eliminate' ( id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'paziente' TEXT NOT NULL, 'data' TEXT NOT NULL, 'farmaco1' TEXT, 'farmaco2' TEXT, 'farmaco3' TEXT, 'farmaco4' TEXT, 'farmaco5' TEXT, 'farmaco6' TEXT, 'farmaco7' TEXT, 'farmaco8' TEXT, 'farmaco9' TEXT, 'note' TEXT );");
 
         //----------- UPDATE TABELLE -----------------
+        $this->AggiornaTabella( "pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'lavoro' TEXT;");
+        $this->AggiornaTabella( "pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'stato' TEXT;");
+        $this->AggiornaTabella( "pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'note' TEXT;");
 
         $f3->set('messaggi', $this->messaggi);
         $f3->set('titolo', 'Migrazioni');
