@@ -102,6 +102,10 @@ $f3->route('GET @utentenuovo: /utente/nuovo', '\App\Admin->UtenteNuovo');
 $f3->route('GET @utentecancella: /utente/cancella/@user_id', '\App\Admin->UtenteCancella');
 $f3->route('POST @utenteregistra: /utente/registra', '\App\Admin->UtenteRegistra');
 
+// Impostazioni
+$f3->route('GET @impostazioni: /impostazioni', '\App\Impostazioni->Home');
+$f3->route('GET @impostazionisvuotaricette: /impostazioni/svuotaricette', '\App\Impostazioni->SvuotaRicette');
+
 // Log
 $f3->route('GET @logs: /logs', '\App\Logs->Show');
 

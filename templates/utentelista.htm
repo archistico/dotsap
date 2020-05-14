@@ -1,5 +1,16 @@
 <div class="row">
     <div class="col-md-12">
+        <!-- bootstrap style-->
+        <F3:repeat group="{{ \App\Flash::instance()->getMessages() }}" value="{{ @msg }}">
+            <div class="alert alert-{{ @msg.status }} alert-dismissable">
+                {{ @msg.text | esc }}
+            </div>
+        </F3:repeat>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
         <a href="{{@BASE}}{{ 'utentenuovo' | alias }}" class="btn btn-primary btn-block btn-lg">NUOVO UTENTE</a><br>
     </div>
 </div>
@@ -26,14 +37,11 @@
         </table>
     </div>
 </div>
+<hr>
 
 <div class="row">
     <div class="col-md-12">
-        <!-- bootstrap style-->
-        <F3:repeat group="{{ \App\Flash::instance()->getMessages() }}" value="{{ @msg }}">
-            <div class="alert alert-{{ @msg.status }} alert-dismissable">
-                {{ @msg.text | esc }}
-            </div>
-        </F3:repeat>
+        <h3>Impostazioni</h3>
+        <a href="{{@BASE}}{{ 'impostazioni' | alias }}" class="btn btn-primary btn-block btn-lg">IMPOSTAZIONI</a><br>
     </div>
 </div>

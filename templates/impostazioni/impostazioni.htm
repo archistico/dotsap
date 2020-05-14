@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-md-12">
+        <!-- bootstrap style-->
+        <F3:repeat group="{{ \App\Flash::instance()->getMessages() }}" value="{{ @msg }}">
+            <div class="alert alert-{{ @msg.status }} alert-dismissable">
+                {{ @msg.text | esc }}
+            </div>
+        </F3:repeat>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-danger alert-dismissable">
+            ATTENZIONE AREA RISERVATA AMMINISTRATORE
+        </div>
+        <a href="{{@BASE}}{{ 'logs' | alias }}" class="btn btn-primary btn-block btn-lg">Visualizza logs</a><br>
+        <a href="{{@BASE}}{{ 'migrazioni' | alias }}" class="btn btn-primary btn-block btn-lg">Effettua migrazioni</a><br>
+        <a href="{{@BASE}}{{ 'impostazionisvuotaricette' | alias }}" class="btn btn-primary btn-block btn-lg">Svuota tabella ricette fatte</a><br>
+    </div>
+</div>

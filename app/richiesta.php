@@ -126,4 +126,14 @@ class Richiesta
         );
         $db->commit();
     }
+
+    public static function SvuotaTabellaRicetteFatte()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $db->begin();
+        $db->exec("DELETE FROM richieste_eliminate;");
+
+        $db->commit();
+    }
 }
