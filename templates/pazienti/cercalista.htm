@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-md-6">
+        <a href="{{@BASE}}{{ 'pazientinuovo' | alias }}" class="btn btn-primary btn-block btn-lg">NUOVO PAZIENTE</a>
+    </div>
+    <div class="col-md-6">
+        <a href="{{@BASE}}{{ 'pazienticerca' | alias }}" class="btn btn-primary btn-block btn-lg">CERCA PAZIENTE</a><br>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col" class="d-none">N.</th>
+                <th scope="col">COGNOME NOME</th>
+                <th scope="col">DATA NASCITA</th>
+                <th scope="col" class="d-none">TELEFONO</th>
+                <th scope="col" class="d-none">EMAIL</th>
+
+                <th scope="col" style="width: 50px">#</th>
+            </tr>
+            </thead>
+            <tbody>
+            <repeat group="{{ @lista }}" value="{{ @paziente }}">
+                <tr>
+                    <td class="d-none">{{ @paziente.id }}</td>
+                    <td>{{ @paziente.nomecompleto }}</td>
+                    <td>{{ @paziente.datanascita }}</td>
+                    <td class="d-none">{{ @paziente.telefono }}</td>
+                    <td class="d-none">{{ @paziente.email }}</td>
+                    <th scope="row">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a href="{{@BASE}}/pazienti/cancella/{{ @paziente.id }}" class="btn btn-danger btn-sm btn-rect"><i class="fas fa-times"></i></a>
+                        </div>
+                    </th>
+                </tr>
+            </repeat>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -10,7 +10,7 @@
             <li>residente: {{ @paziente.citta }}</li>
           </ul>        
         <br>
-        <form method="POST" action="{{@BASE}}{{ 'privacycancella' | alias }}">
+        <form method="POST" action="../../index.php">
             <input type="hidden" name="id" value="{{ @paziente.id }}">
             <button type="submit" class="btn btn-danger btn-block btn-lg">Cancella</button>
         </form>

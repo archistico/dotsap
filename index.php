@@ -71,14 +71,23 @@ $f3->route('GET @privacy: /privacy', '\App\Privacy->Home');
 $f3->route('GET @privacylista: /privacy/@lettera', '\App\Privacy->Lista');
 $f3->route('GET @privacypdf: /privacy/pdf/@id', '\App\Privacy->MakePDF');
 $f3->route('POST @privacymodifica: /privacy/modifica', '\App\Privacy->Modifica');
-$f3->route('GET @privacynew: /privacy/new', '\App\Privacy->PazienteNew');
-$f3->route('POST @privacysave: /privacy/new', '\App\Privacy->PazienteSave');
 $f3->route('GET @privacysearch: /privacy/search', '\App\Privacy->PazienteSearch');
 $f3->route('POST @privacysearchlist: /privacy/search', '\App\Privacy->PazienteSearchList');
 $f3->route('GET @privacytable: /privacy/table', '\App\Privacy->TablePDF');
 
-$f3->route('GET @privacycancella: /privacy/cancella/@id', '\App\Privacy->PazienteCancella');
-$f3->route('POST @privacycancella: /privacy/cancella', '\App\Privacy->Cancella');
+// Pazienti
+$f3->route('GET @pazienti: /pazienti', '\App\Pazienti->Home');
+$f3->route('GET @pazientinuovo: /pazienti/nuovo', '\App\Pazienti->Nuovo');
+$f3->route('POST @pazientisalva: /pazienti/salva', '\App\Pazienti->Salva');
+$f3->route('GET @pazienticerca: /pazienti/cerca', '\App\Pazienti->Cerca');
+$f3->route('POST @pazienticercalista: /pazienti/cerca/lista', '\App\Pazienti->CercaLista');
+$f3->route('GET @pazientimodifica: /pazienti/modifica/@id', '\App\Pazienti->Modifica');
+$f3->route('POST @pazientimodificasql: /pazienti/modifica/sql', '\App\Pazienti->ModificaSQL');
+$f3->route('GET @pazienticancella: /pazienti/cancella/@id', '\App\Pazienti->CancellaConferma');
+$f3->route('POST @pazienticancella: /pazienti/cancella', '\App\Pazienti->Cancella');
+
+// Covid
+$f3->route('GET @covid: /covid', '\App\Covid->Home');
 
 // Autenticazione
 $f3->route('GET @login: /login', '\App\Auth->Login');
@@ -89,12 +98,6 @@ $f3->route('GET @utente: /utente', '\App\Admin->UtenteLista');
 $f3->route('GET @utentenuovo: /utente/nuovo', '\App\Admin->UtenteNuovo');
 $f3->route('GET @utentecancella: /utente/cancella/@user_id', '\App\Admin->UtenteCancella');
 $f3->route('POST @utenteregistra: /utente/registra', '\App\Admin->UtenteRegistra');
-
-// Covid
-$f3->route('GET @covid: /covid', '\App\Covid->Home');
-$f3->route('GET @covidshow: /covid/show/@id', '\App\Covid->Show');
-$f3->route('GET @covidedit: /covid/edit/@id', '\App\Covid->Edit');
-$f3->route('POST @covideditsql: /covid/edit/sql', '\App\Covid->EditSQL');
 
 // Log
 $f3->route('GET @logs: /logs', '\App\Logs->Show');

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <form method="POST" action="{{@BASE}}{{ 'covideditsql' | alias }}">
+        <form method="POST" action="{{@BASE}}{{ 'pazientimodificasql' | alias }}">
             <input type="hidden" name="id" value="{{ @p.id }}">
             <div class="row">
                 <div class="col-md-6">
@@ -103,7 +103,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'covid' | alias }}">Annulla</a>
+                    <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'pazienti' | alias }}">Annulla</a>
                 </div>
                 <div class="col-md-6">
                     <button type="submit" class="btn btn-primary btn-block btn-lg">Modifica</button>

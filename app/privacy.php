@@ -35,7 +35,7 @@ class Privacy
         $f3->set('percentuale', $percentuale);
 
         $f3->set('titolo', 'Privacy');
-        $f3->set('contenuto', 'privacy.htm');
+        $f3->set('contenuto', '/privacy/privacy.htm');
         echo \Template::instance()->render('templates/base.htm');
     }
 
@@ -50,7 +50,7 @@ class Privacy
         // Generali
         $f3->set('titolo', 'Privacy');
         $f3->set('script', 'privacy.js');
-        $f3->set('contenuto', 'privacylista.htm');
+        $f3->set('contenuto', '/privacy/privacylista.htm');
         echo \Template::instance()->render('templates/base.htm');
     }
 
@@ -248,50 +248,10 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $f3->reroute('/privacy/' . $lettera);
     }
 
-    public function PazienteNew($f3)
-    {
-        $f3->set('titolo', 'Nuovo Paziente');
-        $f3->set('contenuto', 'privacynew.htm');
-        echo \Template::instance()->render('templates/base.htm');
-    }
-
-    public function PazienteSave($f3)
-    {
-        $cognome = Utilita::PulisciStringaVirgolette($f3->get('POST.cognome'));
-        $nome = Utilita::PulisciStringaVirgolette($f3->get('POST.nome'));
-        $cf = Utilita::PulisciStringaVirgolette($f3->get('POST.codicefiscale'));
-        $indirizzo = Utilita::PulisciStringaVirgolette($f3->get('POST.indirizzo'));
-        $citta = Utilita::PulisciStringaVirgolette($f3->get('POST.citta'));
-        $sesso = Utilita::PulisciStringaVirgolette($f3->get('POST.sesso'));
-        $datanascita = Utilita::PulisciStringaVirgolette($f3->get('POST.datanascita'));
-
-        $cognome = ucwords(strtolower($cognome));
-        $nome = ucwords(strtolower($nome));
-
-        $indirizzo = ucwords(strtolower($indirizzo));
-        $citta = ucwords(strtolower($citta));
-
-        $telefono = Utilita::PulisciStringaVirgolette($f3->get('POST.telefono'));
-        $lavoro = Utilita::PulisciStringaVirgolette($f3->get('POST.lavoro'));
-        $note = Utilita::PulisciStringaVirgolette($f3->get('POST.note'));
-        $stato = Utilita::PulisciStringaVirgolette($f3->get('POST.stato'));
-
-        $email = Utilita::PulisciStringaVirgolette($f3->get('POST.email'));
-        $email = strtolower($email);
-
-        $p = new \App\Paziente(null, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $stato, $email);
-        $p->AddDB();
-
-        \App\Flash::instance()->addMessage('Paziente aggiunto', 'success');
-
-        $f3->reroute('/privacy');
-
-    }
-
     public function PazienteSearch($f3)
     {
         $f3->set('titolo', 'Cerca Paziente');
-        $f3->set('contenuto', 'privacysearch.htm');
+        $f3->set('contenuto', '/privacy/privacysearch.htm');
         echo \Template::instance()->render('templates/base.htm');
     }
 
@@ -304,7 +264,7 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         // Generali
         $f3->set('titolo', 'Privacy');
         $f3->set('script', 'privacy.js');
-        $f3->set('contenuto', 'privacysearchlist.htm');
+        $f3->set('contenuto', '/privacy/privacysearchlist.htm');
         echo \Template::instance()->render('templates/base.htm');
     }
 
@@ -363,28 +323,5 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $pdf->SetTitle($titolo);
         $pdf->Output('', $titolo . ".pdf");
         
-    }
-
-    public function PazienteCancella($f3, $params)
-    {
-        $id = $params['id'];
-        
-        $paziente = \App\Paziente::ReadByID($id);
-        $f3->set('paziente', $paziente->ToArray());
-
-        // Generali
-        $f3->set('titolo', 'Privacy');
-        $f3->set('contenuto', 'privacycancella.htm');
-        echo \Template::instance()->render('templates/base.htm');
-    }
-
-    public function Cancella($f3, $params)
-    {
-        $id = $f3->get('POST.id');
-        \App\Paziente::CancellaByID($id);
-
-        \App\Flash::instance()->addMessage("Paziente #$id cancellato", 'success');
-        
-        $f3->reroute('/privacy');
     }
 }
