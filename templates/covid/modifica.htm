@@ -1,0 +1,115 @@
+<div class="row">
+    <div class="col-md-12">
+        <form method="POST" action="{{@BASE}}{{ 'covidmodificasql' | alias }}">
+            <input type="hidden" name="id" value="{{ @p.id }}">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Cognome">Cognome</label>
+                        <input type="text" class="form-control" id="Cognome" placeholder="Inserisci il cognome" name="cognome" lang="it" required value="{{ @p.cognome }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Nome">Nome</label>
+                        <input type="text" class="form-control" id="Nome" placeholder="Inserisci il nome" name="nome" lang="it" required value="{{ @p.nome }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="InputData">Data nascita</label>
+                        <input type="text" class="form-control" id="InputData" name="datanascita" required value="{{ @p.datanascita }}">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="InputSesso">Sesso</label>
+                        <select class="form-control" id="InputSesso" placeholder="Sesso M/F" name="sesso" required>
+                            <option value="M" <check if="{{ @p.sesso=='M' }}"><true>selected</true></check> >M</option>
+                            <option value="F" <check if="{{ @p.sesso=='F' }}"><true>selected</true></check>>F</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="CodiceFiscale">Codice fiscale</label>
+                        <input type="text" class="form-control" id="CodiceFiscale" placeholder="Inserisci il codice fiscale" name="codicefiscale" value="{{ @p.codicefiscale }}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Indirizzo">Indirizzo</label>
+                        <input type="text" class="form-control" id="Indirizzo" placeholder="Inserisci l'indirizzo" name="indirizzo" value="{{ @p.indirizzo }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Citta">Città</label>
+                        <input type="text" class="form-control" id="Citta" placeholder="Inserisci la città" name="citta" value="{{ @p.citta }}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Telefono">Telefono</label>
+                        <input type="text" class="form-control" id="telefono" placeholder="Inserisci il numero di telefono" name="telefono" value="{{ @p.telefono }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="text" class="form-control" id="Email" placeholder="Inserisci l'email" name="email" value="{{ @p.email }}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="InputStato">Stato Covid19</label>
+                        <select class="form-control" id="InputStato" placeholder="Stato covid" name="stato" required>
+                            <option value="Ignoto" <check if="{{ @p.stato=='' }}"><true>selected</true></check> >Ignoto</option>
+                            <option value="Sospetto in attesa di tampone" <check if="{{ @p.stato=='Sospetto in attesa di tampone' }}"><true>selected</true></check> >Sospetto in attesa di tampone</option>
+                            <option value="Sospetto non in attesa di tampone" <check if="{{ @p.stato=='Sospetto non in attesa di tampone' }}"><true>selected</true></check> >Sospetto non in attesa di tampone</option>
+                            <option value="Negativo" <check if="{{ @p.stato=='Negativo' }}"><true>selected</true></check> >Negativo</option>
+                            <option value="Isolamento" <check if="{{ @p.stato=='Isolamento' }}"><true>selected</true></check> >Isolamento</option>
+                            <option value="Positivo" <check if="{{ @p.stato=='Positivo' }}"><true>selected</true></check> >Positivo</option>
+                            <option value="Primo Tampone negativo" <check if="{{ @p.stato=='Primo Tampone negativo' }}"><true>selected</true></check> >Primo Tampone negativo</option>
+                            <option value="Secondo Tampone negativo" <check if="{{ @p.stato=='Secondo Tampone negativo' }}"><true>selected</true></check> >Secondo Tampone negativo</option>
+                            <option value="Terzo Tampone negativo" <check if="{{ @p.stato=='Terzo Tampone negativo' }}"><true>selected</true></check> >Terzo Tampone negativo</option>
+                            <option value="Guarito" <check if="{{ @p.stato=='Guarito' }}"><true>selected</true></check> >Guarito</option>
+                            <option value="Deceduto" <check if="{{ @p.stato=='Deceduto' }}"><true>selected</true></check> >Deceduto</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Lavoro">Lavoro</label>
+                        <input type="text" class="form-control" id="lavoro" placeholder="Inserisci il lavoro" name="lavoro" value="{{ @p.lavoro }}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Note">Note</label>
+                <textarea class="form-control" id="note" placeholder="Note" name="note" rows="5">{{ @p.note }}</textarea>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'covid' | alias }}">Annulla</a>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Modifica</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

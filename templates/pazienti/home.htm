@@ -20,7 +20,10 @@
 
 <div class="row">
     <div class="col-md-12">
-        info di base
+        <h3>Lista iniziali cognomi</h3>
+        <repeat group="{{ @lista }}" value="{{ @lettera }}">
+            <a href="{{@BASE}}/pazienti/lettera/{{ @lettera }}" class="display-4">{{ @lettera }}</a>
+        </repeat>
     </div>
 </div>
 

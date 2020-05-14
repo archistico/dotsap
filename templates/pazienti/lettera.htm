@@ -9,6 +9,7 @@
 
 <div class="row">
     <div class="col-md-12">
+        <h3>Cognomi che iniziano con: {{ @lettera }}</h3>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -30,7 +31,7 @@
                     <td class="d-none">{{ @paziente.telefono }}</td>
                     <td class="d-none">{{ @paziente.email }}</td>
                     <th scope="row">
-                        <div class="btn-group" role="group" aria-label="Basic example">
+                        <div class="btn-group" role="group" aria-label="">
                             <a href="{{@BASE}}/pazienti/modifica/{{ @paziente.id }}" class="btn btn-warning btn-sm btn-rect"><i class="fas fa-pencil-alt"></i></a>
                             <a href="{{@BASE}}/pazienti/cancella/{{ @paziente.id }}" class="btn btn-danger btn-sm btn-rect"><i class="fas fa-times"></i></a>
                         </div>

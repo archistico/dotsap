@@ -85,9 +85,12 @@ $f3->route('GET @pazientimodifica: /pazienti/modifica/@id', '\App\Pazienti->Modi
 $f3->route('POST @pazientimodificasql: /pazienti/modifica/sql', '\App\Pazienti->ModificaSQL');
 $f3->route('GET @pazienticancella: /pazienti/cancella/@id', '\App\Pazienti->CancellaConferma');
 $f3->route('POST @pazienticancella: /pazienti/cancella', '\App\Pazienti->Cancella');
+$f3->route('GET @pazientilettera: /pazienti/lettera/@lettera', '\App\Pazienti->Lettera');
 
 // Covid
 $f3->route('GET @covid: /covid', '\App\Covid->Home');
+$f3->route('GET @covidmodifica: /covid/modifica/@id', '\App\Covid->Modifica');
+$f3->route('POST @covidmodificasql: /covid/modifica', '\App\Covid->ModificaSQL');
 
 // Autenticazione
 $f3->route('GET @login: /login', '\App\Auth->Login');

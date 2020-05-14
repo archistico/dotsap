@@ -17,8 +17,25 @@ class Pazienti
 
     public function Home($f3)
     {
+        $listaAlfabetica = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z"];
+        $f3->set('lista', $listaAlfabetica);
+
         $f3->set('titolo', 'Pazienti');
         $f3->set('contenuto', '/pazienti/home.htm');
+        echo \Template::instance()->render('templates/base.htm');
+    }
+
+    public function Lettera($f3, $params)
+    {
+        $lettera = $params['lettera'];
+        $f3->set('lettera', $lettera);
+
+        $lista = Paziente::ReadByLetter($lettera);
+        $f3->set('lista', $lista);
+
+        // Generali
+        $f3->set('titolo', 'Pazienti');
+        $f3->set('contenuto', '/pazienti/lettera.htm');
         echo \Template::instance()->render('templates/base.htm');
     }
 
