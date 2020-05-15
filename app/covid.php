@@ -79,6 +79,7 @@ class Covid
         $f3->set('totaledeceduti', count($listadeceduti));
 
         $f3->set('titolo', 'Covid');
+        $f3->set('script', 'covid.js');
         $f3->set('contenuto', '/covid/covid.htm');
         echo \Template::instance()->render('templates/base.htm');
     }

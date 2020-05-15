@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <select class="form-control" name="paziente" id="selectModifica">
+                        <select class="form-control js-select2" name="paziente" id="selectModifica">
                             <repeat group="{{ @listapazienti }}" value="{{ @p }}">
                                 <option value="{{ @p.id }}">{{ @p.nomecompleto }}</option>
                             </repeat>
@@ -216,11 +216,3 @@
         <hr>
     </div>
 </div>
-
-<script>
-    document.getElementById("btnModifica").addEventListener("click", function(){
-        let sel = document.getElementById("selectModifica");
-        let link = "{{@BASE}}/covid/modifica/" + sel.options[sel.selectedIndex].value;
-        window.location.href = link;
-    });
-</script>
