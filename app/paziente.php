@@ -154,6 +154,32 @@ class Paziente {
         return $risposta;
     }
 
+    // Trattato con Plaquenil
+    public static function ReadByNote($str)
+    {
+        $db = (\App\Db::getInstance())->connect();
+        $risposta = [];
+        // LIKE '%cats%'
+
+        $sql = "SELECT * FROM pazienti WHERE note LIKE '%$str%'";
+        $pazientiArray = $db->exec($sql);
+
+        foreach($pazientiArray as $paz) {
+            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"]);
+            $t->data = $paz["data"];
+            $t->datafirma = $t->getData();
+            $risposta[] = $t->ToArray();
+        }
+
+        // Ordina in base a cognome
+        usort($risposta, function ($a, $b) {
+            return strcmp($a["nomecompleto"], $b["nomecompleto"]);
+        });
+
+        return $risposta;
+    }
+
+
     public static function Search($testoRicerca)
     {
         $db = (\App\Db::getInstance())->connect();

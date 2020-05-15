@@ -71,6 +71,9 @@ class Covid
         $listadeceduti = Paziente::ReadByStato('Deceduto');
         $f3->set('listadeceduti', $listadeceduti);
 
+        $listaPlaquenil = Paziente::ReadByNote('Plaquenil');
+        $f3->set('listaplaquenil', $listaPlaquenil);
+
         $f3->set('totalepositivi', count($listapositivi));
         $f3->set('totalesospetti', count($listasospetti));
         $f3->set('totaleisolamento', count($listaisolamento));

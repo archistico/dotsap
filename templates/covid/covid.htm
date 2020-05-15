@@ -216,3 +216,25 @@
         <hr>
     </div>
 </div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <h3>Trattati con Plaquenil</h3>
+        <table class="table table-striped">
+            <tbody>
+            <repeat group="{{ @listaplaquenil }}" value="{{ @paziente }}">
+                <tr>
+                    <td>{{ @paziente.nomecompleto }} ({{ @paziente.datanascita }})</td>
+                    <td style="width: 30%">{{ @paziente.stato }}</td>
+                    <td scope="row" style="width: 50px">
+                        <div class="btn-group" role="group" aria-label="">
+                            <a href="{{@BASE}}/covid/modifica/{{ @paziente.id }}" class="btn btn-warning btn-sm btn-rect"><i class="fas fa-biohazard"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            </repeat>
+            </tbody>
+        </table>
+        <hr>
+    </div>
+</div>
