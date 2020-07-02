@@ -242,8 +242,16 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $associati = $f3->get('POST.associati');
         $consulenti = $f3->get('POST.consulenti');
         $softwarehouse = $f3->get('POST.softwarehouse');
-
+        
         Paziente::ModifyPrivacyByID($id, $datafirma, $this->ConvertBool($segreteria), $this->ConvertBool($sostituti), $this->ConvertBool($associati), $this->ConvertBool($consulenti), $this->ConvertBool($softwarehouse));
+
+        // Gestione email per Millebook
+        $indirizzoemail = $f3->get('POST.indirizzoemail');
+
+        if(!empty(trim($indirizzoemail))) {
+            Paziente::ModifyEmailByID($id, $indirizzoemail);
+        }
+        
 
         $f3->reroute('/privacy/' . $lettera);
     }
@@ -281,7 +289,7 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         
         $pdf = new \FPDF();
         $pdf->AddPage();
-        $pdf->SetMargins(8, 15, 8);
+        $pdf->SetMargins(8, 10, 8);
         $pdf->SetFont('Arial', 'B', $sizeFontGrande);
         $pdf->Cell(0, 10, "TABELLA PRIVACY", '', '', 'C');
         $pdf->Ln(10);

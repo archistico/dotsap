@@ -365,4 +365,15 @@ class Paziente {
         $db->exec($sql);
         $db->commit();
     }
+
+    public static function ModifyEmailByID($id, $email)
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "UPDATE pazienti SET email='$email' WHERE id='$id';";
+
+        $db->begin();
+        $db->exec($sql);
+        $db->commit();
+    }
 }
