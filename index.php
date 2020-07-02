@@ -32,6 +32,8 @@ $f3->set('APP_VERSIONE', env("APP_VERSIONE"));
 //         ROUTE
 // ----------------------
 
+// \App\Utilita::DumpDie($f3);
+
 $f3->route('GET @home: /', '\App\Appuntamenti->Homepage');
 
 // Appuntamenti

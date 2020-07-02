@@ -63,7 +63,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="../../index.php" id="form_modifica">
+                <form method="POST" action="{{@BASE}}{{ 'privacymodifica' | alias }}" id="form_modifica">
                     <div class="form-group">
                         <h4><span id="modalcognome"></span> <span id="modalnome"></span></h4>
                     </div>
@@ -101,6 +101,10 @@
                         <label class="form-check-label" for="softwarehouse">
                             Software house
                         </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="indirizzoemail">Email</label>
+                        <input type="text" class="form-control" id="indirizzoemail" name="indirizzoemail">
                     </div>
                     <input type="hidden" name="input-id" value="" id="input-id">
                     <input type="hidden" name="input-lettera" value="{{ @lettera }}" id="input-lettera">
