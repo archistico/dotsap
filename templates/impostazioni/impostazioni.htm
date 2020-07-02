@@ -11,12 +11,17 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="alert alert-danger alert-dismissable">
-            ATTENZIONE AREA RISERVATA AMMINISTRATORE
-        </div>
-        <a href="{{@BASE}}{{ 'logs' | alias }}" class="btn btn-primary btn-block btn-lg">Visualizza logs</a><br>
-        <a href="{{@BASE}}{{ 'migrazioni' | alias }}" class="btn btn-warning btn-block btn-lg">Effettua migrazioni</a><br>
-        <a href="{{@BASE}}{{ 'impostazionisvuotaricette' | alias }}" class="btn btn-danger btn-block btn-lg">Svuota tabella ricette fatte</a><br>
-        <a href="{{@BASE}}{{ 'impostazionisvuotaprivacy' | alias }}" class="btn btn-danger btn-block btn-lg">Svuota tabella privacy</a><br>
+        
+        <h1 class="text-center">ATTENZIONE AREA RISERVATA</h1>
+        <h2>LOGS</h2>
+        <a href="{{@BASE}}{{ 'logs' | alias }}" class="btn btn-primary btn-block btn-lg"><i class="fas fa-user-lock"></i> Visualizza logs</a><br>
+        <hr>
+        <h2>DATABASE</h2>
+        <a href="{{@BASE}}{{ 'database_migrazioni' | alias }}" class="btn btn-warning btn-block btn-lg"><i class="fas fa-database"></i> Effettua migrazioni</a><br>
+        <a href="{{@BASE}}{{ 'database_download' | alias }}" class="btn btn-warning btn-block btn-lg"><i class="fas fa-download"></i> Download database</a><br>
+        <hr>
+        <h2>PULIZIA TABELLE</h2>
+        <a href="{{@BASE}}{{ 'impostazionisvuotaricette' | alias }}" class="btn btn-danger btn-block btn-lg"><i class="fas fa-trash-alt"></i> Svuota tabella ricette fatte</a><br>
+        <a href="{{@BASE}}{{ 'impostazionisvuotaprivacy' | alias }}" class="btn btn-danger btn-block btn-lg"><i class="fas fa-trash-alt"></i> Svuota tabella privacy</a><br>
     </div>
 </div>

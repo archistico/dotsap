@@ -112,7 +112,8 @@ $f3->route('GET @impostazionisvuotaprivacy: /impostazioni/svuotaprivacy', '\App\
 $f3->route('GET @logs: /logs', '\App\Logs->Show');
 
 // Creazione database e tabelle
-$f3->route('GET @migrazioni: /migrazioni', 'App\Migrazioni->All');
+$f3->route('GET @database_migrazioni: /database_migrazioni', 'App\Migrazioni->All');
+$f3->route('GET @database_download: /database_download', 'App\Migrazioni->Download');
 
 // Crypt
 $f3->route('GET @crypt: /crypt', '\App\Crypt->Show');
