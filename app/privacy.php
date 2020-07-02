@@ -324,4 +324,12 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $pdf->Output('', $titolo . ".pdf");
         
     }
+
+    public function Cancella($f3, $params)
+    {
+        $id = $params['id'];
+        Paziente::CancellaPrivacyByID($id);
+
+        $f3->reroute('/privacy');
+    }
 }

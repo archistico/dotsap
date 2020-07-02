@@ -344,4 +344,25 @@ class Paziente {
 
         return $risposta;
     }
+
+    public static function SvuotaPrivacy()
+    {
+        $db = (\App\Db::getInstance())->connect();
+        $sql = "UPDATE pazienti SET data='', segreteria='0', sostituti='0', associazione='0', consulenti='0', softwarehouse='0';";
+
+        $db->begin();
+        $db->exec($sql);
+        $db->commit();
+    }
+
+    public static function CancellaPrivacyByID($id)
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "UPDATE pazienti SET data='', segreteria='0', sostituti='0', associazione='0', consulenti='0', softwarehouse='0' WHERE id='$id';";
+
+        $db->begin();
+        $db->exec($sql);
+        $db->commit();
+    }
 }

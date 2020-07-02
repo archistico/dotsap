@@ -74,6 +74,7 @@ $f3->route('POST @privacymodifica: /privacy/modifica', '\App\Privacy->Modifica')
 $f3->route('GET @privacysearch: /privacy/search', '\App\Privacy->PazienteSearch');
 $f3->route('POST @privacysearchlist: /privacy/search', '\App\Privacy->PazienteSearchList');
 $f3->route('GET @privacytable: /privacy/table', '\App\Privacy->TablePDF');
+$f3->route('GET @privacycancella: /privacy/cancella/@id', '\App\Privacy->Cancella');
 
 // Pazienti
 $f3->route('GET @pazienti: /pazienti', '\App\Pazienti->Home');
@@ -105,6 +106,7 @@ $f3->route('POST @utenteregistra: /utente/registra', '\App\Admin->UtenteRegistra
 // Impostazioni
 $f3->route('GET @impostazioni: /impostazioni', '\App\Impostazioni->Home');
 $f3->route('GET @impostazionisvuotaricette: /impostazioni/svuotaricette', '\App\Impostazioni->SvuotaRicette');
+$f3->route('GET @impostazionisvuotaprivacy: /impostazioni/svuotaprivacy', '\App\Impostazioni->SvuotaPrivacy');
 
 // Log
 $f3->route('GET @logs: /logs', '\App\Logs->Show');

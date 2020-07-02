@@ -28,4 +28,11 @@ class Impostazioni
         \App\Flash::instance()->addMessage('Tabella ricette fatte svuotata', 'success');
         $f3->reroute('/impostazioni');
     }
+
+    public function SvuotaPrivacy($f3)
+    {
+        Paziente::SvuotaPrivacy();
+        \App\Flash::instance()->addMessage('Lista privacy svuotata', 'success');
+        $f3->reroute('/impostazioni');
+    }
 }
