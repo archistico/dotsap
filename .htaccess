@@ -1,6 +1,6 @@
 RewriteEngine On
 RewriteBase /
-RewriteRule ^(app|db|dict|ns|tmp)\/|\.ini$ - [R=404]
+RewriteRule ^(app|db|conf|css|img|js|templates|vendor|tmp)\/|\.ini$ - [R=404]
 
 RewriteCond %{REQUEST_FILENAME} !-l
 RewriteCond %{REQUEST_FILENAME} !-f
