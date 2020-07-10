@@ -282,8 +282,10 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $sizeFontPiccolo = 8;
         $altezze_linea = 6;
         $larghezza_nome = 65;
-        $larghezza_data = 20;
-        $larghezza_privacy = 22;
+        $larghezza_data = 18;
+        $larghezza_privacy = 8;
+        $larghezza_modello = 8;
+        $larghezza_email = 65;
 
         $lista = Paziente::AllSigned();
         
@@ -299,11 +301,13 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
 
         $pdf->Cell($larghezza_nome, $altezze_linea, 'Cognome nome', 1, 0, 'C');
         $pdf->Cell($larghezza_data, $altezze_linea, 'Data', 1, 0, 'C');
-        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Segreteria', 1, 0, 'C');
-        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Sostituti', 1, 0, 'C');
-        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Associazione', 1, 0, 'C');
-        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Commercialista', 1, 0, 'C');
-        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Software house', 1, 1, 'C');
+        $pdf->Cell($larghezza_modello, $altezze_linea, 'Mod.', 1, 0, 'C');
+        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Seg.', 1, 0, 'C');
+        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Sos.', 1, 0, 'C');
+        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Ass.', 1, 0, 'C');
+        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Com.', 1, 0, 'C');
+        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Sof.', 1, 0, 'C');
+        $pdf->Cell($larghezza_email, $altezze_linea, 'Email', 1, 1, 'C');
 
         // INSERIMENTO PAZIENTI 
 
@@ -317,14 +321,25 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
             $privacy_associazione = $paz["associazione"]==1 ? "X" : "-";
             $privacy_commercialista = $paz["consulenti"]==1 ? "X" : "-";
             $privacy_software = $paz["softwarehouse"]==1 ? "X" : "-";
+            $privacy_email = $paz["email"];
+
+            $dt = new \DateTime($data);
+            $dt2 = new \DateTime('2020-02-01');
+            if($dt < $dt2) {
+                $modello = "#1";
+            } else {
+                $modello = "#2";
+            }            
 
             $pdf->Cell($larghezza_nome, $altezze_linea, $cognomenome, 1, 0, 'L');
             $pdf->Cell($larghezza_data, $altezze_linea, $data, 1, 0, 'C');
+            $pdf->Cell($larghezza_modello, $altezze_linea, $modello, 1, 0, 'C');
             $pdf->Cell($larghezza_privacy, $altezze_linea, $privacy_collaboratori, 1, 0, 'C');
             $pdf->Cell($larghezza_privacy, $altezze_linea, $privacy_sostituti, 1, 0, 'C');
             $pdf->Cell($larghezza_privacy, $altezze_linea, $privacy_associazione, 1, 0, 'C');
             $pdf->Cell($larghezza_privacy, $altezze_linea, $privacy_commercialista, 1, 0, 'C');
-            $pdf->Cell($larghezza_privacy, $altezze_linea, $privacy_software, 1, 1, 'C');
+            $pdf->Cell($larghezza_privacy, $altezze_linea, $privacy_software, 1, 0, 'C');
+            $pdf->Cell($larghezza_email, $altezze_linea, $privacy_email, 1, 1, 'L');
         }
 
         $titolo = "Privacy firmate del " . date("d-m-Y");
