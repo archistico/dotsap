@@ -35,4 +35,11 @@ class Impostazioni
         \App\Flash::instance()->addMessage('Lista privacy svuotata', 'success');
         $f3->reroute('/impostazioni');
     }
+
+    public function SvuotaPrenotazioni($f3)
+    {
+        Appuntamenti::SvuotaTabellaAppuntamenti();
+        \App\Flash::instance()->addMessage('Tabella appuntamenti svuotata', 'success');
+        $f3->reroute('/impostazioni');
+    }
 }

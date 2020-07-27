@@ -109,6 +109,7 @@ $f3->route('POST @utenteregistra: /utente/registra', '\App\Admin->UtenteRegistra
 $f3->route('GET @impostazioni: /impostazioni', '\App\Impostazioni->Home');
 $f3->route('GET @impostazionisvuotaricette: /impostazioni/svuotaricette', '\App\Impostazioni->SvuotaRicette');
 $f3->route('GET @impostazionisvuotaprivacy: /impostazioni/svuotaprivacy', '\App\Impostazioni->SvuotaPrivacy');
+$f3->route('GET @impostazionisvuotaprenotazioni: /impostazioni/svuotaprenotazioni', '\App\Impostazioni->SvuotaPrenotazioni');
 
 // Log
 $f3->route('GET @logs: /logs', '\App\Logs->Show');

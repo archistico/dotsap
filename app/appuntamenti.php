@@ -391,4 +391,18 @@ class Appuntamenti
         $f3->set('contenuto', 'appuntamenti_lista.htm');
         echo \Template::instance()->render('templates/base.htm');
     }
+
+    public static function SvuotaTabellaAppuntamenti()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        // Oggi
+        $dt = new \DateTime();
+        $jd = juliantojd((int)$dt->format("m"), (int)$dt->format("d"), (int)$dt->format("Y"));
+
+        $db->begin();
+        $db->exec("DELETE FROM appuntamenti WHERE data<$jd;");
+
+        $db->commit();
+    }
 }
