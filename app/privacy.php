@@ -63,6 +63,7 @@ class Privacy
         $sizeFontPiccolo = 8;
 
         $pdf = new \FPDF();
+        $pdf->SetAutoPageBreak(false, 10);
         $pdf->AddPage();
         $pdf->SetMargins(10, 10, 10);
         $pdf->SetFont('Arial', 'B', $sizeFontGrande);
@@ -114,6 +115,18 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $pdf->Cell(0, 10, $txt, '', '', 'C');
         $pdf->Ln(10);
 
+        // rettangolini
+        $pdf->Rect(13, 81, 3, 3, 'D');
+        $pdf->Rect(38, 81, 3, 3, 'D');
+        $pdf->Rect(13, 91, 3, 3, 'D');
+        $pdf->Rect(38, 91, 3, 3, 'D');
+        $pdf->Rect(13, 101, 3, 3, 'D');
+        $pdf->Rect(38, 101, 3, 3, 'D');
+        $pdf->Rect(13, 116, 3, 3, 'D');
+        $pdf->Rect(38, 116, 3, 3, 'D');
+        $pdf->Rect(13, 136, 3, 3, 'D');
+        $pdf->Rect(38, 136, 3, 3, 'D');
+
         $pdf->SetFont('Arial', '', $sizeFontPiccolo);
         // COGNOME NOME
         if ($paz->sesso == "M") {
@@ -142,18 +155,6 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $txt = iconv('UTF-8', 'windows-1252', $txt);
         $pdf->Ln(2);
         $pdf->MultiCell(0, 5, $txt);
-
-        // rettangolini
-        $pdf->Rect(13, 81, 3, 3, 'D');
-        $pdf->Rect(38, 81, 3, 3, 'D');
-        $pdf->Rect(13, 91, 3, 3, 'D');
-        $pdf->Rect(38, 91, 3, 3, 'D');
-        $pdf->Rect(13, 101, 3, 3, 'D');
-        $pdf->Rect(38, 101, 3, 3, 'D');
-        $pdf->Rect(13, 116, 3, 3, 'D');
-        $pdf->Rect(38, 116, 3, 3, 'D');
-        $pdf->Rect(13, 136, 3, 3, 'D');
-        $pdf->Rect(38, 136, 3, 3, 'D');
 
         // Se c'è la data segna altrimenti lascia vuoto
         if ($paz->getFirmata()) {
