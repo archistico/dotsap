@@ -169,77 +169,10 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $txt = iconv('UTF-8', 'windows-1252', $txt);
         $pdf->MultiCell(0, 5, $txt);
 
-        if ($paz->getFirmata()) {
-            $txt = "Data " . $paz->getData() . "                            Firma";
-        } else {
-            $txt = "Data " . date("d/m/Y") . "                            Firma";
-        }
+        $txt = "Data " . date("d/m/Y") . "                            Firma";
         $txt = iconv('UTF-8', 'windows-1252', $txt);
         $pdf->Ln(2);
         $pdf->MultiCell(0, 5, $txt);
-
-        // Se c'è la data segna altrimenti lascia vuoto
-        if ($paz->getFirmata()) {
-            $x = 13;
-            $y = 81;
-            $inc = 3;
-            $falso = 25;
-            if ($paz->segreteria == 1) {
-                $pdf->Line($x, $y, $x + $inc, $y + $inc);
-                $pdf->Line($x, $y + $inc, $x + $inc, $y);
-            } else {
-                $pdf->Line($x + $falso, $y, $x + $inc + $falso, $y + $inc);
-                $pdf->Line($x + $falso, $y + $inc, $x + $inc + $falso, $y);
-            }
-
-            $x = 13;
-            $y = 91;
-            $inc = 3;
-            $falso = 25;
-            if ($paz->sostituti == 1) {
-                $pdf->Line($x, $y, $x + $inc, $y + $inc);
-                $pdf->Line($x, $y + $inc, $x + $inc, $y);
-            } else {
-                $pdf->Line($x + $falso, $y, $x + $inc + $falso, $y + $inc);
-                $pdf->Line($x + $falso, $y + $inc, $x + $inc + $falso, $y);
-            }
-
-            $x = 13;
-            $y = 101;
-            $inc = 3;
-            $falso = 25;
-            if ($paz->associazione == 1) {
-                $pdf->Line($x, $y, $x + $inc, $y + $inc);
-                $pdf->Line($x, $y + $inc, $x + $inc, $y);
-            } else {
-                $pdf->Line($x + $falso, $y, $x + $inc + $falso, $y + $inc);
-                $pdf->Line($x + $falso, $y + $inc, $x + $inc + $falso, $y);
-            }
-
-            $x = 13;
-            $y = 116;
-            $inc = 3;
-            $falso = 25;
-            if ($paz->consulenti == 1) {
-                $pdf->Line($x, $y, $x + $inc, $y + $inc);
-                $pdf->Line($x, $y + $inc, $x + $inc, $y);
-            } else {
-                $pdf->Line($x + $falso, $y, $x + $inc + $falso, $y + $inc);
-                $pdf->Line($x + $falso, $y + $inc, $x + $inc + $falso, $y);
-            }
-
-            $x = 13;
-            $y = 136;
-            $inc = 3;
-            $falso = 25;
-            if ($paz->associazione == 1) {
-                $pdf->Line($x, $y, $x + $inc, $y + $inc);
-                $pdf->Line($x, $y + $inc, $x + $inc, $y);
-            } else {
-                $pdf->Line($x + $falso, $y, $x + $inc + $falso, $y + $inc);
-                $pdf->Line($x + $falso, $y + $inc, $x + $inc + $falso, $y);
-            }
-        }
 
         $titolo = "Privacy - " . $paz->cognome . " " . $paz->nome;
         $pdf->SetTitle($titolo);
