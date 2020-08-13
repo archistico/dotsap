@@ -77,26 +77,28 @@ class Privacy
         $responsabile = env("APP_RESPONSABILE");
         $txt = "a) i dati sensibili da Lei forniti verranno trattati per le seguenti finalità: ottemperanza agli obiettivi ed alle cure erogate dal S.S.N.;
 b) titolare del trattamento è: $responsabile;
-c) destinatari dei Suoi dati personali, in ragione della organizzazione del presente studio medico, saranno i seguenti soggetti: ";
+c) i destinatari dei Suoi dati personali, in ragione della organizzazione del presente studio medico, saranno i seguenti soggetti: ";
         $txt = iconv('UTF-8', 'windows-1252', $txt);
         $pdf->MultiCell(0, 5, $txt);
 
-        $txt = "• per ragioni che attengono alla migliore esecuzione dell'incarico professionale attribuito al medico, potranno avere accesso i collaboratori e/o i segretari presenti nello studio medico, nonché eventuali infermieri:
+        $txt = "• per ragioni che attengono alla migliore esecuzione dell'incarico professionale attribuito al medico, potranno avere accesso i collaboratori di studio, nonché eventuali infermieri:
         Acconsento             Non Acconsento
-• per ragioni di cura della Sua persona potranno avere accesso altri medici sostituti presenti nello studio medico:
+• per ragioni di cura della Sua persona potranno avere accesso i medici sostituti presenti nello studio medico:
         Acconsento             Non Acconsento
-• per ragioni di cura della Sua persona potranno avere accesso altri medici di medicina generale componenti l'associazione:
+• per ragioni di cura della Sua persona potranno avere accesso i medici di medicina generale componenti l'associazione:
         Acconsento             Non Acconsento
 • per ragioni che attengono la migliore organizzazione del lavoro prestato dal medico, potranno avere accesso i consulenti fiscali da quest'ultimo nominati, nei limiti in cui ciò si renda utile e necessario per l'adempimento dell'incarico professionale:
         Acconsento             Non Acconsento
 • per ragioni che attengono la migliore organizzazione del lavoro prestato dal medico, potranno avere accesso i consulenti informatici / software house da quest'ultimo nominati, nei limiti in cui ciò si renda utile e necessario per l'adempimento dell'incarico professionale (assistenza, manutenzione e fornitura anche in remoto dei sistemi informatici):
         Acconsento             Non Acconsento 
-Se desidera ricevere sul suo indirizzo di posta elettronica la registrazione e autorizzare l'utilizzo da parte del Titolare della piattaforma Millebook indichi l'email a cui inviare i dati identificativi per l'accesso: ________________________________________________________";
+";
 
         $txt = iconv('UTF-8', 'windows-1252', $txt);
         $pdf->MultiCell(0, 5, $txt);
 
         $txt = "d) è in suo diritto delegare soggetti terzi, di sua fiducia, al ritiro o alla consegna di documentazione sanitaria che la riguarda, soggetti che verranno, anche verbalmente, indicati al medico o ai suoi collaboratori e sostituti, con esonero di ogni responsabilità al riguardo nei confronti del medico;
+• desidera ricevere sul suo indirizzo di posta elettronica o sul suo numero di cellulare prescrizioni / ricette e autorizzare il Titolare all'invio della registrazione e all'utilizzo della piattaforma Millebook:
+        Acconsento             Non Acconsento 
 e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari anche regionali imposte al medico di medicina generale, tempo per tempo vigenti, essere inoltrati o comunicati ad Enti o soggetti terzi (quali a titolo meramente esemplificativo, ASL, Regione, Ministeri etc.) e che il medico, successivamente alla trasmissione del dato è esente da responsabilità per l'uso, la perdita o la alterazione del dato personale o sensibile da parte di tali soggetti terzi. La informiamo, altresì, che, nel caso in cui Lei fornirà i dati personali di cui sopra: ";
         $txt = iconv('UTF-8', 'windows-1252', $txt);
         $pdf->MultiCell(0, 5, $txt);
@@ -126,13 +128,33 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $pdf->Rect(38, 116, 3, 3, 'D');
         $pdf->Rect(13, 136, 3, 3, 'D');
         $pdf->Rect(38, 136, 3, 3, 'D');
+        $pdf->Rect(13, 161, 3, 3, 'D');
+        $pdf->Rect(38, 161, 3, 3, 'D');
 
         $pdf->SetFont('Arial', '', $sizeFontPiccolo);
         // COGNOME NOME
-        if ($paz->sesso == "M") {
-            $txt = "Il sottoscritto: " . strtoupper($paz->cognome) . " " . strtoupper($paz->nome) . ", nato il " . $paz->datanascita . ", residente: " . $paz->indirizzo . " - " . $paz->citta . ", codice fiscale: " . $paz->codicefiscale;
+        if (empty($paz->codicefiscale)) {
+            $paz_cf = "___________________________";    
         } else {
-            $txt = "La sottoscritta: " . strtoupper($paz->cognome) . " " . strtoupper($paz->nome) . ", nata il " . $paz->datanascita . ", residente: " . $paz->indirizzo . " - " . $paz->citta . ", codice fiscale: " . $paz->codicefiscale;
+            $paz_cf = strtoupper($paz->codicefiscale);
+        }
+
+        if (empty($paz->telefono)) {
+            $paz_telefono = "___________________________";    
+        } else {
+            $paz_telefono = strtolower($paz->telefono);
+        }
+
+        if (empty($paz->email)) {
+            $paz_email = "___________________________";    
+        } else {
+            $paz_email = strtolower($paz->email);
+        }
+
+        if ($paz->sesso == "M") {
+            $txt = "Il sottoscritto: " . strtoupper($paz->cognome) . " " . strtoupper($paz->nome) . ", nato il " . $paz->datanascita . ", residente: " . $paz->indirizzo . " - " . $paz->citta . ", codice fiscale: " . $paz_cf . ", telefono: " . $paz_telefono . ", email: " . $paz_email;
+        } else {
+            $txt = "La sottoscritta: " . strtoupper($paz->cognome) . " " . strtoupper($paz->nome) . ", nata il " . $paz->datanascita . ", residente: " . $paz->indirizzo . " - " . $paz->citta . ", codice fiscale: " . $paz_cf . ", telefono: " . $paz_telefono . ", email: " . $paz_email;
         }
         $txt = iconv('UTF-8', 'windows-1252', $txt);
         $pdf->MultiCell(0, 5, $txt);
@@ -326,10 +348,13 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
 
             $dt = new \DateTime($data);
             $dt2 = new \DateTime('2020-02-01');
+            $dt3 = new \DateTime('2020-08-14');
             if($dt < $dt2) {
                 $modello = "#1";
-            } else {
+            } else if (($dt >= $dt2) && ($dt < $dt3)) {
                 $modello = "#2";
+            } else {
+                $modello = "#3";
             }            
 
             $pdf->Cell($larghezza_nome, $altezze_linea, $cognomenome, 1, 0, 'L');
