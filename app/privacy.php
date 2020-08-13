@@ -265,8 +265,9 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $associati = $f3->get('POST.associati');
         $consulenti = $f3->get('POST.consulenti');
         $softwarehouse = $f3->get('POST.softwarehouse');
+        $invioricette = $f3->get('POST.invioricette');
         
-        Paziente::ModifyPrivacyByID($id, $datafirma, $this->ConvertBool($segreteria), $this->ConvertBool($sostituti), $this->ConvertBool($associati), $this->ConvertBool($consulenti), $this->ConvertBool($softwarehouse));
+        Paziente::ModifyPrivacyByID($id, $datafirma, $this->ConvertBool($segreteria), $this->ConvertBool($sostituti), $this->ConvertBool($associati), $this->ConvertBool($consulenti), $this->ConvertBool($softwarehouse), $this->ConvertBool($invioricette));
 
         // Gestione email per Millebook
         $indirizzoemail = $f3->get('POST.indirizzoemail');
@@ -274,7 +275,6 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         if(!empty(trim($indirizzoemail))) {
             Paziente::ModifyEmailByID($id, $indirizzoemail);
         }
-        
 
         $f3->reroute('/privacy/' . $lettera);
     }
@@ -308,7 +308,7 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $larghezza_data = 18;
         $larghezza_privacy = 8;
         $larghezza_modello = 8;
-        $larghezza_email = 65;
+        $larghezza_email = 57;
 
         $lista = Paziente::AllSigned();
         
@@ -330,6 +330,7 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         $pdf->Cell($larghezza_privacy, $altezze_linea, 'Ass.', 1, 0, 'C');
         $pdf->Cell($larghezza_privacy, $altezze_linea, 'Com.', 1, 0, 'C');
         $pdf->Cell($larghezza_privacy, $altezze_linea, 'Sof.', 1, 0, 'C');
+        $pdf->Cell($larghezza_privacy, $altezze_linea, 'Inv.', 1, 0, 'C');
         $pdf->Cell($larghezza_email, $altezze_linea, 'Email', 1, 1, 'C');
 
         // INSERIMENTO PAZIENTI 
@@ -344,6 +345,7 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
             $privacy_associazione = $paz["associazione"]==1 ? "X" : "-";
             $privacy_commercialista = $paz["consulenti"]==1 ? "X" : "-";
             $privacy_software = $paz["softwarehouse"]==1 ? "X" : "-";
+            $privacy_invioricette = $paz["invioricette"]==1 ? "X" : "-";
             $privacy_email = $paz["email"];
 
             $dt = new \DateTime($data);
@@ -365,6 +367,8 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
             $pdf->Cell($larghezza_privacy, $altezze_linea, $privacy_associazione, 1, 0, 'C');
             $pdf->Cell($larghezza_privacy, $altezze_linea, $privacy_commercialista, 1, 0, 'C');
             $pdf->Cell($larghezza_privacy, $altezze_linea, $privacy_software, 1, 0, 'C');
+            $pdf->Cell($larghezza_privacy, $altezze_linea, $privacy_invioricette, 1, 0, 'C');
+            
             $pdf->Cell($larghezza_email, $altezze_linea, $privacy_email, 1, 1, 'L');
         }
 

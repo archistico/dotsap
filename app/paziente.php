@@ -24,6 +24,7 @@ class Paziente {
     public $sostituti;
     public $consulenti;
     public $softwarehouse;
+    public $invioricette;
     public $datafirma;
 
     // stato covid
@@ -47,6 +48,7 @@ class Paziente {
         $this->sostituti = 0;
         $this->consulenti = 0;
         $this->softwarehouse = 0;
+        $this->invioricette = 0;
 
         $this->lavoro = $lavoro;
         $this->note = $note;
@@ -59,7 +61,7 @@ class Paziente {
     {
         try {
             $db = (\App\Db::getInstance())->connect();
-            $sql = 'INSERT into pazienti values(null, "' . $this->cognome . '", "' . $this->nome . '", "' . $this->datanascita . '", "' . $this->sesso . '", "' . $this->codicefiscale . '", "' . $this->indirizzo . '", "' . $this->citta . '", "' . $this->telefono . '", "' . $this->data . '", "' . $this->segreteria . '", "' . $this->associazione . '", "' . $this->sostituti . '", "' . $this->consulenti . '", "' . $this->softwarehouse . '", "' . $this->lavoro . '", "' . $this->stato . '", "' . $this->note . '", "' . $this->email . '")';
+            $sql = 'INSERT into pazienti values(null, "' . $this->cognome . '", "' . $this->nome . '", "' . $this->datanascita . '", "' . $this->sesso . '", "' . $this->codicefiscale . '", "' . $this->indirizzo . '", "' . $this->citta . '", "' . $this->telefono . '", "' . $this->data . '", "' . $this->segreteria . '", "' . $this->associazione . '", "' . $this->sostituti . '", "' . $this->consulenti . '", "' . $this->softwarehouse . '", "' . $this->lavoro . '", "' . $this->stato . '", "' . $this->note . '", "' . $this->email . '", "' . $this->invioricette . '")';
             $db->begin();
             $db->exec($sql);
             $db->commit();
@@ -217,6 +219,7 @@ class Paziente {
         $risposta->sostituti = $paz["sostituti"];
         $risposta->consulenti = $paz["consulenti"];
         $risposta->softwarehouse = $paz["softwarehouse"];
+        $risposta->invioricette = $paz["invioricette"];
 
         $risposta->lavoro = $paz["lavoro"];
         $risposta->note = $paz["note"];
@@ -226,11 +229,11 @@ class Paziente {
         return $risposta;
     }
 
-    public static function ModifyPrivacyByID($id, $datafirma, $segreteria, $sostituti, $associati, $consulenti, $softwarehouse)
+    public static function ModifyPrivacyByID($id, $datafirma, $segreteria, $sostituti, $associati, $consulenti, $softwarehouse, $invioricette)
     {
         $db = (\App\Db::getInstance())->connect();
 
-        $sql = "UPDATE pazienti SET data='$datafirma', segreteria='$segreteria', sostituti='$sostituti', associazione='$associati', consulenti='$consulenti', softwarehouse='$softwarehouse'  WHERE id='$id';";
+        $sql = "UPDATE pazienti SET data='$datafirma', segreteria='$segreteria', sostituti='$sostituti', associazione='$associati', consulenti='$consulenti', softwarehouse='$softwarehouse', invioricette='$invioricette'  WHERE id='$id';";
 
         $db->begin();
         $db->exec($sql);
@@ -305,6 +308,7 @@ class Paziente {
             'sostituti'     => $this->sostituti,
             'consulenti'    => $this->consulenti,
             'softwarehouse' => $this->softwarehouse,
+            'invioricette'  => $this->invioricette,
             'lavoro'        => $this->lavoro,
             'note'          => $this->note,
             'notebr'        => nl2br($this->note),
@@ -348,7 +352,7 @@ class Paziente {
     public static function SvuotaPrivacy()
     {
         $db = (\App\Db::getInstance())->connect();
-        $sql = "UPDATE pazienti SET data='', segreteria='0', sostituti='0', associazione='0', consulenti='0', softwarehouse='0';";
+        $sql = "UPDATE pazienti SET data='', segreteria='0', sostituti='0', associazione='0', consulenti='0', softwarehouse='0', invioricette='0';";
 
         $db->begin();
         $db->exec($sql);
@@ -359,7 +363,7 @@ class Paziente {
     {
         $db = (\App\Db::getInstance())->connect();
 
-        $sql = "UPDATE pazienti SET data='', segreteria='0', sostituti='0', associazione='0', consulenti='0', softwarehouse='0' WHERE id='$id';";
+        $sql = "UPDATE pazienti SET data='', segreteria='0', sostituti='0', associazione='0', consulenti='0', softwarehouse='0', invioricette='0' WHERE id='$id';";
 
         $db->begin();
         $db->exec($sql);
