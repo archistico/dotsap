@@ -81,11 +81,9 @@ c) i destinatari dei Suoi dati personali, in ragione della organizzazione del p
         $txt = iconv('UTF-8', 'windows-1252', $txt);
         $pdf->MultiCell(0, 5, $txt);
 
-        $txt = "• per ragioni che attengono alla migliore esecuzione dell'incarico professionale attribuito al medico, potranno avere accesso i collaboratori di studio, nonché eventuali infermieri:
+        $txt = "• per ragioni di cura della Sua persona potranno avere accesso i sostituti, i medici di medicina generale componenti l'associazione, i collaboratori di studio, nonché eventuali infermieri:
         Acconsento             Non Acconsento
-• per ragioni di cura della Sua persona potranno avere accesso i medici sostituti presenti nello studio medico:
-        Acconsento             Non Acconsento
-• per ragioni di cura della Sua persona potranno avere accesso i medici di medicina generale componenti l'associazione:
+• per ragioni di cura della Sua persona potranno avere accesso i gruppi di cura esterni (emergenza, reparti, specialisti):
         Acconsento             Non Acconsento
 • per ragioni che attengono la migliore organizzazione del lavoro prestato dal medico, potranno avere accesso i consulenti fiscali da quest'ultimo nominati, nei limiti in cui ciò si renda utile e necessario per l'adempimento dell'incarico professionale:
         Acconsento             Non Acconsento
@@ -120,33 +118,35 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
         // rettangolini
         $pdf->Rect(13, 81, 3, 3, 'D');
         $pdf->Rect(38, 81, 3, 3, 'D');
+
         $pdf->Rect(13, 91, 3, 3, 'D');
         $pdf->Rect(38, 91, 3, 3, 'D');
-        $pdf->Rect(13, 101, 3, 3, 'D');
-        $pdf->Rect(38, 101, 3, 3, 'D');
-        $pdf->Rect(13, 116, 3, 3, 'D');
-        $pdf->Rect(38, 116, 3, 3, 'D');
-        $pdf->Rect(13, 136, 3, 3, 'D');
-        $pdf->Rect(38, 136, 3, 3, 'D');
-        $pdf->Rect(13, 161, 3, 3, 'D');
-        $pdf->Rect(38, 161, 3, 3, 'D');
+
+        $pdf->Rect(13, 106, 3, 3, 'D');
+        $pdf->Rect(38, 106, 3, 3, 'D');
+
+        $pdf->Rect(13, 126, 3, 3, 'D');
+        $pdf->Rect(38, 126, 3, 3, 'D');
+
+        $pdf->Rect(13, 151, 3, 3, 'D');
+        $pdf->Rect(38, 151, 3, 3, 'D');
 
         $pdf->SetFont('Arial', '', $sizeFontPiccolo);
         // COGNOME NOME
         if (empty($paz->codicefiscale)) {
-            $paz_cf = "___________________________";    
+            $paz_cf = "______________________________";    
         } else {
             $paz_cf = strtoupper($paz->codicefiscale);
         }
 
         if (empty($paz->telefono)) {
-            $paz_telefono = "___________________________";    
+            $paz_telefono = "______________________________";    
         } else {
             $paz_telefono = strtolower($paz->telefono);
         }
 
         if (empty($paz->email)) {
-            $paz_email = "___________________________";    
+            $paz_email = "______________________________";    
         } else {
             $paz_email = strtolower($paz->email);
         }
