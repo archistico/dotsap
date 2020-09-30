@@ -45,13 +45,20 @@ $f3->route('POST @appuntamentoaggiungi: /appuntamenti/aggiungi', '\App\Appuntame
 $f3->route('POST @appuntamentoparti: /appuntamenti/parti', '\App\Appuntamenti->Parti');
 
 // Depositi
-$f3->route('GET @vaccinazioni_depositi_nuovo: /vaccinazioni/depositi/nuovo', '\App\Vaccinazioni\Depositi->Nuovo');
-$f3->route('POST @vaccinazioni_depositi_nuovo_registra: /vaccinazioni/depositi/nuovo', '\App\Vaccinazioni\Depositi->Registra');
-$f3->route('GET @vaccinazioni_depositi_lista: /vaccinazioni/depositi/lista', '\App\Vaccinazioni\Depositi->Lista');
-$f3->route('GET @vaccinazioni_depositi_listapdf: /vaccinazioni/depositi/listapdf', '\App\Vaccinazioni\Depositi->ListaPDF');
-$f3->route('GET @vaccinazioni_depositi_visualizza: /vaccinazioni/depositi/visualizza/@id', '\App\Vaccinazioni\Depositi->Visualizza');
-$f3->route('GET @vaccinazioni_depositi_modifica: /vaccinazioni/depositi/modifica/@id', '\App\Vaccinazioni\Depositi->Modifica');
-$f3->route('POST @vaccinazioni_depositi_modifica_registra: /vaccinazioni/depositi/modifica/@id', '\App\Vaccinazioni\Depositi->ModificaRegistra');
+$f3->route('GET @vaccini_depositi_nuovo: /vaccini/depositi/nuovo', '\App\Vaccini\Depositi->Nuovo');
+$f3->route('POST @vaccini_depositi_nuovo_registra: /vaccini/depositi/nuovo', '\App\Vaccini\Depositi->NuovoRegistra');
+$f3->route('GET @vaccini_depositi_lista: /vaccini/depositi/lista', '\App\Vaccini\Depositi->Lista');
+$f3->route('GET @vaccini_depositi_listapdf: /vaccini/depositi/listapdf', '\App\Vaccini\Depositi->ListaPDF');
+$f3->route('GET @vaccini_depositi_visualizza: /vaccini/depositi/visualizza/@id', '\App\Vaccini\Depositi->Visualizza');
+$f3->route('GET @vaccini_depositi_modifica: /vaccini/depositi/modifica/@id', '\App\Vaccini\Depositi->Modifica');
+$f3->route('POST @vaccini_depositi_modifica_registra: /vaccini/depositi/modifica/@id', '\App\Vaccini\Depositi->ModificaRegistra');
+
+// Persone vaccinabili
+$f3->route('GET @vaccini_vaccinabili_nuovo: /vaccini/vaccinabili/nuovo', '\App\Vaccini\Vaccinabili->Nuovo');
+$f3->route('POST @vaccini_vaccinabili_nuovo_registra: /vaccini/vaccinabili/nuovo', '\App\Vaccini\Vaccinabili->NuovoRegistra');
+$f3->route('GET @vaccini_vaccinabili_lista: /vaccini/vaccinabili/lista', '\App\Vaccini\Vaccinabili->Lista');
+$f3->route('GET @vaccini_vaccinabili_modifica: /vaccini/vaccinabili/modifica/@id', '\App\Vaccini\Vaccinabili->Modifica');
+$f3->route('POST @vaccini_vaccinabili_modifica_registra: /vaccini/vaccinabili/modifica/@id', '\App\Vaccini\Vaccinabili->ModificaRegistra');
 
 // Vaccinazioni
 // ...
