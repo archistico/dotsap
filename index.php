@@ -44,6 +44,18 @@ $f3->route('POST @appuntamentomodifica: /appuntamenti/modifica', '\App\Appuntame
 $f3->route('POST @appuntamentoaggiungi: /appuntamenti/aggiungi', '\App\Appuntamenti->Aggiungi');
 $f3->route('POST @appuntamentoparti: /appuntamenti/parti', '\App\Appuntamenti->Parti');
 
+// Depositi
+$f3->route('GET @vaccinazioni_depositi_nuovo: /vaccinazioni/depositi/nuovo', '\App\Vaccinazioni\Depositi->Nuovo');
+$f3->route('POST @vaccinazioni_depositi_nuovo_registra: /vaccinazioni/depositi/nuovo', '\App\Vaccinazioni\Depositi->Registra');
+$f3->route('GET @vaccinazioni_depositi_lista: /vaccinazioni/depositi/lista', '\App\Vaccinazioni\Depositi->Lista');
+$f3->route('GET @vaccinazioni_depositi_listapdf: /vaccinazioni/depositi/listapdf', '\App\Vaccinazioni\Depositi->ListaPDF');
+$f3->route('GET @vaccinazioni_depositi_visualizza: /vaccinazioni/depositi/visualizza/@id', '\App\Vaccinazioni\Depositi->Visualizza');
+$f3->route('GET @vaccinazioni_depositi_modifica: /vaccinazioni/depositi/modifica/@id', '\App\Vaccinazioni\Depositi->Modifica');
+$f3->route('POST @vaccinazioni_depositi_modifica_registra: /vaccinazioni/depositi/modifica/@id', '\App\Vaccinazioni\Depositi->ModificaRegistra');
+
+// Vaccinazioni
+// ...
+
 // Todo
 $f3->route('GET @todocancella: /todo/cancella/@id', '\App\Todo->Cancella');
 $f3->route('POST @todoaggiungi: /todo/aggiungi', '\App\Todo->Aggiungi');
