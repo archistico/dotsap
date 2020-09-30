@@ -51,13 +51,4 @@ class Vaccinabili
         $f3->reroute('/vaccini');
     }
 
-    public function Lista($f3)
-    {
-        // $lista = Deposito::Lista();
-
-        // $f3->set('lista', $lista);
-        // $f3->set('titolo', 'Vaccini');
-        // $f3->set('contenuto', '/vaccini/depositi/lista.htm');
-        // echo \Template::instance()->render('templates/base.htm');
-    }
 }

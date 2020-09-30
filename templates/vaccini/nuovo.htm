@@ -1,0 +1,54 @@
+<h2>Nuovo vaccino {{ @tipoVaccino }}</h2>
+<form method="POST" action="{{@BASE}}{{ 'vaccini_nuovo_registra' | alias }}">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="InputData">Data</label>
+                <input type="date" class="form-control" id="InputData" name="data" required>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="form-group">
+                <label for="InputVaccinabile">Persona da vaccinare</label>
+                <select class="form-control" id="InputVaccinabile" placeholder="Tipologia di vaccino" name="fkpersona" required>
+                    <repeat group="{{ @listaVaccinabili }}" value="{{ @v }}"></repeat>
+                        <option value="{{ @v.id }}">{{ @v.denominazione }}, {{ @v.eta }}, {{ @v.rischio }}</option>
+                    </repeat>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="InputSede">Sede di inoculo</label>
+                <select class="form-control" id="InputSede" placeholder="Tipologia di vaccino" name="fkpersona" required>
+                    <option value="1">Deltoide dx</option>
+                    <option value="2">Deltoide sx</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="form-group">
+                <label for="InputTipo">Tipo di vaccino</label>
+                <select class="form-control" id="InputTipo" placeholder="Tipologia di vaccino" name="fktipo" required>
+                    <repeat group="{{ @listaVaccini }}" value="{{ @v }}"></repeat>
+                        <option value="{{ @v.id }}">{{ @v.tipo }}, lotto: {{ @v.lotto }}</option>
+                    </repeat>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'vaccini' | alias }}">Annulla</a>
+        </div>
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Registra</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    document.getElementById('InputData').valueAsDate = new Date();
+</script>

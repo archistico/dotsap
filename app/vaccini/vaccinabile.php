@@ -34,33 +34,30 @@ class Vaccinabile
         }
     }
 
-    public static function Lista()
-    {
-        $db = (\App\Db::getInstance())->connect();
-        $risposta = [];
-
-        $sql = "SELECT * FROM depositi ORDER BY data ASC";
-        $listaArray = $db->exec($sql);
-
-        foreach($listaArray as $el) {
-            $t = new Deposito($el["id"], \App\Utilita::ConvertToDMY($el['data']), $el["tipo"], $el["lotto"], $el["quantita"], \App\Utilita::ConvertToDMY($el['scadenza']), $el["note"]);
-            $risposta[] = $t->ToArray();
-        }
-
-        return $risposta;
-    }
-
     public function ToArray()
     {
         return [
             'id'            => $this->id,
-            'data'          => $this->data,
-            'tipo'          => $this->tipo,
-            'lotto'         => $this->lotto,
-            'quantita'      => $this->quantita,
-            'scadenza'      => $this->scadenza,
-            'note'          => $this->note,
-            'notebr'        => nl2br($this->note),
+            'denominazione'          => $this->denominazione,
+            'telefono'          => $this->telefono,
+            'eta'         => $this->eta,
+            'rischio'      => $this->rischio,
         ];
+    }
+
+    public static function ListaVaccinabili()
+    {
+        $db = (\App\Db::getInstance())->connect();
+        $risposta = [];
+
+        $sql = "SELECT * FROM vaccinabili ORDER BY denominazione ASC";
+        $listaArray = $db->exec($sql);
+
+        foreach($listaArray as $el) {
+            $t = new Vaccinabile($el["id"], $el["denominazione"], $el["telefono"], $el["eta"], $el["rischio"]);
+            $risposta[] = $t->ToArray();
+        }
+
+        return $risposta;
     }
 }

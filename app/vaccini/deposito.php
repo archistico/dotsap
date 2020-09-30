@@ -68,4 +68,20 @@ class Deposito
             'notebr'        => nl2br($this->note),
         ];
     }
+
+    public static function ListaVaccini()
+    {
+        $db = (\App\Db::getInstance())->connect();
+        $risposta = [];
+
+        $sql = "SELECT * FROM depositi ORDER BY tipo ASC, data DESC";
+        $listaArray = $db->exec($sql);
+
+        foreach($listaArray as $el) {
+            $t = new Deposito($el["id"], \App\Utilita::ConvertToDMY($el['data']), $el["tipo"], $el["lotto"], $el["quantita"], \App\Utilita::ConvertToDMY($el['scadenza']), $el["note"]);
+            $risposta[] = $t->ToArray();
+        }
+
+        return $risposta;
+    }
 }
