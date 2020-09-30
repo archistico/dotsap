@@ -10,9 +10,10 @@
         <div class="col-md-9">
             <div class="form-group">
                 <label for="InputVaccinabile">Persona da vaccinare</label>
-                <select class="form-control" id="InputVaccinabile" placeholder="Tipologia di vaccino" name="fkpersona" required>
+                <select class="form-control" id="InputVaccinabile" placeholder="Tipologia di vaccino" name="fkpersona"
+                    required>
                     <repeat group="{{ @listaVaccinabili }}" value="{{ @v }}"></repeat>
-                        <option value="{{ @v.id }}">{{ @v.denominazione }}, {{ @v.eta }}, {{ @v.rischio }}</option>
+                    <option value="{{ @v.id }}">{{ @v.denominazione }}, {{ @v.eta }}, {{ @v.rischio }}</option>
                     </repeat>
                 </select>
             </div>
@@ -28,26 +29,55 @@
                 </select>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-9">
             <div class="form-group">
                 <label for="InputDeposito">Tipo di vaccino</label>
-                <select class="form-control" id="InputDeposito" placeholder="Tipologia di vaccino" name="fkdeposito" required>
+                <select class="form-control" id="InputDeposito" placeholder="Tipologia di vaccino" name="fkdeposito"
+                    required>
                     <repeat group="{{ @listaVaccini }}" value="{{ @v }}"></repeat>
-                        <option value="{{ @v.id }}">{{ @v.tipo }}, lotto: {{ @v.lotto }}</option>
+                    <option value="{{ @v.id }}">{{ @v.tipo }}, lotto: {{ @v.lotto }}</option>
                     </repeat>
                 </select>
             </div>
         </div>
-        <div class="col-md-4">
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             <div class="form-group">
-                <label for="InputStato">Stato</label>
-                <select class="form-control" id="InputStato" placeholder="Stato" name="stato" required>
-                    <option value="1">Vaccinato</option>
-                    <option value="2">Lasciato vaccino</option>
-                </select>
+                <label for="stato">Stato</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="stato" id="stato1" value="1" checked>
+                    <label class="form-check-label" for="stato1">
+                        Vaccinato
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="stato" id="stato2" value="2">
+                    <label class="form-check-label" for="stato2">
+                        Lasciato vaccino al paziente
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="fornito">Vaccino fornito</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="fornito" id="fornito1" value="1" checked>
+                    <label class="form-check-label" for="fornito1">
+                        AUSL VDA
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="fornito" id="fornito2" value="2">
+                    <label class="form-check-label" for="fornito2">
+                        Dal paziente
+                    </label>
+                </div>
             </div>
         </div>
     </div>
+    <hr>
     <div class="row">
         <div class="col-md-6">
             <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'vaccini' | alias }}">Annulla</a>

@@ -38,7 +38,23 @@ class Vaccini
         $sede = $f3->get('POST.sede');
         $fkdeposito = $f3->get('POST.fkdeposito');
         $stato = $f3->get('POST.stato');
+        $fornito = $f3->get('POST.fornito');
 
-        echo $data. $fkpersona. $sede. $fkdeposito. $stato;
+        $d = new \App\Vaccini\Vaccino(null, $data, $fkpersona, $sede, $fkdeposito, $stato, $fornito);
+        $d->AddDB();
+
+        \App\Flash::instance()->addMessage('Vaccino aggiunto', 'success');
+        $f3->reroute('/vaccini');
+    }
+
+    public function Lista($f3)
+    {
+        $lista = Vaccino::Lista();
+
+        $f3->set('lista', $lista);
+        $f3->set('titolo', 'Vaccini');
+        $f3->set('contenuto', '/vaccini/lista.htm');
+        \Template::instance()->filter('stato','\App\Helpers\Filter::instance()->stato');
+        echo \Template::instance()->render('templates/base.htm');
     }
 }

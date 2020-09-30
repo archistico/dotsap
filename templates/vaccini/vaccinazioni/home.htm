@@ -9,48 +9,116 @@
     </div>
 </div>
 
-<h2>Depositi</h2>
-<a class="btn btn-primary btn-block btn-lg" href="{{@BASE}}{{ 'vaccini_depositi_nuovo' | alias }}">Deposito nuovo</a>
-<a class="btn btn-primary btn-block btn-lg" href="{{@BASE}}{{ 'vaccini_depositi_lista' | alias }}">Depositi lista</a>
-<hr>
 <h2>Vaccinazioni</h2>
-<a class="btn btn-squared-default btn-primary" href="{{@BASE}}{{ 'vaccini_nuovo', 'tipo=antinfluenzale' | alias }}">
-    <i class="fas fa-syringe fa-5x"></i>
-    <p>
-    Vaccino
-    <br />
-    Antinfluenzale
-    </p>
-</a>
-
-<a class="btn btn-squared-default btn-primary" href="{{@BASE}}{{ 'vaccini_nuovo', 'tipo=antipneumococcico' | alias }}">
-    <i class="fas fa-lungs fa-5x"></i>
-    <p>
-    Vaccino
-    <br />
-    Antipneumococcico
-    </p>    
-</a>
+<div class="row">
+    <div class="col-md-3">
+        <a class="btn btn-squared-default btn-primary btn-block"
+            href="{{@BASE}}{{ 'vaccini_nuovo', 'tipo=antinfluenzale' | alias }}">
+            <i class="fas fa-syringe fa-5x"></i>
+            <p>
+                Vaccino
+                <br />
+                Antinfluenzale
+            </p>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-squared-default btn-primary btn-block"
+            href="{{@BASE}}{{ 'vaccini_nuovo', 'tipo=antipneumococcico' | alias }}">
+            <i class="fas fa-lungs fa-5x"></i>
+            <p>
+                Vaccino
+                <br />
+                Antipneumococcico
+            </p>
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a class="btn btn-squared-default btn-primary btn-block" href="{{@BASE}}{{ 'vaccini_lista' | alias }}">
+            <i class="fas fa-th-list fa-5x"></i>
+            <p>
+                Lista
+                <br />
+                vaccini
+            </p>
+        </a>
+    </div>
+</div>
 <hr>
+
+<h2>Depositi</h2>
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-squared-default btn-primary btn-block" href="{{@BASE}}{{ 'vaccini_depositi_nuovo' | alias }}">
+            <i class="fas fa-archive fa-5x"></i>
+            <p>
+                Deposito
+                <br />
+                nuovo
+            </p>
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a class="btn btn-squared-default btn-primary btn-block" href="{{@BASE}}{{ 'vaccini_depositi_lista' | alias }}">
+            <i class="fas fa-warehouse fa-5x"></i>
+            <p>
+                Deposito
+                <br />
+                lista
+            </p>
+        </a>
+    </div>
+</div>
+<hr>
+
 <h2>Persone vaccinabili</h2>
-<a class="btn btn-primary btn-block btn-lg disabled" href="{{@BASE}}{{ 'vaccini_vaccinabili_nuovo' | alias }}" role="button"
-    aria-disabled="true">Nuova persona vaccinabile</a>
-<a class="btn btn-primary btn-block btn-lg" href="{{@BASE}}{{ 'vaccini_vaccinabili_lista' | alias }}">Lista delle persone
-    vaccinabili</a>
-<a class="btn btn-primary btn-block btn-lg" href="{{@BASE}}{{ 'vaccini_vaccinabili_import' | alias }}">Importa CSV</a>
+<div class="row">
+    <div class="col-md-4">
+        <a class="btn btn-squared-default btn-primary btn-block disabled" href="{{@BASE}}{{ 'vaccini_vaccinabili_nuovo' | alias }}"
+            role="button" aria-disabled="true">
+            <i class="fas fa-user-plus fa-5x"></i>
+            <p>
+                Nuovo paziente
+                <br />
+                vaccinabile
+            </p>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-squared-default btn-primary btn-block" href="{{@BASE}}{{ 'vaccini_vaccinabili_lista' | alias }}">
+            <i class="fas fa-users fa-5x"></i>
+            <p>
+                Lista pazienti
+                <br />
+                vaccinabili
+            </p>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-squared-default btn-primary btn-block" href="{{@BASE}}{{ 'vaccini_vaccinabili_import' | alias }}">
+            <i class="fas fa-upload fa-5x"></i>
+            <p>
+                Import
+                <br />
+                CSV
+            </p>
+        </a>
+    </div>
+</div>
 <hr>
 
 
 <style>
     .btn-squared-default {
-        width: 200px !important;
-        height: 200px !important;
+        /* width: 200px !important; */
+        height: 190px !important;
         /* font-size: 16px; */
-        padding-top:30px;
+        padding-top: 30px;
     }
 
-    a.btn-squared-default, p {
-        margin-top:10px;
+    a.btn-squared-default,
+    p {
+        margin-top: 10px;
     }
 
     /*

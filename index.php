@@ -147,10 +147,10 @@ $f3->route('GET @database_download: /database_download', 'App\Migrazioni->Downlo
 $f3->route('GET @crypt: /crypt', '\App\Crypt->Show');
 
 // Se errori
-$f3->set('ONERROR',function($f3){
-    $f3->reroute('/');
-    // $f3->error(403, "Rifare il login");
-});
+// $f3->set('ONERROR',function($f3){
+//     $f3->reroute('/');
+//     // $f3->error(403, "Rifare il login");
+// });
 
 $f3->route('GET /env',
     function() {

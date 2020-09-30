@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">DATA</th>
+                <th scope="col">PAZIENTE</th>
+                <th scope="col">VACCINO</th>
+                <th scope="col" class="d-none d-sm-block">STATO</th>
+
+                <!-- <th scope="col" style="width: 50px">#</th> -->
+            </tr>
+            </thead>
+            <tbody>
+            <repeat group="{{ @lista }}" value="{{ @d }}">
+                <tr>
+                    <td>{{ @d.data }}</td>
+                    <td>{{ @d.denominazione }}, {{ @d.eta }}, {{ @d.rischio }}</td>
+                    <td>{{ @d.tipo }}, {{ @d.lotto }}</td>
+                    <td class="d-none d-sm-block">{{ @d.stato | stato }}</td>
+                    <!--
+                    <td scope="row">
+                        <div class="btn-group" role="group" aria-label="Pulsanti">
+                            <a href="{{@BASE}}/privacy/cancella/{{ @d.id }}" class="btn btn-danger btn-sm btn-rect"><i class="fas fa-times"></i></a>
+                            <a href="{{@BASE}}/privacy/pdf/{{ @d.id }}" class="btn btn-info btn-sm btn-rect" target="_blank"><i class="fas fa-pencil-alt"></i></a>
+                        </div>
+                    </td>
+                    -->
+                </tr>
+            </repeat>
+            </tbody>
+        </table>
+    </div>
+</div>
