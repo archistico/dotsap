@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-md-12">
+        <!-- bootstrap style-->
+        <F3:repeat group="{{ \App\Flash::instance()->getMessages() }}" value="{{ @msg }}">
+            <div class="alert alert-{{ @msg.status }} alert-dismissable">
+                {{ @msg.text | esc }}
+            </div>
+        </F3:repeat>
+    </div>
+</div>
+
+<h2>Depositi</h2>
+<a class="btn btn-primary btn-block btn-lg" href="{{ 'vaccini_depositi_nuovo' | alias }}">Deposito nuovo</a>
+<a class="btn btn-primary btn-block btn-lg" href="{{ 'vaccini_depositi_lista' | alias }}">Depositi lista</a>
+<hr>
+<h2>Persone vaccinabili</h2>
+<a class="btn btn-primary btn-block btn-lg" href="{{ 'vaccini_vaccinabili_nuovo' | alias }}">Nuova persona vaccinabile</a>
+<a class="btn btn-primary btn-block btn-lg" href="{{ 'vaccini_vaccinabili_lista' | alias }}">Lista delle persone vaccinabili</a>

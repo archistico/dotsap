@@ -1,0 +1,57 @@
+<h2>Nuovo deposito di vaccini</h2>
+<form method="POST" action="{{@BASE}}{{ 'vaccini_depositi_nuovo_registra' | alias }}">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputData">Data</label>
+                <input type="date" class="form-control" id="InputData" name="data" required>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="InputTipo">Tipo</label>
+                <select class="form-control" id="InputTipo" placeholder="Tipologia di vaccino" name="tipo" required>
+                    <option value="Fluad">Fluad</option>
+                    <option value="VaxigripTetra">VaxigripTetra</option>
+                    <option value="Prevenar">Prevenar</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputQuantita">Quantità</label>
+                <input type="number" class="form-control" id="InputQuantita" name="quantita" min="0" max="9999" step="1" value="10" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputLotto">Lotto</label>
+                <input type="text" class="form-control" id="InputLotto" name="lotto" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputScadenza">Scadenza</label>
+                <input type="date" class="form-control" id="InputScadenza" name="scadenza" required>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Note">Note</label>
+        <textarea class="form-control" id="note" placeholder="Note" name="note" rows="5"></textarea>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'vaccini' | alias }}">Annulla</a>
+        </div>
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Registra</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    document.getElementById('InputData').valueAsDate = new Date();
+</script>

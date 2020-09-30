@@ -60,8 +60,8 @@ $f3->route('GET @vaccini_vaccinabili_lista: /vaccini/vaccinabili/lista', '\App\V
 $f3->route('GET @vaccini_vaccinabili_modifica: /vaccini/vaccinabili/modifica/@id', '\App\Vaccini\Vaccinabili->Modifica');
 $f3->route('POST @vaccini_vaccinabili_modifica_registra: /vaccini/vaccinabili/modifica/@id', '\App\Vaccini\Vaccinabili->ModificaRegistra');
 
-// Vaccinazioni
-// ...
+// Vaccinazioni 
+$f3->route('GET @vaccini: /vaccini', '\App\Vaccini\Vaccinazioni->Home' );
 
 // Todo
 $f3->route('GET @todocancella: /todo/cancella/@id', '\App\Todo->Cancella');
