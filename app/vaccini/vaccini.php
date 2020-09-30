@@ -33,6 +33,12 @@ class Vaccini
 
     public function NuovoRegistra($f3)
     {
-        echo "registra";
+        $data = $f3->get('POST.data');
+        $fkpersona = $f3->get('POST.fkpersona');
+        $sede = $f3->get('POST.sede');
+        $fkdeposito = $f3->get('POST.fkdeposito');
+        $stato = $f3->get('POST.stato');
+
+        echo $data. $fkpersona. $sede. $fkdeposito. $stato;
     }
 }

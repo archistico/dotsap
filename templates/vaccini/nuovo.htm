@@ -22,19 +22,28 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="InputSede">Sede di inoculo</label>
-                <select class="form-control" id="InputSede" placeholder="Tipologia di vaccino" name="fkpersona" required>
+                <select class="form-control" id="InputSede" placeholder="Sede di inoculo" name="sede" required>
                     <option value="1">Deltoide dx</option>
                     <option value="2">Deltoide sx</option>
                 </select>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-5">
             <div class="form-group">
-                <label for="InputTipo">Tipo di vaccino</label>
-                <select class="form-control" id="InputTipo" placeholder="Tipologia di vaccino" name="fktipo" required>
+                <label for="InputDeposito">Tipo di vaccino</label>
+                <select class="form-control" id="InputDeposito" placeholder="Tipologia di vaccino" name="fkdeposito" required>
                     <repeat group="{{ @listaVaccini }}" value="{{ @v }}"></repeat>
                         <option value="{{ @v.id }}">{{ @v.tipo }}, lotto: {{ @v.lotto }}</option>
                     </repeat>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputStato">Stato</label>
+                <select class="form-control" id="InputStato" placeholder="Stato" name="stato" required>
+                    <option value="1">Vaccinato</option>
+                    <option value="2">Lasciato vaccino</option>
                 </select>
             </div>
         </div>
