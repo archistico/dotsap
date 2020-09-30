@@ -47,3 +47,4 @@ CREATE TABLE `pazienti` ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE
 CREATE TABLE `todo` ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `todo` TEXT NOT NULL, `chi` TEXT NOT NULL );  
 CREATE TABLE `users` ( `user_id` TEXT NOT NULL UNIQUE, `password` TEXT NOT NULL, PRIMARY KEY(`user_id`) );  
 CREATE TABLE `richieste` ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, `paziente` TEXT NOT NULL, `data` TEXT NOT NULL, `farmaco1` TEXT, `farmaco2` TEXT, `farmaco3` TEXT, `farmaco4` TEXT, `farmaco5` TEXT, `farmaco6` TEXT, `farmaco7` TEXT, `farmaco8` TEXT, `farmaco9` TEXT, `note` TEXT )
+CREATE TABLE `depositi` ( `id` INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, `data` TEXT, `tipo` TEXT, `lotto` TEXT, `scadenza` TEXT, `quantita` INTEGER, `note` TEXT )

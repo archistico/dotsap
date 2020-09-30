@@ -1,35 +1,30 @@
 <?php
 namespace App\Vaccini;
 
-class Deposito
+class Vaccinabile
 {
     public $id;
-    public $data;
-    public $tipo;
-    public $lotto;
-    public $scadenza;
-    public $quantita;
-    public $note;
+    public $denominazione;
+    public $telefono;
+    public $eta;
+    public $rischio;
 
-    public function __construct($id, $data, $tipo, $lotto, $quantita, $scadenza, $note)
+    public function __construct($id, $denominazione, $telefono, $eta, $rischio)
     {
         $this->id = $id;
-        $this->data = $data;
-        $this->tipo = $tipo;
-        $this->lotto = $lotto;
-        $this->quantita = $quantita;
-        $this->scadenza = $scadenza;
-        if(empty($note)) {
-            $note = "-";
-        }
-        $this->note = $note;  
+        $this->denominazione = $denominazione;
+        $this->telefono = $telefono;
+        $this->eta = $eta;
+        $this->rischio = $rischio;
     }
 
     public function AddDB()
     {
         try {
             $db = (\App\Db::getInstance())->connect();
-            $sql = 'INSERT into depositi values(null, "' . $this->data . '", "' . $this->tipo . '", "'. $this->lotto . '", "' . $this->scadenza . '", ' . $this->quantita . ', "' . $this->note . '")';
+            $sql = 'INSERT into vaccinabili values(null, "' . $this->denominazione . '", "' . $this->telefono . '", ' . $this->eta . ', "' . $this->rischio . '")';
+            
+            // echo $sql;
             
             $db->begin();
             $db->exec($sql);
