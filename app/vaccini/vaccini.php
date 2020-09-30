@@ -21,7 +21,7 @@ class Vaccini
     {
         $tipoVaccino = $param["tipo"];
         $listaVaccinabili = \App\Vaccini\Vaccinabile::ListaVaccinabili();
-        $listaVaccini = \App\Vaccini\Deposito::ListaVaccini();
+        $listaVaccini = \App\Vaccini\Deposito::ListaVaccini($tipoVaccino);
 
         $f3->set('tipoVaccino', $tipoVaccino);
         $f3->set('listaVaccinabili', $listaVaccinabili);
