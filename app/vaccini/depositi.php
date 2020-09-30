@@ -38,7 +38,7 @@ class Depositi
         echo $quantita."<br>";
         echo $note."<br>";
         
-        // $p = new \App\Paziente($id, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $stato, $email);
+        $d = new \App\Vaccini\Deposito($data, $tipo, $lotto, $quantita, $scadenza, $note);
         // $p->UpdateDB();
         // \App\Flash::instance()->addMessage('Deposito aggiunto', 'success');
         // $f3->reroute('/vaccini');
