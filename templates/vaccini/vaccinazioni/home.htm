@@ -9,6 +9,37 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3 text-center">
+            <div class="card-header"><h5>Antinfluenzale</h5></div>
+            <div class="card-body">
+                <p>Fatti: {{ @fatti_antinfluenzali }}<br>
+                Lasciati al paziente: {{ @lasciati_paziente_antinfluenzali }}<br>
+                Forniti USL: 0<br>
+                Forniti paziente: 0<br>
+                Rimanenza frigo: {{ @rimanenza_antinfluenzale }}
+            </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3 text-center">
+            <div class="card-header"><h5>Antipneumococcica</h5></div>
+            <div class="card-body">
+                <p>Fatti: {{ @fatti_antipneumococcica }}<br>
+                Lasciati al paziente: {{ @lasciati_paziente_antipneumococcica }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-3">
+
+    </div>
+</div>
+
 <h2>Vaccinazioni</h2>
 <div class="row">
     <div class="col-md-3">
@@ -74,8 +105,8 @@
 <h2>Persone vaccinabili</h2>
 <div class="row">
     <div class="col-md-4">
-        <a class="btn btn-squared-default btn-primary btn-block disabled" href="{{@BASE}}{{ 'vaccini_vaccinabili_nuovo' | alias }}"
-            role="button" aria-disabled="true">
+        <a class="btn btn-squared-default btn-primary btn-block disabled"
+            href="{{@BASE}}{{ 'vaccini_vaccinabili_nuovo' | alias }}" role="button" aria-disabled="true">
             <i class="fas fa-user-plus fa-5x"></i>
             <p>
                 Nuovo paziente
@@ -85,7 +116,8 @@
         </a>
     </div>
     <div class="col-md-4">
-        <a class="btn btn-squared-default btn-primary btn-block" href="{{@BASE}}{{ 'vaccini_vaccinabili_lista' | alias }}">
+        <a class="btn btn-squared-default btn-primary btn-block"
+            href="{{@BASE}}{{ 'vaccini_vaccinabili_lista' | alias }}">
             <i class="fas fa-users fa-5x"></i>
             <p>
                 Lista pazienti
@@ -95,7 +127,8 @@
         </a>
     </div>
     <div class="col-md-4">
-        <a class="btn btn-squared-default btn-primary btn-block" href="{{@BASE}}{{ 'vaccini_vaccinabili_import' | alias }}">
+        <a class="btn btn-squared-default btn-primary btn-block"
+            href="{{@BASE}}{{ 'vaccini_vaccinabili_import' | alias }}">
             <i class="fas fa-upload fa-5x"></i>
             <p>
                 Import

@@ -55,6 +55,16 @@ class Deposito
         return $risposta;
     }
 
+    public static function ListaArray()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "SELECT * FROM depositi ORDER BY data ASC";
+        $listaArray = $db->exec($sql);
+
+        return $listaArray;
+    }
+
     public function ToArray()
     {
         return [

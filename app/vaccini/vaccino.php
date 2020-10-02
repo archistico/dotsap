@@ -9,7 +9,14 @@ class Vaccino
     public $sede;
     public $fkdeposito;
     public $stato;
-    public $fornito;   
+    public $fornito;
+
+    public static $ANTINFLUENZALE = 'antinfluenzale';
+    public static $ANTIPNEUMOCOCCICA = 'antipneumococcica';
+
+    public static $Fluad = 'Fluad';
+    public static $VaxigripTetra = 'Vaxigrip Tetra';
+    public static $Prevenar = 'Prevenar';
 
     public function __construct($id, $data, $fkpersona, $sede, $fkdeposito, $stato, $fornito)
     {
@@ -45,12 +52,15 @@ class Vaccino
         $listaArray = $db->exec($sql);
 
         return $listaArray;
+    }
 
-        // foreach($listaArray as $el) {
-        //     $t = new Deposito($el["id"], \App\Utilita::ConvertToDMY($el['data']), $el["tipo"], $el["lotto"], $el["quantita"], \App\Utilita::ConvertToDMY($el['scadenza']), $el["note"]);
-        //     $risposta[] = $t->ToArray();
-        // }
+    public static function ListaArray()
+    {
+        $db = (\App\Db::getInstance())->connect();
 
-        // return $risposta;
+        $sql = "SELECT * FROM vaccini INNER JOIN vaccinabili ON vaccini.fkpersona = vaccinabili.id INNER JOIN depositi ON vaccini.fkdeposito = depositi.id  ORDER BY data DESC";
+        $listaArray = $db->exec($sql);
+
+        return $listaArray;
     }
 }
