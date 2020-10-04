@@ -28,6 +28,7 @@ class Vaccini
         $f3->set('listaVaccini', $listaVaccini);
         $f3->set('titolo', 'Vaccini');
         $f3->set('contenuto', '/vaccini/nuovo.htm');
+        \Template::instance()->filter('fornito','\App\Helpers\Filter::instance()->fornito');
         echo \Template::instance()->render('templates/base.htm');
     }
 
@@ -54,6 +55,7 @@ class Vaccini
         $f3->set('titolo', 'Vaccini');
         $f3->set('contenuto', '/vaccini/lista.htm');
         \Template::instance()->filter('stato','\App\Helpers\Filter::instance()->stato');
+        \Template::instance()->filter('fornito','\App\Helpers\Filter::instance()->fornito');
         echo \Template::instance()->render('templates/base.htm');
     }
 }

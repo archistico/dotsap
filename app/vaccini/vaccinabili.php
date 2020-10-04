@@ -20,7 +20,7 @@ class Vaccinabili
 
     public function Import($f3)
     {
-        define('FILE_NAME', "2020vaccini.csv");
+        define('FILE_NAME', "2020vaccini_public.csv");
 
         echo "Leggo il file " . FILE_NAME . "<br>";
         $handle = fopen(FILE_NAME, "r");
@@ -35,11 +35,11 @@ class Vaccinabili
                 }
 
                 $denominazione = Utilita::Maiuscola($parti[0]) . " " . Utilita::Maiuscola($parti[1]);
-                $telefono = Utilita::pulisciStringaTelefonoCSV($parti[2]);
-                $eta = $parti[3];
-                $rischio = $parti[4];
+                $eta = $parti[2];
+                $rischio = $parti[3];
+                $vaccinato2019 = $parti[4];
 
-                $v = new \App\Vaccini\Vaccinabile(null, $denominazione, $telefono, $eta, $rischio);
+                $v = new \App\Vaccini\Vaccinabile(null, $denominazione, $eta, $rischio, $vaccinato2019);
                 $v->AddDB();
             }
             fclose($handle);

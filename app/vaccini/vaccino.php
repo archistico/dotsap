@@ -9,7 +9,6 @@ class Vaccino
     public $sede;
     public $fkdeposito;
     public $stato;
-    public $fornito;
 
     public static $ANTINFLUENZALE = 'antinfluenzale';
     public static $ANTIPNEUMOCOCCICA = 'antipneumococcica';
@@ -18,7 +17,7 @@ class Vaccino
     public static $VaxigripTetra = 'Vaxigrip Tetra';
     public static $Prevenar = 'Prevenar';
 
-    public function __construct($id, $data, $fkpersona, $sede, $fkdeposito, $stato, $fornito)
+    public function __construct($id, $data, $fkpersona, $sede, $fkdeposito, $stato)
     {
         $this->id = $id;
         $this->data = $data;
@@ -26,14 +25,13 @@ class Vaccino
         $this->sede = $sede;
         $this->fkdeposito = $fkdeposito;
         $this->stato = $stato;
-        $this->fornito = $fornito;
     }
 
     public function AddDB()
     {
         try {
             $db = (\App\Db::getInstance())->connect();
-            $sql = 'INSERT into vaccini values(null, "' . $this->data . '", ' . $this->fkpersona . ', ' . $this->sede . ', ' . $this->fkdeposito . ', ' . $this->stato . ', ' . $this->fornito . ')';
+            $sql = 'INSERT into vaccini values(null, "' . $this->data . '", ' . $this->fkpersona . ', ' . $this->sede . ', ' . $this->fkdeposito . ', ' . $this->stato . ')';
             
             $db->begin();
             $db->exec($sql);

@@ -1,31 +1,36 @@
 <?php
 namespace App\Vaccini;
 
+use App\Utilita;
+
 class Vaccinabile
 {
     public $id;
     public $denominazione;
-    public $telefono;
     public $eta;
     public $rischio;
+    public $vaccinato2019;
 
-    public function __construct($id, $denominazione, $telefono, $eta, $rischio)
+    public function __construct($id, $denominazione, $eta, $rischio, $vaccinato2019)
     {
         $this->id = $id;
         $this->denominazione = $denominazione;
-        $this->telefono = $telefono;
         $this->eta = $eta;
         $this->rischio = $rischio;
+        if(empty($vaccinato2019) || is_null($vaccinato2019)) {
+            $vaccinato2019 = 0;
+        }
+        $this->vaccinato2019 = $vaccinato2019;
     }
 
     public function AddDB()
     {
         try {
             $db = (\App\Db::getInstance())->connect();
-            $sql = 'INSERT into vaccinabili values(null, "' . $this->denominazione . '", "' . $this->telefono . '", ' . $this->eta . ', "' . $this->rischio . '")';
+            $sql = 'INSERT into vaccinabili values(null, "' . $this->denominazione . '", ' . $this->eta . ', "' . $this->rischio . '", ' . $this->vaccinato2019 .');';
             
-            // echo $sql;
-            
+            // Utilita::Dump($sql);
+
             $db->begin();
             $db->exec($sql);
             $db->commit();
@@ -38,10 +43,10 @@ class Vaccinabile
     {
         return [
             'id'            => $this->id,
-            'denominazione'          => $this->denominazione,
-            'telefono'          => $this->telefono,
-            'eta'         => $this->eta,
-            'rischio'      => $this->rischio,
+            'denominazione' => $this->denominazione,
+            'eta'           => $this->eta,
+            'rischio'       => $this->rischio,
+            'vaccinato2019' => $this->vaccinato2019,
         ];
     }
 
@@ -54,7 +59,7 @@ class Vaccinabile
         $listaArray = $db->exec($sql);
 
         foreach($listaArray as $el) {
-            $t = new Vaccinabile($el["id"], $el["denominazione"], $el["telefono"], $el["eta"], $el["rischio"]);
+            $t = new Vaccinabile($el["id"], $el["denominazione"], $el["eta"], $el["rischio"], $el["vaccinato2019"]);
             $risposta[] = $t->ToArray();
         }
 
