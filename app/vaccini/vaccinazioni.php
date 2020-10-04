@@ -42,7 +42,7 @@ class Vaccinazioni
 
 
         $f3->set('titolo', 'Vaccini');
-        $f3->set('contenuto', '/vaccini/vaccinazioni/home.htm');
+        $f3->set('contenuto', '/vaccini/home.htm');
         echo \Template::instance()->render('templates/base.htm');
     }
 }

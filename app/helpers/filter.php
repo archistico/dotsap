@@ -9,5 +9,11 @@ class Filter extends \Prefab {
 		if($val == "1") { return "Vaccinato"; }
 		if($val == "2") { return "In attesa"; }
 		return "!";
+	}
+	
+	function fornito($val) {
+		if($val == "1") { return "AUSL"; }
+		if($val == "2") { return "Paziente"; }
+		return "!";
     }
 }

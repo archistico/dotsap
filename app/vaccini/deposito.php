@@ -9,9 +9,10 @@ class Deposito
     public $lotto;
     public $scadenza;
     public $quantita;
+    public $fornito;
     public $note;
 
-    public function __construct($id, $data, $tipo, $lotto, $quantita, $scadenza, $note)
+    public function __construct($id, $data, $tipo, $lotto, $quantita, $scadenza, $fornito, $note)
     {
         $this->id = $id;
         $this->data = $data;
@@ -19,6 +20,7 @@ class Deposito
         $this->lotto = $lotto;
         $this->quantita = $quantita;
         $this->scadenza = $scadenza;
+        $this->fornito = $fornito;
         if(empty($note)) {
             $note = "-";
         }
@@ -29,7 +31,7 @@ class Deposito
     {
         try {
             $db = (\App\Db::getInstance())->connect();
-            $sql = 'INSERT into depositi values(null, "' . $this->data . '", "' . $this->tipo . '", "'. $this->lotto . '", "' . $this->scadenza . '", ' . $this->quantita . ', "' . $this->note . '")';
+            $sql = 'INSERT into depositi values(null, "' . $this->data . '", "' . $this->tipo . '", "'. $this->lotto . '", "' . $this->scadenza . '", ' . $this->quantita . ', ' . $this->fornito . ', "' . $this->note . '")';
             
             $db->begin();
             $db->exec($sql);
@@ -48,7 +50,7 @@ class Deposito
         $listaArray = $db->exec($sql);
 
         foreach($listaArray as $el) {
-            $t = new Deposito($el["id"], \App\Utilita::ConvertToDMY($el['data']), $el["tipo"], $el["lotto"], $el["quantita"], \App\Utilita::ConvertToDMY($el['scadenza']), $el["note"]);
+            $t = new Deposito($el["id"], \App\Utilita::ConvertToDMY($el['data']), $el["tipo"], $el["lotto"], $el["quantita"], \App\Utilita::ConvertToDMY($el['scadenza']), $el["fornito"], $el["note"]);
             $risposta[] = $t->ToArray();
         }
 
@@ -74,6 +76,7 @@ class Deposito
             'lotto'         => $this->lotto,
             'quantita'      => $this->quantita,
             'scadenza'      => $this->scadenza,
+            'fornito'      => $this->fornito,
             'note'          => $this->note,
             'notebr'        => nl2br($this->note),
         ];
@@ -93,7 +96,7 @@ class Deposito
         $listaArray = $db->exec($sql);
 
         foreach($listaArray as $el) {
-            $t = new Deposito($el["id"], \App\Utilita::ConvertToDMY($el['data']), $el["tipo"], $el["lotto"], $el["quantita"], \App\Utilita::ConvertToDMY($el['scadenza']), $el["note"]);
+            $t = new Deposito($el["id"], \App\Utilita::ConvertToDMY($el['data']), $el["tipo"], $el["lotto"], $el["quantita"], \App\Utilita::ConvertToDMY($el['scadenza']), $el["fornito"], $el["note"]);
             $risposta[] = $t->ToArray();
         }
 

@@ -31,9 +31,10 @@ class Depositi
         $lotto = $f3->get('POST.lotto');
         $scadenza = $f3->get('POST.scadenza');
         $quantita = $f3->get('POST.quantita');
+        $fornito = $f3->get('POST.fornito');
         $note = \App\Utilita::PulisciStringaVirgolette($f3->get('POST.note'));
      
-        $d = new \App\Vaccini\Deposito(null, $data, $tipo, $lotto, $quantita, $scadenza, $note);
+        $d = new \App\Vaccini\Deposito(null, $data, $tipo, $lotto, $quantita, $scadenza, $fornito, $note);
         $d->AddDB();
 
         \App\Flash::instance()->addMessage('Deposito aggiunto', 'success');
@@ -47,6 +48,7 @@ class Depositi
         $f3->set('lista', $lista);
         $f3->set('titolo', 'Vaccini');
         $f3->set('contenuto', '/vaccini/depositi/lista.htm');
+        \Template::instance()->filter('fornito','\App\Helpers\Filter::instance()->fornito');
         echo \Template::instance()->render('templates/base.htm');
     }
 }

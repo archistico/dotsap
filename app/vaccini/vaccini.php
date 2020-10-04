@@ -38,9 +38,8 @@ class Vaccini
         $sede = $f3->get('POST.sede');
         $fkdeposito = $f3->get('POST.fkdeposito');
         $stato = $f3->get('POST.stato');
-        $fornito = $f3->get('POST.fornito');
-
-        $d = new \App\Vaccini\Vaccino(null, $data, $fkpersona, $sede, $fkdeposito, $stato, $fornito);
+        
+        $d = new \App\Vaccini\Vaccino(null, $data, $fkpersona, $sede, $fkdeposito, $stato);
         $d->AddDB();
 
         \App\Flash::instance()->addMessage('Vaccino aggiunto', 'success');
