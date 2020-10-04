@@ -15,5 +15,11 @@ class Filter extends \Prefab {
 		if($val == "1") { return "AUSL"; }
 		if($val == "2") { return "Paziente"; }
 		return "!";
-    }
+	}
+	
+	function vaccinato($val) {
+		if($val == "0") { return "No"; }
+		if($val == "1") { return "Vaccinato"; }
+		return "!";
+	}
 }

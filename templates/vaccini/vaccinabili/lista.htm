@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">DENOMINAZIONE</th>
+                <th scope="col">ETA</th>
+                <th scope="col">RISCHIO</th>
+                <th scope="col">VACCINATO 2019</th>
+
+                <!-- <th scope="col" style="width: 50px">#</th> -->
+            </tr>
+            </thead>
+            <tbody>
+            <repeat group="{{ @listaVaccinabili }}" value="{{ @d }}">
+                <tr>
+                    <td>{{ @d.denominazione }}</td>
+                    <td>{{ @d.eta }}</td>
+                    <td>{{ @d.rischio }}</td>
+                    <td>{{ @d.vaccinato2019 | vaccinato }}</td>
+
+                    <!--
+                    <td scope="row">
+                        <div class="btn-group" role="group" aria-label="Pulsanti">
+                            <a href="{{@BASE}}/privacy/cancella/{{ @d.id }}" class="btn btn-danger btn-sm btn-rect"><i class="fas fa-times"></i></a>
+                            <a href="{{@BASE}}/privacy/pdf/{{ @d.id }}" class="btn btn-info btn-sm btn-rect" target="_blank"><i class="fas fa-pencil-alt"></i></a>
+                        </div>
+                    </td>
+                    -->
+                </tr>
+            </repeat>
+            </tbody>
+        </table>
+    </div>
+</div>

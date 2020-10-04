@@ -1,0 +1,68 @@
+<form method="POST" action="{{@BASE}}{{ 'vaccini_vaccinabili_nuovo_registra' | alias }}">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="InputCognome">Cognome</label>
+                <input type="text" class="form-control" id="InputCognome" name="cognome" placeholder="Inserisci il cognome" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="InputNome">Nome</label>
+                <input type="text" class="form-control" id="InputNome" name="nome" placeholder="Inserisci il nome" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputEta">Età</label>
+                <input type="number" class="form-control" id="InputEta" name="eta" min="0" max="120" step="1" value="" placeholder="Età in anni" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputRischio">Condizione di rischio</label>
+                <select class="form-control" id="InputRischio" placeholder="Condizione di rischio" name="rischio" required>
+                    <option value="" selected>NESSUNA</option>
+                    <option value="ULTRA 60">ULTRA 60</option>
+                    <option value="ULTRA 60 + PATOLOGIE">ULTRA 60 + PATOLOGIE</option>
+                    <option value="< 60 + PATOLOGIE">< 60 + PATOLOGIE</option>
+                    <option value="GRAVIDANZA">GRAVIDANZA</option>                    
+                    <option value="OPERATORI SANITARI">OPERATORI SANITARI</option>
+                    <option value="CONVIVENZA">CONVIVENZA</option>
+                    <option value="CONTATTO ANIMALI">CONTATTO ANIMALI</option>
+                    <option value="PUBBLICO SERVIZIO">PUBBLICO SERVIZIO</option>
+                    <option value="DONATORE SANGUE">DONATORE SANGUE</option>
+                    <option value="OSPITE STRUTTURA">OSPITE STRUTTURA</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="vaccinato2019">Vaccinato 2019</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="vaccinato2019" id="vaccinato1" value="0" checked>
+                    <label class="form-check-label" for="vaccinato1">
+                        Non vaccinato
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="vaccinato2019" id="vaccinato2" value="1">
+                    <label class="form-check-label" for="vaccinato2">
+                        Vaccinato
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'vaccini' | alias }}">Annulla</a>
+        </div>
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Registra</button>
+        </div>
+    </div>
+</form>

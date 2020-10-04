@@ -51,4 +51,37 @@ class Vaccinabili
         $f3->reroute('/vaccini');
     }
 
+    public function Nuovo($f3)
+    {
+        $f3->set('titolo', 'Vaccini');
+        $f3->set('contenuto', '/vaccini/vaccinabili/nuovo.htm');
+        echo \Template::instance()->render('templates/base.htm');
+    }
+
+    public function NuovoRegistra($f3)
+    {
+        $cognome = $f3->get('POST.cognome');
+        $nome = $f3->get('POST.nome');
+        $eta = $f3->get('POST.eta');
+        $rischio = $f3->get('POST.rischio');
+        $vaccinato2019 = $f3->get('POST.vaccinato2019');
+
+        $denominazione = Utilita::Maiuscola($cognome) . " " . Utilita::Maiuscola($nome);
+        $d = new \App\Vaccini\Vaccinabile(null, $denominazione, $eta, $rischio, $vaccinato2019);
+        $d->AddDB();
+
+        \App\Flash::instance()->addMessage('Vaccino aggiunto', 'success');
+        $f3->reroute('/vaccini');
+    }
+
+    public function Lista($f3)
+    {
+        $listaVaccinabili = \App\Vaccini\Vaccinabile::ListaVaccinabili();
+        $f3->set('listaVaccinabili', $listaVaccinabili);
+
+        $f3->set('titolo', 'Vaccini');
+        $f3->set('contenuto', '/vaccini/vaccinabili/lista.htm');
+        \Template::instance()->filter('vaccinato','\App\Helpers\Filter::instance()->vaccinato');
+        echo \Template::instance()->render('templates/base.htm');
+    }
 }
