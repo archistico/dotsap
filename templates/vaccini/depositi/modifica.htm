@@ -1,0 +1,76 @@
+<h2>Modifica deposito di vaccini</h2>
+<form method="POST" action="{{@BASE}}{{ 'vaccini_depositi_modifica_registra', 'id='.@deposito.id | alias }}">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputData">Data</label>
+                <input type="date" class="form-control" id="InputData" name="data" value="{{ @deposito.data | datatodmy }}" required>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="InputTipo">Tipo</label>
+                <select class="form-control" id="InputTipo" placeholder="Tipologia di vaccino" name="tipo" required>
+                    <option value="Fluad" <check if="{{ @deposito.tipo=='Fluad' }}"><true>selected</true></check> >Fluad</option>
+                    <option value="Vaxigrip Tetra" <check if="{{ @deposito.tipo=='Vaxigrip Tetra' }}"><true>selected</true></check> >Vaxigrip Tetra</option>
+                    <option value="Prevenar" <check if="{{ @deposito.tipo=='Prevenar' }}"><true>selected</true></check> >Prevenar</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputQuantita">Quantità</label>
+                <input type="number" class="form-control" id="InputQuantita" name="quantita" min="0" max="9999" step="1"
+                    value="{{ @deposito.quantita }}" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputLotto">Lotto</label>
+                <input type="text" class="form-control" id="InputLotto" name="lotto" placeholder="Inserire il lotto del vaccino" value="{{ @deposito.lotto }}" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputScadenza">Scadenza</label>
+                <input type="date" class="form-control" id="InputScadenza" name="scadenza"  value="{{ @deposito.scadenza | datatodmy }}" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="fornito">Vaccino fornito</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="fornito" id="fornito1" value="1" <check if="{{ @deposito.fornito==1 }}"><true>checked</true></check> >
+                    <label class="form-check-label" for="fornito1">
+                        AUSL VDA
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="fornito" id="fornito2" value="2" <check if="{{ @deposito.fornito==2 }}"><true>checked</true></check> >
+                    <label class="form-check-label" for="fornito2">
+                        Dal paziente
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Note">Note</label>
+                <textarea class="form-control" id="note" placeholder="Note" name="note" rows="5">{{ @deposito.note }}</textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'vaccini' | alias }}">Annulla</a>
+        </div>
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Registra</button>
+        </div>
+    </div>
+</form>
+

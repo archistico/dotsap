@@ -22,4 +22,13 @@ class Filter extends \Prefab {
 		if($val == "1") { return "Vaccinato"; }
 		return "!";
 	}
+
+	function datatodmy($val) {
+		if (is_null($val) || empty($val)) {
+            return "!";
+        } else {
+            $data = \DateTime::createFromFormat('d/m/Y', $val);
+            return $data->format('Y-m-d');
+        }
+	}
 }

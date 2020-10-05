@@ -44,7 +44,7 @@ class Vaccini
         $d->AddDB();
 
         \App\Flash::instance()->addMessage('Vaccino aggiunto', 'success');
-        $f3->reroute('/vaccini');
+        $f3->reroute('@vaccini_lista');
     }
 
     public function Lista($f3)

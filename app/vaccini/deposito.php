@@ -76,7 +76,7 @@ class Deposito
             'lotto'         => $this->lotto,
             'quantita'      => $this->quantita,
             'scadenza'      => $this->scadenza,
-            'fornito'      => $this->fornito,
+            'fornito'       => $this->fornito,
             'note'          => $this->note,
             'notebr'        => nl2br($this->note),
         ];
@@ -101,5 +101,42 @@ class Deposito
         }
 
         return $risposta;
+    }
+
+    public static function ReadByID($id)
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "SELECT * FROM depositi WHERE id = '$id'";
+        $depositiArray = $db->exec($sql);
+        $el = $depositiArray[0];
+        $risposta = new Deposito($el["id"], \App\Utilita::ConvertToDMY($el['data']), $el["tipo"], $el["lotto"], $el["quantita"], \App\Utilita::ConvertToDMY($el['scadenza']), $el["fornito"], $el["note"]);
+
+        return $risposta->ToArray();
+    }
+
+    public function UpdateDB()
+    {
+        try {
+            $db = (\App\Db::getInstance())->connect();
+
+            $sql = "UPDATE depositi
+                    SET 
+                        data = '$this->data',
+                        tipo = '$this->tipo',
+                        lotto = '$this->lotto',
+                        scadenza = '$this->scadenza',
+                        quantita = '$this->quantita ',
+                        fornito = '$this->fornito',
+                        note = '$this->note'
+                    WHERE id = $this->id
+                    ;";
+
+            $db->begin();
+            $db->exec($sql);
+            $db->commit();
+        } catch (\Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
     }
 }

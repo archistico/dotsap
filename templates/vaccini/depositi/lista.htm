@@ -1,5 +1,16 @@
 <div class="row">
     <div class="col-md-12">
+        <!-- bootstrap style-->
+        <F3:repeat group="{{ \App\Flash::instance()->getMessages() }}" value="{{ @msg }}">
+            <div class="alert alert-{{ @msg.status }} alert-dismissable">
+                {{ @msg.text | esc }}
+            </div>
+        </F3:repeat>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
         <!-- table-striped -->
         <table class="table table-bordered">
             <thead>
@@ -10,7 +21,7 @@
                 <th scope="col">LOTTO</th>
                 <th scope="col">FORNITO</th>
 
-                <!-- <th scope="col" style="width: 50px">#</th> -->
+                <th scope="col" style="width: 50px">#</th>
             </tr>
             </thead>
             <tbody>
@@ -21,6 +32,12 @@
                     <td>{{ @d.quantita }}</td>
                     <td>{{ @d.lotto }}</td>
                     <td>{{ @d.fornito | fornito }}</td>
+                    
+                    <td scope="row">
+                        <div class="btn-group" role="group" aria-label="Pulsanti">
+                            <a href="{{@BASE}}{{ 'vaccini_depositi_modifica', 'id='.@d.id | alias }}" class="btn btn-warning btn-sm btn-rect"><i class="fas fa-pencil-alt"></i></a>
+                        </div>
+                    </td>
                     <!--
                     <td scope="row">
                         <div class="btn-group" role="group" aria-label="Pulsanti">

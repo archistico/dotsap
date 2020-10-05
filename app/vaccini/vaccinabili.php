@@ -48,7 +48,7 @@ class Vaccinabili
         }
 
         \App\Flash::instance()->addMessage('Importati con successo', 'success');
-        $f3->reroute('/vaccini');
+        $f3->reroute('@vaccini_vaccinabili_lista');
     }
 
     public function Nuovo($f3)
@@ -71,7 +71,7 @@ class Vaccinabili
         $d->AddDB();
 
         \App\Flash::instance()->addMessage('Vaccino aggiunto', 'success');
-        $f3->reroute('/vaccini');
+        $f3->reroute('@vaccini_vaccinabili_lista');
     }
 
     public function Lista($f3)

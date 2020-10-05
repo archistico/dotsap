@@ -1,5 +1,16 @@
 <div class="row">
     <div class="col-md-12">
+        <!-- bootstrap style-->
+        <F3:repeat group="{{ \App\Flash::instance()->getMessages() }}" value="{{ @msg }}">
+            <div class="alert alert-{{ @msg.status }} alert-dismissable">
+                {{ @msg.text | esc }}
+            </div>
+        </F3:repeat>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
         <table class="table table-striped">
             <thead>
             <tr>
