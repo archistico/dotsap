@@ -84,4 +84,14 @@ class Vaccinabili
         \Template::instance()->filter('vaccinato','\App\Helpers\Filter::instance()->vaccinato');
         echo \Template::instance()->render('templates/base.htm');
     }
+
+    public static function ListaArray()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "SELECT * FROM vaccinabili ORDER BY denominazione ASC";
+        $listaArray = $db->exec($sql);
+
+        return $listaArray;
+    }
 }

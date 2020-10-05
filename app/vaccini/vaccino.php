@@ -17,6 +17,12 @@ class Vaccino
     public static $VaxigripTetra = 'Vaxigrip Tetra';
     public static $Prevenar = 'Prevenar';
 
+    public static $FORNITO_AUSL = 1;
+    public static $FORNITO_PAZIENTE = 2;
+
+    public static $STATO_VACCINATO = 1;
+    public static $STATO_LASCIATO_PAZIENTE = 2;
+
     public function __construct($id, $data, $fkpersona, $sede, $fkdeposito, $stato)
     {
         $this->id = $id;
@@ -60,5 +66,23 @@ class Vaccino
         $listaArray = $db->exec($sql);
 
         return $listaArray;
+    }
+
+    public static function IsANTINFLUENZALE($tipo)
+    {
+        if($tipo == Vaccino::$Fluad || $tipo == Vaccino::$VaxigripTetra) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function IsANTIPNEUMOCOCCO($tipo)
+    {
+        if($tipo == Vaccino::$Prevenar) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

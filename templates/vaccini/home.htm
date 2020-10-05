@@ -11,35 +11,59 @@
 
 <div class="row">
     <div class="col-md-3">
-        <div class="card text-white bg-success mb-3 text-center">
-            <div class="card-header"><h6><small class="font-weight-bold">Anti</small> influenzale</h6></div>
+        <div class="card text-white bg-success text-center h-100">
+            <div class="card-header">
+                <h5>Anti-influenzale<br>ENTRATI</h5>
+            </div>
             <div class="card-body">
-                <p>Fatti: {{ @fatti_antinfluenzali }}<br>
-                Lasciati al paziente: {{ @lasciati_paziente_antinfluenzali }}<br>
-                Forniti USL: 0<br>
-                Forniti paziente: 0<br>
-                Rimanenza frigo: {{ @rimanenza_antinfluenzale }}
-            </p>
+                <p>Forniti AUSL: {{ @antinfluenzali_forniti_ausl }}<br>
+                    Forniti paziente: {{ @antinfluenzali_forniti_paziente }}<br>
+                    Totale depositati: {{ @antinfluenzali_forniti_totale }}<br>
+                </p>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card text-white bg-success mb-3 text-center">
-            <div class="card-header"><h6><small class="font-weight-bold">Anti</small> pneumococcico</h6></div>
+        <div class="card text-white bg-success text-center h-100">
+            <div class="card-header">
+                <h5>Anti-influenzale<br>USCITI</h5>
+            </div>
             <div class="card-body">
-                <p>Fatti: {{ @fatti_antipneumococcica }}<br>
-                Lasciati al paziente: {{ @lasciati_paziente_antipneumococcica }}</p>
+                <p>Vaccinati: {{ @antinfluenzali_fatti }}<br>
+                    Lasciati al paziente: {{ @antinfluenzali_lasciati_paziente }}<br>                    
+                    Totale usciti: {{ @antinfluenzali_usciti }}
+                </p>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-
+        <div class="card text-white bg-success text-center h-100">
+            <div class="card-header">
+                <h5>Anti-influenzale<br>STATISTICHE</h5>
+            </div>
+            <div class="card-body">
+                <p>Totale pazienti: {{ @totale_pazienti }}<br>
+                    Pazienti con rischi: {{ @antinfluenzali_totale_rischio }}<br>
+                    Ancora da vaccinare: {{ @antinfluenzali_da_vaccinare }}
+                </p>
+            </div>
+        </div>
     </div>
     <div class="col-md-3">
-
+        <div class="card text-white bg-success text-center h-100">
+            <div class="card-header">
+                <h5>Anti-influenzale<br>RIMANENZE</h5>
+            </div>
+            <div class="card-body">
+                <p>Fluad: {{ @antinfluenzali_rimanenza_fluad }}<br>
+                    Vaxigrip Tetra: {{ @antinfluenzali_rimanenza_vaxigrip }}<br>
+                    Totale rimanenze: {{ @antinfluenzali_rimanenza }}
+                </p>
+            </div>
+        </div>
     </div>
 </div>
-
+<hr>
 <h2>Vaccinazioni</h2>
 <div class="row">
     <div class="col-md-3">
@@ -60,7 +84,7 @@
             <p>
                 Vaccino
                 <br />
-                Antipneumococcico
+                Antipneumococco
             </p>
         </a>
     </div>

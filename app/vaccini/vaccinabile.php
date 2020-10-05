@@ -11,6 +11,9 @@ class Vaccinabile
     public $rischio;
     public $vaccinato2019;
 
+    public static $VACCINATO_ANNO_PRECEDENTE = 1;
+    public static $NON_VACCINATO_ANNO_PRECEDENTE = 0;
+
     public function __construct($id, $denominazione, $eta, $rischio, $vaccinato2019)
     {
         $this->id = $id;

@@ -19,27 +19,46 @@ class Vaccinazioni
     {
         $vaccini = Vaccino::ListaArray();
         $deposito = Deposito::ListaArray();
+        $vaccinabili = Vaccinabili::ListaArray();
 
-        $fatti_antinfluenzali = 0;
-        $fatti_antinfluenzali = \App\Vaccini\Statistiche::Fatti($vaccini, \App\Vaccini\Vaccino::$ANTINFLUENZALE);
-        $f3->set('fatti_antinfluenzali', $fatti_antinfluenzali);
+        // ANTINFLUENZALI
+        $antinfluenzali_fatti = \App\Vaccini\Statistiche::Fatti($vaccini, \App\Vaccini\Vaccino::$ANTINFLUENZALE);
+        $f3->set('antinfluenzali_fatti', $antinfluenzali_fatti);
 
-        $lasciati_paziente_antinfluenzali = 0;
-        $lasciati_paziente_antinfluenzali = \App\Vaccini\Statistiche::LasciatiPaziente($vaccini, \App\Vaccini\Vaccino::$ANTINFLUENZALE);
-        $f3->set('lasciati_paziente_antinfluenzali', $lasciati_paziente_antinfluenzali);
+        $antinfluenzali_lasciati_paziente = \App\Vaccini\Statistiche::LasciatiPaziente($vaccini, \App\Vaccini\Vaccino::$ANTINFLUENZALE);
+        $f3->set('antinfluenzali_lasciati_paziente', $antinfluenzali_lasciati_paziente);
 
-        $fatti_antipneumococcica = 0;
-        $fatti_antipneumococcica = \App\Vaccini\Statistiche::Fatti($vaccini, \App\Vaccini\Vaccino::$ANTIPNEUMOCOCCICA);
-        $f3->set('fatti_antipneumococcica', $fatti_antipneumococcica);
+        $antinfluenzali_usciti = $antinfluenzali_lasciati_paziente + $antinfluenzali_fatti;
+        $f3->set('antinfluenzali_usciti', $antinfluenzali_usciti);        
 
-        $lasciati_paziente_antipneumococcica = 0;
-        $lasciati_paziente_antipneumococcica = \App\Vaccini\Statistiche::LasciatiPaziente($vaccini, \App\Vaccini\Vaccino::$ANTIPNEUMOCOCCICA);
-        $f3->set('lasciati_paziente_antipneumococcica', $lasciati_paziente_antipneumococcica);
+        $antinfluenzali_forniti_ausl = \App\Vaccini\Statistiche::Forniti($deposito, \App\Vaccini\Vaccino::$ANTINFLUENZALE, \App\Vaccini\Vaccino::$FORNITO_AUSL);
+        $f3->set('antinfluenzali_forniti_ausl', $antinfluenzali_forniti_ausl);
+        $antinfluenzali_forniti_paziente = \App\Vaccini\Statistiche::Forniti($deposito, \App\Vaccini\Vaccino::$ANTINFLUENZALE, \App\Vaccini\Vaccino::$FORNITO_PAZIENTE);
+        $f3->set('antinfluenzali_forniti_paziente', $antinfluenzali_forniti_paziente);
+        $totale_forniti = $antinfluenzali_forniti_ausl + $antinfluenzali_forniti_paziente;
+        $f3->set('antinfluenzali_forniti_totale', $totale_forniti);
 
-        $rimanenza_antinfluenzale = 0;
-        $rimanenza_antinfluenzale = \App\Vaccini\Statistiche::Rimanenti($vaccini, $deposito, \App\Vaccini\Vaccino::$ANTINFLUENZALE);
-        $f3->set('rimanenza_antinfluenzale', $rimanenza_antinfluenzale);
+        $totale_pazienti = \App\Vaccini\Statistiche::TotalePazienti($vaccinabili);
+        $f3->set('totale_pazienti', $totale_pazienti);
 
+        $antinfluenzali_totale_rischio = \App\Vaccini\Statistiche::TotalePazientiRischio($vaccinabili);
+        $f3->set('antinfluenzali_totale_rischio', $antinfluenzali_totale_rischio);
+
+        $antinfluenzali_da_vaccinare = $antinfluenzali_totale_rischio - $antinfluenzali_fatti;
+        $f3->set('antinfluenzali_da_vaccinare', $antinfluenzali_da_vaccinare);
+        
+        $antinfluenzali_rimanenza_fluad = \App\Vaccini\Statistiche::Rimanenti($vaccini, $deposito, \App\Vaccini\Vaccino::$Fluad);
+        $f3->set('antinfluenzali_rimanenza_fluad', $antinfluenzali_rimanenza_fluad);
+
+        $antinfluenzali_rimanenza_vaxigrip = \App\Vaccini\Statistiche::Rimanenti($vaccini, $deposito, \App\Vaccini\Vaccino::$VaxigripTetra);
+        $f3->set('antinfluenzali_rimanenza_vaxigrip', $antinfluenzali_rimanenza_vaxigrip);
+
+        $antinfluenzali_rimanenti = $antinfluenzali_rimanenza_fluad + $antinfluenzali_rimanenza_vaxigrip; 
+        $f3->set('antinfluenzali_rimanenza', $antinfluenzali_rimanenti);
+
+        // // ANTIPNEUMOCOCCO
+        // $f3->set('antipneumococco_fatti', \App\Vaccini\Statistiche::Fatti($vaccini, \App\Vaccini\Vaccino::$ANTIPNEUMOCOCCICA));
+        // $f3->set('antipneumococco_lasciati_paziente', \App\Vaccini\Statistiche::LasciatiPaziente($vaccini, \App\Vaccini\Vaccino::$ANTIPNEUMOCOCCICA));
 
         $f3->set('titolo', 'Vaccini');
         $f3->set('contenuto', '/vaccini/home.htm');
