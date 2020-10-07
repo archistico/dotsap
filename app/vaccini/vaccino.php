@@ -2,6 +2,8 @@
 
 namespace App\Vaccini;
 
+use App\Utilita;
+
 class Vaccino
 {
     public $id;
@@ -32,20 +34,6 @@ class Vaccino
         $this->sede = $sede;
         $this->fkdeposito = $fkdeposito;
         $this->stato = $stato;
-    }
-
-    public function AddDB()
-    {
-        try {
-            $db = (\App\Db::getInstance())->connect();
-            $sql = 'INSERT into vaccini values(null, "' . $this->data . '", ' . $this->fkpersona . ', ' . $this->sede . ', ' . $this->fkdeposito . ', ' . $this->stato . ')';
-
-            $db->begin();
-            $db->exec($sql);
-            $db->commit();
-        } catch (\Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
     }
 
     public static function Lista()
@@ -118,9 +106,34 @@ class Vaccino
         $el = $sqlArray[0];
 
         $risposta = new Vaccino($el['id'], \App\Utilita::ConvertToDMY($el['data']), $el['fkpersona'], $el['sede'], $el['fkdeposito'], $el['stato']);
-        
+
         // ->ToArray()
         return $risposta->ToArray();
+    }
+
+    public function AddDB()
+    {
+        try {
+            $db = (\App\Db::getInstance())->connect();
+
+            $sql = 'SELECT * FROM vaccini WHERE fkpersona = ' . $this->fkpersona.' AND fkdeposito = '.$this->fkdeposito;
+            $precedente = $db->exec($sql);
+            $giapresente = count($precedente) > 0 ? true : false;
+            
+            if ($giapresente) {
+                $this->id = $precedente[0]['id'];
+                $this->UpdateDB();
+            } else {
+                // Se non c'è nessuno con fkpersona allora aggiungi
+                $sql = 'INSERT into vaccini values(null, "' . $this->data . '", ' . $this->fkpersona . ', ' . $this->sede . ', ' . $this->fkdeposito . ', ' . $this->stato . ')';
+
+                $db->begin();
+                $db->exec($sql);
+                $db->commit();
+            }
+        } catch (\Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
     }
 
     public function UpdateDB()
