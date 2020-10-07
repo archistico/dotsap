@@ -53,6 +53,10 @@ $f3->route('GET @vaccini_depositi_visualizza: /vaccini/depositi/visualizza/@id',
 $f3->route('GET @vaccini_depositi_modifica: /vaccini/depositi/modifica/@id', '\App\Vaccini\Depositi->Modifica');
 $f3->route('POST @vaccini_depositi_modifica_registra: /vaccini/depositi/modifica/@id', '\App\Vaccini\Depositi->ModificaRegistra');
 
+// TODO cancellazione depositi
+$f3->route('GET @vaccini_depositi_cancella: /vaccini/depositi/cancella/@id', '\App\Vaccini\Depositi->Cancella');
+$f3->route('POST @vaccini_depositi_cancella_registra: /vaccini/depositi/cancella/@id', '\App\Vaccini\Depositi->CancellaRegistra');
+
 // Persone vaccinabili
 $f3->route('GET @vaccini_vaccinabili_nuovo: /vaccini/vaccinabili/nuovo', '\App\Vaccini\Vaccinabili->Nuovo');
 $f3->route('POST @vaccini_vaccinabili_nuovo_registra: /vaccini/vaccinabili/nuovo', '\App\Vaccini\Vaccinabili->NuovoRegistra');
@@ -61,8 +65,15 @@ $f3->route('GET @vaccini_vaccinabili_modifica: /vaccini/vaccinabili/modifica/@id
 $f3->route('POST @vaccini_vaccinabili_modifica_registra: /vaccini/vaccinabili/modifica/@id', '\App\Vaccini\Vaccinabili->ModificaRegistra');
 $f3->route('GET @vaccini_vaccinabili_import: /vaccini/vaccinabili/import', '\App\Vaccini\Vaccinabili->Import');
 
+// TODO cancellazione persone vaccinabili
+$f3->route('GET @vaccini_vaccinabili_cancella: /vaccini/vaccinabili/cancella/@id', '\App\Vaccini\Vaccinabili->Cancella');
+$f3->route('POST @vaccini_vaccinabili_cancella_registra: /vaccini/vaccinabili/cancella/@id', '\App\Vaccini\Vaccinabili->CancellaRegistra');
+
 // Vaccinazioni
 $f3->route('GET @vaccini: /vaccini', '\App\Vaccini\Vaccinazioni->Home' );
+
+// TODO statistiche pneu
+// TODO nelle lista aggiunta tasto nuovo
 
 // Vaccini
 $f3->route('GET @vaccini_nuovo: /vaccini/nuovo/@tipo', '\App\Vaccini\Vaccini->Nuovo');
@@ -71,6 +82,9 @@ $f3->route('GET @vaccini_lista: /vaccini/lista', '\App\Vaccini\Vaccini->Lista');
 $f3->route('GET @vaccini_modifica: /vaccini/modifica/@id', '\App\Vaccini\Vaccini->Modifica');
 $f3->route('POST @vaccini_modifica_registra: /vaccini/modifica/@id', '\App\Vaccini\Vaccini->ModificaRegistra');
 
+// TODO cancellazione vaccini
+$f3->route('GET @vaccini_cancella: /vaccini/cancella/@id', '\App\Vaccini\Vaccini->Cancella');
+$f3->route('POST @vaccini_cancella_registra: /vaccini/cancella/@id', '\App\Vaccini\Vaccini->CancellaRegistra');
 
 // Todo
 $f3->route('GET @todocancella: /todo/cancella/@id', '\App\Todo->Cancella');
