@@ -4,7 +4,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="InputData">Data</label>
-                <input type="date" class="form-control" id="InputData" name="data" value="{{ @deposito.data | datatodmy }}" required>
+                <input type="date" class="form-control" id="InputData" name="data" value="{{ @deposito.data | datatoymd }}" required>
             </div>
         </div>
         <div class="col-md-8">
@@ -35,7 +35,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="InputScadenza">Scadenza</label>
-                <input type="date" class="form-control" id="InputScadenza" name="scadenza"  value="{{ @deposito.scadenza | datatodmy }}" required>
+                <input type="date" class="form-control" id="InputScadenza" name="scadenza"  value="{{ @deposito.scadenza | datatoymd }}" required>
             </div>
         </div>
     </div>
@@ -66,7 +66,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'vaccini' | alias }}">Annulla</a>
+            <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'vaccini_depositi_lista' | alias }}">Annulla</a>
         </div>
         <div class="col-md-6">
             <button type="submit" class="btn btn-primary btn-block btn-lg">Registra</button>

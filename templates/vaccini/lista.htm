@@ -9,6 +9,7 @@
     </div>
 </div>
 
+<h2>LISTA VACCINI</h2>
 <div class="row">
     <div class="col-md-12">
         <table class="table table-striped">
@@ -19,16 +20,22 @@
                 <th scope="col">VACCINO</th>
                 <th scope="col" class="d-none d-sm-block">STATO</th>
 
-                <!-- <th scope="col" style="width: 50px">#</th> -->
+                <th scope="col" style="width: 50px">#</th>
             </tr>
             </thead>
             <tbody>
             <repeat group="{{ @lista }}" value="{{ @d }}">
                 <tr>
-                    <td>{{ @d.data }}</td>
+                    <td>{{ @d.datavaccino | datatodmy }}</td>
                     <td>{{ @d.denominazione }}, {{ @d.eta }}, {{ @d.rischio }}</td>
                     <td>{{ @d.tipo }}, {{ @d.lotto }}, fornito: {{ @d.fornito | fornito }}</td>
                     <td class="d-none d-sm-block">{{ @d.stato | stato }}</td>
+
+                    <td scope="row">
+                        <div class="btn-group" role="group" aria-label="Pulsanti">
+                            <a href="{{@BASE}}{{ 'vaccini_modifica', 'id='.@d.idvaccino | alias }}" class="btn btn-warning btn-sm btn-rect"><i class="fas fa-pencil-alt"></i></a>
+                        </div>
+                    </td>
                     <!--
                     <td scope="row">
                         <div class="btn-group" role="group" aria-label="Pulsanti">

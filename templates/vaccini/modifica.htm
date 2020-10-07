@@ -1,0 +1,74 @@
+<h2>Modifica vaccino</h2>
+<form method="POST" action="{{@BASE}}{{ 'vaccini_modifica_registra' | alias }}">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="InputData">Data</label>
+                <input type="date" class="form-control" id="InputData" name="data" value="{{ @vaccino.data | datatoymd }}" required>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="form-group">
+                <label for="InputVaccinabile">Persona da vaccinare</label>
+                <select class="form-control" id="InputVaccinabile" placeholder="Tipologia di vaccino" name="fkpersona"
+                    required>
+                    <repeat group="{{ @listaVaccinabili }}" value="{{ @v }}"></repeat>
+                    <option value="{{ @v.id }}" <check if="{{ @v.id }} == {{ @vaccino.fkpersona }}"><true>selected</true></check> >{{ @v.denominazione }}, {{ @v.eta }}<check if="{{ @v.rischio=='' }}"><false>, {{ @v.rischio }}</false></check>
+                        <check if="{{ @v.vaccinato2019==1 }}"><true>(Vaccinato 2019)</true></check>
+                    </option>
+                    </repeat>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="InputSede">Sede di inoculo</label>
+                <select class="form-control" id="InputSede" placeholder="Sede di inoculo" name="sede" required>
+                    <option value="1" <check if="{{ @vaccino.sede }} == 1"><true>selected</true></check> >Deltoide dx</option>
+                    <option value="2" <check if="{{ @vaccino.sede }} == 2"><true>selected</true></check> >Deltoide sx</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="form-group">
+                <label for="InputDeposito">Tipo di vaccino</label>
+                <select class="form-control" id="InputDeposito" placeholder="Tipologia di vaccino" name="fkdeposito"
+                    required>
+                    <repeat group="{{ @listaVaccini }}" value="{{ @v }}"></repeat>
+                    <option value="{{ @v.id }}" <check if="{{ @v.id }} == {{ @vaccino.fkdeposito }}"><true>selected</true></check> >{{ @v.tipo }}, lotto: {{ @v.lotto }}, fornito: {{ @v.fornito | fornito }}</option>
+                    </repeat>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="stato">Stato</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="stato" id="stato1" value="1" <check if="{{ @vaccino.stato }} == 1"><true>checked</true></check> >
+                    <label class="form-check-label" for="stato1">
+                        Vaccinato
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="stato" id="stato2" value="2" <check if="{{ @vaccino.stato }} == 2"><true>checked</true></check> >
+                    <label class="form-check-label" for="stato2">
+                        Lasciato vaccino al paziente
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'vaccini_lista' | alias }}">Annulla</a>
+        </div>
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Registra</button>
+        </div>
+    </div>
+</form>

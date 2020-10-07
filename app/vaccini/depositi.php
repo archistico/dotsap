@@ -62,7 +62,7 @@ class Depositi
         $f3->set('deposito', $deposito);
         $f3->set('titolo', 'Vaccini');
         $f3->set('contenuto', '/vaccini/depositi/modifica.htm');
-        \Template::instance()->filter('datatodmy','\App\Helpers\Filter::instance()->datatodmy');
+        \Template::instance()->filter('datatoymd','\App\Helpers\Filter::instance()->datatoymd');
         echo \Template::instance()->render('templates/base.htm');
     }
 
