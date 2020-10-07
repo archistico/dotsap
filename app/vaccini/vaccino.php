@@ -107,8 +107,33 @@ class Vaccino
 
         $risposta = new Vaccino($el['id'], \App\Utilita::ConvertToDMY($el['data']), $el['fkpersona'], $el['sede'], $el['fkdeposito'], $el['stato']);
 
-        // ->ToArray()
         return $risposta->ToArray();
+    }
+
+    public static function ReadCompleteByID($id)
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "SELECT vaccini.*, depositi.*, vaccinabili.*, vaccini.data as datavaccino, vaccini.id as idvaccino, vaccinabili.id as idvaccinabili, depositi.id as iddepositi FROM vaccini INNER JOIN vaccinabili ON vaccini.fkpersona = vaccinabili.id INNER JOIN depositi ON vaccini.fkdeposito = depositi.id WHERE vaccini.id = '$id'";
+        $sqlArray = $db->exec($sql);
+        $risposta = $sqlArray[0];
+
+        return $risposta;
+    }
+
+    public static function EraseByID($id)
+    {
+        try {
+            $db = (\App\Db::getInstance())->connect();
+
+            $sql = "DELETE FROM vaccini WHERE id = '$id'";
+            $db->exec($sql);
+            
+        } catch (\Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+
+        return true;
     }
 
     public function AddDB()
@@ -116,10 +141,10 @@ class Vaccino
         try {
             $db = (\App\Db::getInstance())->connect();
 
-            $sql = 'SELECT * FROM vaccini WHERE fkpersona = ' . $this->fkpersona.' AND fkdeposito = '.$this->fkdeposito;
+            $sql = 'SELECT * FROM vaccini WHERE fkpersona = ' . $this->fkpersona . ' AND fkdeposito = ' . $this->fkdeposito;
             $precedente = $db->exec($sql);
             $giapresente = count($precedente) > 0 ? true : false;
-            
+
             if ($giapresente) {
                 $this->id = $precedente[0]['id'];
                 $this->UpdateDB();

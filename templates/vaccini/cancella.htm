@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1>ATTENZIONE!</h1>
+        Confermi di voler cancellare il vaccino:
+        <ul>
+            <li>ID: #{{ @vaccino.idvaccino }}</li>
+            <li>Data vaccinazione: {{ @vaccino.datavaccino | datatodmy }}</li>
+            <li>Paziente: <strong>{{ @vaccino.denominazione }}, {{ @vaccino.eta }}</strong></li>
+            <li>Vaccino: {{ @vaccino.tipo }}, {{ @vaccino.lotto }}, fornito: {{ @vaccino.fornito | fornito }}</li>
+            <li>Stato: {{ @vaccino.stato | stato }}</li>
+        </ul>
+        <br>
+        <form method="POST" action="{{@BASE}}{{ 'vaccini_cancella_registra', 'id='.@vaccino.idvaccino | alias }}">
+            <a class="btn btn-secondary btn-block btn-lg mb-3" href="{{ 'vaccini_lista' | alias }}">ANNULLA</a>
+            <button type="submit" class="btn btn-danger btn-block btn-lg">Cancella</button>
+        </form>
+    </div>
+</div>
