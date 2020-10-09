@@ -156,4 +156,19 @@ class Deposito
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
     }
+
+    public static function EraseByID($id)
+    {
+        try {
+            $db = (\App\Db::getInstance())->connect();
+
+            $sql = "DELETE FROM depositi WHERE id = '$id'";
+            $db->exec($sql);
+            
+        } catch (\Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+
+        return true;
+    }
 }

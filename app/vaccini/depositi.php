@@ -84,4 +84,29 @@ class Depositi
         \App\Flash::instance()->addMessage('Deposito modificato', 'success');
         $f3->reroute('@vaccini_depositi_lista');
     }
+
+    public function Cancella($f3, $params)
+    {
+        $id = $params['id'];
+
+        $deposito = Deposito::ReadByID($id);
+
+        $f3->set('deposito', $deposito);
+        $f3->set('titolo', 'Vaccini');
+        $f3->set('contenuto', '/vaccini/depositi/cancella.htm');
+        
+        \Template::instance()->filter('stato','\App\Helpers\Filter::instance()->stato');
+        \Template::instance()->filter('fornito','\App\Helpers\Filter::instance()->fornito');
+        \Template::instance()->filter('datatodmy','\App\Helpers\Filter::instance()->datatodmy');
+        echo \Template::instance()->render('templates/base.htm');
+    }
+
+    public function CancellaRegistra($f3, $params)
+    {
+        $id = $params['id'];
+        Deposito::EraseByID($id);
+
+        \App\Flash::instance()->addMessage('Deposito cancellato', 'success');
+        $f3->reroute('@vaccini_depositi_lista');
+    }
 }

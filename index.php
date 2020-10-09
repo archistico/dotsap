@@ -52,8 +52,6 @@ $f3->route('GET @vaccini_depositi_listapdf: /vaccini/depositi/listapdf', '\App\V
 $f3->route('GET @vaccini_depositi_visualizza: /vaccini/depositi/visualizza/@id', '\App\Vaccini\Depositi->Visualizza');
 $f3->route('GET @vaccini_depositi_modifica: /vaccini/depositi/modifica/@id', '\App\Vaccini\Depositi->Modifica');
 $f3->route('POST @vaccini_depositi_modifica_registra: /vaccini/depositi/modifica/@id', '\App\Vaccini\Depositi->ModificaRegistra');
-
-// TODO cancellazione depositi
 $f3->route('GET @vaccini_depositi_cancella: /vaccini/depositi/cancella/@id', '\App\Vaccini\Depositi->Cancella');
 $f3->route('POST @vaccini_depositi_cancella_registra: /vaccini/depositi/cancella/@id', '\App\Vaccini\Depositi->CancellaRegistra');
 
@@ -81,8 +79,6 @@ $f3->route('POST @vaccini_nuovo_registra: /vaccini/nuovo', '\App\Vaccini\Vaccini
 $f3->route('GET @vaccini_lista: /vaccini/lista', '\App\Vaccini\Vaccini->Lista');
 $f3->route('GET @vaccini_modifica: /vaccini/modifica/@id', '\App\Vaccini\Vaccini->Modifica');
 $f3->route('POST @vaccini_modifica_registra: /vaccini/modifica/@id', '\App\Vaccini\Vaccini->ModificaRegistra');
-
-// TODO cancellazione vaccini
 $f3->route('GET @vaccini_cancella: /vaccini/cancella/@id', '\App\Vaccini\Vaccini->Cancella');
 $f3->route('POST @vaccini_cancella_registra: /vaccini/cancella/@id', '\App\Vaccini\Vaccini->CancellaRegistra');
 

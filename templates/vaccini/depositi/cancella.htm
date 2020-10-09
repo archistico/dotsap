@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1>ATTENZIONE!</h1>
+        Confermi di voler cancellare il deposito:
+        <ul>
+            <li>ID: #{{ @deposito.id }}</li>
+            <li>Data deposito: {{ @deposito.data }}</li>
+            <li>Tipo: <strong>{{ @deposito.tipo }}</strong>, {{ @deposito.lotto }}, fornito: {{ @deposito.fornito | fornito }}</li>
+            <li>Quantità: {{ @deposito.quantita }}</li>
+            <li>Scadenza: {{ @deposito.scadenza }}</li>
+        </ul>
+        <br>
+        <form method="POST" action="{{@BASE}}{{ 'vaccini_depositi_cancella_registra', 'id='.@deposito.id | alias }}">
+            <a class="btn btn-secondary btn-block btn-lg mb-3" href="{{ 'vaccini_depositi_lista' | alias }}">ANNULLA</a>
+            <button type="submit" class="btn btn-danger btn-block btn-lg">Cancella</button>
+        </form>
+    </div>
+</div>
