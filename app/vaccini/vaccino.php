@@ -18,6 +18,7 @@ class Vaccino
 
     public static $Fluad = 'Fluad';
     public static $VaxigripTetra = 'Vaxigrip Tetra';
+    public static $AltroAntinfluenzale = 'Altro antinfluenzale';
     public static $Prevenar = 'Prevenar';
 
     public static $FORNITO_AUSL = 1;
@@ -69,7 +70,7 @@ class Vaccino
 
     public static function IsANTINFLUENZALE($tipo)
     {
-        if ($tipo == Vaccino::$Fluad || $tipo == Vaccino::$VaxigripTetra) {
+        if ($tipo == Vaccino::$Fluad || $tipo == Vaccino::$VaxigripTetra || $tipo == Vaccino::$AltroAntinfluenzale) {
             return true;
         } else {
             return false;

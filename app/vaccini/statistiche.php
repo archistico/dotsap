@@ -61,6 +61,14 @@ class Statistiche
             if ($check_tipo == Vaccino::$VaxigripTetra && $dep['tipo'] == Vaccino::$VaxigripTetra) {
                 $depositati_per_tipo += $dep["quantita"];
             }
+
+            if ($check_tipo == Vaccino::$AltroAntinfluenzale && $dep['tipo'] == Vaccino::$AltroAntinfluenzale) {
+                $depositati_per_tipo += $dep["quantita"];
+            }
+
+            if ($check_tipo == Vaccino::$Prevenar && $dep['tipo'] == Vaccino::$Prevenar) {
+                $depositati_per_tipo += $dep["quantita"];
+            }
         }
 
         // Calcolo fatti per tipo
@@ -70,6 +78,14 @@ class Statistiche
             }
 
             if ($check_tipo == Vaccino::$VaxigripTetra && $vac['tipo'] == Vaccino::$VaxigripTetra) {
+                $fatti_per_tipo++;
+            }
+
+            if ($check_tipo == Vaccino::$AltroAntinfluenzale && $vac['tipo'] == Vaccino::$AltroAntinfluenzale) {
+                $fatti_per_tipo++;
+            }
+
+            if ($check_tipo == Vaccino::$Prevenar && $vac['tipo'] == Vaccino::$Prevenar) {
                 $fatti_per_tipo++;
             }
         }
