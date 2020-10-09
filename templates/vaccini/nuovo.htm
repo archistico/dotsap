@@ -13,8 +13,12 @@
                 <select class="form-control" id="InputVaccinabile" placeholder="Tipologia di vaccino" name="fkpersona"
                     required>
                     <repeat group="{{ @listaVaccinabili }}" value="{{ @v }}"></repeat>
-                    <option value="{{ @v.id }}">{{ @v.denominazione }}, {{ @v.eta }}<check if="{{ @v.rischio=='' }}"><false>, {{ @v.rischio }}</false></check>
-                        <check if="{{ @v.vaccinato2019==1 }}"><true>(Vaccinato 2019)</true></check>
+                    <option value="{{ @v.id }}">{{ @v.denominazione }}, {{ @v.eta }}<check if="{{ @v.rischio=='' }}">
+                            <false>, {{ @v.rischio }}</false>
+                        </check>
+                        <check if="{{ @v.vaccinato2019==1 }}">
+                            <true>(Vaccinato 2019)</true>
+                        </check>
                     </option>
                     </repeat>
                 </select>
@@ -37,7 +41,8 @@
                 <select class="form-control" id="InputDeposito" placeholder="Tipologia di vaccino" name="fkdeposito"
                     required>
                     <repeat group="{{ @listaVaccini }}" value="{{ @v }}"></repeat>
-                    <option value="{{ @v.id }}">{{ @v.tipo }}, lotto: {{ @v.lotto }}, fornito: {{ @v.fornito | fornito }}</option>
+                    <option value="{{ @v.id }}">{{ @v.tipo }}, lotto: {{ @v.lotto }}, fornito:
+                        {{ @v.fornito | fornito }}</option>
                     </repeat>
                 </select>
             </div>
@@ -72,7 +77,3 @@
         </div>
     </div>
 </form>
-
-<script>
-    document.getElementById('InputData').valueAsDate = new Date();
-</script>
