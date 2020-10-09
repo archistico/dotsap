@@ -44,6 +44,15 @@ $f3->route('POST @appuntamentomodifica: /appuntamenti/modifica', '\App\Appuntame
 $f3->route('POST @appuntamentoaggiungi: /appuntamenti/aggiungi', '\App\Appuntamenti->Aggiungi');
 $f3->route('POST @appuntamentoparti: /appuntamenti/parti', '\App\Appuntamenti->Parti');
 
+// Prenotazioni
+$f3->route('GET @vaccini_prenotazioni_nuovo: /vaccini/prenotazioni/nuovo', '\App\Vaccini\Prenotazioni->Nuovo');
+$f3->route('POST @vaccini_prenotazioni_nuovo_registra: /vaccini/prenotazioni/nuovo', '\App\Vaccini\Prenotazioni->NuovoRegistra');
+$f3->route('GET @vaccini_prenotazioni_lista: /vaccini/prenotazioni/lista', '\App\Vaccini\Prenotazioni->Lista');
+$f3->route('GET @vaccini_prenotazioni_modifica: /vaccini/prenotazioni/modifica/@id', '\App\Vaccini\Prenotazioni->Modifica');
+$f3->route('POST @vaccini_prenotazioni_modifica_registra: /vaccini/prenotazioni/modifica/@id', '\App\Vaccini\Prenotazioni->ModificaRegistra');
+$f3->route('GET @vaccini_prenotazioni_cancella: /vaccini/prenotazioni/cancella/@id', '\App\Vaccini\Prenotazioni->Cancella');
+$f3->route('POST @vaccini_prenotazioni_cancella_registra: /vaccini/prenotazioni/cancella/@id', '\App\Vaccini\Prenotazioni->CancellaRegistra');
+
 // Depositi
 $f3->route('GET @vaccini_depositi_nuovo: /vaccini/depositi/nuovo', '\App\Vaccini\Depositi->Nuovo');
 $f3->route('POST @vaccini_depositi_nuovo_registra: /vaccini/depositi/nuovo', '\App\Vaccini\Depositi->NuovoRegistra');

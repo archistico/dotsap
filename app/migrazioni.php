@@ -94,7 +94,8 @@ class Migrazioni
         $this->CreazioneTabella("depositi", "CREATE TABLE 'depositi' ( `id` INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, `data` TEXT, `tipo` TEXT, `lotto` TEXT, `scadenza` TEXT, `quantita` INTEGER DEFAULT 0, `fornito` INTEGER DEFAULT 1, `note` TEXT );");
         $this->CreazioneTabella("vaccinabili", "CREATE TABLE 'vaccinabili' ( 'id' INTEGER PRIMARY KEY AUTOINCREMENT, 'denominazione' TEXT NOT NULL, 'eta' INTEGER NOT NULL, 'rischio' TEXT, 'vaccinato2019' INTEGER DEFAULT 0 );");
         $this->CreazioneTabella("vaccini", "CREATE TABLE 'vaccini' ( 'id' INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, 'data' TEXT NOT NULL, 'fkpersona' INTEGER NOT NULL, 'sede' INTEGER NOT NULL, 'fkdeposito' INTEGER NOT NULL, 'stato' INTEGER NOT NULL );");
-
+        $this->CreazioneTabella("prenotazioni", "CREATE TABLE 'prenotazioni' ( 'idprenotazione' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'dataprenotazione' TEXT, 'ora' TEXT, 'fkpersona' INTEGER, 'antinfluenzale' TEXT, 'antipneumococco' TEXT, 'note' TEXT );");
+        
         //$this->CancellaTabella( "richieste_eliminate");
         $this->CreazioneTabella("richieste_eliminate", "CREATE TABLE IF NOT EXISTS 'richieste_eliminate' ( id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'paziente' TEXT NOT NULL, 'data' TEXT NOT NULL, 'farmaco1' TEXT, 'farmaco2' TEXT, 'farmaco3' TEXT, 'farmaco4' TEXT, 'farmaco5' TEXT, 'farmaco6' TEXT, 'farmaco7' TEXT, 'farmaco8' TEXT, 'farmaco9' TEXT, 'note' TEXT );");
 
