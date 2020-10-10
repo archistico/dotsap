@@ -69,7 +69,7 @@ class Prenotazione
     {
         $db = (\App\Db::getInstance())->connect();
 
-        $sql = "SELECT * FROM prenotazioni INNER JOIN vaccinabili ON prenotazioni.fkpersona = vaccinabili.id";
+        $sql = "SELECT * FROM prenotazioni INNER JOIN vaccinabili ON prenotazioni.fkpersona = vaccinabili.id ORDER BY prenotazioni.data ASC, prenotazioni.ora ASC";
         $sqlArray = $db->exec($sql);
         $risposta = $sqlArray;
 
