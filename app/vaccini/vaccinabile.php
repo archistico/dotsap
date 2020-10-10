@@ -42,6 +42,28 @@ class Vaccinabile
         }
     }
 
+    public function UpdateDB()
+    {
+        try {
+            $db = (\App\Db::getInstance())->connect();
+
+            $sql = "UPDATE vaccinabili
+                    SET 
+                        denominazione = '$this->denominazione',
+                        eta = '$this->eta',
+                        rischio = '$this->rischio',
+                        vaccinato2019 = '$this->vaccinato2019'
+                    WHERE id = $this->id
+                    ;";
+
+            $db->begin();
+            $db->exec($sql);
+            $db->commit();
+        } catch (\Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+    }
+
     public function ToArray()
     {
         return [

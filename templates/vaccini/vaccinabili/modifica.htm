@@ -1,0 +1,62 @@
+<form method="POST" action="{{@BASE}}{{ 'vaccini_vaccinabili_modifica_registra' | alias }}">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="InputDenominazione">Denominazione</label>
+                <input type="text" class="form-control" id="InputDenominazione" name="denominazione" placeholder="Inserisci il cognome e il nome" value="{{ @vaccinabile.denominazione }}" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputEta">Età</label>
+                <input type="number" class="form-control" id="InputEta" name="eta" min="0" max="120" step="1" placeholder="Età in anni" value="{{ @vaccinabile.eta }}" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputRischio">Condizione di rischio</label>
+                <select class="form-control" id="InputRischio" placeholder="Condizione di rischio" name="rischio">
+                    <option value="" <check if="{{ @vaccinabile.rischio=='' }}"><true>selected</true></check> >NESSUNA</option>
+                    <option value="ULTRA 60" <check if="{{ @vaccinabile.rischio=='ULTRA 60' }}"><true>selected</true></check> >ULTRA 60</option>
+                    <option value="ULTRA 60 + PATOLOGIE" <check if="{{ @vaccinabile.rischio=='ULTRA 60 + PATOLOGIE' }}"><true>selected</true></check> >ULTRA 60 + PATOLOGIE</option>
+                    <option value="< 60 + PATOLOGIE" <check if="{{ @vaccinabile.rischio=='< 60 + PATOLOGIE' }}"><true>selected</true></check> >< 60 + PATOLOGIE</option>
+                    <option value="GRAVIDANZA" <check if="{{ @vaccinabile.rischio=='GRAVIDANZA' }}"><true>selected</true></check> >GRAVIDANZA</option>                    
+                    <option value="OPERATORI SANITARI" <check if="{{ @vaccinabile.rischio=='OPERATORI SANITARI' }}"><true>selected</true></check> >OPERATORI SANITARI</option>
+                    <option value="CONVIVENZA" <check if="{{ @vaccinabile.rischio=='CONVIVENZA' }}"><true>selected</true></check> CONVIVENZA</option>
+                    <option value="CONTATTO ANIMALI" <check if="{{ @vaccinabile.rischio=='CONTATTO ANIMALI' }}"><true>selected</true></check> >CONTATTO ANIMALI</option>
+                    <option value="PUBBLICO SERVIZIO" <check if="{{ @vaccinabile.rischio=='PUBBLICO SERVIZIO' }}"><true>selected</true></check> >PUBBLICO SERVIZIO</option>
+                    <option value="DONATORE SANGUE" <check if="{{ @vaccinabile.rischio=='DONATORE SANGUE' }}"><true>selected</true></check> >DONATORE SANGUE</option>
+                    <option value="OSPITE STRUTTURA" <check if="{{ @vaccinabile.rischio=='OSPITE STRUTTURA' }}"><true>selected</true></check> >OSPITE STRUTTURA</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="vaccinato2019">Vaccinato 2019</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="vaccinato2019" id="vaccinato1" value="0" <check if="{{ @vaccinabile.vaccinato2019==0 }}"><true>checked</true></check> >
+                    <label class="form-check-label" for="vaccinato1">
+                        Non vaccinato
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="vaccinato2019" id="vaccinato2" value="1" <check if="{{ @vaccinabile.vaccinato2019==1 }}"><true>checked</true></check> >
+                    <label class="form-check-label" for="vaccinato2">
+                        Vaccinato
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'vaccini_vaccinabili_lista' | alias }}">Annulla</a>
+        </div>
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Registra</button>
+        </div>
+    </div>
+</form>

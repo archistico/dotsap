@@ -94,4 +94,30 @@ class Vaccinabili
 
         return $listaArray;
     }
+
+    public function Modifica($f3, $params)
+    {
+        $id = $params['id'];
+        $vaccinabile = Vaccinabile::ReadById($id);
+
+        $f3->set('vaccinabile', $vaccinabile);
+        $f3->set('titolo', 'Vaccini');
+        $f3->set('contenuto', '/vaccini/vaccinabili/modifica.htm');
+        echo \Template::instance()->render('templates/base.htm');
+    }
+
+    public function ModificaRegistra($f3, $params)
+    {
+        $id = $params['id'];
+        $denominazione = $f3->get('POST.denominazione');
+        $eta = $f3->get('POST.eta');
+        $rischio = $f3->get('POST.rischio');
+        $vaccinato2019 = $f3->get('POST.vaccinato2019');
+
+        $d = new \App\Vaccini\Vaccinabile($id, $denominazione, $eta, $rischio, $vaccinato2019);
+        $d->UpdateDB();
+
+        \App\Flash::instance()->addMessage('Persona vaccinabile modificata', 'success');
+        $f3->reroute('@vaccini_vaccinabili_lista');
+    }
 }
