@@ -82,6 +82,12 @@ $f3->route('GET @vaccini: /vaccini', '\App\Vaccini\Vaccinazioni->Home' );
 // TODO statistiche pneu
 // TODO nelle lista aggiunta tasto nuovo
 
+// Vaccini prenotazioni
+$f3->route('GET @vaccini_prenotazioni_tabella: /vaccini/prenotazioni/tabella', '\App\Vaccini\Prenotazioni->Tabella');
+$f3->route('GET @vaccini_prenotazioni_tabella_giorno: /vaccini/prenotazioni/tabella/@data', '\App\Vaccini\Prenotazioni->TabellaGiorno');
+$f3->route('POST @vaccini_prenotazioni_registra: /vaccini/prenotazioni/registra', '\App\Vaccini\Prenotazioni->Registra');
+$f3->route('POST @vaccini_prenotazioni_modifica: /vaccini/prenotazioni/modifica', '\App\Vaccini\Prenotazioni->Modifica');
+
 // Vaccini
 $f3->route('GET @vaccini_nuovo: /vaccini/nuovo/@tipo', '\App\Vaccini\Vaccini->Nuovo');
 $f3->route('POST @vaccini_nuovo_registra: /vaccini/nuovo', '\App\Vaccini\Vaccini->NuovoRegistra');

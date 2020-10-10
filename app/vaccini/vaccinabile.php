@@ -53,6 +53,19 @@ class Vaccinabile
         ];
     }
 
+    public static function ReadById($id)
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "SELECT * FROM vaccinabili WHERE id = '$id'";
+        $sqlArray = $db->exec($sql);
+        $el = $sqlArray[0];
+
+        $risposta = new Vaccinabile($el["id"], $el["denominazione"], $el["eta"], $el["rischio"], $el["vaccinato2019"]);
+
+        return $risposta->ToArray();
+    }
+
     public static function ListaVaccinabili()
     {
         $db = (\App\Db::getInstance())->connect();

@@ -1,0 +1,213 @@
+<style>
+    .container {
+        max-width: 100%;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="font-weight-bold text-center">
+            <a class="btn" href="{{@BASE}}{{ 'vaccini_prenotazioni_tabella_giorno', 'data='.@lunediPrecedente | alias }}"><i class="fas fa-angle-double-left fa-2x"></i></a>
+            <span class="uppercase">Dal {{ @lunedi }} al {{ @domenica }}</span>
+            <a class="btn" href="{{@BASE}}{{ 'vaccini_prenotazioni_tabella_giorno', 'data='.@lunediSuccessivo | alias }}"><i class="fas fa-angle-double-right fa-2x"></i></a>
+        </p>
+    </div>
+</div>
+
+<!-- DIV TABELLA -->
+<div class="row">
+    <repeat group="{{ @tabella }}" value="{{ @giorno }}">
+        <div class="col p-1">
+            <table class="table table-bordered table-sm">
+                <thead>
+                    <tr class="tabella-giorno">
+                        <th scope="col" colspan="3">
+                            {{ @giorno.giorno }} - {{ @giorno.data }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- LISTA ORARI -->
+                    <repeat group="{{ @giorno.orari }}" value="{{ @prenotazione }}">
+                        <tr>
+                            <th scope="row" class="tabella-orario">
+                                <!-- ORA -->{{ @prenotazione.ora }}
+                            </th>
+                            <check if="{{ @prenotazione.fkpersona!='' }}">
+                                <true>
+                                    <td>
+                                        <check if="{{ @prenotazione.fatto==1 }}">
+                                            <true>
+                                                <span class="tabella-persona text-success">{{ @prenotazione.fkpersona.denominazione }}</span>
+                                            </true>
+                                            <false>
+                                                <span class="tabella-persona">{{ @prenotazione.fkpersona.denominazione }}</span>
+                                            </false>
+                                        </check>
+                                    </td>
+                                    <td class="tabella-btn">
+                                        <button type="button" class="btn btn-danger btn-sm btn-block btn-rect"
+                                            data-toggle="modal" data-target="#rimuoviModal"
+                                            data-idprenotazione="{{ @prenotazione.idprenotazione }}" 
+                                            data-fkpersona="{{ @prenotazione.fkpersona.fkpersona }}"
+                                            data-antinfluenzale="{{ @prenotazione.antinfluenzale }}"
+                                            data-antipneumococco="{{ @prenotazione.antipneumococco }}"
+                                            data-ora="{{ @prenotazione.ora }}" 
+                                            data-data="{{ @giorno.data }}" 
+                                            data-inizio="{{ @prenotazione.inizio }}">
+                                            <i class="fa fa-pencil-alt"></i>
+                                        </button>
+                                    </td>
+                                </true>
+                                <false>
+                                    <check if="{{ @prenotazione.attivo==true }}">
+                                        <true>
+                                            <td colspan="2">
+                                                <button type="button" class="btn btn-light btn-sm btn-block btn-rect"
+                                                    data-toggle="modal" data-target="#aggiungiModal"
+                                                    data-addora="{{ @prenotazione.ora }}"
+                                                    data-adddata="{{ @giorno.data }}" data-addgiorno="{{ @giorno.giorno }}">
+                                                    +
+                                                </button>
+                                            </td>
+                                        </true>
+                                        <false>
+                                            <td colspan="2">
+                                                <button type="button" class="btn btn-gray btn-sm btn-block btn-rect"
+                                                    data-toggle="modal" data-target="#aggiungiModal"
+                                                    data-addora="{{ @prenotazione.ora }}"
+                                                    data-adddata="{{ @giorno.data }}" data-addgiorno="{{ @giorno.giorno }}">
+                                                    +
+                                                </button>
+                                            </td>
+                                        </false>
+                                    </check>
+                                </false>
+                            </check>
+                        </tr>
+                    </repeat>
+                </tbody>
+            </table>
+        </div>
+    </repeat>
+</div>
+<!-- END DIV TABELLA -->
+
+
+<!-- MOD MODIFICA -->
+<div class="modal fade" id="rimuoviModal" tabindex="-1" role="dialog" aria-labelledby="rimuoviModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <form method="POST" action="{{@BASE}}{{ 'vaccini_prenotazioni_modifica' | alias }}" id="form_rimuovi">
+                    <div class="form-group">
+                        <h5 id="modal-info"></h5>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modal-mod-vaccinabile">Persona da vaccinare</label>
+                        <select class="form-control" id="modal-mod-vaccinabile" placeholder="Tipologia di vaccino" name="fkpersona" required>
+                            <repeat group="{{ @listaVaccinabili }}" value="{{ @v }}"></repeat>
+                            <option value="{{ @v.id }}">{{ @v.denominazione }}, {{ @v.eta }}<check if="{{ @v.rischio=='' }}">
+                                    <false>, {{ @v.rischio }}</false>
+                                </check>
+                                <check if="{{ @v.vaccinato2019==1 }}">
+                                    <true>(Vaccinato 2019)</true>
+                                </check>
+                            </option>
+                            </repeat>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-mod-antinfluenzale">Antinfluenzale</label>
+                        <select class="form-control" id="modal-mod-antinfluenzale" name="antinfluenzale">
+                            <option value="">Nessuno</option>
+                            <option value="Vaxigrip">Vaxigrip</option>
+                            <option value="Fluad">Fluad</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-mod-antipneumococco">Antipneumococco</label>
+                        <select class="form-control" id="modal-mod-antipneumococco" name="antipneumococco">
+                            <option value="">Nessuno</option>
+                            <option value="Prevenar">Prevenar</option>
+                        </select>
+                    </div>
+
+                    <input type="hidden" name="tipologia" value="" id="tipologia">
+                    <input type="hidden" name="data" value="" id="data">
+                    <input type="hidden" name="ora" value="" id="ora">
+                    <input type="hidden" name="idprenotazione" value="" id="modal-mod-idprenotazione">
+                    <input type="hidden" name="tabelladata" value="{{ @lunedi }}">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Indietro</button>
+                <button type="button" class="btn btn-danger" id="btn_cancella" onclick="btn_cancella()">Cancella</button>
+                <button type="button" class="btn btn-warning" id="btn_modifica" onclick="btn_modifica()">Modifica</button>
+                <button type="button" class="btn btn-success" id="btn_fatto" onclick="btn_fatto()">Fatto</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MOD MODIFICA FINE -->
+
+<!-- MOD AGGIUNGI -->
+<div class="modal fade" id="aggiungiModal" tabindex="-1" role="dialog" aria-labelledby="aggiungiModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="aggiungiModalLabel">Nuova Prenotazione</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{@BASE}}{{ 'vaccini_prenotazioni_registra' | alias }}" id="form_aggiungi">
+                    <div class="form-group">
+                        <p>
+                            <span id="modal-add-data"></span> - <span id="modal-add-ora"></span>
+                        </p>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="InputVaccinabile">Persona da vaccinare</label>
+                        <select class="form-control" id="InputVaccinabile" placeholder="Tipologia di vaccino" name="fkpersona" required>
+                            <repeat group="{{ @listaVaccinabili }}" value="{{ @v }}"></repeat>
+                            <option value="{{ @v.id }}">{{ @v.denominazione }}, {{ @v.eta }}<check if="{{ @v.rischio=='' }}">
+                                    <false>, {{ @v.rischio }}</false>
+                                </check>
+                                <check if="{{ @v.vaccinato2019==1 }}">
+                                    <true>(Vaccinato 2019)</true>
+                                </check>
+                            </option>
+                            </repeat>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="InputTipoAntinfluenzale">Antinfluenzale</label>
+                        <select class="form-control" id="InputTipoAntinfluenzale" name="antinfluenzale">
+                            <option value="">Nessuno</option>
+                            <option value="Vaxigrip">Vaxigrip</option>
+                            <option value="Fluad">Fluad</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="InputTipoAntipneumococco">Antipneumococco</label>
+                        <select class="form-control" id="InputTipoAntipneumococco" name="antipneumococco">
+                            <option value="">Nessuno</option>
+                            <option value="Prevenar">Prevenar</option>
+                        </select>
+                    </div>
+
+                    <input type="hidden" name="data" value="" id="add-data">
+                    <input type="hidden" name="ora" value="" id="add-ora">
+                    <input type="hidden" name="tabelladata" value="{{ @lunedi }}">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Indietro</button>
+                <button type="button" class="btn btn-success" id="btn_aggiungi" onclick="btn_aggiungi()">Registra</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MOD AGGIUNGI FINE -->

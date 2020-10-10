@@ -2,168 +2,109 @@
 
 namespace App\Vaccini;
 
+use App\Utilita;
+
 class Prenotazione
 {
     public $idprenotazione;
-    public $dataprenotazione;
+    public $data;
     public $ora;
     public $fkpersona;
     public $antinfluenzale;
     public $antipneumococco;
-    public $note;
+    public $fatto;
 
-    public function __construct($idprenotazione, $dataprenotazione, $ora, $fkpersona, $antinfluenzale, $antipneumococco, $note)
+    public function __construct($idprenotazione, $data, $ora, $fkpersona, $antinfluenzale, $antipneumococco, $fatto)
     {
         $this->idprenotazione = $idprenotazione;
-        $this->dataprenotazione = $dataprenotazione;
+        $this->data = $data;
         $this->ora = $ora;
         $this->fkpersona = $fkpersona;
         $this->antinfluenzale = $antinfluenzale;
         $this->antipneumococco = $antipneumococco;
-        $this->note = $note;
+        $this->fatto = $fatto;
     }
 
     public function ToArray()
     {
         return [
             'idprenotazione'    => $this->idprenotazione,
-            'dataprenotazione'  => $this->dataprenotazione,
+            'data'              => $this->data,
             'ora'               => $this->ora,
             'fkpersona'         => $this->fkpersona,
             'antinfluenzale'    => $this->antinfluenzale,
-            'antipneumococco'   => $this->antipneumococco,            
-            'note'              => $this->note,
-            'notebr'            => nl2br($this->note),
+            'antipneumococco'   => $this->antipneumococco,
+            'fatto'             => $this->fatto
         ];
     }
 
-    // public function AddDB()
-    // {
-    //     try {
-    //         $db = (\App\Db::getInstance())->connect();
-    //         $sql = 'INSERT into depositi values(null, "' . $this->data . '", "' . $this->tipo . '", "'. $this->lotto . '", "' . $this->scadenza . '", ' . $this->quantita . ', ' . $this->fornito . ', "' . $this->note . '")';
+    public function AddDB()
+    {
+        try {
+            $db = (\App\Db::getInstance())->connect();
 
-    //         $db->begin();
-    //         $db->exec($sql);
-    //         $db->commit();
-    //     } catch (\Exception $e) {
-    //         echo 'Caught exception: ',  $e->getMessage(), "\n";
-    //     }
-    // }
+            $data = Utilita::ConvertToYMD($this->data);
+            $sql = "INSERT into prenotazioni values(null, '$data', '$this->ora', $this->fkpersona, '$this->antinfluenzale', '$this->antipneumococco', $this->fatto)";
 
-    // public static function Lista()
-    // {
-    //     $db = (\App\Db::getInstance())->connect();
-    //     $risposta = [];
+            $db->begin();
+            $db->exec($sql);
+            $db->commit();
+        } catch (\Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+    }
 
-    //     $sql = "SELECT * FROM depositi ORDER BY data ASC";
-    //     $listaArray = $db->exec($sql);
+    public static function ReadAll()
+    {
+        $db = (\App\Db::getInstance())->connect();
 
-    //     foreach($listaArray as $el) {
-    //         $t = new Deposito($el["id"], \App\Utilita::ConvertToDMY($el['data']), $el["tipo"], $el["lotto"], $el["quantita"], \App\Utilita::ConvertToDMY($el['scadenza']), $el["fornito"], $el["note"]);
-    //         $risposta[] = $t->ToArray();
-    //     }
+        $sql = "SELECT * FROM prenotazioni";
+        $sqlArray = $db->exec($sql);
+        $risposta = $sqlArray;
 
-    //     return $risposta;
-    // }
+        return $risposta;
+    }
 
-    // public static function ListaArray()
-    // {
-    //     $db = (\App\Db::getInstance())->connect();
+    public static function EraseById($id)
+    {
+        try {
+            $db = (\App\Db::getInstance())->connect();
 
-    //     $sql = "SELECT * FROM depositi ORDER BY data ASC";
-    //     $listaArray = $db->exec($sql);
+            $sql = "DELETE FROM prenotazioni WHERE idprenotazione = '$id'";
+            $db->exec($sql);
+            
+        } catch (\Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
 
-    //     return $listaArray;
-    // }
+        return true;
+    }
 
-    // public static function ListaVaccini($tipo)
-    // {
-    //     $db = (\App\Db::getInstance())->connect();
-    //     $risposta = [];
+    public function UpdateDB()
+    {
+        try {
+            $db = (\App\Db::getInstance())->connect();
 
-    //     if($tipo == "antinfluenzale") {
-    //         $sql = "SELECT * FROM depositi WHERE tipo = 'Fluad' OR tipo = 'Vaxigrip Tetra' ORDER BY tipo ASC, data DESC";
-    //     } else {
-    //         $sql = "SELECT * FROM depositi WHERE tipo = 'Prevenar' ORDER BY tipo ASC, data DESC";
-    //     }
+            $data = Utilita::ConvertToYMD($this->data);
 
-    //     $listaArray = $db->exec($sql);
+            $sql = "UPDATE prenotazioni
+                    SET 
+                        data = '$data', 
+                        ora = '$this->ora', 
+                        fkpersona = $this->fkpersona, 
+                        antinfluenzale = '$this->antinfluenzale', 
+                        antipneumococco = '$this->antipneumococco', 
+                        fatto= $this->fatto 
+                    WHERE idprenotazione = $this->idprenotazione
+                    ;";
 
-    //     foreach($listaArray as $el) {
-    //         $t = new Deposito($el["id"], \App\Utilita::ConvertToDMY($el['data']), $el["tipo"], $el["lotto"], $el["quantita"], \App\Utilita::ConvertToDMY($el['scadenza']), $el["fornito"], $el["note"]);
-    //         $risposta[] = $t->ToArray();
-    //     }
+            // Utilita::DumpDie($sql);
 
-    //     return $risposta;
-    // }
-
-    // public static function ListaVacciniGenerico()
-    // {
-    //     $db = (\App\Db::getInstance())->connect();
-    //     $risposta = [];
-
-    //     $sql = "SELECT * FROM depositi ORDER BY tipo ASC, data DESC";
-
-    //     $listaArray = $db->exec($sql);
-
-    //     foreach($listaArray as $el) {
-    //         $t = new Deposito($el["id"], \App\Utilita::ConvertToDMY($el['data']), $el["tipo"], $el["lotto"], $el["quantita"], \App\Utilita::ConvertToDMY($el['scadenza']), $el["fornito"], $el["note"]);
-    //         $risposta[] = $t->ToArray();
-    //     }
-
-    //     return $risposta;
-    // }
-
-    // public static function ReadByID($id)
-    // {
-    //     $db = (\App\Db::getInstance())->connect();
-
-    //     $sql = "SELECT * FROM depositi WHERE id = '$id'";
-    //     $depositiArray = $db->exec($sql);
-    //     $el = $depositiArray[0];
-    //     $risposta = new Deposito($el["id"], \App\Utilita::ConvertToDMY($el['data']), $el["tipo"], $el["lotto"], $el["quantita"], \App\Utilita::ConvertToDMY($el['scadenza']), $el["fornito"], $el["note"]);
-
-    //     return $risposta->ToArray();
-    // }
-
-    // public function UpdateDB()
-    // {
-    //     try {
-    //         $db = (\App\Db::getInstance())->connect();
-
-    //         $sql = "UPDATE depositi
-    //                 SET 
-    //                     data = '$this->data',
-    //                     tipo = '$this->tipo',
-    //                     lotto = '$this->lotto',
-    //                     scadenza = '$this->scadenza',
-    //                     quantita = '$this->quantita ',
-    //                     fornito = '$this->fornito',
-    //                     note = '$this->note'
-    //                 WHERE id = $this->id
-    //                 ;";
-
-    //         $db->begin();
-    //         $db->exec($sql);
-    //         $db->commit();
-    //     } catch (\Exception $e) {
-    //         echo 'Caught exception: ',  $e->getMessage(), "\n";
-    //     }
-    // }
-
-    // public static function EraseByID($id)
-    // {
-    //     try {
-    //         $db = (\App\Db::getInstance())->connect();
-
-    //         $sql = "DELETE FROM depositi WHERE id = '$id'";
-    //         $db->exec($sql);
-
-    //     } catch (\Exception $e) {
-    //         echo 'Caught exception: ',  $e->getMessage(), "\n";
-    //     }
-
-    //     return true;
-    // }
+            $db->begin();
+            $db->exec($sql);
+            $db->commit();
+        } catch (\Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+    }
 }

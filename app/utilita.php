@@ -85,13 +85,35 @@ class Utilita
         return trim($risultato);
     }
 
+    public static function CheckData($date, $format = 'Y-m-d', $strict = true)
+	{
+		$dateTime = \DateTime::createFromFormat($format, $date);
+		if ($strict) {
+			$errors = \DateTime::getLastErrors();
+			if (!empty($errors['warning_count'])) {
+				return false;
+			}
+		}
+		return $dateTime !== false;
+	}
+
     public static function ConvertToDMY($testo)
     {
-        if (is_null($testo) || empty($testo)) {
+        if (is_null($testo) || empty($testo) || !self::CheckData($testo, 'Y-m-d')) {
             return null;
         } else {
             $data = \DateTime::createFromFormat('Y-m-d', $testo);
             return $data->format('d/m/Y');
+        }
+    }
+
+    public static function ConvertToYMD($testo)
+    {
+        if (is_null($testo) || empty($testo) || !self::CheckData($testo, 'd/m/Y')) {
+            return null;
+        } else {
+            $data = \DateTime::createFromFormat('d/m/Y', $testo);
+            return $data->format('Y-m-d');
         }
     }
 

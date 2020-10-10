@@ -1,112 +1,165 @@
 <?php
+
 namespace App\Vaccini;
 
 use App\Utilita;
 
 class Prenotazioni
 {
-    // Bisogna essere loggati
-    public function beforeroute($f3)
-    {
-        $auth = \App\Auth::Autentica($f3);
-        if (!$auth) {
-            $f3->set('logged', false);
-            $f3->reroute('/login');
-        } else {
-            $f3->set('logged', true);
-        }
+  // Bisogna essere loggati
+  public function beforeroute($f3)
+  {
+    $auth = \App\Auth::Autentica($f3);
+    if (!$auth) {
+      $f3->set('logged', false);
+      $f3->reroute('/login');
+    } else {
+      $f3->set('logged', true);
+    }
+  }
+
+  public function Tabella($f3)
+  {
+    $oggi = new \Datetime();
+    $dmy = $oggi->format('d-m-Y');
+    $f3->reroute('/vaccini/prenotazioni/tabella/' . $dmy);
+  }
+
+  public function TabellaGiorno($f3, $params)
+  {
+    $settimana = new \App\Settimana($params['data']);
+
+    $listaGiorni = new \App\ListaGiorni();
+    $listaGiorni->Add(new \App\Giorno($settimana->lunedi->format('d/m/Y'), 'Lunedì'));
+    $listaGiorni->Add(new \App\Giorno($settimana->martedi->format('d/m/Y'), 'Martedì'));
+    $listaGiorni->Add(new \App\Giorno($settimana->mercoledi->format('d/m/Y'), 'Mercoledì'));
+    $listaGiorni->Add(new \App\Giorno($settimana->giovedi->format('d/m/Y'), 'Giovedì'));
+    $listaGiorni->Add(new \App\Giorno($settimana->venerdi->format('d/m/Y'), 'Venerdì'));
+
+    $listaOrari = new \App\Vaccini\PrenotazioneOrari();
+
+    $orari_check = new \App\Orari_check();
+
+    $ORARIO_SUDDIVISIONE = ["00", "03", "06", "10", "13", "16", "20", "23", "26", "30", "33", "36", "40", "43", "46", "50", "53", "56"];
+    $ORARIO_SETTIMANALE = [
+      [
+        'giorno' => 'Lunedì',
+        'inizio' => '14:30',
+        'fine' => '15:30'
+      ],
+      [
+        'giorno' => 'Martedì',
+        'inizio' => '14:30',
+        'fine' => '15:30'
+      ],
+      [
+        'giorno' => 'Mercoledì',
+        'inizio' => '14:30',
+        'fine' => '15:30'
+      ],
+      [
+        'giorno' => 'Giovedì',
+        'inizio' => '14:30',
+        'fine' => '15:30'
+      ],
+      [
+        'giorno' => 'Venerdì',
+        'inizio' => '14:30',
+        'fine' => '15:30'
+      ],
+    ];
+
+    $orari_check->OrarioByArray(8, 18, $ORARIO_SUDDIVISIONE);
+
+    $app_check = new \App\Vaccini\PrenotazioneGiornataHelper($orari_check);
+
+    foreach ($ORARIO_SETTIMANALE as $a) {
+      $app_check->AddGiornata($a['giorno'], $a['inizio'], $a['fine']);
     }
 
-    public function Nuovo($f3)
-    {
-        $f3->set('titolo', 'Vaccini');
-        $f3->set('contenuto', '/vaccini/prenotazioni/nuovo.htm');
-        echo \Template::instance()->render('templates/base.htm');
+    $giorni_settimana = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"];
+    $orario_giornaliero = $orari_check->getOrari();
+
+    // Seleziono orari attivi o non attivi
+    foreach ($giorni_settimana as $g) {
+      foreach ($orario_giornaliero as $o) {
+        $listaOrari->Add(new \App\Vaccini\PrenotazioneOrario($g, $o, $app_check->CercaPrenotabile($g, $o)));
+      }
     }
 
-    // public function NuovoRegistra($f3)
-    // {
-    //     $data = $f3->get('POST.data');
-    //     $tipo = $f3->get('POST.tipo');
-    //     $lotto = $f3->get('POST.lotto');
-    //     $scadenza = $f3->get('POST.scadenza');
-    //     $quantita = $f3->get('POST.quantita');
-    //     $fornito = $f3->get('POST.fornito');
-    //     $note = \App\Utilita::PulisciStringaVirgolette($f3->get('POST.note'));
-     
-    //     $d = new \App\Vaccini\Deposito(null, $data, $tipo, $lotto, $quantita, $scadenza, $fornito, $note);
-    //     $d->AddDB();
+    $listaAppuntamenti = new \App\Vaccini\PrenotazioneLista();
+    foreach(\App\Vaccini\Prenotazione::ReadAll() as $p) {
+      $data = Utilita::ConvertToDMY($p['data']);
+      $persona = \App\Vaccini\Vaccinabile::ReadById($p['fkpersona']);
+      $listaAppuntamenti->Add(new \App\Vaccini\Prenotazione($p['idprenotazione'], $data, $p['ora'], ['fkpersona' => $p['fkpersona'], 'denominazione' => $persona['denominazione'] ], $p['antinfluenzale'], $p['antipneumococco'], $p['fatto']));
+    }
 
-    //     \App\Flash::instance()->addMessage('Deposito aggiunto', 'success');
-    //     $f3->reroute('@vaccini_depositi_lista');
-    // }
+    $tabella = new \App\Vaccini\PrenotazioneTabella($listaGiorni, $listaOrari, $listaAppuntamenti);
 
-    // public function Lista($f3)
-    // {
-    //     $lista = Deposito::Lista();
+    // -------------------------
 
-    //     $f3->set('lista', $lista);
-    //     $f3->set('titolo', 'Vaccini');
-    //     $f3->set('contenuto', '/vaccini/depositi/lista.htm');
-    //     \Template::instance()->filter('fornito','\App\Helpers\Filter::instance()->fornito');
-    //     echo \Template::instance()->render('templates/base.htm');
-    // }
+    $listaVaccinabili = \App\Vaccini\Vaccinabile::ListaVaccinabili();
+    $f3->set('listaVaccinabili', $listaVaccinabili);
 
-    // public function Modifica($f3, $params)
-    // {
-    //     $id = $params['id'];
-    //     $deposito = Deposito::ReadById($id);
+    $f3->set('tabella', $tabella->ToArray());
 
-    //     // Utilita::DumpDie($deposito);
+    $f3->set('lunedi', $settimana->lunedi->format('d-m-Y'));
+    $f3->set('domenica', $settimana->domenica->format('d-m-Y'));
 
-    //     $f3->set('deposito', $deposito);
-    //     $f3->set('titolo', 'Vaccini');
-    //     $f3->set('contenuto', '/vaccini/depositi/modifica.htm');
-    //     \Template::instance()->filter('datatoymd','\App\Helpers\Filter::instance()->datatoymd');
-    //     echo \Template::instance()->render('templates/base.htm');
-    // }
+    $f3->set('lunediPrecedente', $settimana->lunediPrecedente->format('d-m-Y'));
+    $f3->set('lunediSuccessivo', $settimana->lunediSuccessivo->format('d-m-Y'));
 
-    // public function ModificaRegistra($f3, $params)
-    // {
-    //     $id = $params['id'];
-    //     $data = $f3->get('POST.data');
-    //     $tipo = $f3->get('POST.tipo');
-    //     $lotto = $f3->get('POST.lotto');
-    //     $scadenza = $f3->get('POST.scadenza');
-    //     $quantita = $f3->get('POST.quantita');
-    //     $fornito = $f3->get('POST.fornito');
-    //     $note = \App\Utilita::PulisciStringaVirgolette($f3->get('POST.note'));
-     
-    //     $d = new \App\Vaccini\Deposito($id, $data, $tipo, $lotto, $quantita, $scadenza, $fornito, $note);
-        
-    //     $d->UpdateDB();
+    $f3->set('titolo', 'Vaccini');
+    $f3->set('script', 'prenotazionitabella.js');
+    $f3->set('contenuto', 'vaccini/prenotazioni/tabella.htm');
+    echo \Template::instance()->render('templates/base.htm');
+  }
 
-    //     \App\Flash::instance()->addMessage('Deposito modificato', 'success');
-    //     $f3->reroute('@vaccini_depositi_lista');
-    // }
+  public function Registra($f3)
+  {
+    $data = $f3->get('POST.data');
+    $ora = $f3->get('POST.ora');
+    $fkpersona = $f3->get('POST.fkpersona');
+    $antinfluenzale = $f3->get('POST.antinfluenzale');
+    $antipneumococco = $f3->get('POST.antipneumococco');
+    $lunedi = $f3->get('POST.tabelladata');
 
-    // public function Cancella($f3, $params)
-    // {
-    //     $id = $params['id'];
+    $p = new \App\Vaccini\Prenotazione(null, $data, $ora, $fkpersona, $antinfluenzale, $antipneumococco, 0);
+    $p->AddDB();
 
-    //     $deposito = Deposito::ReadByID($id);
+    // ridirigi sulla tabella con la data della registrazione
+    $f3->reroute('/vaccini/prenotazioni/tabella/' . $lunedi);
+  }
 
-    //     $f3->set('deposito', $deposito);
-    //     $f3->set('titolo', 'Vaccini');
-    //     $f3->set('contenuto', '/vaccini/depositi/cancella.htm');
-        
-    //     \Template::instance()->filter('stato','\App\Helpers\Filter::instance()->stato');
-    //     \Template::instance()->filter('fornito','\App\Helpers\Filter::instance()->fornito');
-    //     \Template::instance()->filter('datatodmy','\App\Helpers\Filter::instance()->datatodmy');
-    //     echo \Template::instance()->render('templates/base.htm');
-    // }
+  public function Modifica($f3)
+  {
+    $idprenotazione = $f3->get('POST.idprenotazione');
+    $data = $f3->get('POST.data');
+    $ora = $f3->get('POST.ora');
+    $fkpersona = $f3->get('POST.fkpersona');
+    $antinfluenzale = $f3->get('POST.antinfluenzale');
+    $antipneumococco = $f3->get('POST.antipneumococco');
+    $lunedi = $f3->get('POST.tabelladata');
+    $tipologia = $f3->get('POST.tipologia');
+    
+    if($tipologia=="modifica")
+    {
+      $p = new \App\Vaccini\Prenotazione($idprenotazione, $data, $ora, $fkpersona, $antinfluenzale, $antipneumococco, 0);
+      $p->UpdateDB();
+    }
 
-    // public function CancellaRegistra($f3, $params)
-    // {
-    //     $id = $params['id'];
-    //     Deposito::EraseByID($id);
+    if($tipologia=="fatto")
+    {
+      $p = new \App\Vaccini\Prenotazione($idprenotazione, $data, $ora, $fkpersona, $antinfluenzale, $antipneumococco, 1);
+      $p->UpdateDB();
+    }
 
-    //     \App\Flash::instance()->addMessage('Deposito cancellato', 'success');
-    //     $f3->reroute('@vaccini_depositi_lista');
-    // }
+    if($tipologia=="cancella")
+    {
+      \App\Vaccini\Prenotazione::EraseById($idprenotazione);
+    }
+
+    // ridirigi sulla tabella con la data della registrazione
+    $f3->reroute('/vaccini/prenotazioni/tabella/' . $lunedi);
+  }
 }
