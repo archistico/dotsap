@@ -65,6 +65,17 @@ class Prenotazione
         return $risposta;
     }
 
+    public static function ReadComplete()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "SELECT * FROM prenotazioni INNER JOIN vaccinabili ON prenotazioni.fkpersona = vaccinabili.id";
+        $sqlArray = $db->exec($sql);
+        $risposta = $sqlArray;
+
+        return $risposta;
+    }
+
     public static function EraseById($id)
     {
         try {

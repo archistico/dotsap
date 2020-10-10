@@ -128,7 +128,7 @@
 
 <h2>Persone vaccinabili</h2>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-3">
         <!-- disabled -->
         <!-- aria-disabled="true" -->
         <a class="btn btn-squared-default btn-primary btn-block"
@@ -141,7 +141,7 @@
             </p>
         </a>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-3">
         <a class="btn btn-squared-default btn-primary btn-block"
             href="{{@BASE}}{{ 'vaccini_vaccinabili_lista' | alias }}">
             <i class="fas fa-users fa-5x"></i>
@@ -149,6 +149,28 @@
                 Lista pazienti
                 <br />
                 vaccinabili
+            </p>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-squared-default btn-primary btn-block"
+            href="{{@BASE}}{{ 'vaccini_prenotazioni_tabella' | alias }}">
+            <i class="fas fa-table fa-5x"></i>
+            <p>
+                Nuove
+                <br />
+                Prenotazioni
+            </p>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-squared-default btn-primary btn-block"
+            href="{{@BASE}}{{ 'vaccini_prenotazioni_pdf' | alias }}">
+            <i class="far fa-file-pdf fa-5x"></i>
+            <p>
+                Lista
+                <br />
+                Prenotazioni
             </p>
         </a>
     </div>

@@ -88,10 +88,10 @@ class Prenotazioni
     }
 
     $listaAppuntamenti = new \App\Vaccini\PrenotazioneLista();
-    foreach(\App\Vaccini\Prenotazione::ReadAll() as $p) {
+    foreach (\App\Vaccini\Prenotazione::ReadAll() as $p) {
       $data = Utilita::ConvertToDMY($p['data']);
       $persona = \App\Vaccini\Vaccinabile::ReadById($p['fkpersona']);
-      $listaAppuntamenti->Add(new \App\Vaccini\Prenotazione($p['idprenotazione'], $data, $p['ora'], ['fkpersona' => $p['fkpersona'], 'denominazione' => $persona['denominazione'] ], $p['antinfluenzale'], $p['antipneumococco'], $p['fatto']));
+      $listaAppuntamenti->Add(new \App\Vaccini\Prenotazione($p['idprenotazione'], $data, $p['ora'], ['fkpersona' => $p['fkpersona'], 'denominazione' => $persona['denominazione']], $p['antinfluenzale'], $p['antipneumococco'], $p['fatto']));
     }
 
     $tabella = new \App\Vaccini\PrenotazioneTabella($listaGiorni, $listaOrari, $listaAppuntamenti);
@@ -141,25 +141,90 @@ class Prenotazioni
     $antipneumococco = $f3->get('POST.antipneumococco');
     $lunedi = $f3->get('POST.tabelladata');
     $tipologia = $f3->get('POST.tipologia');
-    
-    if($tipologia=="modifica")
-    {
+
+    if ($tipologia == "modifica") {
       $p = new \App\Vaccini\Prenotazione($idprenotazione, $data, $ora, $fkpersona, $antinfluenzale, $antipneumococco, 0);
       $p->UpdateDB();
     }
 
-    if($tipologia=="fatto")
-    {
+    if ($tipologia == "fatto") {
       $p = new \App\Vaccini\Prenotazione($idprenotazione, $data, $ora, $fkpersona, $antinfluenzale, $antipneumococco, 1);
       $p->UpdateDB();
     }
 
-    if($tipologia=="cancella")
-    {
+    if ($tipologia == "cancella") {
       \App\Vaccini\Prenotazione::EraseById($idprenotazione);
     }
 
     // ridirigi sulla tabella con la data della registrazione
     $f3->reroute('/vaccini/prenotazioni/tabella/' . $lunedi);
+  }
+
+  public function Pdf($f3)
+  {
+    $sizeFontGrande = 10;
+    $sizeFontPiccolo = 8;
+    $altezze_linea = 6;
+
+    $larghezza_data = 18;
+    $larghezza_ora = 10;
+    $larghezza_cognomenome = 54;
+    $larghezza_eta = 8;
+    $larghezza_rischio = 36;
+    $larghezza_vaccinato2019 = 12;
+    $larghezza_antinfluenzale = 22;
+    $larghezza_antipneumococco = 25;
+    $larghezza_fatto = 8;
+
+    $lista = \App\Vaccini\Prenotazione::ReadComplete();
+
+    $pdf = new \FPDF();
+    $pdf->AddPage();
+    $pdf->SetMargins(8, 10, 8);
+    $pdf->SetFont('Arial', 'B', $sizeFontGrande);
+    $pdf->Cell(0, 10, "LISTA PRENOTAZIONI", '', '', 'C');
+    $pdf->Ln(10);
+    $pdf->SetFont('Arial', '', $sizeFontPiccolo);
+
+    // INTESTAZIONE TABELLA 
+
+    $pdf->Cell($larghezza_data, $altezze_linea, 'Data', 1, 0, 'C');
+    $pdf->Cell($larghezza_ora, $altezze_linea, 'Ora', 1, 0, 'C');
+    $pdf->Cell($larghezza_cognomenome, $altezze_linea, 'Cognome nome', 1, 0, 'L');
+    $pdf->Cell($larghezza_eta, $altezze_linea, iconv('UTF-8', 'windows-1252', "Età"), 1, 0, 'L');
+    $pdf->Cell($larghezza_rischio, $altezze_linea, 'Rischio', 1, 0, 'L');
+    $pdf->Cell($larghezza_vaccinato2019, $altezze_linea, 'V. 2019', 1, 0, 'C');
+    $pdf->Cell($larghezza_antinfluenzale, $altezze_linea, 'Antinfluenzale', 1, 0, 'C');
+    $pdf->Cell($larghezza_antipneumococco, $altezze_linea, 'Antipneumococco', 1, 0, 'C');
+    $pdf->Cell($larghezza_fatto, $altezze_linea, 'Fatto', 1, 1, 'C');
+
+
+    // INSERIMENTO PAZIENTI 
+
+    foreach ($lista as $p) {
+      $cognomenome = iconv('UTF-8', 'windows-1252', $p['denominazione']);
+      $data = Utilita::ConvertToDMY($p['data']);
+      $antinfluenzale = $p['antinfluenzale'];
+      $antipneumococco = $p['antipneumococco'];
+      $ora = $p['ora'];
+      $eta = $p['eta'];
+      $rischio = $p['rischio'];
+      $vaccinato2019 = $p["vaccinato2019"] == 1 ? "X" : "-";
+      $fatto = $p["fatto"] == 1 ? "X" : "-";
+
+      $pdf->Cell($larghezza_data, $altezze_linea, $data, 1, 0, 'C');
+      $pdf->Cell($larghezza_ora, $altezze_linea, $ora, 1, 0, 'C');
+      $pdf->Cell($larghezza_cognomenome, $altezze_linea, $cognomenome, 1, 0, 'L');
+      $pdf->Cell($larghezza_eta, $altezze_linea, $eta, 1, 0, 'L');
+      $pdf->Cell($larghezza_rischio, $altezze_linea, $rischio, 1, 0, 'L');
+      $pdf->Cell($larghezza_vaccinato2019, $altezze_linea, $vaccinato2019, 1, 0, 'C');
+      $pdf->Cell($larghezza_antinfluenzale, $altezze_linea, $antinfluenzale, 1, 0, 'C');
+      $pdf->Cell($larghezza_antipneumococco, $altezze_linea, $antipneumococco, 1, 0, 'C');
+      $pdf->Cell($larghezza_fatto, $altezze_linea, $fatto, 1, 1, 'C');
+    }
+
+    $titolo = "Prenotazioni del " . date("d-m-Y");
+    $pdf->SetTitle($titolo);
+    $pdf->Output('', $titolo . ".pdf");
   }
 }
