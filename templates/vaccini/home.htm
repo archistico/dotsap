@@ -55,7 +55,7 @@
                     Fluad: {{ @antinfluenzali_rimanenza_fluad }}<br>
                    Vaxigrip Tetra: {{ @antinfluenzali_rimanenza_vaxigrip }}<br>
                    Altro: {{ @antinfluenzali_rimanenza_altro }}<br>
-                    Totale rimanenze: {{ @antinfluenzali_rimanenza }}
+                    Totale frigo: {{ @antinfluenzali_rimanenza }}
                 </p>
                 <hr>
                 <p><strong>Antipneumococco</strong><br>
@@ -70,18 +70,19 @@
                 <h5>STATISTICHE</h5>
             </div>
             <div class="card-body">
-                <p><strong>Antinfluenzali</strong><br>
-                    Totale pazienti: {{ @totale_pazienti }}<br>
-                    Pazienti con rischi: {{ @antinfluenzali_totale_rischio }}<br>
-                    Ancora da vaccinare: {{ @antinfluenzali_da_vaccinare }}
-                </p>
-                <hr>
                 <p><strong>Prenotazioni</strong><br>
                     Fluad: {{ @prenotazioni_fluad }}<br>
                     Vaxigrip Tetra: {{ @prenotazioni_vaxigrip }}<br>
                     Altro: {{ @prenotazioni_altro }}<br>
                     Prevenar: {{ @prenotazioni_prevenar }}
                 </p>
+                <hr>
+                <p><strong>Antinfluenzali</strong><br>
+                    Totale pazienti: {{ @totale_pazienti }}<br>
+                    Pazienti con rischi: {{ @antinfluenzali_totale_rischio }}<br>
+                    Da vaccinare: {{ @antinfluenzali_da_vaccinare }}<br>
+                    Vaccinati: {{ @antinfluenzali_percentuale_vaccinati }} &percnt;
+                </p>               
             </div>
         </div>
     </div>

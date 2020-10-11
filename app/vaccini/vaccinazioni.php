@@ -83,6 +83,15 @@ class Vaccinazioni
         $prenotazioni_prevenar = \App\Vaccini\Statistiche::Prenotazioni($prenotazioni, \App\Vaccini\Vaccino::$Prevenar);
         $f3->set('prenotazioni_prevenar', $prenotazioni_prevenar);
 
+        // STATISTICHE
+        if($antinfluenzali_totale_rischio != 0) {
+            $antinfluenzali_percentuale_vaccinati = ( $antinfluenzali_fatti / $antinfluenzali_totale_rischio ) * 100;
+        } else {
+            $antinfluenzali_percentuale_vaccinati = "-";
+        }
+        
+        $f3->set('antinfluenzali_percentuale_vaccinati', $antinfluenzali_percentuale_vaccinati);
+
         $f3->set('titolo', 'Vaccini');
         $f3->set('contenuto', '/vaccini/home.htm');
         echo \Template::instance()->render('templates/base.htm');

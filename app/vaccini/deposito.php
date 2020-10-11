@@ -88,7 +88,7 @@ class Deposito
         $risposta = [];
 
         if($tipo == "antinfluenzale") {
-            $sql = "SELECT * FROM depositi WHERE tipo = 'Fluad' OR tipo = 'Vaxigrip Tetra' ORDER BY tipo ASC, data DESC";
+            $sql = "SELECT * FROM depositi WHERE tipo = 'Fluad' OR tipo = 'Vaxigrip Tetra' OR tipo = 'Altro antinfluenzale' ORDER BY tipo DESC, data DESC";
         } else {
             $sql = "SELECT * FROM depositi WHERE tipo = 'Prevenar' ORDER BY tipo ASC, data DESC";
         }
