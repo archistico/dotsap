@@ -205,6 +205,9 @@ class Prenotazioni
       $cognomenome = iconv('UTF-8', 'windows-1252', $p['denominazione']);
       $data = Utilita::ConvertToDMY($p['data']);
       $antinfluenzale = $p['antinfluenzale'];
+      if($antinfluenzale == 'Altro antinfluenzale') {
+        $antinfluenzale = "Altro";
+      }
       $antipneumococco = $p['antipneumococco'];
       $ora = $p['ora'];
       $eta = $p['eta'];

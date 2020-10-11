@@ -140,4 +140,32 @@ class Statistiche
 
         return $risultato;
     }
+
+    // STATISTICHE PRENOTAZIONI
+
+    public static function Prenotazioni($prenotazioni, $check_tipo)
+    {
+        $prenotati = 0;
+
+        // Calcolo fatti per tipo
+        foreach ($prenotazioni as $p) {
+            if ($check_tipo == Vaccino::$Fluad && $p['antinfluenzale'] == Vaccino::$Fluad) {
+                $prenotati++;
+            }
+
+            if ($check_tipo == Vaccino::$VaxigripTetra && $p['antinfluenzale'] == Vaccino::$VaxigripTetra) {
+                $prenotati++;
+            }
+
+            if ($check_tipo == Vaccino::$AltroAntinfluenzale && $p['antinfluenzale'] == Vaccino::$AltroAntinfluenzale) {
+                $prenotati++;
+            }
+
+            if ($check_tipo == Vaccino::$Prevenar && $p['antipneumococco'] == Vaccino::$Prevenar) {
+                $prenotati++;
+            }
+        }
+
+        return $prenotati;
+    }
 }

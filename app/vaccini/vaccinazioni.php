@@ -25,6 +25,9 @@ class Vaccinazioni
         $antinfluenzali_fatti = \App\Vaccini\Statistiche::Fatti($vaccini, \App\Vaccini\Vaccino::$ANTINFLUENZALE);
         $f3->set('antinfluenzali_fatti', $antinfluenzali_fatti);
 
+        $antipneumococco_usciti = \App\Vaccini\Statistiche::Fatti($vaccini, \App\Vaccini\Vaccino::$ANTIPNEUMOCOCCICA);
+        $f3->set('antipneumococco_usciti', $antipneumococco_usciti);
+
         $antinfluenzali_lasciati_paziente = \App\Vaccini\Statistiche::LasciatiPaziente($vaccini, \App\Vaccini\Vaccino::$ANTINFLUENZALE);
         $f3->set('antinfluenzali_lasciati_paziente', $antinfluenzali_lasciati_paziente);
 
@@ -37,6 +40,9 @@ class Vaccinazioni
         $f3->set('antinfluenzali_forniti_paziente', $antinfluenzali_forniti_paziente);
         $totale_forniti = $antinfluenzali_forniti_ausl + $antinfluenzali_forniti_paziente;
         $f3->set('antinfluenzali_forniti_totale', $totale_forniti);
+
+        $antipneumococco_forniti_totale = \App\Vaccini\Statistiche::Forniti($deposito, \App\Vaccini\Vaccino::$ANTIPNEUMOCOCCICA, \App\Vaccini\Vaccino::$FORNITO_AUSL);
+        $f3->set('antipneumococco_forniti_totale', $antipneumococco_forniti_totale);
 
         $totale_pazienti = \App\Vaccini\Statistiche::TotalePazienti($vaccinabili);
         $f3->set('totale_pazienti', $totale_pazienti);
@@ -53,12 +59,29 @@ class Vaccinazioni
         $antinfluenzali_rimanenza_vaxigrip = \App\Vaccini\Statistiche::Rimanenti($vaccini, $deposito, \App\Vaccini\Vaccino::$VaxigripTetra);
         $f3->set('antinfluenzali_rimanenza_vaxigrip', $antinfluenzali_rimanenza_vaxigrip);
 
-        $antinfluenzali_rimanenti = $antinfluenzali_rimanenza_fluad + $antinfluenzali_rimanenza_vaxigrip; 
+        $antinfluenzali_rimanenza_altro = \App\Vaccini\Statistiche::Rimanenti($vaccini, $deposito, \App\Vaccini\Vaccino::$AltroAntinfluenzale);
+        $f3->set('antinfluenzali_rimanenza_altro', $antinfluenzali_rimanenza_altro);
+
+        $antinfluenzali_rimanenti = $antinfluenzali_rimanenza_fluad + $antinfluenzali_rimanenza_vaxigrip + $antinfluenzali_rimanenza_altro; 
         $f3->set('antinfluenzali_rimanenza', $antinfluenzali_rimanenti);
 
-        // // ANTIPNEUMOCOCCO
-        // $f3->set('antipneumococco_fatti', \App\Vaccini\Statistiche::Fatti($vaccini, \App\Vaccini\Vaccino::$ANTIPNEUMOCOCCICA));
-        // $f3->set('antipneumococco_lasciati_paziente', \App\Vaccini\Statistiche::LasciatiPaziente($vaccini, \App\Vaccini\Vaccino::$ANTIPNEUMOCOCCICA));
+        $antipneumococco_prevenar_rimanenza = \App\Vaccini\Statistiche::Rimanenti($vaccini, $deposito, \App\Vaccini\Vaccino::$Prevenar);
+        $f3->set('antipneumococco_prevenar_rimanenza', $antipneumococco_prevenar_rimanenza);
+
+        // PRENOTAZIONI
+        $prenotazioni = \App\Vaccini\Prenotazione::ReadAll();
+
+        $prenotazioni_fluad = \App\Vaccini\Statistiche::Prenotazioni($prenotazioni, \App\Vaccini\Vaccino::$Fluad);
+        $f3->set('prenotazioni_fluad', $prenotazioni_fluad);
+
+        $prenotazioni_vaxigrip = \App\Vaccini\Statistiche::Prenotazioni($prenotazioni, \App\Vaccini\Vaccino::$VaxigripTetra);
+        $f3->set('prenotazioni_vaxigrip', $prenotazioni_vaxigrip);
+
+        $prenotazioni_altro = \App\Vaccini\Statistiche::Prenotazioni($prenotazioni, \App\Vaccini\Vaccino::$AltroAntinfluenzale);
+        $f3->set('prenotazioni_altro', $prenotazioni_altro);
+
+        $prenotazioni_prevenar = \App\Vaccini\Statistiche::Prenotazioni($prenotazioni, \App\Vaccini\Vaccino::$Prevenar);
+        $f3->set('prenotazioni_prevenar', $prenotazioni_prevenar);
 
         $f3->set('titolo', 'Vaccini');
         $f3->set('contenuto', '/vaccini/home.htm');

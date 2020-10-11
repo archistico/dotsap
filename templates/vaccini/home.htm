@@ -11,53 +11,76 @@
 
 <div class="row">
     <div class="col-md-3">
-        <div class="card text-white bg-success text-center h-100">
+        <div class="card text-center h-100">
             <div class="card-header">
-                <h5>Anti-influenzale<br>ENTRATI</h5>
+                <h5>ENTRATI</h5>
             </div>
             <div class="card-body">
-                <p>Forniti AUSL: {{ @antinfluenzali_forniti_ausl }}<br>
+                <p><strong>Antinfluenzali</strong><br>Forniti AUSL: {{ @antinfluenzali_forniti_ausl }}<br>
                     Forniti paziente: {{ @antinfluenzali_forniti_paziente }}<br>
-                    Totale depositati: {{ @antinfluenzali_forniti_totale }}<br>
+                    Totale depositati: {{ @antinfluenzali_forniti_totale }}
+                </p>
+                <hr>
+                <p><strong>Antipneumococco</strong><br>
+                    Totale depositati: {{ @antipneumococco_forniti_totale }}
                 </p>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card text-white bg-danger text-center h-100">
+        <div class="card text-center h-100">
             <div class="card-header">
-                <h5>Anti-influenzale<br>USCITI</h5>
+                <h5>USCITI</h5>
             </div>
             <div class="card-body">
-                <p>Vaccinati: {{ @antinfluenzali_fatti }}<br>
+                <p><strong>Antinfluenzali</strong><br>
+                    Vaccinati: {{ @antinfluenzali_fatti }}<br>
                     Lasciati al paziente: {{ @antinfluenzali_lasciati_paziente }}<br>                    
                     Totale usciti: {{ @antinfluenzali_usciti }}
                 </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card text-white bg-info text-center h-100">
-            <div class="card-header">
-                <h5>Anti-influenzale<br>STATISTICHE</h5>
-            </div>
-            <div class="card-body">
-                <p>Totale pazienti: {{ @totale_pazienti }}<br>
-                    Pazienti con rischi: {{ @antinfluenzali_totale_rischio }}<br>
-                    Ancora da vaccinare: {{ @antinfluenzali_da_vaccinare }}
+                <hr>
+                <p><strong>Antipneumococco</strong><br>
+                    Totale usciti: {{ @antipneumococco_usciti }}
                 </p>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card text-white bg-secondary text-center h-100">
+        <div class="card text-center h-100">
             <div class="card-header">
-                <h5>Anti-influenzale<br>RIMANENZE</h5>
+                <h5>RIMANENZE</h5>
             </div>
             <div class="card-body">
-                <p>Fluad: {{ @antinfluenzali_rimanenza_fluad }}<br>
-                    Vaxigrip Tetra: {{ @antinfluenzali_rimanenza_vaxigrip }}<br>
+                <p><strong>Antinfluenzali</strong><br>
+                    Fluad: {{ @antinfluenzali_rimanenza_fluad }}<br>
+                   Vaxigrip Tetra: {{ @antinfluenzali_rimanenza_vaxigrip }}<br>
+                   Altro: {{ @antinfluenzali_rimanenza_altro }}<br>
                     Totale rimanenze: {{ @antinfluenzali_rimanenza }}
+                </p>
+                <hr>
+                <p><strong>Antipneumococco</strong><br>
+                    Prevenar: {{ @antipneumococco_prevenar_rimanenza }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center h-100">
+            <div class="card-header">
+                <h5>STATISTICHE</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Antinfluenzali</strong><br>
+                    Totale pazienti: {{ @totale_pazienti }}<br>
+                    Pazienti con rischi: {{ @antinfluenzali_totale_rischio }}<br>
+                    Ancora da vaccinare: {{ @antinfluenzali_da_vaccinare }}
+                </p>
+                <hr>
+                <p><strong>Prenotazioni</strong><br>
+                    Fluad: {{ @prenotazioni_fluad }}<br>
+                    Vaxigrip Tetra: {{ @prenotazioni_vaxigrip }}<br>
+                    Altro: {{ @prenotazioni_altro }}<br>
+                    Prevenar: {{ @prenotazioni_prevenar }}
                 </p>
             </div>
         </div>
@@ -71,7 +94,7 @@
             href="{{@BASE}}{{ 'vaccini_nuovo', 'tipo=antinfluenzale' | alias }}">
             <i class="fas fa-syringe fa-5x"></i>
             <p>
-                Vaccino
+                Nuovo Vaccino
                 <br />
                 Antinfluenzale
             </p>
@@ -82,7 +105,7 @@
             href="{{@BASE}}{{ 'vaccini_nuovo', 'tipo=antipneumococcico' | alias }}">
             <i class="fas fa-lungs fa-5x"></i>
             <p>
-                Vaccino
+                Nuovo Vaccino
                 <br />
                 Antipneumococco
             </p>
@@ -94,36 +117,12 @@
             <p>
                 Lista
                 <br />
-                vaccini
+                vaccini fatti
             </p>
         </a>
     </div>
 </div>
-<hr>
 
-<h2>Depositi</h2>
-<div class="row">
-    <div class="col-md-6">
-        <a class="btn btn-squared-default btn-primary btn-block" href="{{@BASE}}{{ 'vaccini_depositi_nuovo' | alias }}">
-            <i class="fas fa-archive fa-5x"></i>
-            <p>
-                Deposito
-                <br />
-                nuovo
-            </p>
-        </a>
-    </div>
-    <div class="col-md-6">
-        <a class="btn btn-squared-default btn-primary btn-block" href="{{@BASE}}{{ 'vaccini_depositi_lista' | alias }}">
-            <i class="fas fa-warehouse fa-5x"></i>
-            <p>
-                Deposito
-                <br />
-                lista
-            </p>
-        </a>
-    </div>
-</div>
 <hr>
 
 <h2>Persone vaccinabili</h2>
@@ -157,18 +156,18 @@
             href="{{@BASE}}{{ 'vaccini_prenotazioni_tabella' | alias }}">
             <i class="fas fa-table fa-5x"></i>
             <p>
-                Nuove
+                Nuova
                 <br />
-                Prenotazioni
+                Prenotazione
             </p>
         </a>
     </div>
     <div class="col-md-3">
         <a class="btn btn-squared-default btn-primary btn-block"
-            href="{{@BASE}}{{ 'vaccini_prenotazioni_pdf' | alias }}">
+            href="{{@BASE}}{{ 'vaccini_prenotazioni_pdf' | alias }}" target="_blank">
             <i class="far fa-file-pdf fa-5x"></i>
             <p>
-                Lista
+                PDF lista
                 <br />
                 Prenotazioni
             </p>
@@ -186,8 +185,32 @@
         </a>
     </div> -->
 </div>
+
 <hr>
 
+<h2>Depositi</h2>
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-squared-default btn-primary btn-block" href="{{@BASE}}{{ 'vaccini_depositi_nuovo' | alias }}">
+            <i class="fas fa-archive fa-5x"></i>
+            <p>
+                Nuovo
+                <br />
+                Deposito
+            </p>
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a class="btn btn-squared-default btn-primary btn-block" href="{{@BASE}}{{ 'vaccini_depositi_lista' | alias }}">
+            <i class="fas fa-warehouse fa-5x"></i>
+            <p>
+                Lista
+                <br />
+                Vaccini depositati
+            </p>
+        </a>
+    </div>
+</div>
 
 <style>
     .btn-squared-default {
