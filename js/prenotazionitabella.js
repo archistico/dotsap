@@ -63,4 +63,8 @@ $(document).ready(function () {
     if (sessionStorage.scrollTop != "undefined") {
         $(window).scrollTop(sessionStorage.scrollTop);
     }
+
+    // $('#InputVaccinabile').select2({
+    //     dropdownParent: $('#aggiungiModal')
+    // });
 });
