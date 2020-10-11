@@ -181,7 +181,7 @@ class Prenotazioni
     $pdf = new \FPDF();
     $pdf->AddPage();
     $pdf->SetMargins(8, 10, 8);
-    $pdf->SetAutoPageBreak(false, 10);
+    $pdf->SetAutoPageBreak(true, 10);
     $pdf->SetFont('Arial', 'B', $sizeFontGrande);
     $pdf->Cell(0, 10, "LISTA PRENOTAZIONI", '', '', 'C');
     $pdf->Ln(10);
