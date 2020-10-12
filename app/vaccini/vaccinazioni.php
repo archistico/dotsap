@@ -85,7 +85,7 @@ class Vaccinazioni
 
         // STATISTICHE
         if($antinfluenzali_totale_rischio != 0) {
-            $antinfluenzali_percentuale_vaccinati = ( $antinfluenzali_fatti / $antinfluenzali_totale_rischio ) * 100;
+            $antinfluenzali_percentuale_vaccinati = round((( $antinfluenzali_fatti / $antinfluenzali_totale_rischio ) * 100), 2);
         } else {
             $antinfluenzali_percentuale_vaccinati = "-";
         }
