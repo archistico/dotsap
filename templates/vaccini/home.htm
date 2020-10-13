@@ -71,10 +71,10 @@
             </div>
             <div class="card-body">
                 <p><strong>Prenotazioni</strong><br>
-                    Fluad: {{ @prenotazioni_fluad }}<br>
-                    Vaxigrip Tetra: {{ @prenotazioni_vaxigrip }}<br>
+                    Fluad: {{ @prenotazioni_fluad }} <span class="text-info">(pren. {{ @prenotazioni_possibili_fluad }})</span><br>
+                    Vaxigrip Tetra: {{ @prenotazioni_vaxigrip }} <span class="text-info">(pren. {{ @prenotazioni_possibili_vaxigrip }})</span><br>
                     Altro: {{ @prenotazioni_altro }}<br>
-                    Prevenar: {{ @prenotazioni_prevenar }}
+                    Prevenar: {{ @prenotazioni_prevenar }} <span class="text-info">(pren. {{ @prenotazioni_possibili_prevenar }})</span>
                 </p>
                 <hr>
                 <p><strong>Antinfluenzali</strong><br>

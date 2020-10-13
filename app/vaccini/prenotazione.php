@@ -58,7 +58,7 @@ class Prenotazione
     {
         $db = (\App\Db::getInstance())->connect();
 
-        $sql = "SELECT * FROM prenotazioni";
+        $sql = "SELECT * FROM prenotazioni WHERE fatto=0";
         $sqlArray = $db->exec($sql);
         $risposta = $sqlArray;
 

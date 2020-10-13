@@ -89,8 +89,19 @@ class Vaccinazioni
         } else {
             $antinfluenzali_percentuale_vaccinati = "-";
         }
-        
         $f3->set('antinfluenzali_percentuale_vaccinati', $antinfluenzali_percentuale_vaccinati);
+
+        // Ancora prenotabili
+        $prenotazioni_possibili_fluad = $antinfluenzali_rimanenza_fluad - $prenotazioni_fluad;
+        $f3->set('prenotazioni_possibili_fluad', $prenotazioni_possibili_fluad);
+
+        $prenotazioni_possibili_vaxigrip = $antinfluenzali_rimanenza_vaxigrip - $prenotazioni_vaxigrip;
+        $f3->set('prenotazioni_possibili_vaxigrip', $prenotazioni_possibili_vaxigrip);
+
+        $prenotazioni_possibili_prevenar = $antipneumococco_prevenar_rimanenza - $prenotazioni_prevenar;
+        $f3->set('prenotazioni_possibili_prevenar', $prenotazioni_possibili_prevenar);
+        
+
 
         $f3->set('titolo', 'Vaccini');
         $f3->set('contenuto', '/vaccini/home.htm');
