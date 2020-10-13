@@ -76,6 +76,17 @@ class Prenotazione
         return $risposta;
     }
 
+    public static function NonDefinite()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "SELECT * FROM prenotazioni WHERE (antinfluenzale=null OR antinfluenzale='') AND (antipneumococco=null OR antipneumococco='')";
+        $sqlArray = $db->exec($sql);
+        $risposta = count($sqlArray);
+
+        return $risposta;
+    }
+
     public static function EraseById($id)
     {
         try {

@@ -101,7 +101,9 @@ class Vaccinazioni
         $prenotazioni_possibili_prevenar = $antipneumococco_prevenar_rimanenza - $prenotazioni_prevenar;
         $f3->set('prenotazioni_possibili_prevenar', $prenotazioni_possibili_prevenar);
         
-
+        //prenotazioni_tipo_da_definire
+        $prenotazioni_tipo_da_definire = \App\Vaccini\Prenotazione::NonDefinite();
+        $f3->set('prenotazioni_tipo_da_definire', $prenotazioni_tipo_da_definire);
 
         $f3->set('titolo', 'Vaccini');
         $f3->set('contenuto', '/vaccini/home.htm');

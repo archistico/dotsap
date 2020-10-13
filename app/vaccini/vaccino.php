@@ -62,7 +62,7 @@ class Vaccino
     {
         $db = (\App\Db::getInstance())->connect();
 
-        $sql = "SELECT vaccini.*, depositi.*, vaccinabili.*, vaccini.data as datavaccino, vaccini.id as idvaccino FROM vaccini INNER JOIN vaccinabili ON vaccini.fkpersona = vaccinabili.id INNER JOIN depositi ON vaccini.fkdeposito = depositi.id  ORDER BY data DESC";
+        $sql = "SELECT vaccini.*, depositi.*, vaccinabili.*, vaccini.data as datavaccino, vaccini.id as idvaccino FROM vaccini INNER JOIN vaccinabili ON vaccini.fkpersona = vaccinabili.id INNER JOIN depositi ON vaccini.fkdeposito = depositi.id  ORDER BY data DESC, vaccini.id DESC";
         $listaArray = $db->exec($sql);
 
         return $listaArray;
