@@ -221,10 +221,14 @@ class Prenotazioni
 
 
     // INSERIMENTO PAZIENTI 
-
+    $datavecchia = Utilita::ConvertToDMY($lista[0]['data']);
     foreach ($lista as $p) {
+      if($datavecchia!=Utilita::ConvertToDMY($p['data'])) {
+        $pdf->AddPage();
+      }
       $cognomenome = iconv('UTF-8', 'windows-1252', $p['denominazione']);
       $data = Utilita::ConvertToDMY($p['data']);
+      $datavecchia = $data;
       $antinfluenzale = $p['antinfluenzale'];
       if($antinfluenzale == 'Altro antinfluenzale') {
         $antinfluenzale = "Altro";
