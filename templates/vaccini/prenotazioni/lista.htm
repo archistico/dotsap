@@ -1,0 +1,43 @@
+<style>
+    .container {
+        max-width: 100%;
+    }
+</style>
+
+<h2>LISTA PRENOTAZIONI</h2>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">DATA ORA</th>
+                <th scope="col">PERSONA, ETA, RISCHIO</th>
+                <th scope="col">V. 2019</th>
+                <th scope="col">ANTINFLUENZALE</th>
+                <th scope="col">ANTIPNEUMOCOCCO</th>
+                <th scope="col">FATTO</th>
+
+                <th scope="col" style="width: 50px">#</th>
+            </tr>
+            </thead>
+            <tbody>
+            <repeat group="{{ @lista }}" value="{{ @d }}">
+                <tr>
+                    <td>{{ @d.data }} {{ @d.ora }}</td>
+                    <td>{{ @d.denominazione }} {{ @d.eta }} {{ @d.rischio }}</td>
+                    <td>{{ @d.vaccinato2019 | vaccinato }}</td>
+                    <td>{{ @d.antinfluenzale }}</td>
+                    <td>{{ @d.antipneumococco }}</td>
+                    <td>{{ @d.fatto | fatto }}</td>
+
+                    <td scope="row">
+                        <div class="btn-group" role="group" aria-label="Pulsanti">
+                            <a href="{{@BASE}}{{ 'vaccini_prenotazioni_cancella', 'id='.@d.idprenotazione | alias }}" class="btn btn-danger btn-sm btn-rect"><i class="fas fa-times"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            </repeat>
+            </tbody>
+        </table>
+    </div>
+</div>

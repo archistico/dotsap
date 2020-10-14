@@ -160,6 +160,26 @@ class Prenotazioni
     $f3->reroute('/vaccini/prenotazioni/tabella/' . $lunedi);
   }
 
+  public function Cancella($f3, $params)
+  {
+    $idprenotazione = $params['id'];
+    \App\Vaccini\Prenotazione::EraseById($idprenotazione);
+    
+    $f3->reroute('@vaccini_prenotazioni_lista');
+  }
+
+  public function Lista($f3)
+  {
+    $lista = \App\Vaccini\Prenotazione::ReadComplete();
+    $f3->set('lista', $lista);
+
+    $f3->set('titolo', 'Vaccini');
+    $f3->set('contenuto', 'vaccini/prenotazioni/lista.htm');
+    \Template::instance()->filter('vaccinato','\App\Helpers\Filter::instance()->vaccinato');
+    \Template::instance()->filter('fatto','\App\Helpers\Filter::instance()->fatto');
+    echo \Template::instance()->render('templates/base.htm');
+  }
+
   public function Pdf($f3)
   {
     $sizeFontGrande = 10;

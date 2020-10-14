@@ -40,6 +40,17 @@ class Filter extends \Prefab
 		return "!";
 	}
 
+	function fatto($val)
+	{
+		if ($val == "0") {
+			return "-";
+		}
+		if ($val == "1") {
+			return "X";
+		}
+		return "!";
+	}
+
 
 	private static function verifyDate($date, $format = 'Y-m-d', $strict = true)
 	{
