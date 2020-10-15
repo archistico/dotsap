@@ -40,33 +40,24 @@ class Prenotazioni
 
     $orari_check = new \App\Orari_check();
 
+    // $ORARIO_SUDDIVISIONE = ["00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"];
     $ORARIO_SUDDIVISIONE = ["00", "03", "06", "10", "13", "16", "20", "23", "26", "30", "33", "36", "40", "43", "46", "50", "53", "56"];
     $ORARIO_SETTIMANALE = [
       [
         'giorno' => 'Lunedì',
-        'inizio' => '14:30',
-        'fine' => '15:30'
+        'inizio' => '15:00',
+        'fine' => '16:46'
       ],
       [
         'giorno' => 'Martedì',
-        'inizio' => '14:30',
-        'fine' => '15:30'
-      ],
-      [
-        'giorno' => 'Mercoledì',
-        'inizio' => '14:30',
-        'fine' => '15:30'
+        'inizio' => '14:46',
+        'fine' => '16:16'
       ],
       [
         'giorno' => 'Giovedì',
         'inizio' => '14:30',
-        'fine' => '15:30'
-      ],
-      [
-        'giorno' => 'Venerdì',
-        'inizio' => '14:30',
-        'fine' => '15:30'
-      ],
+        'fine' => '16:16'
+      ]
     ];
 
     $orari_check->OrarioByArray(8, 18, $ORARIO_SUDDIVISIONE);
