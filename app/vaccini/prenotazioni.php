@@ -50,17 +50,17 @@ class Prenotazioni
       ],
       [
         'giorno' => 'Martedì',
-        'inizio' => '14:46',
-        'fine' => '16:16'
+        'inizio' => '14:30',
+        'fine' => '16:00'
       ],
       [
-        'giorno' => 'Giovedì',
+        'giorno' => 'Venerdì',
         'inizio' => '14:30',
         'fine' => '16:16'
       ]
     ];
 
-    $orari_check->OrarioByArray(8, 18, $ORARIO_SUDDIVISIONE);
+    $orari_check->OrarioByArray(14, 19, $ORARIO_SUDDIVISIONE);
 
     $app_check = new \App\Vaccini\PrenotazioneGiornataHelper($orari_check);
 
