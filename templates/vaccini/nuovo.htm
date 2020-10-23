@@ -30,8 +30,8 @@
             <div class="form-group">
                 <label for="InputSede">Sede di inoculo</label>
                 <select class="form-control" id="InputSede" placeholder="Sede di inoculo" name="sede" required>
-                    <option value="1">Deltoide dx</option>
-                    <option value="2">Deltoide sx</option>
+                    <option value="1" <check if="{{ @tipoVaccino }} == 'antinfluenzale'"><true>selected</true></check> >Deltoide dx</option>
+                    <option value="2" <check if="{{ @tipoVaccino }} == 'antipneumococcico'"><true>selected</true></check> >Deltoide sx</option>
                 </select>
             </div>
         </div>

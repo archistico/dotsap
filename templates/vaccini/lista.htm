@@ -43,7 +43,7 @@
                 <tr>
                     <td>{{ @d.datavaccino | datatodmy }}</td>
                     <td>{{ @d.denominazione }}, {{ @d.eta }}<check if="{{ @d.rischio=='' }}"><false>, {{ @d.rischio }}</false></check></td>
-                    <td>{{ @d.tipo }}, {{ @d.lotto }}, fornito: {{ @d.fornito | fornito }}</td>
+                    <td>{{ @d.tipo }}, {{ @d.lotto }}, fornito: {{ @d.fornito | fornito }}, sede: {{ @d.sede | sede }}</td>
                     <td class="d-none d-sm-block">{{ @d.stato | stato }}</td>
 
                     <td scope="row">

@@ -6,6 +6,16 @@ use App\Utilita;
 
 class Filter extends \Prefab
 {
+	function sede($val)
+	{
+		if ($val == "1") {
+			return "DX";
+		}
+		if ($val == "2") {
+			return "SX";
+		}
+		return "!";
+	}
 
 	function stato($val)
 	{

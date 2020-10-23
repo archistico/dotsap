@@ -60,6 +60,7 @@ class Vaccini
         \Template::instance()->filter('stato','\App\Helpers\Filter::instance()->stato');
         \Template::instance()->filter('fornito','\App\Helpers\Filter::instance()->fornito');
         \Template::instance()->filter('datatodmy','\App\Helpers\Filter::instance()->datatodmy');
+        \Template::instance()->filter('sede','\App\Helpers\Filter::instance()->sede');
         echo \Template::instance()->render('templates/base.htm');
     }
 
