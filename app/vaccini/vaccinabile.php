@@ -103,4 +103,54 @@ class Vaccinabile
 
         return $risposta;
     }
+
+    public static function ListaChiamare()
+    {
+        $db = (\App\Db::getInstance())->connect();
+        $listaDaChiamare = [];
+        $listaVaccinabili = [];
+        $listaIdVaccinatiOPrenotati = [];
+
+        $sql = "SELECT * FROM vaccinabili WHERE rischio != '' OR vaccinato2019 = 1 ORDER BY denominazione ASC";
+        $listaArray = $db->exec($sql);
+
+        foreach($listaArray as $el) {
+            $t = new Vaccinabile($el["id"], $el["denominazione"], $el["eta"], $el["rischio"], $el["vaccinato2019"]);
+            $listaVaccinabili[] = $t->ToArray();
+        }
+
+        // LISTA I VACCINATI CON FLUAD O VAXIGRIP TETRA (NO PRENEVAR)
+
+        $sql = "SELECT vaccini.fkpersona FROM vaccini INNER JOIN depositi ON vaccini.fkdeposito = depositi.id WHERE depositi.tipo = 'Fluad' OR depositi.tipo = 'Vaxigrip Tetra' ORDER BY vaccini.fkpersona ASC";
+        $listaArray = $db->exec($sql);
+
+        foreach($listaArray as $el) {
+            $listaIdVaccinatiOPrenotati[] = $el["fkpersona"];
+        }
+
+
+        // LISTA I PRENOTATI
+        $sql = "SELECT fkpersona FROM prenotazioni WHERE fatto = 0 ORDER BY fkpersona ASC";
+        $listaArray = $db->exec($sql);
+
+        foreach($listaArray as $el) {
+            $listaIdVaccinatiOPrenotati[] = $el["fkpersona"];
+        }
+
+        sort($listaIdVaccinatiOPrenotati);
+
+        // RIMUOVERE DALLA LISTA DA CHIAMARE VACCINATI E PRENOTATI
+        foreach($listaVaccinabili as $el) {
+            $presente = false;
+
+            $id = $el["id"];
+            $presente = in_array($id, $listaIdVaccinatiOPrenotati);
+
+            if(!$presente) {
+                $listaDaChiamare[] = $el;
+            }
+        }
+
+        return $listaDaChiamare;
+    }
 }

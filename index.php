@@ -71,6 +71,7 @@ $f3->route('GET @vaccini_vaccinabili_lista: /vaccini/vaccinabili/lista', '\App\V
 $f3->route('GET @vaccini_vaccinabili_modifica: /vaccini/vaccinabili/modifica/@id', '\App\Vaccini\Vaccinabili->Modifica');
 $f3->route('POST @vaccini_vaccinabili_modifica_registra: /vaccini/vaccinabili/modifica/@id', '\App\Vaccini\Vaccinabili->ModificaRegistra');
 $f3->route('GET @vaccini_vaccinabili_import: /vaccini/vaccinabili/import', '\App\Vaccini\Vaccinabili->Import');
+$f3->route('GET @vaccini_vaccinabili_chiamare: /vaccini/vaccinabili/chiamare', '\App\Vaccini\Vaccinabili->Chiamare');
 
 // TODO cancellazione persone vaccinabili
 $f3->route('GET @vaccini_vaccinabili_cancella: /vaccini/vaccinabili/cancella/@id', '\App\Vaccini\Vaccinabili->Cancella');

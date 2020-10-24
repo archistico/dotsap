@@ -81,7 +81,7 @@ class Vaccinabili
 
         $f3->set('titolo', 'Vaccini');
         $f3->set('contenuto', '/vaccini/vaccinabili/lista.htm');
-        \Template::instance()->filter('vaccinato','\App\Helpers\Filter::instance()->vaccinato');
+        \Template::instance()->filter('vaccinato', '\App\Helpers\Filter::instance()->vaccinato');
         echo \Template::instance()->render('templates/base.htm');
     }
 
@@ -119,5 +119,16 @@ class Vaccinabili
 
         \App\Flash::instance()->addMessage('Persona vaccinabile modificata', 'success');
         $f3->reroute('@vaccini_vaccinabili_lista');
+    }
+
+    public function Chiamare($f3)
+    {
+        $lista = \App\Vaccini\Vaccinabile::ListaChiamare();
+        $f3->set('lista', $lista);
+
+        $f3->set('titolo', 'Vaccini');
+        $f3->set('contenuto', 'vaccini/vaccinabili/chiamare.htm');
+        \Template::instance()->filter('vaccinato', '\App\Helpers\Filter::instance()->vaccinato');
+        echo \Template::instance()->render('templates/base.htm');
     }
 }

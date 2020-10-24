@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-md-12">
+        <!-- bootstrap style-->
+        <F3:repeat group="{{ \App\Flash::instance()->getMessages() }}" value="{{ @msg }}">
+            <div class="alert alert-{{ @msg.status }} alert-dismissable">
+                {{ @msg.text | esc }}
+            </div>
+        </F3:repeat>
+    </div>
+</div>
+
+<h2>LISTA DA CHIAMARE (NON PRENOTATI E NON VACCINATI)</h2>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">DENOMINAZIONE</th>
+                <th scope="col">ETA</th>
+                <th scope="col">RISCHIO</th>
+                <th scope="col">VACCINATO 2019</th>
+            </tr>
+            </thead>
+            <tbody>
+            <repeat group="{{ @lista }}" value="{{ @d }}">
+                <tr>
+                    <td>{{ @d.denominazione }}</td>
+                    <td>{{ @d.eta }}</td>
+                    <td>{{ @d.rischio }}</td>
+                    <td>{{ @d.vaccinato2019 | vaccinato }}</td>
+                </tr>
+            </repeat>
+            </tbody>
+        </table>
+    </div>
+</div>
