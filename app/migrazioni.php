@@ -98,6 +98,9 @@ class Migrazioni
         
         //$this->CancellaTabella( "richieste_eliminate");
         $this->CreazioneTabella("richieste_eliminate", "CREATE TABLE IF NOT EXISTS 'richieste_eliminate' ( id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'paziente' TEXT NOT NULL, 'data' TEXT NOT NULL, 'farmaco1' TEXT, 'farmaco2' TEXT, 'farmaco3' TEXT, 'farmaco4' TEXT, 'farmaco5' TEXT, 'farmaco6' TEXT, 'farmaco7' TEXT, 'farmaco8' TEXT, 'farmaco9' TEXT, 'note' TEXT );");
+        $this->CreazioneTabella("dipendenti", "CREATE TABLE IF NOT EXISTS 'dipendenti' ( id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'cognome' TEXT NOT NULL, 'nome' TEXT NOT NULL );");
+        $this->CreazioneTabella("orelavorate", "CREATE TABLE IF NOT EXISTS 'orelavorate' ( id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'fkdipendente' INTEGER NOT NULL, 'data' TEXT, 'ingresso' TEXT, 'uscita' TEXT );");
+
 
         //----------- UPDATE TABELLE -----------------
         $this->AggiornaTabella("pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'lavoro' TEXT;");
@@ -105,6 +108,7 @@ class Migrazioni
         $this->AggiornaTabella("pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'note' TEXT;");
         $this->AggiornaTabella("pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'email' TEXT;");
         $this->AggiornaTabella("pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'invioricette' INTEGER NOT NULL DEFAULT 0;");
+        $this->AggiornaTabella("pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'datacovid' TEXT;");
 
         $f3->set('messaggi', $this->messaggi);
         $f3->set('titolo', 'Migrazioni');
