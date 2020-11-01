@@ -1,0 +1,40 @@
+<h2>Nuova presenza</h2>
+<form method="POST" action="{{@BASE}}{{ 'dipendenti_presenze_nuovo_registra' | alias }}">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputData">Data</label>
+                <input type="date" class="form-control" id="InputData" name="data" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputEntrata">Ora di entrata</label>
+                <input type="time" min="7:00" max="22:00" class="form-control" id="InputEntrata" name="entrata" required>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="InputUscita">Ora di uscita</label>
+                <input type="time" min="7:00" max="22:00" class="form-control" id="InputUscita" name="uscita" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="InputNote">Note</label>
+                <input type="text" class="form-control" id="InputNote" placeholder="Note" name="note">
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'utente' | alias }}">Annulla</a>
+        </div>
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Registra</button>
+        </div>
+    </div>
+</form>
