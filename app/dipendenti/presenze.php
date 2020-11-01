@@ -59,4 +59,15 @@ class Presenze
         \App\Flash::instance()->addMessage('Presenza cancellata', 'success');
         $f3->reroute('@dipendenti_presenze_lista');
     }
+
+    public function Statistiche($f3)
+    {
+        $lista = \App\Dipendenti\Presenza::Statistiche();
+        $f3->set('lista', $lista);
+
+        $f3->set('titolo', 'Presenze');
+        $f3->set('contenuto', '/dipendenti/presenze/statistica.htm');
+        echo \Template::instance()->render('templates/base.htm');
+    }
+
 }

@@ -182,6 +182,7 @@ $f3->route('POST @dipendenti_presenze_nuovo_registra: /dipendenti/presenze/nuovo
 $f3->route('GET @dipendenti_presenze_lista: /dipendenti/presenze/lista', '\App\Dipendenti\Presenze->Lista');
 $f3->route('GET @dipendenti_presenze_cancella: /dipendenti/presenze/cancella/@id', '\App\Dipendenti\Presenze->Cancella');
 $f3->route('POST @dipendenti_presenze_cancella_registra: /dipendenti/presenze/cancella/@id', '\App\Dipendenti\Presenze->CancellaRegistra');
+$f3->route('GET @dipendenti_presenze_statistiche: /dipendenti/presenze/statistiche', '\App\Dipendenti\Presenze->Statistiche');
 
 // Se errori
 // $f3->set('ONERROR',function($f3){
