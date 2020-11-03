@@ -71,7 +71,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="InputStato">Stato Covid19</label>
                         <select class="form-control" id="InputStato" placeholder="Stato covid" name="stato" required>
@@ -87,6 +87,12 @@
                             <option value="Guarito" <check if="{{ @p.stato=='Guarito' }}"><true>selected</true></check> >Guarito</option>
                             <option value="Deceduto" <check if="{{ @p.stato=='Deceduto' }}"><true>selected</true></check> >Deceduto</option>
                         </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="InputDataCovid">Data covid</label>
+                        <input type="date" class="form-control" id="InputDataCovid" name="datacovid" required value="{{ @p.datacovid }}">
                     </div>
                 </div>
                 <div class="col-md-6">

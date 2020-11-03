@@ -141,7 +141,7 @@ class Paziente {
         $db = (\App\Db::getInstance())->connect();
         $risposta = [];
 
-        $sql = "SELECT * FROM pazienti WHERE stato = '$stato'";
+        $sql = "SELECT * FROM pazienti WHERE stato = '$stato' ORDER BY datacovid ASC";
         $pazientiArray = $db->exec($sql);
 
         foreach($pazientiArray as $paz) {
@@ -151,10 +151,10 @@ class Paziente {
             $risposta[] = $t->ToArray();
         }
 
-        // Ordina in base a cognome
-        usort($risposta, function ($a, $b) {
-            return strcmp($a["nomecompleto"], $b["nomecompleto"]);
-        });
+        // // Ordina in base a cognome
+        // usort($risposta, function ($a, $b) {
+        //     return strcmp($a["nomecompleto"], $b["nomecompleto"]);
+        // });
 
         return $risposta;
     }

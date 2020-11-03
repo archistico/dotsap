@@ -69,8 +69,9 @@ class Pazienti
 
         $email = Utilita::PulisciStringaVirgolette($f3->get('POST.email'));
         $email = strtolower($email);
+        $datacovid = null;
 
-        $p = new \App\Paziente(null, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $stato, $email);
+        $p = new \App\Paziente(null, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $stato, $email, $datacovid);
         $p->AddDB();
 
         \App\Flash::instance()->addMessage('Paziente aggiunto', 'success');
@@ -141,8 +142,10 @@ class Pazienti
         } else {
             $note = Utilita::PulisciStringaVirgolette($f3->get('POST.note')) . "\nModifica: " . date("d/m/Y") . " | Stato: ".$statoprecedente." -> ".$stato;
         }
+        
+        $datacovid = Utilita::PulisciStringaVirgolette($f3->get('POST.datacovid'));
 
-        $p = new \App\Paziente($id, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $stato, $email);
+        $p = new \App\Paziente($id, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $stato, $email, $datacovid);
         $p->UpdateDB();
 
         \App\Flash::instance()->addMessage('Paziente modificato', 'success');

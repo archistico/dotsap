@@ -93,6 +93,7 @@
             <tbody>
             <repeat group="{{ @listapositivi }}" value="{{ @paziente }}">
                 <tr>
+                    <td>{{ @paziente.datacovid | datatodmy }}</td>
                     <td>{{ @paziente.nomecompleto }} ({{ @paziente.datanascita }})</td>
                     <td style="width: 30%">{{ @paziente.stato }}</td>
                     <td scope="row" style="width: 50px">
@@ -114,6 +115,7 @@
             <tbody>
             <repeat group="{{ @listasospetti }}" value="{{ @paziente }}">
                 <tr>
+                    <td>{{ @paziente.datacovid | datatodmy }}</td>
                     <td>{{ @paziente.nomecompleto }} ({{ @paziente.datanascita }})</td>
                     <td style="width: 30%">{{ @paziente.stato }}</td>
                     <td scope="row" style="width: 50px">
@@ -136,6 +138,7 @@
             <tbody>
             <repeat group="{{ @listaisolamento }}" value="{{ @paziente }}">
                 <tr>
+                    <td>{{ @paziente.datacovid | datatodmy }}</td>
                     <td>{{ @paziente.nomecompleto }} ({{ @paziente.datanascita }})</td>
                     <td style="width: 30%">{{ @paziente.stato }}</td>
                     <td scope="row" style="width: 50px">
@@ -158,6 +161,7 @@
             <tbody>
             <repeat group="{{ @listanegativi }}" value="{{ @paziente }}">
                 <tr>
+                    <td>{{ @paziente.datacovid | datatodmy }}</td>
                     <td>{{ @paziente.nomecompleto }} ({{ @paziente.datanascita }})</td>
                     <td style="width: 30%">{{ @paziente.stato }}</td>
                     <td scope="row" style="width: 50px">
@@ -180,6 +184,7 @@
             <tbody>
             <repeat group="{{ @listaguariti }}" value="{{ @paziente }}">
                 <tr>
+                    <td>{{ @paziente.datacovid | datatodmy }}</td>
                     <td>{{ @paziente.nomecompleto }} ({{ @paziente.datanascita }})</td>
                     <td style="width: 30%">{{ @paziente.stato }}</td>
                     <td scope="row" style="width: 50px">
@@ -202,6 +207,7 @@
             <tbody>
             <repeat group="{{ @listadeceduti }}" value="{{ @paziente }}">
                 <tr>
+                    <td>{{ @paziente.datacovid | datatodmy }}</td>
                     <td>{{ @paziente.nomecompleto }} ({{ @paziente.datanascita }})</td>
                     <td style="width: 30%">{{ @paziente.stato }}</td>
                     <td scope="row" style="width: 50px">
@@ -224,6 +230,7 @@
             <tbody>
             <repeat group="{{ @listaplaquenil }}" value="{{ @paziente }}">
                 <tr>
+                    <td>{{ @paziente.datacovid | datatodmy }}</td>
                     <td>{{ @paziente.nomecompleto }} ({{ @paziente.datanascita }})</td>
                     <td style="width: 30%">{{ @paziente.stato }}</td>
                     <td scope="row" style="width: 50px">

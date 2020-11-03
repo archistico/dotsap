@@ -84,6 +84,7 @@ class Covid
         $f3->set('titolo', 'Covid');
         $f3->set('script', 'covid.js');
         $f3->set('contenuto', '/covid/covid.htm');
+        \Template::instance()->filter('datatodmy','\App\Helpers\Filter::instance()->datatodmy');
         echo \Template::instance()->render('templates/base.htm');
     }
 
@@ -133,7 +134,9 @@ class Covid
             $note = Utilita::PulisciStringaVirgolette($f3->get('POST.note')) . "\nModifica: " . date("d/m/Y") . " | Stato: ".$statoprecedente." -> ".$stato;
         }
 
-        $p = new \App\Paziente($id, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $stato, $email);
+        $datacovid = Utilita::PulisciStringaVirgolette($f3->get('POST.datacovid'));
+
+        $p = new \App\Paziente($id, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $stato, $email, $datacovid);
         $p->UpdateDB();
 
         \App\Flash::instance()->addMessage('Paziente modificato', 'success');
