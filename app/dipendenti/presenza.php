@@ -52,6 +52,16 @@ class Presenza
         return $listaArray;
     }
 
+    public static function ListaArrayOrderDESC()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "SELECT * FROM presenze ORDER BY data DESC, entrata DESC";
+        $listaArray = $db->exec($sql);
+
+        return $listaArray;
+    }
+
     public function ToArray()
     {
         return [

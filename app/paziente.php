@@ -16,7 +16,7 @@ class Paziente {
     public $lavoro;
     public $note;
     public $email;
-
+    
     // dati privacy
     public $data;
     public $segreteria;
@@ -29,8 +29,9 @@ class Paziente {
 
     // stato covid
     public $stato;
+    public $datacovid;
 
-    public function __construct($id, $cognome, $nome, $datanascita, $sesso, $codicefiscale, $indirizzo, $citta, $telefono, $lavoro, $note, $stato, $email)
+    public function __construct($id, $cognome, $nome, $datanascita, $sesso, $codicefiscale, $indirizzo, $citta, $telefono, $lavoro, $note, $stato, $email, $datacovid)
     {
         $this->id = $id;
         $this->cognome = ucwords($cognome);
@@ -55,13 +56,14 @@ class Paziente {
         $this->stato = $stato;
 
         $this->email = $email;
+        $this->datacovid = $datacovid;
     }
 
     public function AddDB()
     {
         try {
             $db = (\App\Db::getInstance())->connect();
-            $sql = 'INSERT into pazienti values(null, "' . $this->cognome . '", "' . $this->nome . '", "' . $this->datanascita . '", "' . $this->sesso . '", "' . $this->codicefiscale . '", "' . $this->indirizzo . '", "' . $this->citta . '", "' . $this->telefono . '", "' . $this->data . '", "' . $this->segreteria . '", "' . $this->associazione . '", "' . $this->sostituti . '", "' . $this->consulenti . '", "' . $this->softwarehouse . '", "' . $this->lavoro . '", "' . $this->stato . '", "' . $this->note . '", "' . $this->email . '", "' . $this->invioricette . '")';
+            $sql = 'INSERT into pazienti values(null, "' . $this->cognome . '", "' . $this->nome . '", "' . $this->datanascita . '", "' . $this->sesso . '", "' . $this->codicefiscale . '", "' . $this->indirizzo . '", "' . $this->citta . '", "' . $this->telefono . '", "' . $this->data . '", "' . $this->segreteria . '", "' . $this->associazione . '", "' . $this->sostituti . '", "' . $this->consulenti . '", "' . $this->softwarehouse . '", "' . $this->lavoro . '", "' . $this->stato . '", "' . $this->note . '", "' . $this->email . '", "' . $this->invioricette . '", "' . $this->datacovid . '")';
             $db->begin();
             $db->exec($sql);
             $db->commit();
@@ -88,7 +90,8 @@ class Paziente {
                          lavoro = '$this->lavoro',
                          stato = '$this->stato',
                          note = '$this->note',
-                         email = '$this->email'
+                         email = '$this->email',
+                         datacovid = '$this->datacovid' 
                     WHERE id = $this->id
                     ;";
 
@@ -119,7 +122,7 @@ class Paziente {
         $pazientiArray = $db->exec($sql);
 
         foreach($pazientiArray as $paz) {
-            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"]);
+            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"], $paz["datacovid"]);
             $t->data = $paz["data"];
             $t->datafirma = $t->getData();
             $risposta[] = $t->ToArray();
@@ -142,7 +145,7 @@ class Paziente {
         $pazientiArray = $db->exec($sql);
 
         foreach($pazientiArray as $paz) {
-            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"]);
+            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"], $paz["datacovid"]);
             $t->data = $paz["data"];
             $t->datafirma = $t->getData();
             $risposta[] = $t->ToArray();
@@ -167,7 +170,7 @@ class Paziente {
         $pazientiArray = $db->exec($sql);
 
         foreach($pazientiArray as $paz) {
-            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"]);
+            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"], $paz["datacovid"]);
             $t->data = $paz["data"];
             $t->datafirma = $t->getData();
             $risposta[] = $t->ToArray();
@@ -191,7 +194,7 @@ class Paziente {
         $pazientiArray = $db->exec($sql);
 
         foreach($pazientiArray as $paz) {
-            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"]);
+            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"], $paz["datacovid"]);
             $t->data = $paz["data"];
             $t->datafirma = $t->getData();
             $risposta[] = $t->ToArray();
@@ -212,7 +215,7 @@ class Paziente {
         $sql = "SELECT * FROM pazienti WHERE id = '$id'";
         $pazientiArray = $db->exec($sql);
         $paz = $pazientiArray[0];
-        $risposta = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"]);
+        $risposta = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"], $paz["datacovid"]);
         $risposta->data = $paz["data"];
         $risposta->segreteria = $paz["segreteria"];
         $risposta->associazione = $paz["associazione"];
@@ -225,6 +228,7 @@ class Paziente {
         $risposta->note = $paz["note"];
         $risposta->stato = $paz["stato"];
         $risposta->email = $paz["email"];
+        $risposta->datacovid = $paz["datacovid"];
 
         return $risposta;
     }
@@ -314,6 +318,7 @@ class Paziente {
             'notebr'        => nl2br($this->note),
             'stato'         => $this->stato,
             'email'         => $this->email,
+            'datacovid'     => $this->datacovid,
         ];
     }
 

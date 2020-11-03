@@ -42,7 +42,7 @@ class Presenze
 
     public function Lista($f3)
     {
-        $lista = \App\Dipendenti\Presenza::ListaArray();
+        $lista = \App\Dipendenti\Presenza::ListaArrayOrderDESC();
         $f3->set('lista', $lista);
 
         $f3->set('titolo', 'Presenze');
