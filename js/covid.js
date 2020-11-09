@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     document.getElementById("btnModifica").addEventListener("click", function(){
         let sel = document.getElementById("selectModifica");
-        let link = "{{@BASE}}/covid/modifica/" + sel.options[sel.selectedIndex].value;
+        let link = "{{@BASE}}/covid/scheda/" + sel.options[sel.selectedIndex].value;
         window.location.href = link;
     });
 });

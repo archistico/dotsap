@@ -1,0 +1,132 @@
+<div class="row">
+    <div class="col-md-12">
+        <form method="POST" action="{{@BASE}}{{ 'covid_scheda_registra' | alias }}">
+            <fieldset class="border pl-2 pr-2">
+                <legend class="w-auto">Generale</legend>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="datascheda">Data scheda</label>
+                            <input type="date" class="form-control" id="datascheda" name="datascheda" required>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <label>&NonBreakingSpace;</label>
+                        <h3><strong>{{ @paziente_denominazione }}</strong> ({{ @paziente_data_di_nascita }})</h3>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="border pl-2 pr-2">
+                <legend class="w-auto">Tampone</legend>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="datatampone">Data tampone</label>
+                            <input type="date" class="form-control" id="datatampone" name="datatampone">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="stato">Stato Covid</label>
+                            <select class="form-control" id="stato" name="stato" required>
+                                <option value="Ignoto">Ignoto</option>
+                                <option value="Sospetto in attesa di tampone">Sospetto in attesa di tampone</option>
+                                <option value="Sospetto non in attesa di tampone">Sospetto non in attesa di tampone</option>
+                                <option value="Negativo">Negativo</option>
+                                <option value="Isolamento">Isolamento</option>
+                                <option value="Positivo">Positivo</option>
+                                <option value="Guarito">Guarito</option>
+                                <option value="Deceduto">Deceduto</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="clinica">Clinica</label>
+                            <select class="form-control" id="clinica" name="clinica" required>
+                                <option value="-">-</option>
+                                <option value="Asintomatico">Asintomatico</option>
+                                <option value="Paucisintomatico">Paucisintomatico</option>
+                                <option value="Sintomatico">Sintomatico</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+
+
+            <fieldset class="border pl-2 pr-2">
+                <legend class="w-auto">Presa in carico</legend>
+                <div class="row">  
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="presaincarico">Presa in carico</label>
+                            <select class="form-control" id="presaincarico" name="presaincarico" required>
+                                <option value="Nessuna">Nessuna</option>
+                                <option value="MMG">MMG</option>
+                                <option value="USCA">USCA</option>
+                                <option value="Ospedale">Ospedale</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="comorbidita">Comorbidità</label>
+                            <select class="form-control" id="comorbidita" name="comorbidita" required>
+                                <option value="Non patologie">Non patologie</option>
+                                <option value="Patologie">Patologie</option>
+                                <option value="Patologie ed età">Patologie ed età</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="esami">Esami</label>
+                            <input type="text" class="form-control" id="esami" placeholder="Esami" name="esami">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="terapia">Terapia</label>
+                            <input type="text" class="form-control" id="terapia" placeholder="Terapia" name="terapia">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="ossigeno">Ossigeno</label>
+                            <select class="form-control" id="ossigeno" name="ossigeno" required>
+                                <option value="No">No</option>
+                                <option value="Gassoso">Gassoso</option>
+                                <option value="Liquido">Liquido</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="note">Note</label>
+                            <textarea class="form-control" id="note" placeholder="Note" name="note" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'covid' | alias }}">Annulla</a>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Registra</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
