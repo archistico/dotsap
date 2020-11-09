@@ -1,0 +1,44 @@
+<style>
+    .container {
+        max-width: 100%;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Data scheda</th>
+                    <th scope="col">Paziente</th>
+                    <th scope="col">Stato</th>                    
+                    <th scope="col">Clinica</th>
+                    <th scope="col">Comorbidità</th>
+                    <th scope="col">Presa in carico</th>
+                    <th scope="col">Terapia</th>
+                    <th scope="col">Ossigeno</th>
+                    <th scope="col">Esami</th>
+                    <th scope="col">Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                <repeat group="{{ @lista }}" value="{{ @s }}"></repeat>
+                <tr>
+                    <td>{{ @s.datascheda | datatodmy }}</td>
+                    <td>{{ @s.cognome }} {{ @s.nome }} ({{ @s.datanascita }})</td>
+                    <td>{{ @s.stato }} <check if="{{ @s.datatampone!='' }}"><true>({{ @s.datatampone | datatodmy }})</true></check></td>
+                    <td>{{ @s.clinica }}</td>
+                    <td>{{ @s.comorbidita }}</td>
+                    <td>{{ @s.presaincarico }}</td>
+                    <td>{{ @s.terapia }}</td>
+                    <td>{{ @s.o2 }}</td>
+                    <td>{{ @s.esami }}</td>
+                    <td>{{ @s.note }}</td>
+                </tr>
+                </repeat>
+            </tbody>
+        </table>
+
+    </div>
+</div>

@@ -23,6 +23,37 @@ class Covid
         $listapazienti = \App\Paziente::ReadAllName();
         $f3->set('listapazienti', $listapazienti);
 
+        $schede_array = \App\Covid\Model\Covid::ReadAll();
+        $stato_positivi = \App\Covid\Model\Covid::Conteggio($schede_array, \App\Covid\Model\Covid::$STATO_POSITIVO);
+        $stato_sospetti_in_attesa_di_tampone = \App\Covid\Model\Covid::Conteggio($schede_array, \App\Covid\Model\Covid::$STATO_SOSPETTO_IN_ATTESA_DI_TAMPONE);
+        $stato_sospetti_non_in_attesa_di_tampone = \App\Covid\Model\Covid::Conteggio($schede_array, \App\Covid\Model\Covid::$STATO_SOSPETTO_NON_IN_ATTESA_DI_TAMPONE);
+        $stato_isolamento = \App\Covid\Model\Covid::Conteggio($schede_array, \App\Covid\Model\Covid::$STATO_ISOLAMENTO);
+        $stato_negativi = \App\Covid\Model\Covid::Conteggio($schede_array, \App\Covid\Model\Covid::$STATO_NEGATIVO);
+        $stato_guariti = \App\Covid\Model\Covid::Conteggio($schede_array, \App\Covid\Model\Covid::$STATO_GUARITO);
+        $stato_deceduti = \App\Covid\Model\Covid::Conteggio($schede_array, \App\Covid\Model\Covid::$STATO_DECEDUTO);
+        
+        $f3->set('stato_positivi', $stato_positivi);
+        $f3->set('stato_sospetti', $stato_sospetti_in_attesa_di_tampone + $stato_sospetti_non_in_attesa_di_tampone);
+        $f3->set('stato_isolamento', $stato_isolamento);
+        $f3->set('stato_negativi', $stato_negativi);
+        $f3->set('stato_guariti', $stato_guariti);
+        $f3->set('stato_deceduti', $stato_deceduti);
+
+        $schede_positivi = \App\Covid\Model\Covid::FilterLastByStato($schede_array, \App\Covid\Model\Covid::$STATO_POSITIVO);
+        $f3->set('schede_positivi', $schede_positivi);
+
+        $schede_sospetti = \App\Covid\Model\Covid::FilterLastByStato($schede_array, \App\Covid\Model\Covid::$STATO_SOSPETTO_IN_ATTESA_DI_TAMPONE);
+        $f3->set('schede_sospetti', $schede_sospetti);
+
+        $schede_isolamento = \App\Covid\Model\Covid::FilterLastByStato($schede_array, \App\Covid\Model\Covid::$STATO_ISOLAMENTO);
+        $f3->set('schede_isolamento', $schede_isolamento);
+
+        $schede_guariti = \App\Covid\Model\Covid::FilterLastByStato($schede_array, \App\Covid\Model\Covid::$STATO_GUARITO);
+        $f3->set('schede_guariti', $schede_guariti);
+
+        $schede_deceduti = \App\Covid\Model\Covid::FilterLastByStato($schede_array, \App\Covid\Model\Covid::$STATO_DECEDUTO);
+        $f3->set('schede_deceduti', $schede_deceduti);
+
         $f3->set('titolo', 'Covid');
         $f3->set('script', 'covid.js');
         $f3->set('contenuto', '/covid/covid.htm');
@@ -35,7 +66,6 @@ class Covid
         $fkpaziente = $params['fkpaziente'];
         
         $paziente = \App\Paziente::ReadByID($fkpaziente);
-        // Utilita::DumpDie($paziente);
 
         $paziente_denominazione = $paziente->cognome ." ". $paziente->nome;
         $f3->set('paziente_denominazione', $paziente_denominazione);
@@ -69,6 +99,16 @@ class Covid
         $f3->reroute('@covid');
     }
 
+    public function Lista($f3)
+    {
+        $schede_array = \App\Covid\Model\Covid::ReadAllOrderByDate();
+        $f3->set('lista', $schede_array);
+
+        $f3->set('titolo', 'Covid');
+        $f3->set('contenuto', '/covid/lista.htm');
+        \Template::instance()->filter('datatodmy','\App\Helpers\Filter::instance()->datatodmy');
+        echo \Template::instance()->render('templates/base.htm');
+    }
 
     // public function Home($f3)
     // {

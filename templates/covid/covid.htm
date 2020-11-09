@@ -1,3 +1,9 @@
+<style>
+    .container {
+        max-width: 100%;
+    }
+</style>
+
 <div class="row">
     <div class="col-md-12">
         <!-- bootstrap style-->
@@ -41,7 +47,7 @@
             <h6 class="my-0 font-weight-normal">Positivi</h6>
         </div>
         <div class="card-body">
-            <h1 class="card-title pricing-card-title">{{ @totalepositivi }}</h1>
+            <h1 class="card-title pricing-card-title">{{ @stato_positivi }}</h1>
         </div>
     </div>
     <div class="card mb-4 shadow-sm">
@@ -49,7 +55,7 @@
             <h6 class="my-0 font-weight-normal">Sospetti</h6>
         </div>
         <div class="card-body">
-            <h1 class="card-title pricing-card-title">{{ @totalesospetti }}</h1>
+            <h1 class="card-title pricing-card-title">{{ @stato_sospetti }}</h1>
         </div>
     </div>
     <div class="card mb-4 shadow-sm">
@@ -57,7 +63,7 @@
             <h6 class="my-0 font-weight-normal">Isolamento</h6>
         </div>
         <div class="card-body">
-            <h1 class="card-title pricing-card-title">{{ @totaleisolamento }}</h1>
+            <h1 class="card-title pricing-card-title">{{ @stato_isolamento }}</h1>
         </div>
     </div>
     <div class="card mb-4 shadow-sm">
@@ -65,7 +71,7 @@
             <h6 class="my-0 font-weight-normal">Negativi</h6>
         </div>
         <div class="card-body">
-            <h1 class="card-title pricing-card-title">{{ @totalenegativi }}</h1>
+            <h1 class="card-title pricing-card-title">{{ @stato_negativi }}</h1>
         </div>
     </div>
     <div class="card mb-4 shadow-sm">
@@ -73,7 +79,7 @@
             <h6 class="my-0 font-weight-normal">Guariti</h6>
         </div>
         <div class="card-body">
-            <h1 class="card-title pricing-card-title">{{ @totaleguariti }}</h1>
+            <h1 class="card-title pricing-card-title">{{ @stato_guariti }}</h1>
         </div>
     </div>
     <div class="card mb-4 shadow-sm">
@@ -81,167 +87,208 @@
             <h6 class="my-0 font-weight-normal">Deceduti</h6>
         </div>
         <div class="card-body">
-            <h1 class="card-title pricing-card-title">{{ @totaledeceduti }}</h1>
+            <h1 class="card-title pricing-card-title">{{ @stato_deceduti }}</h1>
         </div>
     </div>
 </div>
 
-<div class="row mt-3">
+<h3>Positivi</h3>
+<div class="row">
     <div class="col-md-12">
-        <h3>Positivi</h3>
+
         <table class="table table-striped">
-            <tbody>
-            <repeat group="{{ @listapositivi }}" value="{{ @paziente }}">
+            <thead>
                 <tr>
-                    <td>{{ @paziente.datacovid | datatodmy }}</td>
-                    <td>{{ @paziente.nomecompleto }} ({{ @paziente.datanascita }})</td>
-                    <td style="width: 30%">{{ @paziente.stato }}</td>
-                    <td scope="row" style="width: 50px">
-                        <div class="btn-group" role="group" aria-label="">
-                            <a href="{{@BASE}}/covid/modifica/{{ @paziente.id }}" class="btn btn-warning btn-sm btn-rect"><i class="fas fa-biohazard"></i></a>
-                        </div>
-                    </td>
+                    <th scope="col">Data scheda</th>
+                    <th scope="col">Paziente</th>
+                    <th scope="col">Stato</th>                    
+                    <th scope="col">Clinica</th>
+                    <th scope="col">Comorbidità</th>
+                    <th scope="col">Presa in carico</th>
+                    <th scope="col">Terapia</th>
+                    <th scope="col">Ossigeno</th>
+                    <th scope="col">Esami</th>
+                    <th scope="col">Note</th>
                 </tr>
-            </repeat>
+            </thead>
+            <tbody>
+                <repeat group="{{ @schede_positivi }}" value="{{ @s }}"></repeat>
+                <tr>
+                    <td>{{ @s.datascheda | datatodmy }}</td>
+                    <td>{{ @s.cognome }} {{ @s.nome }} ({{ @s.datanascita }})</td>
+                    <td>{{ @s.stato }} <check if="{{ @s.datatampone!='' }}"><true>({{ @s.datatampone | datatodmy }})</true></check></td>
+                    <td>{{ @s.clinica }}</td>
+                    <td>{{ @s.comorbidita }}</td>
+                    <td>{{ @s.presaincarico }}</td>
+                    <td>{{ @s.terapia }}</td>
+                    <td>{{ @s.o2 }}</td>
+                    <td>{{ @s.esami }}</td>
+                    <td>{{ @s.note }}</td>
+                </tr>
+                </repeat>
             </tbody>
         </table>
-        <hr>
-    </div>
-</div>
-<div class="row mt-3">
-    <div class="col-md-12">
-        <h3>Sospetti</h3>
-        <table class="table table-striped">
-            <tbody>
-            <repeat group="{{ @listasospetti }}" value="{{ @paziente }}">
-                <tr>
-                    <td>{{ @paziente.datacovid | datatodmy }}</td>
-                    <td>{{ @paziente.nomecompleto }} ({{ @paziente.datanascita }})</td>
-                    <td style="width: 30%">{{ @paziente.stato }}</td>
-                    <td scope="row" style="width: 50px">
-                        <div class="btn-group" role="group" aria-label="">
-                            <a href="{{@BASE}}/covid/modifica/{{ @paziente.id }}" class="btn btn-warning btn-sm btn-rect"><i class="fas fa-biohazard"></i></a>
-                        </div>
-                    </td>
-                </tr>
-            </repeat>
-            </tbody>
-        </table>
-        <hr>
+
     </div>
 </div>
 
-<div class="row mt-3">
+<h3>Sospetti</h3>
+<div class="row">
     <div class="col-md-12">
-        <h3>Isolamento</h3>
+
         <table class="table table-striped">
-            <tbody>
-            <repeat group="{{ @listaisolamento }}" value="{{ @paziente }}">
+            <thead>
                 <tr>
-                    <td>{{ @paziente.datacovid | datatodmy }}</td>
-                    <td>{{ @paziente.nomecompleto }} ({{ @paziente.datanascita }})</td>
-                    <td style="width: 30%">{{ @paziente.stato }}</td>
-                    <td scope="row" style="width: 50px">
-                        <div class="btn-group" role="group" aria-label="">
-                            <a href="{{@BASE}}/covid/modifica/{{ @paziente.id }}" class="btn btn-warning btn-sm btn-rect"><i class="fas fa-biohazard"></i></a>
-                        </div>
-                    </td>
+                    <th scope="col">Data scheda</th>
+                    <th scope="col">Paziente</th>
+                    <th scope="col">Stato</th>                    
+                    <th scope="col">Clinica</th>
+                    <th scope="col">Comorbidità</th>
+                    <th scope="col">Presa in carico</th>
+                    <th scope="col">Terapia</th>
+                    <th scope="col">Ossigeno</th>
+                    <th scope="col">Esami</th>
+                    <th scope="col">Note</th>
                 </tr>
-            </repeat>
+            </thead>
+            <tbody>
+                <repeat group="{{ @schede_sospetti }}" value="{{ @s }}"></repeat>
+                <tr>
+                    <td>{{ @s.datascheda | datatodmy }}</td>
+                    <td>{{ @s.cognome }} {{ @s.nome }} ({{ @s.datanascita }})</td>
+                    <td>{{ @s.stato }} <check if="{{ @s.datatampone!='' }}"><true>({{ @s.datatampone | datatodmy }})</true></check></td>
+                    <td>{{ @s.clinica }}</td>
+                    <td>{{ @s.comorbidita }}</td>
+                    <td>{{ @s.presaincarico }}</td>
+                    <td>{{ @s.terapia }}</td>
+                    <td>{{ @s.o2 }}</td>
+                    <td>{{ @s.esami }}</td>
+                    <td>{{ @s.note }}</td>
+                </tr>
+                </repeat>
             </tbody>
         </table>
-        <hr>
+
     </div>
 </div>
 
-<div class="row mt-3">
+<h3>Isolamento</h3>
+<div class="row">
     <div class="col-md-12">
-        <h3>Negativi</h3>
+
         <table class="table table-striped">
-            <tbody>
-            <repeat group="{{ @listanegativi }}" value="{{ @paziente }}">
+            <thead>
                 <tr>
-                    <td>{{ @paziente.datacovid | datatodmy }}</td>
-                    <td>{{ @paziente.nomecompleto }} ({{ @paziente.datanascita }})</td>
-                    <td style="width: 30%">{{ @paziente.stato }}</td>
-                    <td scope="row" style="width: 50px">
-                        <div class="btn-group" role="group" aria-label="">
-                            <a href="{{@BASE}}/covid/modifica/{{ @paziente.id }}" class="btn btn-warning btn-sm btn-rect"><i class="fas fa-biohazard"></i></a>
-                        </div>
-                    </td>
+                    <th scope="col">Data scheda</th>
+                    <th scope="col">Paziente</th>
+                    <th scope="col">Stato</th>                    
+                    <th scope="col">Clinica</th>
+                    <th scope="col">Comorbidità</th>
+                    <th scope="col">Presa in carico</th>
+                    <th scope="col">Terapia</th>
+                    <th scope="col">Ossigeno</th>
+                    <th scope="col">Esami</th>
+                    <th scope="col">Note</th>
                 </tr>
-            </repeat>
+            </thead>
+            <tbody>
+                <repeat group="{{ @schede_isolamento }}" value="{{ @s }}"></repeat>
+                <tr>
+                    <td>{{ @s.datascheda | datatodmy }}</td>
+                    <td>{{ @s.cognome }} {{ @s.nome }} ({{ @s.datanascita }})</td>
+                    <td>{{ @s.stato }} <check if="{{ @s.datatampone!='' }}"><true>({{ @s.datatampone | datatodmy }})</true></check></td>
+                    <td>{{ @s.clinica }}</td>
+                    <td>{{ @s.comorbidita }}</td>
+                    <td>{{ @s.presaincarico }}</td>
+                    <td>{{ @s.terapia }}</td>
+                    <td>{{ @s.o2 }}</td>
+                    <td>{{ @s.esami }}</td>
+                    <td>{{ @s.note }}</td>
+                </tr>
+                </repeat>
             </tbody>
         </table>
-        <hr>
+
     </div>
 </div>
 
-<div class="row mt-3">
+<h3>Guariti</h3>
+<div class="row">
     <div class="col-md-12">
-        <h3>Guariti</h3>
+
         <table class="table table-striped">
-            <tbody>
-            <repeat group="{{ @listaguariti }}" value="{{ @paziente }}">
+            <thead>
                 <tr>
-                    <td>{{ @paziente.datacovid | datatodmy }}</td>
-                    <td>{{ @paziente.nomecompleto }} ({{ @paziente.datanascita }})</td>
-                    <td style="width: 30%">{{ @paziente.stato }}</td>
-                    <td scope="row" style="width: 50px">
-                        <div class="btn-group" role="group" aria-label="">
-                            <a href="{{@BASE}}/covid/modifica/{{ @paziente.id }}" class="btn btn-warning btn-sm btn-rect"><i class="fas fa-biohazard"></i></a>
-                        </div>
-                    </td>
+                    <th scope="col">Data scheda</th>
+                    <th scope="col">Paziente</th>
+                    <th scope="col">Stato</th>                    
+                    <th scope="col">Clinica</th>
+                    <th scope="col">Comorbidità</th>
+                    <th scope="col">Presa in carico</th>
+                    <th scope="col">Terapia</th>
+                    <th scope="col">Ossigeno</th>
+                    <th scope="col">Esami</th>
+                    <th scope="col">Note</th>
                 </tr>
-            </repeat>
+            </thead>
+            <tbody>
+                <repeat group="{{ @schede_guariti }}" value="{{ @s }}"></repeat>
+                <tr>
+                    <td>{{ @s.datascheda | datatodmy }}</td>
+                    <td>{{ @s.cognome }} {{ @s.nome }} ({{ @s.datanascita }})</td>
+                    <td>{{ @s.stato }} <check if="{{ @s.datatampone!='' }}"><true>({{ @s.datatampone | datatodmy }})</true></check></td>
+                    <td>{{ @s.clinica }}</td>
+                    <td>{{ @s.comorbidita }}</td>
+                    <td>{{ @s.presaincarico }}</td>
+                    <td>{{ @s.terapia }}</td>
+                    <td>{{ @s.o2 }}</td>
+                    <td>{{ @s.esami }}</td>
+                    <td>{{ @s.note }}</td>
+                </tr>
+                </repeat>
             </tbody>
         </table>
-        <hr>
+
     </div>
 </div>
 
-<div class="row mt-3">
+<h3>Deceduti</h3>
+<div class="row">
     <div class="col-md-12">
-        <h3>Deceduti</h3>
+
         <table class="table table-striped">
-            <tbody>
-            <repeat group="{{ @listadeceduti }}" value="{{ @paziente }}">
+            <thead>
                 <tr>
-                    <td>{{ @paziente.datacovid | datatodmy }}</td>
-                    <td>{{ @paziente.nomecompleto }} ({{ @paziente.datanascita }})</td>
-                    <td style="width: 30%">{{ @paziente.stato }}</td>
-                    <td scope="row" style="width: 50px">
-                        <div class="btn-group" role="group" aria-label="">
-                            <a href="{{@BASE}}/covid/modifica/{{ @paziente.id }}" class="btn btn-warning btn-sm btn-rect"><i class="fas fa-biohazard"></i></a>
-                        </div>
-                    </td>
+                    <th scope="col">Data scheda</th>
+                    <th scope="col">Paziente</th>
+                    <th scope="col">Stato</th>                    
+                    <th scope="col">Clinica</th>
+                    <th scope="col">Comorbidità</th>
+                    <th scope="col">Presa in carico</th>
+                    <th scope="col">Terapia</th>
+                    <th scope="col">Ossigeno</th>
+                    <th scope="col">Esami</th>
+                    <th scope="col">Note</th>
                 </tr>
-            </repeat>
+            </thead>
+            <tbody>
+                <repeat group="{{ @schede_deceduti }}" value="{{ @s }}"></repeat>
+                <tr>
+                    <td>{{ @s.datascheda | datatodmy }}</td>
+                    <td>{{ @s.cognome }} {{ @s.nome }} ({{ @s.datanascita }})</td>
+                    <td>{{ @s.stato }} <check if="{{ @s.datatampone!='' }}"><true>({{ @s.datatampone | datatodmy }})</true></check></td>
+                    <td>{{ @s.clinica }}</td>
+                    <td>{{ @s.comorbidita }}</td>
+                    <td>{{ @s.presaincarico }}</td>
+                    <td>{{ @s.terapia }}</td>
+                    <td>{{ @s.o2 }}</td>
+                    <td>{{ @s.esami }}</td>
+                    <td>{{ @s.note }}</td>
+                </tr>
+                </repeat>
             </tbody>
         </table>
-        <hr>
+
     </div>
 </div>
 
-<div class="row mt-3">
-    <div class="col-md-12">
-        <h3>Trattati con Plaquenil</h3>
-        <table class="table table-striped">
-            <tbody>
-            <repeat group="{{ @listaplaquenil }}" value="{{ @paziente }}">
-                <tr>
-                    <td>{{ @paziente.datacovid | datatodmy }}</td>
-                    <td>{{ @paziente.nomecompleto }} ({{ @paziente.datanascita }})</td>
-                    <td style="width: 30%">{{ @paziente.stato }}</td>
-                    <td scope="row" style="width: 50px">
-                        <div class="btn-group" role="group" aria-label="">
-                            <a href="{{@BASE}}/covid/modifica/{{ @paziente.id }}" class="btn btn-warning btn-sm btn-rect"><i class="fas fa-biohazard"></i></a>
-                        </div>
-                    </td>
-                </tr>
-            </repeat>
-            </tbody>
-        </table>
-        <hr>
-    </div>
-</div>

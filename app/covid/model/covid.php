@@ -70,6 +70,125 @@ class Covid
         }
     }
 
+    public static function ReadAll()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "SELECT covid.*, pazienti.cognome, pazienti.nome, pazienti.datanascita FROM covid INNER JOIN pazienti ON covid.fkpaziente = pazienti.id ORDER BY covid.fkpaziente ASC, covid.datascheda DESC";
+        $listaArray = $db->exec($sql);
+
+        return $listaArray;
+    }
+
+    public static function ReadAllOrderByDate()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "SELECT covid.*, pazienti.cognome, pazienti.nome, pazienti.datanascita FROM covid INNER JOIN pazienti ON covid.fkpaziente = pazienti.id ORDER BY covid.datascheda DESC, pazienti.cognome ASC, pazienti.nome ASC";
+        $listaArray = $db->exec($sql);
+
+        return $listaArray;
+    }
+
+
+    public static function FilterLastByStato($lista, $stato)
+    {
+        $listaUltimeSchede = [];
+        $risultato = [];
+
+        $fkpaziente_corrente = null;
+        $fkpaziente_precedente = null;
+        // Elimina nella lista (ordinata in base alla data) tutte le schede > 1 per un fkpaziente
+        foreach($lista as $el) {
+            $fkpaziente_corrente = $el['fkpaziente'];
+            if($fkpaziente_corrente == $fkpaziente_precedente) {
+                // non faccio nulla
+            } else {
+                $fkpaziente_precedente = $fkpaziente_corrente;
+                $listaUltimeSchede[] = $el;
+            }
+        }
+
+        foreach($listaUltimeSchede as $el) {
+            if(($stato == self::$STATO_POSITIVO) && ($el['stato'] == self::$STATO_POSITIVO)) {
+                $risultato[] = $el;
+            }
+            if(($stato == self::$STATO_SOSPETTO_IN_ATTESA_DI_TAMPONE) && ($el['stato'] == self::$STATO_SOSPETTO_IN_ATTESA_DI_TAMPONE)) {
+                $risultato[] = $el;
+            }
+            if(($stato == self::$STATO_SOSPETTO_NON_IN_ATTESA_DI_TAMPONE) && ($el['stato'] == self::$STATO_SOSPETTO_NON_IN_ATTESA_DI_TAMPONE)) {
+                $risultato[] = $el;
+            }
+            if(($stato == self::$STATO_ISOLAMENTO) && ($el['stato'] == self::$STATO_ISOLAMENTO)) {
+                $risultato[] = $el;
+            }
+            if(($stato == self::$STATO_NEGATIVO) && ($el['stato'] == self::$STATO_NEGATIVO)) {
+                $risultato[] = $el;
+            }
+            if(($stato == self::$STATO_IGNOTO) && ($el['stato'] == self::$STATO_IGNOTO)) {
+                $risultato[] = $el;
+            }
+            if(($stato == self::$STATO_GUARITO) && ($el['stato'] == self::$STATO_GUARITO)) {
+                $risultato[] = $el;
+            }
+            if(($stato == self::$STATO_DECEDUTO) && ($el['stato'] == self::$STATO_DECEDUTO)) {
+                $risultato[] = $el;
+            }
+        }
+
+        return $risultato;
+    }
+
+    public static function Conteggio($lista, $stato)
+    {
+        $conteggio = 0;
+        $listaUltimeSchede = [];
+
+        $fkpaziente_corrente = null;
+        $fkpaziente_precedente = null;
+        // Elimina nella lista (ordinata in base alla data) tutte le schede > 1 per un fkpaziente
+        foreach($lista as $el) {
+            $fkpaziente_corrente = $el['fkpaziente'];
+            if($fkpaziente_corrente == $fkpaziente_precedente) {
+                // non faccio nulla
+            } else {
+                $fkpaziente_precedente = $fkpaziente_corrente;
+                $listaUltimeSchede[] = $el;
+            }
+        }
+
+        // Utilita::DumpDie($listaUltimeSchede);
+
+        foreach($listaUltimeSchede as $el) {
+            if(($stato == self::$STATO_POSITIVO) && ($el['stato'] == self::$STATO_POSITIVO)) {
+                $conteggio += 1;
+            }
+            if(($stato == self::$STATO_SOSPETTO_IN_ATTESA_DI_TAMPONE) && ($el['stato'] == self::$STATO_SOSPETTO_IN_ATTESA_DI_TAMPONE)) {
+                $conteggio += 1;
+            }
+            if(($stato == self::$STATO_SOSPETTO_NON_IN_ATTESA_DI_TAMPONE) && ($el['stato'] == self::$STATO_SOSPETTO_NON_IN_ATTESA_DI_TAMPONE)) {
+                $conteggio += 1;
+            }
+            if(($stato == self::$STATO_ISOLAMENTO) && ($el['stato'] == self::$STATO_ISOLAMENTO)) {
+                $conteggio += 1;
+            }
+            if(($stato == self::$STATO_NEGATIVO) && ($el['stato'] == self::$STATO_NEGATIVO)) {
+                $conteggio += 1;
+            }
+            if(($stato == self::$STATO_IGNOTO) && ($el['stato'] == self::$STATO_IGNOTO)) {
+                $conteggio += 1;
+            }
+            if(($stato == self::$STATO_GUARITO) && ($el['stato'] == self::$STATO_GUARITO)) {
+                $conteggio += 1;
+            }
+            if(($stato == self::$STATO_DECEDUTO) && ($el['stato'] == self::$STATO_DECEDUTO)) {
+                $conteggio += 1;
+            }
+        }
+
+        return $conteggio;
+    }
+
     // public static function Lista()
     // {
     //     $db = (\App\Db::getInstance())->connect();

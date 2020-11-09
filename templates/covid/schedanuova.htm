@@ -18,15 +18,9 @@
             </fieldset>
 
             <fieldset class="border pl-2 pr-2">
-                <legend class="w-auto">Tampone</legend>
+                <legend class="w-auto">Situazione</legend>
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="datatampone">Data tampone</label>
-                            <input type="date" class="form-control" id="datatampone" name="datatampone">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="stato">Stato Covid</label>
                             <select class="form-control" id="stato" name="stato" required>
@@ -41,7 +35,14 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="datatampone">Data tampone</label>
+                            <input type="date" class="form-control" id="datatampone" name="datatampone">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="clinica">Clinica</label>
                             <select class="form-control" id="clinica" name="clinica" required>

@@ -151,7 +151,9 @@ $f3->route('GET @pazientilettera: /pazienti/lettera/@lettera', '\App\Pazienti->L
 // $f3->route('POST @covidmodificasql: /covid/modifica', '\App\Covid->ModificaSQL');
 $f3->route('GET @covid: /covid', '\App\Covid\Controller\Covid->Home');
 $f3->route('GET @covid_scheda_nuova: /covid/scheda/@fkpaziente', '\App\Covid\Controller\Covid->SchedaNuova');
+$f3->route('GET @covid_scheda_modifica: /covid/scheda/modifica/@id', '\App\Covid\Controller\Covid->SchedaModifica');
 $f3->route('POST @covid_scheda_registra: /covid/scheda/@fkpaziente', '\App\Covid\Controller\Covid->SchedaRegistra');
+$f3->route('GET @covid_lista: /covid/lista', '\App\Covid\Controller\Covid->Lista');
 
 // Autenticazione
 $f3->route('GET @login: /login', '\App\Auth->Login');
