@@ -31,7 +31,10 @@ class Vaccinazioni
         $antinfluenzali_lasciati_paziente = \App\Vaccini\Statistiche::LasciatiPaziente($vaccini, \App\Vaccini\Vaccino::$ANTINFLUENZALE);
         $f3->set('antinfluenzali_lasciati_paziente', $antinfluenzali_lasciati_paziente);
 
-        $antinfluenzali_usciti = $antinfluenzali_lasciati_paziente + $antinfluenzali_fatti;
+        $antinfluenzali_scartati = \App\Vaccini\Statistiche::Scartati($vaccini, \App\Vaccini\Vaccino::$ANTINFLUENZALE);
+        $f3->set('antinfluenzali_scartati', $antinfluenzali_scartati);
+
+        $antinfluenzali_usciti = $antinfluenzali_lasciati_paziente + $antinfluenzali_fatti + $antinfluenzali_scartati;
         $f3->set('antinfluenzali_usciti', $antinfluenzali_usciti);        
 
         $antinfluenzali_forniti_ausl = \App\Vaccini\Statistiche::Forniti($deposito, \App\Vaccini\Vaccino::$ANTINFLUENZALE, \App\Vaccini\Vaccino::$FORNITO_AUSL);
@@ -84,8 +87,8 @@ class Vaccinazioni
         $f3->set('prenotazioni_prevenar', $prenotazioni_prevenar);
 
         // STATISTICHE
-        if($antinfluenzali_totale_rischio != 0) {
-            $antinfluenzali_percentuale_vaccinati = round((( $antinfluenzali_fatti / $antinfluenzali_totale_rischio ) * 100), 2);
+        if($totale_forniti != 0) {
+            $antinfluenzali_percentuale_vaccinati = round((( $antinfluenzali_fatti / $totale_forniti ) * 100), 2);
         } else {
             $antinfluenzali_percentuale_vaccinati = "-";
         }

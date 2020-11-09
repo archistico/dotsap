@@ -43,6 +43,24 @@ class Statistiche
         return $risultato;
     }
 
+    public static function Scartati($vaccini, $tipo)
+    {
+        $risultato = 0;
+        foreach ($vaccini as $v) {
+            if ($v["stato"] == Vaccino::$STATO_SCARTATO) {
+                if ($tipo == Vaccino::$ANTINFLUENZALE && Vaccino::IsANTINFLUENZALE($v['tipo'])) {
+                    $risultato++;
+                }
+
+                if ($tipo == Vaccino::$ANTIPNEUMOCOCCICA && Vaccino::IsANTIPNEUMOCOCCO($v['tipo'])) {
+                    $risultato++;
+                }
+            }
+        }
+
+        return $risultato;
+    }
+
     public static function Rimanenti($vaccini, $depositi, $check_tipo)
     {
         $fatti_per_tipo = 0;

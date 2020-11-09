@@ -25,6 +25,9 @@ class Filter extends \Prefab
 		if ($val == "2") {
 			return "In attesa";
 		}
+		if ($val == "3") {
+			return "Scartato";
+		}
 		return "!";
 	}
 

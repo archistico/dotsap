@@ -26,6 +26,7 @@ class Vaccino
 
     public static $STATO_VACCINATO = 1;
     public static $STATO_LASCIATO_PAZIENTE = 2;
+    public static $STATO_SCARTATO = 3;
 
     public function __construct($id, $data, $fkpersona, $sede, $fkdeposito, $stato)
     {
@@ -129,7 +130,6 @@ class Vaccino
 
             $sql = "DELETE FROM vaccini WHERE id = '$id'";
             $db->exec($sql);
-            
         } catch (\Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
@@ -142,21 +142,11 @@ class Vaccino
         try {
             $db = (\App\Db::getInstance())->connect();
 
-            $sql = 'SELECT * FROM vaccini WHERE fkpersona = ' . $this->fkpersona . ' AND fkdeposito = ' . $this->fkdeposito;
-            $precedente = $db->exec($sql);
-            $giapresente = count($precedente) > 0 ? true : false;
+            $sql = 'INSERT into vaccini values(null, "' . $this->data . '", ' . $this->fkpersona . ', ' . $this->sede . ', ' . $this->fkdeposito . ', ' . $this->stato . ')';
 
-            if ($giapresente) {
-                $this->id = $precedente[0]['id'];
-                $this->UpdateDB();
-            } else {
-                // Se non c'è nessuno con fkpersona allora aggiungi
-                $sql = 'INSERT into vaccini values(null, "' . $this->data . '", ' . $this->fkpersona . ', ' . $this->sede . ', ' . $this->fkdeposito . ', ' . $this->stato . ')';
-
-                $db->begin();
-                $db->exec($sql);
-                $db->commit();
-            }
+            $db->begin();
+            $db->exec($sql);
+            $db->commit();
         } catch (\Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
