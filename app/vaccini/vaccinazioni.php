@@ -108,6 +108,12 @@ class Vaccinazioni
         $prenotazioni_tipo_da_definire = \App\Vaccini\Prenotazione::NonDefinite();
         $f3->set('prenotazioni_tipo_da_definire', $prenotazioni_tipo_da_definire);
 
+        // Percentuale sopra 60 anni vaccinati
+        $over60 = \App\Vaccini\Statistiche::Over60(\App\Vaccini\Vaccinabile::ReadAll());
+        $f3->set('over60', $over60);
+        $percentualeover60 = \App\Vaccini\Statistiche::PercentualeFattiOver60(\App\Vaccini\Vaccinabile::ReadAll(), $vaccini);
+        $f3->set('percentualeover60', $percentualeover60);
+
         $f3->set('titolo', 'Vaccini');
         $f3->set('contenuto', '/vaccini/home.htm');
         echo \Template::instance()->render('templates/base.htm');

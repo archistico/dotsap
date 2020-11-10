@@ -75,6 +75,16 @@ class Vaccinabile
         ];
     }
 
+    public static function ReadAll()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "SELECT * FROM vaccinabili ORDER BY denominazione ASC";
+        $risposta = $db->exec($sql);
+        
+        return $risposta;
+    }
+
     public static function ReadById($id)
     {
         $db = (\App\Db::getInstance())->connect();

@@ -61,13 +61,57 @@ class Statistiche
         return $risultato;
     }
 
+    public static function Over60($vaccinabili)
+    {
+        $risultato = 0;
+
+        foreach ($vaccinabili as $v) {
+            if ($v['eta'] >= 60) {
+                $risultato++;
+            }
+        }
+
+        return $risultato;
+    }
+
+    public static function PercentualeFattiOver60($vaccinabili, $vaccini)
+    {
+        $fattiover60 = 0;
+        $over60 = 0;
+
+        foreach ($vaccinabili as $v) {
+            if ($v['eta'] >= 60) {
+                $over60++;
+
+                $id = $v['id'];
+                $vaccinato = false;
+                foreach ($vaccini as $vac) {
+                    if (($vac['fkpersona'] == $id) && ($vac['stato'] == 1) && (($vac['tipo'] == Vaccino::$VaxigripTetra) || ($vac['tipo'] == Vaccino::$Fluad)  || ($vac['tipo'] == Vaccino::$AltroAntinfluenzale)) ) {
+                        $vaccinato = true;
+                    }
+                }
+                if ($vaccinato == true) {
+                    $fattiover60++;
+                }
+            }
+        }
+
+        if($over60<>0) {
+            $percentuale = round((( $fattiover60 / $over60 ) * 100), 0);
+        } else {
+            $percentuale = 0;
+        }
+        return $percentuale;
+    }
+
+
     public static function Rimanenti($vaccini, $depositi, $check_tipo)
     {
         $fatti_per_tipo = 0;
         $depositati_per_tipo = 0;
 
         // Depositati check_tipo - fatti check_tipo
-        
+
         // Calcolo depositati per tipo
         foreach ($depositi as $dep) {
 
