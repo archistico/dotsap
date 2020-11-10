@@ -90,6 +90,17 @@ class Covid
         return $listaArray;
     }
 
+    public static function ReadByID($id)
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "SELECT covid.*, pazienti.cognome, pazienti.nome, pazienti.datanascita FROM covid INNER JOIN pazienti ON covid.fkpaziente = pazienti.id WHERE covid.id = '$id'";
+        $sqlArray = $db->exec($sql);
+        $el = $sqlArray[0];
+
+        return $el;
+    }
+
 
     public static function FilterLastByStato($lista, $stato)
     {
@@ -189,90 +200,45 @@ class Covid
         return $conteggio;
     }
 
-    // public static function Lista()
-    // {
-    //     $db = (\App\Db::getInstance())->connect();
-    //     $risposta = [];
+    public function UpdateDB()
+    {
+        try {
+            $db = (\App\Db::getInstance())->connect();
 
-    //     $sql = "SELECT * FROM vaccini INNER JOIN vaccinabili ON vaccini.fkpersona = vaccinabili.id INNER JOIN depositi ON vaccini.fkdeposito = depositi.id  ORDER BY data DESC";
-    //     $listaArray = $db->exec($sql);
+            $sql = "UPDATE covid
+                            SET 
+                                datascheda = :datascheda,
+                                datatampone = :datatampone,
+                                stato = :stato, 
+                                clinica = :clinica, 
+                                comorbidita = :comorbidita, 
+                                presaincarico = :presaincarico, 
+                                terapia = :terapia, 
+                                o2 = :ossigeno, 
+                                esami = :esami, 
+                                note = :note 
+                            WHERE id = :id
+                            ;";
 
-    //     return $listaArray;
-    // }
-
-    // public static function ListaArray()
-    // {
-    //     $db = (\App\Db::getInstance())->connect();
-
-    //     $sql = "SELECT * FROM vaccini INNER JOIN vaccinabili ON vaccini.fkpersona = vaccinabili.id INNER JOIN depositi ON vaccini.fkdeposito = depositi.id  ORDER BY data DESC";
-    //     $listaArray = $db->exec($sql);
-
-    //     return $listaArray;
-    // }
-
-    // public static function ListaToView()
-    // {
-    //     $db = (\App\Db::getInstance())->connect();
-
-    //     $sql = "SELECT vaccini.*, depositi.*, vaccinabili.*, vaccini.data as datavaccino, vaccini.id as idvaccino FROM vaccini INNER JOIN vaccinabili ON vaccini.fkpersona = vaccinabili.id INNER JOIN depositi ON vaccini.fkdeposito = depositi.id  ORDER BY data DESC, vaccini.id DESC";
-    //     $listaArray = $db->exec($sql);
-
-    //     return $listaArray;
-    // }
-
-    // public static function IsANTINFLUENZALE($tipo)
-    // {
-    //     if ($tipo == Vaccino::$Fluad || $tipo == Vaccino::$VaxigripTetra || $tipo == Vaccino::$AltroAntinfluenzale) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
-    // public static function IsANTIPNEUMOCOCCO($tipo)
-    // {
-    //     if ($tipo == Vaccino::$Prevenar) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
-    // public function ToArray()
-    // {
-    //     return [
-    //         'id'            => $this->id,
-    //         'data'          => $this->data,
-    //         'fkpersona'     => $this->fkpersona,
-    //         'sede'          => $this->sede,
-    //         'fkdeposito'    => $this->fkdeposito,
-    //         'stato'         => $this->stato
-    //     ];
-    // }
-
-    // public static function ReadByID($id)
-    // {
-    //     $db = (\App\Db::getInstance())->connect();
-
-    //     $sql = "SELECT * FROM vaccini WHERE id = '$id'";
-    //     $sqlArray = $db->exec($sql);
-    //     $el = $sqlArray[0];
-
-    //     $risposta = new Vaccino($el['id'], \App\Utilita::ConvertToDMY($el['data']), $el['fkpersona'], $el['sede'], $el['fkdeposito'], $el['stato']);
-
-    //     return $risposta->ToArray();
-    // }
-
-    // public static function ReadCompleteByID($id)
-    // {
-    //     $db = (\App\Db::getInstance())->connect();
-
-    //     $sql = "SELECT vaccini.*, depositi.*, vaccinabili.*, vaccini.data as datavaccino, vaccini.id as idvaccino, vaccinabili.id as idvaccinabili, depositi.id as iddepositi FROM vaccini INNER JOIN vaccinabili ON vaccini.fkpersona = vaccinabili.id INNER JOIN depositi ON vaccini.fkdeposito = depositi.id WHERE vaccini.id = '$id'";
-    //     $sqlArray = $db->exec($sql);
-    //     $risposta = $sqlArray[0];
-
-    //     return $risposta;
-    // }
+            $db->begin();
+            $db->exec($sql, [
+                ':datascheda' => $this->datascheda,
+                ':datatampone' => $this->datatampone,
+                ':stato' => $this->stato,
+                ':clinica' => $this->clinica,
+                ':presaincarico' => $this->presaincarico,
+                ':comorbidita' => $this->comorbidita,
+                ':esami' => $this->esami,
+                ':terapia' => $this->terapia,
+                ':ossigeno' => $this->ossigeno,
+                ':note' => $this->note,
+                ':id' => $this->id,
+            ]);
+            $db->commit();
+        } catch (\Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+    }
 
     // public static function EraseByID($id)
     // {

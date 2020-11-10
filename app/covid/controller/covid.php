@@ -111,6 +111,67 @@ class Covid
         echo \Template::instance()->render('templates/base.htm');
     }
 
+    public function SchedaModifica($f3, $params)
+    {
+        $id = $params['id'];
+        $schedaArray = \App\Covid\Model\Covid::ReadByID($id);
+       
+        $f3->set('paziente_denominazione', $schedaArray['cognome']." ".$schedaArray['nome']);
+        $f3->set('paziente_data_di_nascita', $schedaArray['datanascita']);
+        
+        $f3->set('fkpaziente', $schedaArray['fkpaziente']);
+        $f3->set('datascheda', $schedaArray['datascheda']);
+        $f3->set('datatampone', $schedaArray['datatampone']);
+        $f3->set('stato', $schedaArray['stato']);
+        $f3->set('clinica', $schedaArray['clinica']);
+        $f3->set('comorbidita', $schedaArray['comorbidita']);
+        $f3->set('presaincarico', $schedaArray['presaincarico']);
+        $f3->set('terapia', $schedaArray['terapia']);
+        $f3->set('o2', $schedaArray['o2']);
+        $f3->set('esami', $schedaArray['esami']);
+        $f3->set('note', $schedaArray['note']);
+
+        //Utilita::DumpDie($schedaArray);
+
+        $f3->set('titolo', 'Covid');
+        $f3->set('contenuto', '/covid/schedamodifica.htm');
+        \Template::instance()->filter('datatodmy','\App\Helpers\Filter::instance()->datatodmy');
+        echo \Template::instance()->render('templates/base.htm');
+    }
+
+    public function SchedaModificaRegistra($f3, $params)
+    {
+        $id = $params['id'];
+        
+        $fkpaziente = Utilita::PulisciStringaVirgolette($f3->get('POST.fkpaziente'));
+        $datascheda = Utilita::PulisciStringaVirgolette($f3->get('POST.datascheda'));
+        $datatampone = Utilita::PulisciStringaVirgolette($f3->get('POST.datatampone'));
+        $stato = Utilita::PulisciStringaVirgolette($f3->get('POST.stato'));
+        $clinica = Utilita::PulisciStringaVirgolette($f3->get('POST.clinica'));
+        $presaincarico = Utilita::PulisciStringaVirgolette($f3->get('POST.presaincarico'));
+        $comorbidita = Utilita::PulisciStringaVirgolette($f3->get('POST.comorbidita'));
+        $esami = Utilita::PulisciStringaVirgolette($f3->get('POST.esami'));
+        $terapia = Utilita::PulisciStringaVirgolette($f3->get('POST.terapia'));
+        $ossigeno = Utilita::PulisciStringaVirgolette($f3->get('POST.ossigeno'));
+        $note = Utilita::PulisciStringaVirgolette($f3->get('POST.note'));
+        
+        $schedacovid = new \App\Covid\Model\Covid($id, $fkpaziente, $datascheda, $datatampone, $stato, $clinica, $presaincarico, $comorbidita, $esami, $terapia, $ossigeno, $note);
+        $schedacovid->UpdateDB();
+
+        \App\Flash::instance()->addMessage('Scheda modificata', 'success');
+        $f3->reroute('@covid');
+    }
+
+    public function SchedaCancellaConferma($f3, $params)
+    {
+        echo "ok cancella conferma";
+    }
+
+    public function SchedaCancellaRegistra($f3, $params)
+    {
+        echo "ok cancella registra";
+    }
+
     // public function Home($f3)
     // {
     //     $listapazienti = Paziente::ReadAllName();
