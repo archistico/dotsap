@@ -39,6 +39,7 @@ class Covid
         $f3->set('stato_guariti', $stato_guariti);
         $f3->set('stato_deceduti', $stato_deceduti);
 
+        $schede_array = \App\Covid\Model\Covid::ReadAllOrderByDate();
         $schede_positivi = \App\Covid\Model\Covid::FilterLastByStato($schede_array, \App\Covid\Model\Covid::$STATO_POSITIVO);
         $f3->set('schede_positivi', $schede_positivi);
 
