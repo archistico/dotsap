@@ -41,26 +41,36 @@ class Prenotazioni
     $orari_check = new \App\Orari_check();
 
     // $ORARIO_SUDDIVISIONE = ["00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"];
-    $ORARIO_SUDDIVISIONE = ["00", "03", "06", "10", "13", "16", "20", "23", "26", "30", "33", "36", "40", "43", "46", "50", "53", "56"];
+    $ORARIO_SUDDIVISIONE = ["00", "15", "30", "45"];
     $ORARIO_SETTIMANALE = [
       [
         'giorno' => 'Lunedì',
-        'inizio' => '15:00',
-        'fine' => '16:46'
+        'inizio' => '17:00',
+        'fine' => '19:00'
       ],
       [
         'giorno' => 'Martedì',
-        'inizio' => '14:30',
-        'fine' => '16:00'
+        'inizio' => '9:00',
+        'fine' => '13:00'
+      ],
+      [
+        'giorno' => 'Mercoledì',
+        'inizio' => '9:00',
+        'fine' => '13:00'
+      ],
+      [
+        'giorno' => 'Giovedì',
+        'inizio' => '9:00',
+        'fine' => '13:00'
       ],
       [
         'giorno' => 'Venerdì',
-        'inizio' => '14:30',
-        'fine' => '16:16'
+        'inizio' => '17:00',
+        'fine' => '19:00'
       ]
     ];
 
-    $orari_check->OrarioByArray(14, 19, $ORARIO_SUDDIVISIONE);
+    $orari_check->OrarioByArray(8, 19, $ORARIO_SUDDIVISIONE);
 
     $app_check = new \App\Vaccini\PrenotazioneGiornataHelper($orari_check);
 
