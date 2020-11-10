@@ -39,7 +39,7 @@ class Covid
         $f3->set('stato_guariti', $stato_guariti);
         $f3->set('stato_deceduti', $stato_deceduti);
 
-        $schede_array = \App\Covid\Model\Covid::ReadAllOrderByDate();
+        //$schede_array = \App\Covid\Model\Covid::ReadAllOrderByDate();
         $schede_positivi = \App\Covid\Model\Covid::FilterLastByStato($schede_array, \App\Covid\Model\Covid::$STATO_POSITIVO);
         $f3->set('schede_positivi', $schede_positivi);
 
@@ -160,6 +160,20 @@ class Covid
 
         \App\Flash::instance()->addMessage('Scheda modificata', 'success');
         $f3->reroute('@covid');
+    }
+
+    public function ListaPaziente($f3, $params)
+    {
+        $fkpaziente = $params['fkpaziente'];
+        
+        $schede_array = \App\Covid\Model\Covid::ReadByFkpaziente($fkpaziente);
+        $f3->set('lista', $schede_array);
+
+        $f3->set('titolo', 'Covid');
+        $f3->set('contenuto', '/covid/lista.htm');
+        \Template::instance()->filter('datatodmy','\App\Helpers\Filter::instance()->datatodmy');
+        echo \Template::instance()->render('templates/base.htm');
+
     }
 
     public function SchedaCancellaConferma($f3, $params)

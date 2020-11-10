@@ -157,6 +157,7 @@ $f3->route('POST @covid_scheda_modifica_registra: /covid/scheda/modifica/@id', '
 $f3->route('GET @covid_scheda_cancella_conferma: /covid/scheda/cancella/@id', '\App\Covid\Controller\Covid->SchedaCancellaConferma');
 $f3->route('POST @covid_scheda_cancella_registra: /covid/scheda/cancella/@id', '\App\Covid\Controller\Covid->SchedaCancellaRegistra');
 $f3->route('GET @covid_lista: /covid/lista', '\App\Covid\Controller\Covid->Lista');
+$f3->route('GET @covid_lista_paziente: /covid/lista/@fkpaziente', '\App\Covid\Controller\Covid->ListaPaziente');
 
 
 // Autenticazione

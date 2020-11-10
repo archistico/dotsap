@@ -30,7 +30,17 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary btn-block btn-lg" id="btnModifica">AGGIUNGI SCHEDA COVID</button>
+            <div class="row">
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary btn-block btn-lg" id="btnModifica">AGGIUNGI SCHEDA COVID</button>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary btn-block btn-lg" id="btnVisualizza">VISUALIZZA SCHEDE PAZIENTE</button>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'covid_lista' | alias }}">VISUALIZZA TUTTE LE SCHEDE</a>
+                </div>
+            </div>
         </form>
     </div>
 </div>
