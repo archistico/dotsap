@@ -117,7 +117,7 @@
                     <td>{{ @s.datascheda | datatodmy }}</td>
                     <td>{{ @s.cognome }} {{ @s.nome }} ({{ @s.datanascita }})</td>
                     <td>{{ @s.stato }} <check if="{{ @s.datatampone!='' }}"><true>({{ @s.datatampone | datatodmy }})</true></check></td>
-                    <td>{{ @s.clinica }}</td>
+                    <td><check if="{{ @s.clinica=='Sintomatico' }}"><true><span class="text-danger">{{ @s.clinica }}</span></true><false>{{ @s.clinica }}</false></check></td>
                     <td>{{ @s.comorbidita }}</td>
                     <td>{{ @s.presaincarico }}</td>
                     <td>{{ @s.terapia }}</td>
@@ -157,7 +157,7 @@
                     <td>{{ @s.datascheda | datatodmy }}</td>
                     <td>{{ @s.cognome }} {{ @s.nome }} ({{ @s.datanascita }})</td>
                     <td>{{ @s.stato }} <check if="{{ @s.datatampone!='' }}"><true>({{ @s.datatampone | datatodmy }})</true></check></td>
-                    <td><check if="{{ @s.clinica='Sintomatico' }}"><true><span class="text-danger">{{ @s.clinica }}</span></true><false>{{ @s.clinica }}</false></check></td>
+                    <td>{{ @s.clinica }}</td>
                     <td>{{ @s.comorbidita }}</td>
                     <td>{{ @s.presaincarico }}</td>
                     <td>{{ @s.terapia }}</td>
