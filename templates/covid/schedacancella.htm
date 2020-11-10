@@ -1,0 +1,134 @@
+<div class="row">
+    <div class="col-md-12">
+        <form method="POST" action="{{@BASE}}{{ 'covid_scheda_cancella_registra' | alias }}">
+            <input type="hidden" name="fkpaziente" value="{{ @fkpaziente }}">
+            <fieldset class="border pl-2 pr-2" disabled>
+                <legend class="w-auto">Generale</legend>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="datascheda">Data scheda</label>
+                            <input type="date" class="form-control" id="datascheda" name="datascheda" value="{{ @datascheda }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <label>&NonBreakingSpace;</label>
+                        <h3><strong>{{ @paziente_denominazione }}</strong> ({{ @paziente_data_di_nascita }})</h3>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="border pl-2 pr-2" disabled>
+                <legend class="w-auto">Situazione</legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="stato">Stato Covid</label>
+                            <select class="form-control" id="stato" name="stato" required>
+                                <option value="Ignoto" <check if="{{ @stato }} == 'Ignoto'"><true>selected</true></check> >Ignoto</option>
+                                <option value="Sospetto in attesa di tampone" <check if="{{ @stato }} == 'Sospetto in attesa di tampone'"><true>selected</true></check> >Sospetto in attesa di tampone</option>
+                                <option value="Sospetto non in attesa di tampone" <check if="{{ @stato }} == 'Sospetto non in attesa di tampone'"><true>selected</true></check> >Sospetto non in attesa di tampone</option>
+                                <option value="Negativo" <check if="{{ @stato }} == 'Negativo'"><true>selected</true></check> >Negativo</option>
+                                <option value="Isolamento" <check if="{{ @stato }} == 'Isolamento'"><true>selected</true></check> >Isolamento</option>
+                                <option value="Positivo" <check if="{{ @stato }} == 'Positivo'"><true>selected</true></check> >Positivo</option>
+                                <option value="Guarito" <check if="{{ @stato }} == 'Guarito'"><true>selected</true></check> >Guarito</option>
+                                <option value="Deceduto" <check if="{{ @stato }} == 'Deceduto'"><true>selected</true></check> >Deceduto</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="datatampone">Data tampone</label>
+                            <input type="date" class="form-control" id="datatampone" name="datatampone" value="{{ @datatampone }}">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="clinica">Clinica</label>
+                            <select class="form-control" id="clinica" name="clinica" required>
+                                <option value="-" <check if="{{ @clinica }} == '-'"><true>selected</true></check> >-</option>
+                                <option value="Asintomatico" <check if="{{ @clinica }} == 'Asintomatico'"><true>selected</true></check> >Asintomatico</option>
+                                <option value="Paucisintomatico" <check if="{{ @clinica }} == 'Paucisintomatico'"><true>selected</true></check> >Paucisintomatico</option>
+                                <option value="Sintomatico" <check if="{{ @clinica }} == 'Sintomatico'"><true>selected</true></check> >Sintomatico</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+
+
+            <fieldset class="border pl-2 pr-2" disabled>
+                <legend class="w-auto">Presa in carico</legend>
+                <div class="row">  
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="presaincarico">Presa in carico</label>
+                            <select class="form-control" id="presaincarico" name="presaincarico" required>
+                                <option value="Nessuna" <check if="{{ @presaincarico }} == 'Nessuna'"><true>selected</true></check> >Nessuna</option>
+                                <option value="MMG" <check if="{{ @presaincarico }} == 'MMG'"><true>selected</true></check> >MMG</option>
+                                <option value="USCA" <check if="{{ @presaincarico }} == 'USCA'"><true>selected</true></check> >USCA</option>
+                                <option value="Ospedale" <check if="{{ @presaincarico }} == 'Ospedale'"><true>selected</true></check> >Ospedale</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="comorbidita">Comorbidità</label>
+                            <select class="form-control" id="comorbidita" name="comorbidita" required>
+                                <option value="Non patologie" <check if="{{ @comorbidita }} == 'Non patologie'"><true>selected</true></check> >Non patologie</option>
+                                <option value="Patologie" <check if="{{ @comorbidita }} == 'Patologie'"><true>selected</true></check> >Patologie</option>
+                                <option value="Patologie ed età" <check if="{{ @comorbidita }} == 'Patologie ed età'"><true>selected</true></check> >Patologie ed età</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="esami">Esami</label>
+                            <input type="text" class="form-control" id="esami" placeholder="Esami" name="esami" value="{{ @esami }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="terapia">Terapia</label>
+                            <input type="text" class="form-control" id="terapia" placeholder="Terapia" name="terapia" value="{{ @terapia }}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="ossigeno">Ossigeno</label>
+                            <select class="form-control" id="ossigeno" name="ossigeno" required>
+                                <option value="No" <check if="{{ @o2 }} == 'No'"><true>selected</true></check> >No</option>
+                                <option value="Gassoso" <check if="{{ @o2 }} == 'Gassoso'"><true>selected</true></check> >Gassoso</option>
+                                <option value="Liquido" <check if="{{ @o2 }} == 'Liquido'"><true>selected</true></check> >Liquido</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="note">Note</label>
+                            <textarea class="form-control" id="note" placeholder="Note" name="note" rows="3">{{ @note }}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'covid' | alias }}">Annulla</a>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-danger btn-block btn-lg">Cancella</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

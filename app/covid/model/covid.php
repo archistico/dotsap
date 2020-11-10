@@ -267,55 +267,17 @@ class Covid
         }
     }
 
-    // public static function EraseByID($id)
-    // {
-    //     try {
-    //         $db = (\App\Db::getInstance())->connect();
+    public static function EraseByID($id)
+    {
+        try {
+            $db = (\App\Db::getInstance())->connect();
 
-    //         $sql = "DELETE FROM vaccini WHERE id = '$id'";
-    //         $db->exec($sql);
-    //     } catch (\Exception $e) {
-    //         echo 'Caught exception: ',  $e->getMessage(), "\n";
-    //     }
+            $sql = "DELETE FROM covid WHERE id = :id";
+            $db->exec($sql, ['id'=>$id]);
+        } catch (\Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
 
-    //     return true;
-    // }
-
-    // public function AddDB()
-    // {
-    //     try {
-    //         $db = (\App\Db::getInstance())->connect();
-
-    //         $sql = 'INSERT into vaccini values(null, "' . $this->data . '", ' . $this->fkpersona . ', ' . $this->sede . ', ' . $this->fkdeposito . ', ' . $this->stato . ')';
-
-    //         $db->begin();
-    //         $db->exec($sql);
-    //         $db->commit();
-    //     } catch (\Exception $e) {
-    //         echo 'Caught exception: ',  $e->getMessage(), "\n";
-    //     }
-    // }
-
-    // public function UpdateDB()
-    // {
-    //     try {
-    //         $db = (\App\Db::getInstance())->connect();
-
-    //         $sql = "UPDATE vaccini
-    //                 SET 
-    //                     data = '$this->data',
-    //                     fkpersona = '$this->fkpersona',
-    //                     sede = '$this->sede',
-    //                     fkdeposito = '$this->fkdeposito ',
-    //                     stato= '$this->stato'
-    //                 WHERE id = $this->id
-    //                 ;";
-
-    //         $db->begin();
-    //         $db->exec($sql);
-    //         $db->commit();
-    //     } catch (\Exception $e) {
-    //         echo 'Caught exception: ',  $e->getMessage(), "\n";
-    //     }
-    // }
+        return true;
+    }
 }
