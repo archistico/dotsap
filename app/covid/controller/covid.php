@@ -231,7 +231,7 @@ class Covid
         }
 
         if(count($schede_array)>0) {
-            $pdf = new \App\Covid\Controller\SchedaPdf($schede_array);
+            $pdf = new \App\Covid\Controller\SchedaPdf($stato, $schede_array);
             $pdf->MakePdf();
         }
     }
