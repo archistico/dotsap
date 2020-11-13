@@ -211,4 +211,28 @@ class Covid
         \App\Flash::instance()->addMessage('Scheda cancellata', 'success');
         $f3->reroute('@covid');
     }
+
+    public function PdfStato($f3, $params)
+    {
+        $stato = $params['stato'];
+        if($stato == 'positivi') {
+            $schede_array = \App\Covid\Model\Covid::FilterLastByStato(\App\Covid\Model\Covid::ReadAll(), \App\Covid\Model\Covid::$STATO_POSITIVO);
+        } else if ($stato == 'sospetti') {
+            $schede_array = \App\Covid\Model\Covid::FilterLastByStato(\App\Covid\Model\Covid::ReadAll(), \App\Covid\Model\Covid::$STATO_SOSPETTO_IN_ATTESA_DI_TAMPONE);
+        } else if ($stato == 'isolamento') {
+            $schede_array = \App\Covid\Model\Covid::FilterLastByStato(\App\Covid\Model\Covid::ReadAll(), \App\Covid\Model\Covid::$STATO_ISOLAMENTO);
+        } else if ($stato == 'guariti') {
+            $schede_array = \App\Covid\Model\Covid::FilterLastByStato(\App\Covid\Model\Covid::ReadAll(), \App\Covid\Model\Covid::$STATO_GUARITO);
+        } else if ($stato == 'deceduti') {
+            $schede_array = \App\Covid\Model\Covid::FilterLastByStato(\App\Covid\Model\Covid::ReadAll(), \App\Covid\Model\Covid::$STATO_DECEDUTO);
+        } else {
+            \App\Flash::instance()->addMessage('Pdf di categoria non valida', 'danger');
+            $f3->reroute('@covid');
+        }
+
+        if(count($schede_array)>0) {
+            $pdf = new \App\Covid\Controller\SchedaPdf($schede_array);
+            $pdf->MakePdf();
+        }
+    }
 }
