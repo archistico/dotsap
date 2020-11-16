@@ -146,18 +146,5 @@ class MyFpdf extends \FPDF
         }
 
         $this->SetXY($this->GetX(), $y_iniziale + $altezza_max);
-
-        // $x_finale = $this->GetX();
-        // $y_finale = $this->GetY();
-
-        // $altezza_max = max($altezze);
-
-        // 
-
-
-
-        // $this->SetXY($this->GetX(), $y_iniziale + $altezza_max);
-
-        //Utilita::Dump($altezze);
     }
 }
