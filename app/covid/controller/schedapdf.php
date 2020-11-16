@@ -69,10 +69,18 @@ class SchedaPdf
 
         // INSERIMENTO PAZIENTI 
 
+        // Utilita::DumpDie($this->schede);
+
+        $riempimento = 0;
+
         foreach ($this->schede as $s) {
-            $datascheda =Utilita::ConvertToDMY($s['datascheda']);
-            $paziente = $this->ConvertText($s['cognome']) . " " . $this->CropText($s['nome'], 15);
-            $stato = $this->ConvertText($s['stato']);
+            $datascheda = Utilita::ConvertToDMY($s['datascheda']);
+            $paziente = $this->ConvertText($s['cognome']) . " " . $this->CropText($s['nome'], 15) . " (".$s['datanascita'].")";
+            if(empty($s['datatampone'])) {
+                $stato = $this->ConvertText($s['stato']);
+            } else {
+                $stato = $this->ConvertText($s['stato']). " (".Utilita::ConvertToDMY($s['datatampone']).")";
+            }            
             $clinica = $this->ConvertText($s['clinica']);
             $comorbidita = $this->ConvertText($s['comorbidita']);
             $presaincarico = $this->ConvertText($s['presaincarico']);
@@ -80,19 +88,64 @@ class SchedaPdf
             $o2 = $this->ConvertText($s['o2']);
             $esami = $this->ConvertText($s['esami']);
             $note = $this->ConvertText($s['note']);
+           
+            //  $border = 0, $ln = 0, $align = 'L', $fill = false
+            $columns = [
+                [   
+                    'larghezza' => $larghezza_schedadata,  
+                    'testo' => $datascheda, 
+                    'allineamento' => 'C'
+                ],
+                [
+                    'larghezza' => $larghezza_paziente, 
+                    'testo' => $paziente,
+                    'allineamento' => 'L'
+                ],
+                [
+                    'larghezza' => $larghezza_stato, 
+                    'testo' => $stato, 
+                    'allineamento' => 'L'
+                ],
+                [
+                    'larghezza' => $larghezza_clinica, 
+                    'testo' => $clinica, 
+                    'allineamento' => 'L'
+                ],
+                [
+                    'larghezza' => $larghezza_comorbidita, 
+                    'testo' => $comorbidita,
+                    'allineamento' => 'L'
+                ],
+                [
+                    'larghezza' => $larghezza_presaincarico, 
+                    'testo' => $presaincarico, 
+                    'allineamento' => 'C'
+                ],
+                [
+                    'larghezza' => $larghezza_terapia, 
+                    'testo' => $terapia, 
+                    'allineamento' => 'L'
+                ],
+                [
+                    'larghezza' => $larghezza_ossigeno, 
+                    'testo' => $o2, 
+                    'allineamento' => 'C'
+                ],
+                [
+                    'larghezza' => $larghezza_esami, 
+                    'testo' => $esami, 
+                    'allineamento' => 'L'
+                ],
+                [
+                    'larghezza' => $larghezza_note, 
+                    'testo' => $note, 
+                    'allineamento' => 'L'
+                ],
+            ];
 
-            $hs = [];
+            $riempimento = $riempimento == 1?0:1;
 
-            $hs[] = $pdf->MultiAlignCell($larghezza_schedadata, $altezze_linea, $datascheda, 1, 0, 'C');
-            $hs[] = $pdf->MultiAlignCell($larghezza_paziente, $altezze_linea, $paziente, 1, 0, 'L');
-            $hs[] = $pdf->MultiAlignCell($larghezza_stato, $altezze_linea, $stato, 1, 0, 'L');
-            $hs[] = $pdf->MultiAlignCell($larghezza_clinica, $altezze_linea, $clinica, 1, 0, 'L');
-            $hs[] = $pdf->MultiAlignCell($larghezza_comorbidita, $altezze_linea, $comorbidita, 1, 0, 'L');
-            $hs[] = $pdf->MultiAlignCell($larghezza_presaincarico, $altezze_linea, $presaincarico, 1, 0, 'C');
-            $hs[] = $pdf->MultiAlignCell($larghezza_terapia, $altezze_linea, $terapia, 1, 0, 'L');
-            $hs[] = $pdf->MultiAlignCell($larghezza_ossigeno, $altezze_linea, $o2, 1, 0, 'C');
-            $hs[] = $pdf->MultiAlignCell($larghezza_esami, $altezze_linea, $esami, 1, 0, 'L');
-            $hs[] = $pdf->MultiAlignCell($larghezza_note, $altezze_linea, $note, 1, 1, 'L');
+            $pdf->RowTable($columns, $altezze_linea, $riempimento);
         }
 
         // var_dump($hs);
