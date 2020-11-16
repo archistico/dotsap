@@ -144,14 +144,15 @@ class SchedaPdf
                 ],
             ];
             
-            $riempimentoUSCA = ($riempimentoUSCA == 1)?0:1;
-            $riempimento = ($riempimento == 1)?0:1;
-
             $usca = ($presaincarico == "USCA");
             if($usca) {
-                $riempimento_colore = $riempimentoUSCA?[193, 203, 112]:[134, 147, 33];
+                $riempimentoUSCA = ($riempimentoUSCA == 1)?0:1;
+                
+                $riempimento_colore = $riempimentoUSCA?[253, 222, 0]:[211, 187, 12];
                 $pdf->RowTable($columns, $altezze_linea, 1, $riempimento_colore);
             } else {
+                $riempimento = ($riempimento == 1)?0:1;
+
                 $riempimento_colore = $riempimento?[240,240,240]:[255,255,255];
                 $pdf->RowTable($columns, $altezze_linea, $riempimento, $riempimento_colore);
             }

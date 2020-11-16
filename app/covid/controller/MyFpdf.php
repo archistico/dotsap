@@ -11,11 +11,16 @@ class MyFpdf extends \FPDF
      * Controlla se cella di dimensioni $h ci sta altrimenti cambia pagina
      * 
      * @param int $h Altezza cella
+     * @return boolean 
      */
     function CheckPageBreak($h)
     {
-        if ($this->GetY() + $h > $this->PageBreakTrigger)
+        if ($this->GetY() + $h > $this->PageBreakTrigger) {
             $this->AddPage($this->CurOrientation);
+            return true;
+        } else {
+            return false;
+        }            
     }
 
     /**
@@ -114,7 +119,10 @@ class MyFpdf extends \FPDF
         }
         
         $altezza_max = max($altezze);
-        $this->CheckPageBreak($altezza_max);
+        if($this->CheckPageBreak($altezza_max)) {
+            $x_iniziale = $this->GetX();
+            $y_iniziale = $this->GetY();
+        }
         
         // Disegna bordi
         $this->SetFillColor($riempimento_colore[0], $riempimento_colore[1], $riempimento_colore[2]);
