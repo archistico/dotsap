@@ -7,6 +7,16 @@ use FPDF;
 
 class MyFpdf extends \FPDF
 {
+    /**
+     * Controlla se cella di dimensioni $h ci sta altrimenti cambia pagina
+     * 
+     * @param int $h Altezza cella
+     */
+    function CheckPageBreak($h)
+    {
+        if ($this->GetY() + $h > $this->PageBreakTrigger)
+            $this->AddPage($this->CurOrientation);
+    }
 
     /**
      * Calcola il numero di righe per una cella larga $w
@@ -14,8 +24,7 @@ class MyFpdf extends \FPDF
      * @param int $w Larghezza cella
      * @param string $txt Testo da inserire
      */
-
-    function NbLines($w, $txt)
+    private function NbLines($w, $txt)
     {
         $cw = &$this->CurrentFont['cw'];
         if ($w == 0)
@@ -93,39 +102,53 @@ class MyFpdf extends \FPDF
      * @param array $columns
      * @return void
      */
-    public function RowTable($columns, $altezze_linea, $riempimento)
+    public function RowTable($columns, $altezze_linea, $riempimento, $riempimento_colore = 240)
     {
         $x_iniziale = $this->GetX();
         $y_iniziale = $this->GetY();
         $altezze = [];
 
-        $this->SetFillColor(240);
-
+        
+        for ($c = 0; $c < count($columns); $c++) {
+            $altezze[] = $altezze_linea * $this->NbLines($columns[$c]['larghezza'], $columns[$c]['testo']);
+        }
+        
+        $altezza_max = max($altezze);
+        $this->CheckPageBreak($altezza_max);
+        
+        // Disegna bordi
+        $this->SetFillColor($riempimento_colore[0], $riempimento_colore[1], $riempimento_colore[2]);
         for ($c = 0; $c < count($columns); $c++) {
             if ($c < count($columns) - 1) {
-                $altezze[] = $this->MultiAlignCell($columns[$c]['larghezza'], $altezze_linea, $columns[$c]['testo'], 0, 0, $columns[$c]['allineamento'], $riempimento) - $y_iniziale;
+                $this->MultiAlignCell($columns[$c]['larghezza'], $altezza_max, "", 1, 0, $columns[$c]['allineamento'], $riempimento);
             } else {
-                $altezze[] = $this->MultiAlignCell($columns[$c]['larghezza'], $altezze_linea, $columns[$c]['testo'], 0, 1, $columns[$c]['allineamento'], $riempimento) - $y_iniziale;
+                $this->MultiAlignCell($columns[$c]['larghezza'], $altezza_max, "", 1, 1, $columns[$c]['allineamento'], $riempimento);
             }
         }
 
-        $x_finale = $this->GetX();
-        $y_finale = $this->GetY();
-
-        $altezza_max = max($altezze);
-
         $this->SetXY($x_iniziale, $y_iniziale);
 
-        // Disegna bordi
+        // Scrivi testi
         for ($c = 0; $c < count($columns); $c++) {
             if ($c < count($columns) - 1) {
-                $this->MultiAlignCell($columns[$c]['larghezza'], $altezza_max, "", 1, 0, $columns[$c]['allineamento'], 0);
+                $this->MultiAlignCell($columns[$c]['larghezza'], $altezze_linea, $columns[$c]['testo'], 0, 0, $columns[$c]['allineamento'], 0);
             } else {
-                $this->MultiAlignCell($columns[$c]['larghezza'], $altezza_max, "", 1, 1, $columns[$c]['allineamento'], 0);
+                $this->MultiAlignCell($columns[$c]['larghezza'], $altezze_linea, $columns[$c]['testo'], 0, 1, $columns[$c]['allineamento'], 0);
             }
         }
 
         $this->SetXY($this->GetX(), $y_iniziale + $altezza_max);
+
+        // $x_finale = $this->GetX();
+        // $y_finale = $this->GetY();
+
+        // $altezza_max = max($altezze);
+
+        // 
+
+
+
+        // $this->SetXY($this->GetX(), $y_iniziale + $altezza_max);
 
         //Utilita::Dump($altezze);
     }

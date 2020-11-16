@@ -72,10 +72,11 @@ class SchedaPdf
         // Utilita::DumpDie($this->schede);
 
         $riempimento = 0;
+        $riempimentoUSCA = 0;
 
         foreach ($this->schede as $s) {
             $datascheda = Utilita::ConvertToDMY($s['datascheda']);
-            $paziente = $this->ConvertText($s['cognome']) . " " . $this->CropText($s['nome'], 15) . " (".$s['datanascita'].")";
+            $paziente = $this->CropText($this->ConvertText($s['cognome']), 20) . " " . $this->CropText($s['nome'], 15) . " (".$s['datanascita'].")";
             if(empty($s['datatampone'])) {
                 $stato = $this->ConvertText($s['stato']);
             } else {
@@ -142,13 +143,21 @@ class SchedaPdf
                     'allineamento' => 'L'
                 ],
             ];
+            
+            $riempimentoUSCA = ($riempimentoUSCA == 1)?0:1;
+            $riempimento = ($riempimento == 1)?0:1;
 
-            $riempimento = $riempimento == 1?0:1;
+            $usca = ($presaincarico == "USCA");
+            if($usca) {
+                $riempimento_colore = $riempimentoUSCA?[193, 203, 112]:[134, 147, 33];
+                $pdf->RowTable($columns, $altezze_linea, 1, $riempimento_colore);
+            } else {
+                $riempimento_colore = $riempimento?[240,240,240]:[255,255,255];
+                $pdf->RowTable($columns, $altezze_linea, $riempimento, $riempimento_colore);
+            }
 
-            $pdf->RowTable($columns, $altezze_linea, $riempimento);
+            
         }
-
-        // var_dump($hs);
 
         $titolo = date("Y-m-d") . " " . $this->stato;
         $pdf->SetTitle($titolo);
