@@ -28,6 +28,9 @@ class Vaccino
     public static $STATO_LASCIATO_PAZIENTE = 2;
     public static $STATO_SCARTATO = 3;
 
+    public static $SEDE_DX = 1;
+    public static $SEDE_SX = 2;
+
     public function __construct($id, $data, $fkpersona, $sede, $fkdeposito, $stato)
     {
         $this->id = $id;
@@ -63,7 +66,17 @@ class Vaccino
     {
         $db = (\App\Db::getInstance())->connect();
 
-        $sql = "SELECT vaccini.*, depositi.*, vaccinabili.*, vaccini.data as datavaccino, vaccini.id as idvaccino FROM vaccini INNER JOIN vaccinabili ON vaccini.fkpersona = vaccinabili.id INNER JOIN depositi ON vaccini.fkdeposito = depositi.id  ORDER BY data DESC, vaccini.id DESC";
+        $sql = "SELECT vaccini.*, depositi.*, vaccinabili.*, vaccini.data as datavaccino, vaccini.id as idvaccino FROM vaccini INNER JOIN vaccinabili ON vaccini.fkpersona = vaccinabili.id INNER JOIN depositi ON vaccini.fkdeposito = depositi.id  ORDER BY data DESC, vaccinabili.denominazione ASC, vaccini.id DESC";
+        $listaArray = $db->exec($sql);
+
+        return $listaArray;
+    }
+
+    public static function ListaToPdf()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $sql = "SELECT vaccini.*, depositi.*, vaccinabili.*, vaccini.data as datavaccino, vaccini.id as idvaccino FROM vaccini INNER JOIN vaccinabili ON vaccini.fkpersona = vaccinabili.id INNER JOIN depositi ON vaccini.fkdeposito = depositi.id  ORDER BY data ASC, vaccinabili.denominazione ASC, vaccini.id DESC";
         $listaArray = $db->exec($sql);
 
         return $listaArray;

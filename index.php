@@ -94,6 +94,7 @@ $f3->route('GET @vaccini_prenotazioni_pdf: /vaccini/prenotazioni/pdf', '\App\Vac
 $f3->route('GET @vaccini_nuovo: /vaccini/nuovo/@tipo', '\App\Vaccini\Vaccini->Nuovo');
 $f3->route('POST @vaccini_nuovo_registra: /vaccini/nuovo', '\App\Vaccini\Vaccini->NuovoRegistra');
 $f3->route('GET @vaccini_lista: /vaccini/lista', '\App\Vaccini\Vaccini->Lista');
+$f3->route('GET @vaccini_lista_pdf: /vaccini/pdf', '\App\Vaccini\Vaccini->Pdf');
 $f3->route('GET @vaccini_modifica: /vaccini/modifica/@id', '\App\Vaccini\Vaccini->Modifica');
 $f3->route('POST @vaccini_modifica_registra: /vaccini/modifica/@id', '\App\Vaccini\Vaccini->ModificaRegistra');
 $f3->route('GET @vaccini_cancella: /vaccini/cancella/@id', '\App\Vaccini\Vaccini->Cancella');

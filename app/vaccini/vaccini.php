@@ -52,8 +52,6 @@ class Vaccini
     {
         $lista = Vaccino::ListaToView();
 
-        // Utilita::DumpDie($lista);
-
         $f3->set('lista', $lista);
         $f3->set('titolo', 'Vaccini');
         $f3->set('contenuto', '/vaccini/lista.htm');
@@ -62,6 +60,13 @@ class Vaccini
         \Template::instance()->filter('datatodmy','\App\Helpers\Filter::instance()->datatodmy');
         \Template::instance()->filter('sede','\App\Helpers\Filter::instance()->sede');
         echo \Template::instance()->render('templates/base.htm');
+    }
+
+    public function Pdf($f3)
+    {
+        $lista = Vaccino::ListaToPdf();
+        $pdf = new \App\Vaccini\ListaPdf($lista);
+        $pdf->MakePdf();
     }
 
     public function Modifica($f3, $params)
