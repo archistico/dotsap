@@ -46,7 +46,7 @@ class ListaPdf
         $pdf->SetMargins(8, 10, 8);
         $pdf->SetAutoPageBreak(true, 10);
         $pdf->SetFont('Arial', 'B', $sizeFontGrande);
-        $pdf->Cell(0, $altezze_titolo, "Vaccini", 0, 0, 'C');
+        $pdf->Cell(0, $altezze_titolo, "Vaccini al ".date("d-m-Y"), 0, 0, 'C');
         $pdf->Ln($altezze_titolo);
         $pdf->SetFont('Arial', '', $sizeFontPiccolo);
 
@@ -68,7 +68,7 @@ class ListaPdf
         foreach ($this->lista as $l) {
             $data = Utilita::ConvertToDMY($l['datavaccino']);
             $rischio = $this->ConvertText($l['rischio']);
-            $paziente = $this->CropText($this->ConvertText($l['denominazione']), 20) . " (" . $l['eta'] . ") " . $rischio;
+            $paziente = $this->CropText($this->ConvertText($l['denominazione']), 30) . " (" . $l['eta'] . ") " . $rischio;
             $tipo = $this->ConvertText($l['tipo']);
             $lotto = $this->ConvertText($l['lotto']);
             $fornito = $this->ConvertText($l['fornito']);
