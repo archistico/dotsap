@@ -193,13 +193,13 @@ $f3->route('POST @dipendenti_presenze_cancella_registra: /dipendenti/presenze/ca
 $f3->route('GET @dipendenti_presenze_statistiche: /dipendenti/presenze/statistiche', '\App\Dipendenti\Presenze->Statistiche');
 
 // NAOTAO
-$f3->route('GET  @naotao:                   /naotao',                    '\App\Naotao\Controller\Naotao->Lista');
-$f3->route('GET  @naotao_nuovo:             /naotao/nuovo/@fkpaziente',  '\App\Naotao\Controller\Naotao->Nuovo');
-$f3->route('POST @naotao_registra:          /naotao/nuovo/@fkpaziente',  '\App\Naotao\Controller\Naotao->Registra');
-$f3->route('GET  @naotao_modifica:          /naotao/modifica/@id',       '\App\Naotao\Controller\Naotao->Modifica');
-$f3->route('POST @naotao_modifica_registra: /naotao/modifica/@id',       '\App\Naotao\Controller\Naotao->ModificaRegistra');
-$f3->route('GET  @naotao_cancella_conferma: /naotao/cancella/@id',       '\App\Naotao\Controller\Naotao->CancellaConferma');
-$f3->route('POST @naotao_cancella_registra: /naotao/cancella/@id',       '\App\Naotao\Controller\Naotao->CancellaRegistra');
+$f3->route('GET  @naotao:              /naotao',                    '\App\Naotao\Controller\Naotao->Lista');
+$f3->route('GET  @naotao_nuovo:        /naotao/nuovo/@fkpaziente',  '\App\Naotao\Controller\Naotao->Nuovo');
+$f3->route('POST @naotao_nuovo_db:     /naotao/nuovo/@fkpaziente',  '\App\Naotao\Controller\Naotao->NuovoDb');
+$f3->route('GET  @naotao_modifica:     /naotao/modifica/@id',       '\App\Naotao\Controller\Naotao->Modifica');
+$f3->route('POST @naotao_modifica_db:  /naotao/modifica/@id',       '\App\Naotao\Controller\Naotao->ModificaDb');
+$f3->route('GET  @naotao_cancella:     /naotao/cancella/@id',       '\App\Naotao\Controller\Naotao->Cancella');
+$f3->route('POST @naotao_cancella_db:  /naotao/cancella/@id',       '\App\Naotao\Controller\Naotao->CancellaDb');
 
 // Se errori
 // $f3->set('ONERROR',function($f3){

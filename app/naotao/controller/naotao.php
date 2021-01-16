@@ -7,9 +7,8 @@ class Naotao
 {
    public function Nuovo($f3) {
       $f3->set('titolo', 'Naotao');
-      $f3->set('contenuto', 'Naotao/Naotao_nuovo.htm');
-      $f3->set('script', 'Naotao_nuovo.js');
-      echo \Template::instance()->render('../app/View/Generic/Base.htm');
+      $f3->set('contenuto', 'naotao/naotao_nuovo.htm');
+      echo \Template::instance()->render('templates/base.htm');
    }
 
    public function NuovoDb($f3) {
@@ -35,9 +34,8 @@ class Naotao
       $f3->set('elemento', $elemento);
 
       $f3->set('titolo', 'Naotao');
-      $f3->set('contenuto', 'Naotao/Naotao_modifica.htm');
-      $f3->set('script', 'Naotao_modifica.js');
-      echo \Template::instance()->render('../app/View/Generic/Base.htm');
+      $f3->set('contenuto', 'naotao/naotao_modifica.htm');
+      echo \Template::instance()->render('templates/base.htm');
    }
 
    public function ModificaDb($f3, $params) {
@@ -64,19 +62,8 @@ class Naotao
       $f3->set('lista', $lista);
 
       $f3->set('titolo', 'Naotao');
-      $f3->set('contenuto', 'Naotao/Naotao_lista.htm');
-      $f3->set('script', 'Naotao_lista.js');
-      echo \Template::instance()->render('../app/View/Generic/Base.htm');
-   }
-
-   public function Vedi($f3, $params) {
-      $idnaotao = $params['id'];
-      $elemento = \app\Naotao\Model\Naotao::SelectById($idnaotao);
-      $f3->set('elemento', $elemento);
-
-      $f3->set('titolo', 'Naotao');
-      $f3->set('contenuto', 'Naotao/Naotao_vedi.htm');
-      echo \Template::instance()->render('../app/View/Generic/Base.htm');
+      $f3->set('contenuto', 'naotao/naotao_lista.htm');
+      echo \Template::instance()->render('templates/base.htm');
    }
 
    public function Cancella($f3, $params) {
@@ -85,8 +72,8 @@ class Naotao
       $f3->set('elemento', $elemento);
 
       $f3->set('titolo', 'Naotao');
-      $f3->set('contenuto', 'Naotao/Naotao_cancella.htm');
-      echo \Template::instance()->render('../app/View/Generic/Base.htm');
+      $f3->set('contenuto', 'naotao/naotao_cancella.htm');
+      echo \Template::instance()->render('templates/base.htm');
    }
 
    public function CancellaDb($f3, $params) {
