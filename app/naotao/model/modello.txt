@@ -1,0 +1,17 @@
+NAO/TAO
+- TAO - COUMADIN
+- TAO - SINTROM
+- NAO - PRADAXA 110 / 150
+- NAO - ELIQUIS 2.5 / 5
+- NAO - LIXIANA 30 / 60
+- NAO - XARELTO 15 / 20
+
+idnaotao
+fkpaziente
+farmaco
+dataultimiesami
+allegatocompilato
+datafollowup
+esamiprescritti
+convocare
+note
