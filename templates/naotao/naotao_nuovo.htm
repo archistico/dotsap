@@ -1,1 +1,97 @@
-naotao nuovo
+<div class="row">
+    <div class="col-md-12">
+        <form method="POST" action="{{@BASE}}{{ 'naotao_nuovo_db' | alias }}">
+
+<div class="row">
+    <div class="col-md-12">
+       <div class="form-group">
+          <label for="fkpaziente">Paziente</label>
+          <select class="form-control select2" id="fkpaziente" name="fkpaziente">
+             <repeat group="{{ @lista_pazienti }}" value="{{ @p }}">
+                <option value="{{ @p.id }}">{{ @p.nomecompleto }} ({{ @p.datanascita }})</option>
+             </repeat>
+          </select>
+       </div>
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-md-12">
+       <div class="form-group">
+          <label for="farmaco">Farmaco</label>
+          <select class="form-control select2" id="farmaco" name="farmaco">
+             <repeat group="{{ @lista_farmaci }}" value="{{ @elemento }}">
+                <option value="{{ @elemento }}">{{ @elemento }}</option>
+             </repeat>
+          </select>
+       </div>
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-md-12">
+       <div class="form-group">
+          <label for="dataultimiesami">Dataultimiesami</label>
+          <input type="date" class="form-control" id="dataultimiesami" name="dataultimiesami">
+       </div>
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-md-12">
+       <div class="form-group">
+          <label for="allegatocompilato">Allegatocompilato</label>
+          <select class="form-control select2" id="allegatocompilato" name="allegatocompilato">
+             <option value=1>Sì</option>
+             <option value=0>No</option>
+          </select>
+       </div>
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-md-12">
+       <div class="form-group">
+          <label for="datafollowup">Datafollowup</label>
+          <input type="date" class="form-control" id="datafollowup" name="datafollowup">
+       </div>
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-md-12">
+       <div class="form-group">
+          <label for="esamiprescritti">Esamiprescritti</label>
+          <select class="form-control select2" id="esamiprescritti" name="esamiprescritti">
+            <option value=1>Sì</option>
+            <option value=0>No</option>
+          </select>
+       </div>
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-md-12">
+       <div class="form-group">
+          <label for="convocare">Convocare</label>
+          <select class="form-control select2" id="convocare" name="convocare">
+            <option value=1>Sì</option>
+            <option value=0>No</option>
+          </select>
+       </div>
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-md-12">
+       <div class="form-group">
+          <label for="note">Note</label>
+          <input type="text" class="form-control" id="note" placeholder="Note" name="note">
+       </div>
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'naotao' | alias }}">Annulla</a>
+    </div>
+    <div class="col-md-6">
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Registra</button>
+    </div>
+</div>
+ 
+</form>
+</div>
+</div>

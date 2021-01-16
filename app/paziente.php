@@ -336,13 +336,14 @@ class Paziente {
         $db = (\App\Db::getInstance())->connect();
         $risposta = [];
 
-        $sql = "SELECT id, cognome, nome FROM pazienti";
+        $sql = "SELECT id, cognome, nome, datanascita FROM pazienti";
         $pazientiArray = $db->exec($sql);
 
         foreach($pazientiArray as $paz) {
             $risposta[] = [
                 'id' => $paz["id"],
-                'nomecompleto' => $paz["cognome"] . " ". $paz["nome"]
+                'nomecompleto' => $paz["cognome"] . " ". $paz["nome"],
+                'datanascita' => $paz["datanascita"]
             ];
         }
 

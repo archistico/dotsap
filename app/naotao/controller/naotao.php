@@ -1,11 +1,30 @@
 <?php
 
 namespace App\Naotao\Controller;
-use \app\Helper\Utilita;
+use \app\Utilita;
 
 class Naotao 
 {
    public function Nuovo($f3) {
+      $lista_farmaci = [ 
+         'TAO - COUMADIN', 
+         'TAO - SINTROM',
+         'NAO - PRADAXA 110',
+         'NAO - PRADAXA 150',
+         'NAO - ELIQUIS 2.5',
+         'NAO - ELIQUIS 5',
+         'NAO - LIXIANA 30',
+         'NAO - LIXIANA 60',
+         'NAO - XARELTO 15',
+         'NAO - XARELTO 20'
+      ];
+      $f3->set('lista_farmaci', $lista_farmaci);
+
+      $listapazienti = \App\Paziente::ReadAllName();
+      $f3->set('lista_pazienti', $listapazienti);
+
+      // Utilita::Dump($listapazienti);
+
       $f3->set('titolo', 'Naotao');
       $f3->set('contenuto', 'naotao/naotao_nuovo.htm');
       echo \Template::instance()->render('templates/base.htm');
