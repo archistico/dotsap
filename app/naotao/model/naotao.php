@@ -97,9 +97,29 @@ class Naotao
    public static function SelectById($idnaotao)
    {
       $db = (\app\Db::getInstance())->connect();
-      $sql = "SELECT * FROM naotao WHERE idnaotao = :idnaotao";
+      $sql = "
+         SELECT naotao.*, pazienti.cognome as cognome, pazienti.nome as nome, pazienti.datanascita as datanascita
+         FROM naotao 
+         INNER JOIN pazienti ON naotao.fkpaziente = pazienti.id
+         WHERE idnaotao = :idnaotao
+         ";
       $lista = $db->exec($sql, [
          ':idnaotao' => $idnaotao
+      ]);
+      return $lista[0];
+   }
+
+   public static function SelectByFkpaziente($fkpaziente)
+   {
+      $db = (\app\Db::getInstance())->connect();
+      $sql = "
+         SELECT naotao.*, pazienti.cognome, pazienti.nome, pazienti.datanascita
+         FROM naotao 
+         INNER JOIN pazienti ON naotao.fkpaziente = pazienti.id
+         WHERE fkpaziente = :fkpaziente
+         ";
+      $lista = $db->exec($sql, [
+         ':fkpaziente' => $fkpaziente
       ]);
       return $lista[0];
    }

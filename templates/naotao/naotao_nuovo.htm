@@ -8,7 +8,7 @@
           <label for="fkpaziente">Paziente</label>
           <select class="form-control select2" id="fkpaziente" name="fkpaziente">
              <repeat group="{{ @lista_pazienti }}" value="{{ @p }}">
-                <option value="{{ @p.id }}">{{ @p.nomecompleto }} ({{ @p.datanascita }})</option>
+                <option value="{{ @p.id }}" <check if="{{ @fkpaziente == @p.id }}"><true>selected</true></check>>{{ @p.nomecompleto }} ({{ @p.datanascita }})</option>
              </repeat>
           </select>
        </div>
@@ -29,7 +29,7 @@
  <div class="row">
     <div class="col-md-12">
        <div class="form-group">
-          <label for="dataultimiesami">Dataultimiesami</label>
+          <label for="dataultimiesami">Data ultimi esami</label>
           <input type="date" class="form-control" id="dataultimiesami" name="dataultimiesami">
        </div>
     </div>
@@ -37,10 +37,10 @@
  <div class="row">
     <div class="col-md-12">
        <div class="form-group">
-          <label for="allegatocompilato">Allegatocompilato</label>
+          <label for="allegatocompilato">Allegato compilato</label>
           <select class="form-control select2" id="allegatocompilato" name="allegatocompilato">
-             <option value=1>Sì</option>
-             <option value=0>No</option>
+            <option value=0>No</option>
+            <option value=1>Sì</option>
           </select>
        </div>
     </div>
@@ -48,7 +48,7 @@
  <div class="row">
     <div class="col-md-12">
        <div class="form-group">
-          <label for="datafollowup">Datafollowup</label>
+          <label for="datafollowup">Data follow up</label>
           <input type="date" class="form-control" id="datafollowup" name="datafollowup">
        </div>
     </div>
@@ -56,10 +56,10 @@
  <div class="row">
     <div class="col-md-12">
        <div class="form-group">
-          <label for="esamiprescritti">Esamiprescritti</label>
+          <label for="esamiprescritti">Esami prescritti</label>
           <select class="form-control select2" id="esamiprescritti" name="esamiprescritti">
-            <option value=1>Sì</option>
             <option value=0>No</option>
+            <option value=1>Sì</option>
           </select>
        </div>
     </div>
@@ -69,8 +69,8 @@
        <div class="form-group">
           <label for="convocare">Convocare</label>
           <select class="form-control select2" id="convocare" name="convocare">
-            <option value=1>Sì</option>
             <option value=0>No</option>
+            <option value=1>Sì</option>
           </select>
        </div>
     </div>

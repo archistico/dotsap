@@ -1,1 +1,22 @@
-cancella
+<div class="row">
+    <div class="col-md-12">
+        <h1>ATTENZIONE!</h1>
+        Confermi di voler cancellare il NAO/TAO:
+        <ul>
+            <li>ID: #{{ @naotao.idnaotao }}</li>
+            <li>Paziente: <strong>{{ @naotao.cognome }} {{ @naotao.nome }}</strong> ({{ @naotao.datanascita }})</li>
+            <li>Farmaco: {{ @naotao.farmaco }}</li>
+            <li>Data ultimi esami: {{ @naotao.dataultimiesami | datatodmy }}</li>
+            <li>Allegato compilato: {{ @naotao.allegatocompilato | sino }}</li>
+            <li>Data prossimo follow up: {{ @naotao.datafollowup | datatodmy }}</li>
+            <li>Esami prescritti: {{ @naotao.esamiprescritti | sino }}</li>
+            <li>Convocare: {{ @naotao.convocare | sino }}</li>
+            <li>Note: {{ @naotao.note }}</li>            
+        </ul>
+        <br>
+        <form method="POST" action="{{@BASE}}{{ 'naotao_cancella_db', 'id='.@naotao.idnaotao | alias }}">
+            <a class="btn btn-secondary btn-block btn-lg mb-3" href="{{ 'naotao' | alias }}">ANNULLA</a>
+            <button type="submit" class="btn btn-danger btn-block btn-lg">Cancella</button>
+        </form>
+    </div>
+</div>
