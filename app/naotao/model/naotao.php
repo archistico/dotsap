@@ -107,7 +107,10 @@ class Naotao
    public static function SelectAll()
    {
       $db = (\app\Db::getInstance())->connect();
-      $sql = "SELECT * FROM naotao";
+      $sql = "SELECT naotao.*, pazienti.cognome, pazienti.nome, pazienti.datanascita
+              FROM naotao 
+              INNER JOIN pazienti ON naotao.fkpaziente = pazienti.id
+              ";
       $lista = $db->exec($sql, []);
       return $lista;
    }

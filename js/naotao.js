@@ -1,0 +1,9 @@
+$(document).ready(function() {
+    $('.js-select2').select2();
+
+    document.getElementById("btnModifica").addEventListener("click", function(){
+        let sel = document.getElementById("selectModifica");
+        let link = "{{@BASE}}/naotao/scelta/" + sel.options[sel.selectedIndex].value;
+        window.location.href = link;
+    });
+});

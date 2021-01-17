@@ -1,10 +1,17 @@
 <?php
 
 namespace App\Naotao\Controller;
-use \app\Utilita;
+
+use App\Utilita;
 
 class Naotao 
 {
+   public function Scelta($f3, $params) {
+      $fkpaziente = $params['fkpaziente'];
+
+      echo "fkpaziente ".$fkpaziente;
+   }
+
    public function Nuovo($f3) {
       $lista_farmaci = [ 
          'TAO - COUMADIN', 
@@ -80,8 +87,14 @@ class Naotao
       $lista = \app\Naotao\Model\Naotao::SelectAll();
       $f3->set('lista', $lista);
 
+      $listapazienti = \App\Paziente::ReadAllName();
+      $f3->set('lista_pazienti', $listapazienti);
+
       $f3->set('titolo', 'Naotao');
       $f3->set('contenuto', 'naotao/naotao_lista.htm');
+      $f3->set('script', 'naotao.js');
+      \Template::instance()->filter('datatodmy','\App\Helpers\Filter::instance()->datatodmy');
+      \Template::instance()->filter('sino','\App\Helpers\Filter::instance()->sino');
       echo \Template::instance()->render('templates/base.htm');
    }
 

@@ -96,4 +96,15 @@ class Filter extends \Prefab
 			return $data->format('d/m/Y');
 		}
 	}
+
+	function sino($val)
+	{
+		if ($val == "0") {
+			return "No";
+		}
+		if ($val == "1") {
+			return "Sì";
+		}
+		return "!";
+	}
 }

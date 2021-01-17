@@ -194,6 +194,7 @@ $f3->route('GET @dipendenti_presenze_statistiche: /dipendenti/presenze/statistic
 
 // NAOTAO
 $f3->route('GET  @naotao:              /naotao',                    '\App\Naotao\Controller\Naotao->Lista');
+$f3->route('GET  @naotao_scelta:       /naotao/scelta/@fkpaziente', '\App\Naotao\Controller\Naotao->Scelta');
 $f3->route('GET  @naotao_nuovo:        /naotao/nuovo/@fkpaziente',  '\App\Naotao\Controller\Naotao->Nuovo');
 $f3->route('POST @naotao_nuovo_db:     /naotao/nuovo/@fkpaziente',  '\App\Naotao\Controller\Naotao->NuovoDb');
 $f3->route('GET  @naotao_modifica:     /naotao/modifica/@id',       '\App\Naotao\Controller\Naotao->Modifica');

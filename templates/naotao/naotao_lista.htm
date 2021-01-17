@@ -1,1 +1,88 @@
-lista naotao
+<style>
+    .container {
+        max-width: 100%;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- bootstrap style-->
+        <F3:repeat group="{{ \App\Flash::instance()->getMessages() }}" value="{{ @msg }}">
+            <div class="alert alert-{{ @msg.status }} alert-dismissable">
+                {{ @msg.text | esc }}
+            </div>
+        </F3:repeat>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Cerca paziente</h3>
+        <form method="get" action="" id="formModifica">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <select class="form-control js-select2" name="paziente" id="selectModifica">
+                            <repeat group="{{ @lista_pazienti }}" value="{{ @p }}">
+                                <option value="{{ @p.id }}">{{ @p.nomecompleto }} ({{ @p.datanascita }})</option>
+                             </repeat>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary btn-block btn-lg mb-3" id="btnModifica">MODIFICA</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Lista</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Paziente</th>
+                    <th scope="col">Farmaco</th>
+                    <th scope="col">Data ultimi esami</th>                    
+                    <th scope="col">Allegato compilato</th>
+                    <th scope="col">Data follow up</th>
+                    <th scope="col">Esami prescritti</th>
+                    <th scope="col">Convocare</th>
+                    <th scope="col">Note</th>
+                    <th scope="col" style="width: 50px">#</th>
+                </tr>
+            </thead>
+            <tbody>
+                <repeat group="{{ @lista }}" value="{{ @s }}"></repeat>
+                <tr>
+                    <td>{{ @s.cognome }} {{ @s.nome }} ({{ @s.datanascita }})</td>
+                    <td>{{ @s.farmaco }}</td>
+                    <td>{{ @s.dataultimiesami | datatodmy }}</td>
+                    <td>{{ @s.allegatocompilato | sino }}</td>
+                    <td>{{ @s.datafollowup | datatodmy }}</td>
+                    <td>{{ @s.esamiprescritti | sino }}</td>
+                    <td>{{ @s.convocare | sino }}</td>
+                    <td>{{ @s.note }}</td>
+                    <td scope="row">
+                        <div class="btn-group" role="group" aria-label="Pulsanti">
+                            <a href="{{@BASE}}{{ 'naotao_modifica', 'id='.@s.id | alias }}" class="btn btn-warning btn-sm btn-rect"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{@BASE}}{{ 'naotao_cancella', 'id='.@s.id | alias }}" class="btn btn-danger btn-sm btn-rect"><i class="fas fa-times"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                </repeat>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
