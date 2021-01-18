@@ -25,6 +25,7 @@ class Naotao
       $f3->set('fkpaziente', $fkpaziente);
 
       $lista_farmaci = [ 
+         'Non definito',
          'TAO - COUMADIN', 
          'TAO - SINTROM',
          'NAO - PRADAXA 110',
@@ -69,6 +70,7 @@ class Naotao
       $idnaotao = $params['id'];
 
       $lista_farmaci = [ 
+         'Non definito',
          'TAO - COUMADIN', 
          'TAO - SINTROM',
          'NAO - PRADAXA 110',
