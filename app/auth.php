@@ -87,6 +87,9 @@ class Auth
         // CONTROLLA SE NON SONO SOTTO ATTACCO CSRF
         if ($token === $csrf) {
 
+            $username = str_replace('"', "", $username);
+            $username = str_replace("'", "", $username);
+
             // HASH
             $password_hash = hash('sha512', $password, false);
 
