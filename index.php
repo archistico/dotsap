@@ -163,16 +163,23 @@ $f3->route('GET @login: /login', '\App\Auth->Login');
 $f3->route('POST @loginCheck: /loginCheck', '\App\Auth->LoginCheck');
 $f3->route('GET @logout: /logout', '\App\Auth->Logout');
 $f3->route('GET @autentica: /autentica', '\App\Auth->Autentica');
-$f3->route('GET @utente: /utente', '\App\Admin->UtenteLista');
-$f3->route('GET @utentenuovo: /utente/nuovo', '\App\Admin->UtenteNuovo');
-$f3->route('GET @utentecancella: /utente/cancella/@user_id', '\App\Admin->UtenteCancella');
-$f3->route('POST @utenteregistra: /utente/registra', '\App\Admin->UtenteRegistra');
+
+// Amministrazione
+$f3->route('GET @amministrazione: /amministrazione', '\App\Admin->Amministrazione');
 
 // Impostazioni
 $f3->route('GET @impostazioni: /impostazioni', '\App\Impostazioni->Home');
 $f3->route('GET @impostazionisvuotaricette: /impostazioni/svuotaricette', '\App\Impostazioni->SvuotaRicette');
 $f3->route('GET @impostazionisvuotaprivacy: /impostazioni/svuotaprivacy', '\App\Impostazioni->SvuotaPrivacy');
 $f3->route('GET @impostazionisvuotaprenotazioni: /impostazioni/svuotaprenotazioni', '\App\Impostazioni->SvuotaPrenotazioni');
+
+// Utenti
+$f3->route('GET  @utente_nuovo:                 /impostazione/utente/nuovo',        '\App\Utenti->Nuovo');
+$f3->route('POST @utente_nuovo_db:              /impostazione/utente/nuovo',        '\App\Utenti->NuovoDb');
+$f3->route('GET  @utente_modifica:              /impostazione/utente/modifica/@id', '\App\Utenti->Modifica');
+$f3->route('POST @utente_modifica_db:           /impostazione/utente/modifica/@id', '\App\Utenti->ModificaDb');
+$f3->route('GET  @utente_cancella:              /impostazione/utente/cancella/@id', '\App\Utenti->Cancella');
+$f3->route('POST @utente_cancella_db:           /impostazione/utente/cancella/@id', '\App\Utenti->CancellaDb');
 
 // Log
 $f3->route('GET @logs: /logs', '\App\Logs->Show');

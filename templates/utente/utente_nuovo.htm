@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-md-12">
+       <div class="box">
+          <div class="box-header">
+             <h3 class="box-title">Nuovo</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body no-padding">
+             <form method="POST" action="{{@BASE}}{{ 'utente_nuovo_db' | alias }}">
+                <div class="row">
+                   <div class="col-md-6">
+                      <div class="form-group">
+                         <label for="username">Username</label>
+                         <input type="text" class="form-control" id="username" placeholder="Il tuo nome utente"
+                            name="username" required autofocus>
+                      </div>
+                   </div>
+                   <div class="col-md-6">
+                      <div class="form-group">
+                         <label for="password">Password</label>
+                         <input type="password" class="form-control" id="password" placeholder="" name="password" required>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-md-12">
+                      <div class="form-group">
+                         <label for="role">Role</label>
+                         <select class="form-control select2" id="role" name="role">
+                            <repeat group="{{ @lista_ruoli }}" value="{{ @elemento }}">
+                               <option>{{ @elemento }}</option>
+                            </repeat>
+                         </select>
+                      </div>
+                   </div>
+                </div>
+                <hr>
+                <div class="row">
+                   <div class="col-md-6">
+                      <a class="btn btn-secondary btn-block btn-lg mb-2"
+                         href="{{@BASE}}{{ 'amministrazione' | alias }}">Annulla</a>
+                   </div>
+                   <div class="col-md-6">
+                      <button type="submit" class="btn btn-primary btn-block btn-lg"><i class="fas fa-save"></i>
+                         Salva</button>
+                   </div>
+                </div>
+             </form>
+ 
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+    </div>
+ </div>
+ <!-- /.row (main row) -->

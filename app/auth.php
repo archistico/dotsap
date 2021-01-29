@@ -1,18 +1,19 @@
 <?php
+
 namespace App;
 
 class Auth
 {
     public function Login($f3, $args)
     {
-        // CSRF
+        // RICORDARSI CACHE TRUE ALTRIMENTI NON FUNZIONA LA SESSIONE
         $session = new \Session();
         $csrf = $session->csrf();
         $f3->set('token', $csrf);
         $f3->set('SESSION.csrf', $csrf);
 
-        // Reset persistenza
-        $f3->set('COOKIE.sessionName', null);
+        // Reset persistenza utente
+        $f3->set('COOKIE.sessionName', null, 86400);
 
         echo \Template::instance()->render('templates/login.htm');
     }
@@ -22,17 +23,18 @@ class Auth
         $session = new \Session();
         $csrf = $f3->get('COOKIE.sessionName');
 
-        $sessionUserid = "SESSION.UserID." . $csrf;
+        $sessionUsername = "SESSION.Username." . $csrf;
         $sessionPassword = "SESSION.Password." . $csrf;
+        $sessionRole = "SESSION.Role." . $csrf;
 
-        $f3->set('COOKIE.sessionName', null);
-        $f3->set($sessionUserid, null);
+        $f3->set($sessionUsername, null);
         $f3->set($sessionPassword, null);
+        $f3->set($sessionRole, null);
 
         \App\Log::SaveMessage("-", "logout");
 
         \App\Flash::instance()->addMessage('Logout avvenuto', 'success');
-        $f3->reroute('/login');
+        $f3->reroute('@login');
     }
 
     public static function Autentica($f3)
@@ -41,20 +43,29 @@ class Auth
         $csrf = $f3->get('COOKIE.sessionName');
 
         if (isset($csrf)) {
-            $sessionUserid = "SESSION.UserID." . $csrf;
+            $sessionUsername = "SESSION.Username." . $csrf;
             $sessionPassword = "SESSION.Password." . $csrf;
-          
-            if ( ($f3->get($sessionUserid)!==null) && ($f3->get($sessionPassword)!==null) ) {
+            $sessionRole = "SESSION.Role." . $csrf;
 
-                $utente = trim($f3->get($sessionUserid));
+            if (($f3->get($sessionUsername) !== null) && ($f3->get($sessionPassword) !== null) && ($f3->get($sessionRole) !== null)) {
+
+                $username = trim($f3->get($sessionUsername));
                 $password = trim($f3->get($sessionPassword));
-                
-                $db = (\App\Db::getInstance())->connect();
-                $users = new \DB\SQL\Mapper($db, 'users');
-                $auth = new \Auth($users, array('id' => 'user_id', 'pw' => 'password'));
+                $role = trim($f3->get($sessionRole));
 
-                $hash = hash('sha512', $password, false);
-                $login_result = $auth->login($utente, $hash);
+                $username = str_replace('"', "", $username);
+                $username = str_replace("'", "", $username);
+
+                // HASH
+                $password_hash = hash('sha512', $password, false);
+
+                // CONTROLLO SE ESISTE UN UTENTE CON QUESTI USERNAME E PASSWORD
+                $login_result = \App\Utente::Login($username, $password_hash);
+
+                if ($login_result) {
+                    $f3->set('auth_username', ucfirst($username));
+                    $f3->set('auth_role', $role);
+                }
 
                 return $login_result;
             } else {
@@ -62,8 +73,6 @@ class Auth
                 return false;
             }
         }
-        
-        \App\Flash::instance()->addMessage('Richieste multiple non valide', 'danger');
         return false;
     }
 
@@ -72,54 +81,48 @@ class Auth
         // INIZIALIZZA SESSIONE
         $session = new \Session();
 
-        if ($f3->VERB == 'POST') {
+        // CARICA I DATI INVIATI
+        $username = $f3->get('POST.utente');
+        $password = $f3->get('POST.p');
+        $token = $f3->get('POST.token');
+        $csrf = $f3->get('SESSION.csrf');
 
-            // CARICA I DATI INVIATI E DI SESSIONE
-            $utente = $f3->get('POST.utente');
-            $password = $f3->get('POST.p');
-            $token = $f3->get('POST.token');
-            $csrf = $f3->get('SESSION.csrf');
+        // CONTROLLA SE NON SONO SOTTO ATTACCO CSRF
+        if ($token === $csrf) {
 
-            $utente = str_replace('"', "", $utente);
-            $utente = str_replace("'", "", $utente);
+            $username = str_replace('"', "", $username);
+            $username = str_replace("'", "", $username);
 
-            // Resetta il csrf per evitare il doppio invio
-            $f3->set('SESSION.csrf', $session->csrf());
+            // HASH
+            $password_hash = hash('sha512', $password, false);
 
-            // CONTROLLA SE NON SONO SOTTO ATTACCO CSRF
-            if ($token === $csrf) {
+            // CONTROLLO SE ESISTE UN UTENTE CON QUESTI USERNAME E PASSWORD
+            $login_result = \App\Utente::Login($username, $password_hash);
 
-                $db = (\App\Db::getInstance())->connect();
-                $users = new \DB\SQL\Mapper($db, 'users');
-                $auth = new \Auth($users, array('id' => 'user_id', 'pw' => 'password'));
+            if ($login_result) {
 
-                $hash = hash('sha512', $password, false);
-                $login_result = $auth->login($utente, $hash);
+                // TROVO IL RUOLO
+                $role = \App\Utente::Role($username, $password_hash);
 
-                if ($login_result) {
+                $f3->set('COOKIE.sessionName', $csrf, 86400);
+                $sessionUsername = "SESSION.Username." . $csrf;
+                $sessionPassword = "SESSION.Password." . $csrf;
+                $sessionRole = "SESSION.Role." . $csrf;
 
-                    $f3->set('COOKIE.sessionName', $csrf);
-                    $sessionUserid = "SESSION.UserID." . $csrf;
-                    $sessionPassword = "SESSION.Password." . $csrf;
+                $f3->set($sessionUsername, $username);
+                $f3->set($sessionPassword, $password);
+                $f3->set($sessionRole, $role);
 
-                    $f3->set($sessionUserid, $utente);
-                    $f3->set($sessionPassword, $password);
-
-                    \App\Log::SaveMessage($utente, "login effettuato");
-
-                    $f3->reroute('/');
-                } else {
-                    \App\Log::SaveMessage($utente, "login errato");
-
-                    \App\Flash::instance()->addMessage('Nome utente o password non corretta', 'danger');
-                    $f3->reroute('/login');
-                }
+                $f3->reroute('@home');
             } else {
-                \App\Log::SaveMessage($utente, "login errato - richiesta multipla");
-
-                \App\Flash::instance()->addMessage('Richieste multiple non valide', 'danger');
-                $f3->reroute('/login');
+                // LOGIN USERNAME/PASSWORD ERRATO
+                \App\Flash::instance()->addMessage('Username/password errati', 'danger');
+                $f3->reroute('@login');
             }
+        } else {
+            // TOKEN ERRATO
+            \App\Flash::instance()->addMessage('Richieste multiple non valide', 'danger');
+            $f3->reroute('@login');
         }
     }
 }

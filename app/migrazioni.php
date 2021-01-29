@@ -102,7 +102,7 @@ class Migrazioni
         $this->CreazioneTabella("richieste_eliminate", "CREATE TABLE IF NOT EXISTS 'richieste_eliminate' ( id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'paziente' TEXT NOT NULL, 'data' TEXT NOT NULL, 'farmaco1' TEXT, 'farmaco2' TEXT, 'farmaco3' TEXT, 'farmaco4' TEXT, 'farmaco5' TEXT, 'farmaco6' TEXT, 'farmaco7' TEXT, 'farmaco8' TEXT, 'farmaco9' TEXT, 'note' TEXT );");
         $this->CreazioneTabella("dipendenti", "CREATE TABLE IF NOT EXISTS 'dipendenti' ( id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'cognome' TEXT NOT NULL, 'nome' TEXT NOT NULL );");
         $this->CreazioneTabella("presenze", "CREATE TABLE IF NOT EXISTS 'presenze' ( id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'fkdipendente' INTEGER NOT NULL, 'data' TEXT, 'entrata' TEXT, 'uscita' TEXT, 'note' TEXT );");
-
+        $this->CreazioneTabella("utente", "CREATE TABLE IF NOT EXISTS 'utente' ( 'idutente'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'username' TEXT UNIQUE, 'password' TEXT NOT NULL, 'role' TEXT NOT NULL);");
 
         //----------- UPDATE TABELLE -----------------
         $this->AggiornaTabella("pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'lavoro' TEXT;");
