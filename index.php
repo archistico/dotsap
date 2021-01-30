@@ -167,10 +167,8 @@ $f3->route('GET  @impostazionisvuotanaotao:         /impostazioni/svuotanaotao',
 $f3->route('GET  @impostazionisvuotaantinfluenzale: /impostazioni/svuotaantinfluenzale', '\App\Impostazioni->SvuotaAntinfluenzale');
 $f3->route('GET  @impostazionisvuotapazienti:       /impostazioni/svuotapazienti',       '\App\Impostazioni->SvuotaPazienti');
 
-$f3->route('GET  @impostazioni_import_pazienti:    /impostazioni/import/pazienti',    '\App\Impostazioni->Nuovo');
-$f3->route('POST @impostazioni_import_pazienti_db: /impostazioni/import/pazienti',    '\App\Impostazioni->NuovoDb');
-
-
+$f3->route('GET  @impostazioni_import_pazienti:    /impostazioni/import/pazienti',       '\App\Impostazioni->ImportPazienti');
+$f3->route('POST @impostazioni_import_pazienti_db: /impostazioni/import/pazienti',       '\App\Impostazioni->ImportPazientiDb');
 
 // Utenti
 $f3->route('GET  @utente_nuovo:        /impostazioni/utente/nuovo',        '\App\Utenti->Nuovo');

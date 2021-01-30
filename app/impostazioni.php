@@ -22,6 +22,23 @@ class Impostazioni
         echo \Template::instance()->render('templates/base.htm');
     }
 
+    public function ImportPazienti($f3)
+    {
+        $f3->set('titolo', 'Impostazioni');
+        $f3->set('contenuto', '/impostazioni/import_pazienti.htm');
+        echo \Template::instance()->render('templates/base.htm');
+    }
+
+    public function ImportPazientiDb($f3)
+    {
+        $formato = $f3->get('POST.formato');
+        $csv = $f3->get('POST.csv');
+
+        Utilita::DumpDie($csv);
+        \App\Flash::instance()->addMessage('Pazienti caricati con successo', 'success');
+        $f3->reroute('@pazienti');
+    }
+
     public function SvuotaRicette($f3)
     {
         Richiesta::SvuotaTabellaRicetteFatte();
