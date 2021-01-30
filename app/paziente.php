@@ -396,4 +396,23 @@ class Paziente {
 
         $db->commit();
     }
+
+    public static function ImportaCSV($csv) 
+    {
+        $csv = strtoupper($csv);
+        $array_csv = explode("\n", $csv);
+
+        foreach($array_csv as $linea) {
+            if(!empty($linea)) {
+                echo $linea."<br>";
+                $parti = preg_split("/[|]/", $linea);
+                Utilita::Dump($parti);
+            }            
+        }
+
+        // CORREGGERE SQL PAZIENTE CON :cognome ecc.
+
+        // $paz = new Paziente($cognome, $nome, $datanascita, $sesso, $codicefiscale, $indirizzo, $citta, $telefono);
+        // $paz->AddDB();
+    }
 }
