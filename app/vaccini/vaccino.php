@@ -187,4 +187,24 @@ class Vaccino
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
     }
+    
+    public static function SvuotaTabellaAntinfluenzale()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $db->begin();
+        $db->exec("DELETE FROM vaccini;");
+
+        $db->commit();
+    }
+
+    public static function SvuotaTabellaVaccinabili()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $db->begin();
+        $db->exec("DELETE FROM vaccinabili;");
+
+        $db->commit();
+    }
 }

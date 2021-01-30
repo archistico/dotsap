@@ -143,4 +143,14 @@ class Covid
 
         $f3->reroute('/covid');
     }
+
+    public static function SvuotaTabellaSchedeCovid()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $db->begin();
+        $db->exec("DELETE FROM covid;");
+
+        $db->commit();
+    }
 }

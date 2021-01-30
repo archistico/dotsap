@@ -50,7 +50,7 @@ class Log
     public static function LoadAll()
     {
         $db = (\App\Db::getInstance())->connect();
-        $sql = "SELECT * FROM logs ORDER BY data DESC";
+        $sql = "SELECT * FROM logs ORDER BY id DESC";
         return $db->exec($sql);
     }
 }

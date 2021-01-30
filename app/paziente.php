@@ -386,4 +386,14 @@ class Paziente {
         $db->exec($sql);
         $db->commit();
     }
+
+    public static function SvuotaTabellaPazienti()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $db->begin();
+        $db->exec("DELETE FROM pazienti;");
+
+        $db->commit();
+    }
 }

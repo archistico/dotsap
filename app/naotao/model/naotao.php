@@ -2,7 +2,7 @@
 
 namespace App\Naotao\Model;
 
-class Naotao 
+class Naotao
 {
    public $idnaotao;
    public $fkpaziente;
@@ -36,20 +36,20 @@ class Naotao
 
          $db->begin();
          $db->exec($sql, [
-            ':idnaotao' => $this->idnaotao, 
-            ':fkpaziente' => $this->fkpaziente, 
-            ':farmaco' => $this->farmaco, 
-            ':dataultimiesami' => $this->dataultimiesami, 
-            ':allegatocompilato' => $this->allegatocompilato, 
-            ':datafollowup' => $this->datafollowup, 
-            ':esamiprescritti' => $this->esamiprescritti, 
-            ':convocare' => $this->convocare, 
+            ':idnaotao' => $this->idnaotao,
+            ':fkpaziente' => $this->fkpaziente,
+            ':farmaco' => $this->farmaco,
+            ':dataultimiesami' => $this->dataultimiesami,
+            ':allegatocompilato' => $this->allegatocompilato,
+            ':datafollowup' => $this->datafollowup,
+            ':esamiprescritti' => $this->esamiprescritti,
+            ':convocare' => $this->convocare,
             ':note' => $this->note
          ]);
          $db->commit();
       } catch (\Exception $e) {
-          echo 'Caught exception: ', $e->getMessage(), "\n";
-          return false;
+         echo 'Caught exception: ', $e->getMessage(), "\n";
+         return false;
       }
       return true;
    }
@@ -72,20 +72,20 @@ class Naotao
 
          $db->begin();
          $db->exec($sql, [
-            ':idnaotao' => $this->idnaotao, 
-            ':fkpaziente' => $this->fkpaziente, 
-            ':farmaco' => $this->farmaco, 
-            ':dataultimiesami' => $this->dataultimiesami, 
-            ':allegatocompilato' => $this->allegatocompilato, 
-            ':datafollowup' => $this->datafollowup, 
-            ':esamiprescritti' => $this->esamiprescritti, 
-            ':convocare' => $this->convocare, 
+            ':idnaotao' => $this->idnaotao,
+            ':fkpaziente' => $this->fkpaziente,
+            ':farmaco' => $this->farmaco,
+            ':dataultimiesami' => $this->dataultimiesami,
+            ':allegatocompilato' => $this->allegatocompilato,
+            ':datafollowup' => $this->datafollowup,
+            ':esamiprescritti' => $this->esamiprescritti,
+            ':convocare' => $this->convocare,
             ':note' => $this->note
          ]);
          $db->commit();
       } catch (\Exception $e) {
-          echo 'Caught exception: ', $e->getMessage(), "\n";
-          return false;
+         echo 'Caught exception: ', $e->getMessage(), "\n";
+         return false;
       }
       return true;
    }
@@ -143,5 +143,15 @@ class Naotao
          ':idnaotao' => $idnaotao
       ]);
       return true;
+   }
+
+   public static function SvuotaTabellaNaoTao()
+   {
+      $db = (\App\Db::getInstance())->connect();
+
+      $db->begin();
+      $db->exec("DELETE FROM naotao;");
+
+      $db->commit();
    }
 }

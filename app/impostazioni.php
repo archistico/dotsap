@@ -42,4 +42,35 @@ class Impostazioni
         \App\Flash::instance()->addMessage('Tabella appuntamenti svuotata', 'success');
         $f3->reroute('/impostazioni');
     }
+
+    public function SvuotaSchedeCovid($f3)
+    {
+        Covid::SvuotaTabellaSchedeCovid();
+        \App\Flash::instance()->addMessage('Tabella schede covid svuotata', 'success');
+        $f3->reroute('/impostazioni');
+    }
+
+    public function SvuotaAntinfluenzale($f3)
+    {
+        \App\Vaccini\Vaccino::SvuotaTabellaAntinfluenzale();
+        \App\Vaccini\Vaccino::SvuotaTabellaVaccinabili();
+        \App\Flash::instance()->addMessage('Tabella vaccini antinfluenzali e vaccinabili svuotata', 'success');
+        $f3->reroute('/impostazioni');
+    }
+
+    public function SvuotaNaoTao($f3)
+    {
+        \App\Naotao\Model\Naotao::SvuotaTabellaNaoTao();
+        \App\Flash::instance()->addMessage('Tabella Nao/Tao svuotata', 'success');
+        $f3->reroute('/impostazioni');
+    }
+
+    public function SvuotaPazienti($f3)
+    {
+        Covid::SvuotaTabellaSchedeCovid();
+        \App\Naotao\Model\Naotao::SvuotaTabellaNaoTao();
+        Paziente::SvuotaTabellaPazienti();
+        \App\Flash::instance()->addMessage('Tabella pazienti svuotata e tutte quelle collegate', 'success');
+        $f3->reroute('/impostazioni');
+    }
 }

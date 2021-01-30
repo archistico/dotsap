@@ -157,18 +157,28 @@ $f3->route('GET @autentica: /autentica', '\App\Auth->Autentica');
 $f3->route('GET @amministrazione: /amministrazione', '\App\Admin->Amministrazione');
 
 // Impostazioni
-$f3->route('GET @impostazioni: /impostazioni', '\App\Impostazioni->Home');
-$f3->route('GET @impostazionisvuotaricette: /impostazioni/svuotaricette', '\App\Impostazioni->SvuotaRicette');
-$f3->route('GET @impostazionisvuotaprivacy: /impostazioni/svuotaprivacy', '\App\Impostazioni->SvuotaPrivacy');
-$f3->route('GET @impostazionisvuotaprenotazioni: /impostazioni/svuotaprenotazioni', '\App\Impostazioni->SvuotaPrenotazioni');
+$f3->route('GET  @impostazioni:                    /impostazioni',                    '\App\Impostazioni->Home');
+
+$f3->route('GET  @impostazionisvuotaricette:        /impostazioni/svuotaricette',        '\App\Impostazioni->SvuotaRicette');
+$f3->route('GET  @impostazionisvuotaprivacy:        /impostazioni/svuotaprivacy',        '\App\Impostazioni->SvuotaPrivacy');
+$f3->route('GET  @impostazionisvuotaprenotazioni:   /impostazioni/svuotaprenotazioni',   '\App\Impostazioni->SvuotaPrenotazioni');
+$f3->route('GET  @impostazionisvuotaschedecovid:    /impostazioni/svuotaschedecovid',    '\App\Impostazioni->SvuotaSchedeCovid');
+$f3->route('GET  @impostazionisvuotanaotao:         /impostazioni/svuotanaotao',         '\App\Impostazioni->SvuotaNaoTao');
+$f3->route('GET  @impostazionisvuotaantinfluenzale: /impostazioni/svuotaantinfluenzale', '\App\Impostazioni->SvuotaAntinfluenzale');
+$f3->route('GET  @impostazionisvuotapazienti:       /impostazioni/svuotapazienti',       '\App\Impostazioni->SvuotaPazienti');
+
+$f3->route('GET  @impostazioni_import_pazienti:    /impostazioni/import/pazienti',    '\App\Impostazioni->Nuovo');
+$f3->route('POST @impostazioni_import_pazienti_db: /impostazioni/import/pazienti',    '\App\Impostazioni->NuovoDb');
+
+
 
 // Utenti
-$f3->route('GET  @utente_nuovo:                 /impostazione/utente/nuovo',        '\App\Utenti->Nuovo');
-$f3->route('POST @utente_nuovo_db:              /impostazione/utente/nuovo',        '\App\Utenti->NuovoDb');
-$f3->route('GET  @utente_modifica:              /impostazione/utente/modifica/@id', '\App\Utenti->Modifica');
-$f3->route('POST @utente_modifica_db:           /impostazione/utente/modifica/@id', '\App\Utenti->ModificaDb');
-$f3->route('GET  @utente_cancella:              /impostazione/utente/cancella/@id', '\App\Utenti->Cancella');
-$f3->route('POST @utente_cancella_db:           /impostazione/utente/cancella/@id', '\App\Utenti->CancellaDb');
+$f3->route('GET  @utente_nuovo:        /impostazioni/utente/nuovo',        '\App\Utenti->Nuovo');
+$f3->route('POST @utente_nuovo_db:     /impostazioni/utente/nuovo',        '\App\Utenti->NuovoDb');
+$f3->route('GET  @utente_modifica:     /impostazioni/utente/modifica/@id', '\App\Utenti->Modifica');
+$f3->route('POST @utente_modifica_db:  /impostazioni/utente/modifica/@id', '\App\Utenti->ModificaDb');
+$f3->route('GET  @utente_cancella:     /impostazioni/utente/cancella/@id', '\App\Utenti->Cancella');
+$f3->route('POST @utente_cancella_db:  /impostazioni/utente/cancella/@id', '\App\Utenti->CancellaDb');
 
 // Log
 $f3->route('GET @logs: /logs', '\App\Logs->Show');
