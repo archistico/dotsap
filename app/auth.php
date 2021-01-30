@@ -87,11 +87,11 @@ class Auth
         $token = $f3->get('POST.token');
         $csrf = $f3->get('SESSION.csrf');
 
+        $username = str_replace('"', "", $username);
+        $username = str_replace("'", "", $username);
+
         // CONTROLLA SE NON SONO SOTTO ATTACCO CSRF
         if ($token === $csrf) {
-
-            $username = str_replace('"', "", $username);
-            $username = str_replace("'", "", $username);
 
             // HASH
             $password_hash = hash('sha512', $password, false);
@@ -113,14 +113,21 @@ class Auth
                 $f3->set($sessionPassword, $password);
                 $f3->set($sessionRole, $role);
 
+                \App\Log::SaveMessage($username, "login effettuato");
+
                 $f3->reroute('@home');
             } else {
                 // LOGIN USERNAME/PASSWORD ERRATO
+
+                \App\Log::SaveMessage($username, "login errato");
+
                 \App\Flash::instance()->addMessage('Username/password errati', 'danger');
                 $f3->reroute('@login');
             }
         } else {
             // TOKEN ERRATO
+            \App\Log::SaveMessage($username, "token errato");
+
             \App\Flash::instance()->addMessage('Richieste multiple non valide', 'danger');
             $f3->reroute('@login');
         }
