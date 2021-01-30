@@ -44,7 +44,7 @@ class Naotao
 
       // Utilita::Dump($listapazienti);
 
-      $f3->set('titolo', 'Naotao');
+      $f3->set('titolo', 'Nao/Tao');
       $f3->set('contenuto', 'naotao/naotao_nuovo.htm');
       echo \Template::instance()->render('templates/base.htm');
    }
@@ -92,7 +92,7 @@ class Naotao
 
       // Utilita::DumpDie($elemento);
 
-      $f3->set('titolo', 'Naotao');
+      $f3->set('titolo', 'Nao/Tao');
       $f3->set('contenuto', 'naotao/naotao_modifica.htm');
       echo \Template::instance()->render('templates/base.htm');
    }
@@ -123,7 +123,7 @@ class Naotao
       $listapazienti = \App\Paziente::ReadAllName();
       $f3->set('lista_pazienti', $listapazienti);
 
-      $f3->set('titolo', 'Naotao');
+      $f3->set('titolo', 'Nao/Tao');
       $f3->set('contenuto', 'naotao/naotao_lista.htm');
       $f3->set('script', 'naotao.js');
       \Template::instance()->filter('datatodmy','\App\Helpers\Filter::instance()->datatodmy');
@@ -136,7 +136,7 @@ class Naotao
       $elemento = \app\Naotao\Model\Naotao::SelectById($idnaotao);
       $f3->set('naotao', $elemento);
 
-      $f3->set('titolo', 'Naotao');
+      $f3->set('titolo', 'Nao/Tao');
       $f3->set('contenuto', 'naotao/naotao_cancella.htm');
       \Template::instance()->filter('datatodmy','\App\Helpers\Filter::instance()->datatodmy');
       \Template::instance()->filter('sino','\App\Helpers\Filter::instance()->sino');

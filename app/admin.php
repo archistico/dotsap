@@ -20,7 +20,7 @@ class Admin
         $utenti = \App\Utente::SelectAll();
         $f3->set('utenti', $utenti);
         $f3->set('titolo', 'Amministrazione');
-        $f3->set('contenuto', 'amministrazione.htm');
+        $f3->set('contenuto', '/impostazioni/amministrazione.htm');
         echo \Template::instance()->render('templates/base.htm');
     }
 }
