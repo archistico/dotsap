@@ -204,6 +204,7 @@ e) i dati da Lei forniti potrebbero, in virtù di norme legali e regolamentari 
 
         // Gestione email per Millebook
         $indirizzoemail = $f3->get('POST.indirizzoemail');
+        $indirizzoemail = strtolower($indirizzoemail);
 
         if(!empty(trim($indirizzoemail))) {
             Paziente::ModifyEmailByID($id, $indirizzoemail);
