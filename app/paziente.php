@@ -436,23 +436,6 @@ class Paziente
                 }
 
                 // TRASFORMO DATA DA GG/MM/YY IN GG/MM/YYYY GRAZIE ALL'ETA
-<<<<<<< HEAD
-
-
-
-                // CONTROLLO SE ESISTE GIA
-                if (Paziente::ESISTE($cognome, $nome, $datanascita)) {
-                    // SE ESISTE AGGIORNO I DATI
-                    $id = Paziente::SELECT_ID_BY_COGNOME_NOME_DATANASCITA($cognome, $nome, $datanascita);
-                    $paz = new Paziente($id, $cognome, $nome, $datanascita, $sesso, $codicefiscale, "", "", $recapito, "", "", "");
-                    $paz->UpdateDB();
-                    echo "Modificato paziente: " . $cognome . " " . $nome . "<br>";
-                } else {
-                    // SE NON ESISTE ALLORA LO AGGIUNGO
-                    $paz = new Paziente(null, $cognome, $nome, $datanascita, $sesso, $codicefiscale, "", "", $recapito, "", "", "");
-                    $paz->AddDB();
-                    echo "Aggiunto paziente: " . $cognome . " " . $nome . "<br>";
-=======
                 $anno_in_corso = date("y");
                 if($eta<100) {
                     if($eta>=$anno_in_corso) {
@@ -479,7 +462,6 @@ class Paziente
                     $paz = new Paziente(null, $cognome, $nome, $datanascita_completa, $sesso, $codicefiscale, "", "", $recapito, "", "", "");
                     $paz->AddDB();
                     //echo "Aggiunto paziente: " . $cognome . " " . $nome . "<br>";
->>>>>>> repair
                 }
             }
         }
