@@ -420,7 +420,7 @@ class Paziente
                 $sesso = $parti[2];
                 $datanascita = $parti[3];
                 $codicefiscale = $parti[4];
-                $eta = $parti[5];
+                $eta = self::CLEAN_ONLY_NUMBER($parti[5]);
                 $telefono = self::CLEAN_ONLY_NUMBER_SPACE($parti[6]);
                 $cellulare = self::CLEAN_ONLY_NUMBER_SPACE($parti[7]);
 
@@ -436,21 +436,32 @@ class Paziente
                 }
 
                 // TRASFORMO DATA DA GG/MM/YY IN GG/MM/YYYY GRAZIE ALL'ETA
-
+                $anno_in_corso = date("y");
+                if($eta<100) {
+                    if($eta>=$anno_in_corso) {
+                        $centenario = "19";
+                    } else {
+                        $centenario = "20";
+                    }
+                } else {
+                    $centenario = "19";
+                }
+                $datanascita_completa = substr($datanascita, 0, 6).$centenario.substr($datanascita, -2);
+                // Utilita::Dump([$eta, $datanascita, $datanascita_completa]);
 
 
                 // CONTROLLO SE ESISTE GIA
-                if (Paziente::ESISTE($cognome, $nome, $datanascita)) {
+                if (Paziente::ESISTE($cognome, $nome, $datanascita_completa)) {
                     // SE ESISTE AGGIORNO I DATI
-                    $id = Paziente::SELECT_ID_BY_COGNOME_NOME_DATANASCITA($cognome, $nome, $datanascita);
-                    $paz = new Paziente($id, $cognome, $nome, $datanascita, $sesso, $codicefiscale, "", "", $recapito, "", "", "");
+                    $id = Paziente::SELECT_ID_BY_COGNOME_NOME_DATANASCITA($cognome, $nome, $datanascita_completa);
+                    $paz = new Paziente($id, $cognome, $nome, $datanascita_completa, $sesso, $codicefiscale, "", "", $recapito, "", "", "");
                     $paz->UpdateDB();
-                    echo "Modificato paziente: " . $cognome . " " . $nome . "<br>";
+                    //echo "Modificato paziente: " . $cognome . " " . $nome . "<br>";
                 } else {
                     // SE NON ESISTE ALLORA LO AGGIUNGO
-                    $paz = new Paziente(null, $cognome, $nome, $datanascita, $sesso, $codicefiscale, "", "", $recapito, "", "", "");
+                    $paz = new Paziente(null, $cognome, $nome, $datanascita_completa, $sesso, $codicefiscale, "", "", $recapito, "", "", "");
                     $paz->AddDB();
-                    echo "Aggiunto paziente: " . $cognome . " " . $nome . "<br>";
+                    //echo "Aggiunto paziente: " . $cognome . " " . $nome . "<br>";
                 }
             }
         }
@@ -483,6 +494,16 @@ class Paziente
     {
         if (!empty($text)) {
             $output = preg_replace('/[^0-9 ]/', '', $text);
+            return $output;
+        } else {
+            return $text;
+        }
+    }
+
+    private static function CLEAN_ONLY_NUMBER($text)
+    {
+        if (!empty($text)) {
+            $output = preg_replace('/[^0-9]/', '', $text);
             return $output;
         } else {
             return $text;
