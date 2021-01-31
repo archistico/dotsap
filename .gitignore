@@ -1,6 +1,7 @@
 tmp/
 .database_test.zip
 db/temp.sqlite
+db/database.sqlite
 pazienti.txt
 /.idea/
 .idea/workspace.xml
