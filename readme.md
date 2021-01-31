@@ -1,11 +1,23 @@
 # DOT'S AP
 
-![homepage](https://github.com/archistico/dotsap/blob/master/img/homepage.png?raw=true)
-![appuntamenti](https://github.com/archistico/dotsap/blob/master/img/appuntamenti.png?raw=true)
-![privacy](https://github.com/archistico/dotsap/blob/master/img/privacy.png?raw=true)
-![nao-tao](https://github.com/archistico/dotsap/blob/master/img/nao-tao.png?raw=true)
-![scheda](https://github.com/archistico/dotsap/blob/master/img/scheda.png?raw=true)
-![amministrazione](https://github.com/archistico/dotsap/blob/master/img/amministrazione.png?raw=true)
+Gestionale di studio medico  
+
+![homepage](https://github.com/archistico/dotsap/blob/master/img/homepage.png?raw=true)  
+  
+Zona appuntamenti  
+![appuntamenti](https://github.com/archistico/dotsap/blob/master/img/appuntamenti.png?raw=true)  
+  
+Creazione pdf privacy
+![privacy](https://github.com/archistico/dotsap/blob/master/img/privacy.png?raw=true)  
+  
+Gestione Nao/Tao  
+![nao-tao](https://github.com/archistico/dotsap/blob/master/img/nao-tao.png?raw=true)  
+  
+Schede di monitoraggio  
+![scheda](https://github.com/archistico/dotsap/blob/master/img/scheda.png?raw=true)  
+  
+Area amministrazione    
+![amministrazione](https://github.com/archistico/dotsap/blob/master/img/amministrazione.png?raw=true)  
 
 ## Memo  
 - configurare il file .env
