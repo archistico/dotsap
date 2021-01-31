@@ -48,35 +48,30 @@ class Pazienti
 
     public function Salva($f3)
     {
-        $cognome = Utilita::PulisciStringaVirgolette($f3->get('POST.cognome'));
-        $nome = Utilita::PulisciStringaVirgolette($f3->get('POST.nome'));
-        $cf = Utilita::PulisciStringaVirgolette($f3->get('POST.codicefiscale'));
-        $indirizzo = Utilita::PulisciStringaVirgolette($f3->get('POST.indirizzo'));
-        $citta = Utilita::PulisciStringaVirgolette($f3->get('POST.citta'));
-        $sesso = Utilita::PulisciStringaVirgolette($f3->get('POST.sesso'));
-        $datanascita = Utilita::PulisciStringaVirgolette($f3->get('POST.datanascita'));
+        $cognome = $f3->get('POST.cognome');
+        $nome = $f3->get('POST.nome');
+        $cf = $f3->get('POST.codicefiscale');
+        $indirizzo = $f3->get('POST.indirizzo');
+        $citta = $f3->get('POST.citta');
+        $sesso = $f3->get('POST.sesso');
+        $datanascita = $f3->get('POST.datanascita');
 
-        $cognome = ucwords(strtolower($cognome));
-        $nome = ucwords(strtolower($nome));
-
+        $cognome = strtoupper($cognome);
+        $nome = strtoupper($nome);
         $indirizzo = ucwords(strtolower($indirizzo));
         $citta = ucwords(strtolower($citta));
-
-        $telefono = Utilita::PulisciStringaVirgolette($f3->get('POST.telefono'));
-        $lavoro = Utilita::PulisciStringaVirgolette($f3->get('POST.lavoro'));
-        $note = Utilita::PulisciStringaVirgolette($f3->get('POST.note'));
-        $stato = Utilita::PulisciStringaVirgolette($f3->get('POST.stato'));
-
-        $email = Utilita::PulisciStringaVirgolette($f3->get('POST.email'));
+        $telefono = $f3->get('POST.telefono');
+        $lavoro = $f3->get('POST.lavoro');
+        $email = $f3->get('POST.email');
         $email = strtolower($email);
-        $datacovid = null;
-
-        $p = new \App\Paziente(null, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $stato, $email, $datacovid);
+        $note = $f3->get('POST.note');
+        
+        $p = new \App\Paziente(null, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $email);
         $p->AddDB();
 
         \App\Flash::instance()->addMessage('Paziente aggiunto', 'success');
 
-        $f3->reroute('/pazienti');
+        $f3->reroute('@pazienti');
     }
 
     public function Cerca($f3)
@@ -112,45 +107,29 @@ class Pazienti
     public function ModificaSQL($f3)
     {
         $id = $f3->get('POST.id');
-        $cognome = Utilita::PulisciStringaVirgolette($f3->get('POST.cognome'));
-        $nome = Utilita::PulisciStringaVirgolette($f3->get('POST.nome'));
-        $cf = Utilita::PulisciStringaVirgolette($f3->get('POST.codicefiscale'));
-        $indirizzo = Utilita::PulisciStringaVirgolette($f3->get('POST.indirizzo'));
-        $citta = Utilita::PulisciStringaVirgolette($f3->get('POST.citta'));
-        $sesso = Utilita::PulisciStringaVirgolette($f3->get('POST.sesso'));
-        $datanascita = Utilita::PulisciStringaVirgolette($f3->get('POST.datanascita'));
+        $cognome = $f3->get('POST.cognome');
+        $nome = $f3->get('POST.nome');
+        $cf = $f3->get('POST.codicefiscale');
+        $indirizzo = $f3->get('POST.indirizzo');
+        $citta = $f3->get('POST.citta');
+        $sesso = $f3->get('POST.sesso');
+        $datanascita = $f3->get('POST.datanascita');
 
-        $cognome = ucwords(strtolower($cognome));
-        $nome = ucwords(strtolower($nome));
-
+        $cognome = strtoupper($cognome);
+        $nome = strtoupper($nome);
         $indirizzo = ucwords(strtolower($indirizzo));
         $citta = ucwords(strtolower($citta));
-
-        $telefono = Utilita::PulisciStringaVirgolette($f3->get('POST.telefono'));
-        $lavoro = Utilita::PulisciStringaVirgolette($f3->get('POST.lavoro'));
-        $stato = Utilita::PulisciStringaVirgolette($f3->get('POST.stato'));
-
-        $email = Utilita::PulisciStringaVirgolette($f3->get('POST.email'));
+        $telefono = $f3->get('POST.telefono');
+        $lavoro = $f3->get('POST.lavoro');
+        $email = $f3->get('POST.email');
         $email = strtolower($email);
-
-        // SEGNA LE MODIFICHE NELLE NOTE
-        $paziente = \App\Paziente::ReadByID($id);
-        $statoprecedente = $paziente->stato;
-
-        if($stato == $statoprecedente) {
-            $note = Utilita::PulisciStringaVirgolette($f3->get('POST.note'));
-        } else {
-            $note = Utilita::PulisciStringaVirgolette($f3->get('POST.note')) . "\nModifica: " . date("d/m/Y") . " | Stato: ".$statoprecedente." -> ".$stato;
-        }
+        $note = $f3->get('POST.note');
         
-        $datacovid = Utilita::PulisciStringaVirgolette($f3->get('POST.datacovid'));
-
-        $p = new \App\Paziente($id, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $stato, $email, $datacovid);
+        $p = new \App\Paziente($id, $cognome, $nome, $datanascita, $sesso, $cf, $indirizzo, $citta, $telefono, $lavoro, $note, $email);
         $p->UpdateDB();
 
         \App\Flash::instance()->addMessage('Paziente modificato', 'success');
-
-        $f3->reroute('/pazienti');
+        $f3->reroute('@pazienti');
     }
 
     public function CancellaConferma($f3, $params)
@@ -169,10 +148,11 @@ class Pazienti
     public function Cancella($f3, $params)
     {
         $id = $f3->get('POST.id');
+        \App\Naotao\Model\Naotao::DeleteByFkpaziente($id);
+        \App\Covid\Model\Covid::DeleteByFkpaziente($id);
         \App\Paziente::CancellaByID($id);
 
         \App\Flash::instance()->addMessage("Paziente #$id cancellato", 'success');
-
-        $f3->reroute('/pazienti');
+        $f3->reroute('@pazienti');
     }
 }

@@ -71,31 +71,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="InputStato">Stato Covid19</label>
-                        <select class="form-control" id="InputStato" placeholder="Stato covid" name="stato" required>
-                            <option value="Ignoto" <check if="{{ @p.stato=='' }}"><true>selected</true></check> >Ignoto</option>
-                            <option value="Sospetto in attesa di tampone" <check if="{{ @p.stato=='Sospetto in attesa di tampone' }}"><true>selected</true></check> >Sospetto in attesa di tampone</option>
-                            <option value="Sospetto non in attesa di tampone" <check if="{{ @p.stato=='Sospetto non in attesa di tampone' }}"><true>selected</true></check> >Sospetto non in attesa di tampone</option>
-                            <option value="Negativo" <check if="{{ @p.stato=='Negativo' }}"><true>selected</true></check> >Negativo</option>
-                            <option value="Isolamento" <check if="{{ @p.stato=='Isolamento' }}"><true>selected</true></check> >Isolamento</option>
-                            <option value="Positivo" <check if="{{ @p.stato=='Positivo' }}"><true>selected</true></check> >Positivo</option>
-                            <option value="Primo Tampone negativo" <check if="{{ @p.stato=='Primo Tampone negativo' }}"><true>selected</true></check> >Primo Tampone negativo</option>
-                            <option value="Secondo Tampone negativo" <check if="{{ @p.stato=='Secondo Tampone negativo' }}"><true>selected</true></check> >Secondo Tampone negativo</option>
-                            <option value="Terzo Tampone negativo" <check if="{{ @p.stato=='Terzo Tampone negativo' }}"><true>selected</true></check> >Terzo Tampone negativo</option>
-                            <option value="Guarito" <check if="{{ @p.stato=='Guarito' }}"><true>selected</true></check> >Guarito</option>
-                            <option value="Deceduto" <check if="{{ @p.stato=='Deceduto' }}"><true>selected</true></check> >Deceduto</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="InputDataCovid">Data covid</label>
-                        <input type="date" class="form-control" id="InputDataCovid" name="datacovid" value="{{ @p.datacovid }}">
-                    </div>
-                </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
                         <label for="Lavoro">Lavoro</label>
                         <input type="text" class="form-control" id="lavoro" placeholder="Inserisci il lavoro" name="lavoro" value="{{ @p.lavoro }}">

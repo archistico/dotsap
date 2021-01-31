@@ -280,4 +280,14 @@ class Covid
 
         return true;
     }
+
+    public static function DeleteByFkpaziente($fkpaziente)
+   {
+      $db = (\app\Db::getInstance())->connect();
+      $sql = "DELETE FROM covid WHERE fkpaziente = :fkpaziente";
+      $db->exec($sql, [
+         ':fkpaziente' => $fkpaziente
+      ]);
+      return true;
+   }
 }

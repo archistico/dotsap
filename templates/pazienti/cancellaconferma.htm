@@ -10,6 +10,8 @@
             <li>residente: {{ @paziente.citta }}</li>
         </ul>
         <br>
+        <h3 class="text-danger">Verranno cancellate anche le schede Covid e le schede Nao/Tao relative</h3>
+        <br>
         <form method="POST" action="{{@BASE}}{{ 'pazienticancella' | alias }}">
             <input type="hidden" name="id" value="{{ @paziente.id }}">
             <button type="submit" class="btn btn-danger btn-block btn-lg">Cancella</button>
