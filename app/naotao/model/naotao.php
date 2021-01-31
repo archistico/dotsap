@@ -145,6 +145,16 @@ class Naotao
       return true;
    }
 
+   public static function DeleteByFkpaziente($fkpaziente)
+   {
+      $db = (\app\Db::getInstance())->connect();
+      $sql = "DELETE FROM naotao WHERE fkpaziente = :fkpaziente";
+      $db->exec($sql, [
+         ':fkpaziente' => $fkpaziente
+      ]);
+      return true;
+   }
+
    public static function SvuotaTabellaNaoTao()
    {
       $db = (\App\Db::getInstance())->connect();

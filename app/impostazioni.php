@@ -43,10 +43,8 @@ class Impostazioni
             $f3->reroute('@impostazioni');
         }
         
-        Utilita::DumpDie("ok");
-        
         \App\Flash::instance()->addMessage('Pazienti caricati con successo', 'success');
-        $f3->reroute('@pazienti');
+        $f3->reroute('@impostazioni');
     }
 
     public function SvuotaRicette($f3)
