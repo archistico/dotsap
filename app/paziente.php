@@ -449,7 +449,6 @@ class Paziente
                 $datanascita_completa = substr($datanascita, 0, 6).$centenario.substr($datanascita, -2);
                 // Utilita::Dump([$eta, $datanascita, $datanascita_completa]);
 
-
                 // CONTROLLO SE ESISTE GIA
                 if (Paziente::ESISTE($cognome, $nome, $datanascita_completa)) {
                     // SE ESISTE AGGIORNO I DATI
@@ -465,11 +464,6 @@ class Paziente
                 }
             }
         }
-
-        // CORREGGERE SQL PAZIENTE CON :cognome ecc.
-
-        // $paz = new Paziente($cognome, $nome, $datanascita, $sesso, $codicefiscale, $indirizzo, $citta, $telefono);
-        // $paz->AddDB();
     }
 
     private static function CLEAN_TEXT($text)
