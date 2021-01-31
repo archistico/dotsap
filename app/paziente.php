@@ -29,11 +29,7 @@ class Paziente
     public $invioricette;
     public $datafirma;
 
-    // stato covid
-    public $stato;
-    public $datacovid;
-
-    public function __construct($id, $cognome, $nome, $datanascita, $sesso, $codicefiscale, $indirizzo, $citta, $telefono, $lavoro, $note, $stato, $email, $datacovid)
+    public function __construct($id, $cognome, $nome, $datanascita, $sesso, $codicefiscale, $indirizzo, $citta, $telefono, $lavoro, $note, $email)
     {
         $this->id = $id;
         $this->cognome = ucwords($cognome);
@@ -55,54 +51,81 @@ class Paziente
 
         $this->lavoro = $lavoro;
         $this->note = $note;
-        $this->stato = $stato;
 
         $this->email = $email;
-        $this->datacovid = $datacovid;
     }
 
     public function AddDB()
     {
         try {
-            $db = (\App\Db::getInstance())->connect();
-            $sql = 'INSERT into pazienti values(null, "' . $this->cognome . '", "' . $this->nome . '", "' . $this->datanascita . '", "' . $this->sesso . '", "' . $this->codicefiscale . '", "' . $this->indirizzo . '", "' . $this->citta . '", "' . $this->telefono . '", "' . $this->data . '", "' . $this->segreteria . '", "' . $this->associazione . '", "' . $this->sostituti . '", "' . $this->consulenti . '", "' . $this->softwarehouse . '", "' . $this->lavoro . '", "' . $this->stato . '", "' . $this->note . '", "' . $this->email . '", "' . $this->invioricette . '", "' . $this->datacovid . '")';
+            $db = (\app\Db::getInstance())->connect();
+            $sql = "INSERT INTO pazienti (id, cognome, nome, datanascita, sesso, codicefiscale, indirizzo, citta, telefono, lavoro, note, email)
+            VALUES (:id, :cognome, :nome, :datanascita, :sesso, :codicefiscale, :indirizzo, :citta, :telefono, :lavoro, :note, :email)";
+
             $db->begin();
-            $db->exec($sql);
+            $db->exec($sql, [
+                ':id' => $this->id,
+                ':cognome' => $this->cognome,
+                ':nome' => $this->nome,
+                ':datanascita' => $this->datanascita,
+                ':sesso' => $this->sesso,
+                ':codicefiscale' => $this->codicefiscale,
+                ':indirizzo' => $this->indirizzo,
+                ':citta' => $this->citta,
+                ':telefono' => $this->telefono,
+                ':lavoro' => $this->lavoro,
+                ':note' => $this->note,
+                ':email' => $this->email
+            ]);
             $db->commit();
         } catch (\Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+            return false;
         }
+        return true;
     }
 
     public function UpdateDB()
     {
         try {
-            $db = (\App\Db::getInstance())->connect();
+            $db = (\app\Db::getInstance())->connect();
+            $sql = "UPDATE pazienti SET 
+               cognome = :cognome, 
+               nome = :nome, 
+               datanascita = :datanascita, 
+               sesso = :sesso, 
+               codicefiscale = :codicefiscale, 
+               indirizzo = :indirizzo, 
+               citta = :citta, 
+               telefono = :telefono, 
+               lavoro = :lavoro, 
+               note = :note, 
+               email = :email
 
-            $sql = "UPDATE pazienti
-                    SET 
-                         cognome = '$this->cognome',
-                         nome = '$this->nome',
-                         datanascita = '$this->datanascita',
-                         sesso = '$this->sesso',
-                         codicefiscale = '$this->codicefiscale',
-                         indirizzo = '$this->indirizzo',
-                         citta = '$this->citta',
-                         telefono = '$this->telefono',
-                         lavoro = '$this->lavoro',
-                         stato = '$this->stato',
-                         note = '$this->note',
-                         email = '$this->email',
-                         datacovid = '$this->datacovid' 
-                    WHERE id = $this->id
-                    ;";
+               WHERE id = :id;
+            ";
 
             $db->begin();
-            $db->exec($sql);
+            $db->exec($sql, [
+                ':id' => $this->id,
+                ':cognome' => $this->cognome,
+                ':nome' => $this->nome,
+                ':datanascita' => $this->datanascita,
+                ':sesso' => $this->sesso,
+                ':codicefiscale' => $this->codicefiscale,
+                ':indirizzo' => $this->indirizzo,
+                ':citta' => $this->citta,
+                ':telefono' => $this->telefono,
+                ':lavoro' => $this->lavoro,
+                ':note' => $this->note,
+                ':email' => $this->email
+            ]);
             $db->commit();
         } catch (\Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+            return false;
         }
+        return true;
     }
 
     public function getData()
@@ -124,7 +147,8 @@ class Paziente
         $pazientiArray = $db->exec($sql);
 
         foreach ($pazientiArray as $paz) {
-            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"], $paz["datacovid"]);
+            // $id, $cognome, $nome, $datanascita, $sesso, $codicefiscale, $indirizzo, $citta, $telefono, $lavoro, $note, $email
+            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["email"]);
             $t->data = $paz["data"];
             $t->datafirma = $t->getData();
             $risposta[] = $t->ToArray();
@@ -137,55 +161,6 @@ class Paziente
 
         return $risposta;
     }
-
-    public static function ReadByStato($stato)
-    {
-        $db = (\App\Db::getInstance())->connect();
-        $risposta = [];
-
-        $sql = "SELECT * FROM pazienti WHERE stato = '$stato' ORDER BY datacovid ASC";
-        $pazientiArray = $db->exec($sql);
-
-        foreach ($pazientiArray as $paz) {
-            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"], $paz["datacovid"]);
-            $t->data = $paz["data"];
-            $t->datafirma = $t->getData();
-            $risposta[] = $t->ToArray();
-        }
-
-        // // Ordina in base a cognome
-        // usort($risposta, function ($a, $b) {
-        //     return strcmp($a["nomecompleto"], $b["nomecompleto"]);
-        // });
-
-        return $risposta;
-    }
-
-    // Trattato con Plaquenil
-    public static function ReadByNote($str)
-    {
-        $db = (\App\Db::getInstance())->connect();
-        $risposta = [];
-        // LIKE '%cats%'
-
-        $sql = "SELECT * FROM pazienti WHERE note LIKE '%$str%'";
-        $pazientiArray = $db->exec($sql);
-
-        foreach ($pazientiArray as $paz) {
-            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"], $paz["datacovid"]);
-            $t->data = $paz["data"];
-            $t->datafirma = $t->getData();
-            $risposta[] = $t->ToArray();
-        }
-
-        // Ordina in base a cognome
-        usort($risposta, function ($a, $b) {
-            return strcmp($a["nomecompleto"], $b["nomecompleto"]);
-        });
-
-        return $risposta;
-    }
-
 
     public static function Search($testoRicerca)
     {
@@ -196,7 +171,7 @@ class Paziente
         $pazientiArray = $db->exec($sql);
 
         foreach ($pazientiArray as $paz) {
-            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"], $paz["datacovid"]);
+            $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["email"]);
             $t->data = $paz["data"];
             $t->datafirma = $t->getData();
             $risposta[] = $t->ToArray();
@@ -217,7 +192,7 @@ class Paziente
         $sql = "SELECT * FROM pazienti WHERE id = '$id'";
         $pazientiArray = $db->exec($sql);
         $paz = $pazientiArray[0];
-        $risposta = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"], $paz["datacovid"]);
+        $risposta = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["email"]);
         $risposta->data = $paz["data"];
         $risposta->segreteria = $paz["segreteria"];
         $risposta->associazione = $paz["associazione"];
@@ -319,9 +294,7 @@ class Paziente
             'lavoro'        => $this->lavoro,
             'note'          => $this->note,
             'notebr'        => nl2br($this->note),
-            'stato'         => $this->stato,
-            'email'         => $this->email,
-            'datacovid'     => $this->datacovid,
+            'email'         => $this->email
         ];
     }
 
@@ -400,6 +373,36 @@ class Paziente
         $db->commit();
     }
 
+    public static function ESISTE($cognome, $nome, $datanascita)
+    {
+        $db = (\app\Db::getInstance())->connect();
+        $sql = "SELECT COUNT() as qt FROM pazienti WHERE cognome = :cognome AND nome = :nome AND datanascita = :datanascita";
+        $lista = $db->exec($sql, [
+            ':cognome' => $cognome,
+            ':nome' => $nome,
+            ':datanascita' => $datanascita,
+        ]);
+        
+        if($lista[0]["qt"]==0) {
+            return false;
+        } else {
+            return true;
+        }        
+    }
+
+    public static function SELECT_ID_BY_COGNOME_NOME_DATANASCITA($cognome, $nome, $datanascita)
+    {
+        $db = (\app\Db::getInstance())->connect();
+        $sql = "SELECT id FROM pazienti WHERE cognome = :cognome AND nome = :nome AND datanascita = :datanascita";
+        $lista = $db->exec($sql, [
+            ':cognome' => $cognome,
+            ':nome' => $nome,
+            ':datanascita' => $datanascita,
+        ]);
+        
+        return $lista[0]["id"];        
+    }
+
     public static function ImportaCSV($csv)
     {
         $csv = strtoupper($csv);
@@ -409,33 +412,46 @@ class Paziente
             if (!empty($linea)) {
 
                 $linea = self::CLEAN_TEXT($linea);
-
-                echo $linea . "<br>";
                 $parti = preg_split("/[|]/", $linea);
 
                 /* cognome|nome|sesso|nascita|codice_fiscale|eta|telefono|cellulare */
-
                 $cognome = $parti[0];
                 $nome = $parti[1];
-                $datanascita = $parti[2];
-                $sesso = $parti[3];
+                $sesso = $parti[2];
+                $datanascita = $parti[3];
                 $codicefiscale = $parti[4];
                 $eta = $parti[5];
                 $telefono = self::CLEAN_ONLY_NUMBER_SPACE($parti[6]);
                 $cellulare = self::CLEAN_ONLY_NUMBER_SPACE($parti[7]);
 
-                if($telefono == $cellulare) {
-                    if(!empty($telefono)) {
+                if ($telefono == $cellulare) {
+                    if (!empty($telefono)) {
                         $recapito = self::CLEAN_TEXT($telefono);
                     }
-                    if(!empty($cellulare)) {
+                    if (!empty($cellulare)) {
                         $recapito = self::CLEAN_TEXT($cellulare);
                     }
                 } else {
-                    $recapito = self::CLEAN_TEXT($telefono. " ". $cellulare);
-                }                
+                    $recapito = self::CLEAN_TEXT($telefono . " " . $cellulare);
+                }
 
-                Utilita::Dump($recapito);
+                // TRASFORMO DATA DA GG/MM/YY IN GG/MM/YYYY GRAZIE ALL'ETA
+
+
+
+                // CONTROLLO SE ESISTE GIA
+                if (Paziente::ESISTE($cognome, $nome, $datanascita)) {
+                    // SE ESISTE AGGIORNO I DATI
+                    $id = Paziente::SELECT_ID_BY_COGNOME_NOME_DATANASCITA($cognome, $nome, $datanascita);
+                    $paz = new Paziente($id, $cognome, $nome, $datanascita, $sesso, $codicefiscale, "", "", $recapito, "", "", "");
+                    $paz->UpdateDB();
+                    echo "Modificato paziente: " . $cognome . " " . $nome . "<br>";
+                } else {
+                    // SE NON ESISTE ALLORA LO AGGIUNGO
+                    $paz = new Paziente(null, $cognome, $nome, $datanascita, $sesso, $codicefiscale, "", "", $recapito, "", "", "");
+                    $paz->AddDB();
+                    echo "Aggiunto paziente: " . $cognome . " " . $nome . "<br>";
+                }
             }
         }
 
