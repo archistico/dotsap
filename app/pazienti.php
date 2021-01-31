@@ -148,6 +148,8 @@ class Pazienti
     public function Cancella($f3, $params)
     {
         $id = $f3->get('POST.id');
+        \App\Naotao\Model\Naotao::DeleteByFkpaziente($id);
+        \App\Covid\Model\Covid::DeleteByFkpaziente($id);
         \App\Paziente::CancellaByID($id);
 
         \App\Flash::instance()->addMessage("Paziente #$id cancellato", 'success');
