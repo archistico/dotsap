@@ -79,6 +79,8 @@ class Impostazioni
 
     public function SvuotaAntinfluenzale($f3)
     {
+        \App\Vaccini\Vaccino::SvuotaTabellaDepositi();
+        \App\Vaccini\Vaccino::SvuotaTabellaPrenotazioni();
         \App\Vaccini\Vaccino::SvuotaTabellaAntinfluenzale();
         \App\Vaccini\Vaccino::SvuotaTabellaVaccinabili();
         \App\Flash::instance()->addMessage('Tabella vaccini antinfluenzali e vaccinabili svuotata', 'success');

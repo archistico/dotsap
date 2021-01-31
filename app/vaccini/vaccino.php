@@ -207,4 +207,24 @@ class Vaccino
 
         $db->commit();
     }
+
+    public static function SvuotaTabellaPrenotazioni()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $db->begin();
+        $db->exec("DELETE FROM prenotazioni;");
+
+        $db->commit();
+    }
+
+    public static function SvuotaTabellaDepositi()
+    {
+        $db = (\App\Db::getInstance())->connect();
+
+        $db->begin();
+        $db->exec("DELETE FROM depositi;");
+
+        $db->commit();
+    }
 }

@@ -1,7 +1,9 @@
 <?php
+
 namespace App;
 
-class Paziente {
+class Paziente
+{
 
     // dati paziente
     public $id;
@@ -16,7 +18,7 @@ class Paziente {
     public $lavoro;
     public $note;
     public $email;
-    
+
     // dati privacy
     public $data;
     public $segreteria;
@@ -105,7 +107,7 @@ class Paziente {
 
     public function getData()
     {
-        if(is_null($this->data) || empty($this->data)) {
+        if (is_null($this->data) || empty($this->data)) {
             return null;
         } else {
             $data = \DateTime::createFromFormat('Y-m-d', $this->data);
@@ -121,7 +123,7 @@ class Paziente {
         $sql = "SELECT * FROM pazienti WHERE cognome LIKE '$lettera%'";
         $pazientiArray = $db->exec($sql);
 
-        foreach($pazientiArray as $paz) {
+        foreach ($pazientiArray as $paz) {
             $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"], $paz["datacovid"]);
             $t->data = $paz["data"];
             $t->datafirma = $t->getData();
@@ -144,7 +146,7 @@ class Paziente {
         $sql = "SELECT * FROM pazienti WHERE stato = '$stato' ORDER BY datacovid ASC";
         $pazientiArray = $db->exec($sql);
 
-        foreach($pazientiArray as $paz) {
+        foreach ($pazientiArray as $paz) {
             $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"], $paz["datacovid"]);
             $t->data = $paz["data"];
             $t->datafirma = $t->getData();
@@ -169,7 +171,7 @@ class Paziente {
         $sql = "SELECT * FROM pazienti WHERE note LIKE '%$str%'";
         $pazientiArray = $db->exec($sql);
 
-        foreach($pazientiArray as $paz) {
+        foreach ($pazientiArray as $paz) {
             $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"], $paz["datacovid"]);
             $t->data = $paz["data"];
             $t->datafirma = $t->getData();
@@ -193,7 +195,7 @@ class Paziente {
         $sql = "SELECT * FROM pazienti WHERE cognome LIKE '$testoRicerca%' OR nome  LIKE '$testoRicerca%';";
         $pazientiArray = $db->exec($sql);
 
-        foreach($pazientiArray as $paz) {
+        foreach ($pazientiArray as $paz) {
             $t = new Paziente($paz["id"], $paz["cognome"], $paz["nome"], $paz["datanascita"], $paz["sesso"], $paz["codicefiscale"], $paz["indirizzo"], $paz["citta"], $paz["telefono"], $paz["lavoro"], $paz["note"], $paz["stato"], $paz["email"], $paz["datacovid"]);
             $t->data = $paz["data"];
             $t->datafirma = $t->getData();
@@ -275,15 +277,16 @@ class Paziente {
 
     public function getPrefisso()
     {
-        if($this->sesso == 'M') {
+        if ($this->sesso == 'M') {
             return "Sig.";
         } else {
             return "Sig.ra";
         }
     }
 
-    public function getFirmata() {
-        if(is_null($this->data) || empty($this->data)) {
+    public function getFirmata()
+    {
+        if (is_null($this->data) || empty($this->data)) {
             return 0;
         } else {
             return 1;
@@ -296,7 +299,7 @@ class Paziente {
             'id'            => $this->id,
             'cognome'       => $this->cognome,
             'nome'          => $this->nome,
-            'nomecompleto'  => $this->cognome . " ". $this->nome,
+            'nomecompleto'  => $this->cognome . " " . $this->nome,
             'datanascita'   => $this->datanascita,
             'sesso'         => $this->sesso,
             'codicefiscale' => $this->codicefiscale,
@@ -327,7 +330,7 @@ class Paziente {
         $db = (\App\Db::getInstance())->connect();
 
         $sql = "SELECT * FROM pazienti WHERE data IS NOT NULL AND data != '' ORDER BY data ASC, cognome ASC, nome ASC";
-        
+
         return $db->exec($sql);
     }
 
@@ -339,10 +342,10 @@ class Paziente {
         $sql = "SELECT id, cognome, nome, datanascita FROM pazienti";
         $pazientiArray = $db->exec($sql);
 
-        foreach($pazientiArray as $paz) {
+        foreach ($pazientiArray as $paz) {
             $risposta[] = [
                 'id' => $paz["id"],
-                'nomecompleto' => $paz["cognome"] . " ". $paz["nome"],
+                'nomecompleto' => $paz["cognome"] . " " . $paz["nome"],
                 'datanascita' => $paz["datanascita"]
             ];
         }
@@ -397,22 +400,76 @@ class Paziente {
         $db->commit();
     }
 
-    public static function ImportaCSV($csv) 
+    public static function ImportaCSV($csv)
     {
         $csv = strtoupper($csv);
         $array_csv = explode("\n", $csv);
 
-        foreach($array_csv as $linea) {
-            if(!empty($linea)) {
-                echo $linea."<br>";
+        foreach ($array_csv as $linea) {
+            if (!empty($linea)) {
+
+                $linea = self::CLEAN_TEXT($linea);
+
+                echo $linea . "<br>";
                 $parti = preg_split("/[|]/", $linea);
-                Utilita::Dump($parti);
-            }            
+
+                /* cognome|nome|sesso|nascita|codice_fiscale|eta|telefono|cellulare */
+
+                $cognome = $parti[0];
+                $nome = $parti[1];
+                $datanascita = $parti[2];
+                $sesso = $parti[3];
+                $codicefiscale = $parti[4];
+                $eta = $parti[5];
+                $telefono = self::CLEAN_ONLY_NUMBER_SPACE($parti[6]);
+                $cellulare = self::CLEAN_ONLY_NUMBER_SPACE($parti[7]);
+
+                if($telefono == $cellulare) {
+                    if(!empty($telefono)) {
+                        $recapito = self::CLEAN_TEXT($telefono);
+                    }
+                    if(!empty($cellulare)) {
+                        $recapito = self::CLEAN_TEXT($cellulare);
+                    }
+                } else {
+                    $recapito = self::CLEAN_TEXT($telefono. " ". $cellulare);
+                }                
+
+                Utilita::Dump($recapito);
+            }
         }
 
         // CORREGGERE SQL PAZIENTE CON :cognome ecc.
 
         // $paz = new Paziente($cognome, $nome, $datanascita, $sesso, $codicefiscale, $indirizzo, $citta, $telefono);
         // $paz->AddDB();
+    }
+
+    private static function CLEAN_TEXT($text)
+    {
+        if (!empty($text)) {
+            $text = str_replace("- ", " - ", $text);
+            $text = str_replace(" -", " - ", $text);
+            $text = str_replace("     ", " ", $text);
+            $text = str_replace("    ", " ", $text);
+            $text = str_replace("   ", " ", $text);
+            $text = str_replace("  ", " ", $text);
+
+            $text = str_replace(array("\n", "\r"), "", $text);
+            if (!empty($text)) {
+                $text = trim($text);
+            }
+        }
+        return $text;
+    }
+
+    private static function CLEAN_ONLY_NUMBER_SPACE($text)
+    {
+        if (!empty($text)) {
+            $output = preg_replace('/[^0-9 ]/', '', $text);
+            return $output;
+        } else {
+            return $text;
+        }
     }
 }
