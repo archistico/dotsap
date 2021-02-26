@@ -157,7 +157,7 @@ $f3->route('GET @autentica: /autentica', '\App\Auth->Autentica');
 $f3->route('GET @amministrazione: /amministrazione', '\App\Admin->Amministrazione');
 
 // Impostazioni
-$f3->route('GET  @impostazioni:                    /impostazioni',                    '\App\Impostazioni->Home');
+$f3->route('GET  @impostazioni:                     /impostazioni',                      '\App\Impostazioni->Home');
 
 $f3->route('GET  @impostazionisvuotaricette:        /impostazioni/svuotaricette',        '\App\Impostazioni->SvuotaRicette');
 $f3->route('GET  @impostazionisvuotaprivacy:        /impostazioni/svuotaprivacy',        '\App\Impostazioni->SvuotaPrivacy');
@@ -169,6 +169,10 @@ $f3->route('GET  @impostazionisvuotapazienti:       /impostazioni/svuotapazienti
 
 $f3->route('GET  @impostazioni_import_pazienti:    /impostazioni/import/pazienti',       '\App\Impostazioni->ImportPazienti');
 $f3->route('POST @impostazioni_import_pazienti_db: /impostazioni/import/pazienti',       '\App\Impostazioni->ImportPazientiDb');
+
+$f3->route('GET  @impostazioni_converti_nomi:      /impostazioni/converti/nomi',         '\App\Impostazioni->ConvertiNomi');
+$f3->route('POST @impostazioni_converti_nomi_db:   /impostazioni/converti/nomi',         '\App\Impostazioni->ConvertiNomiDb');
+
 
 // Utenti
 $f3->route('GET  @utente_nuovo:        /impostazioni/utente/nuovo',        '\App\Utenti->Nuovo');

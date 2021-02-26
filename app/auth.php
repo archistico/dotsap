@@ -13,7 +13,7 @@ class Auth
         $f3->set('SESSION.csrf', $csrf);
 
         // Reset persistenza utente
-        $f3->set('COOKIE.sessionName', null, 86400);
+        $f3->set('COOKIE.sessionName', null, null);
 
         echo \Template::instance()->render('templates/login.htm');
     }

@@ -100,4 +100,11 @@ class Impostazioni
         \App\Flash::instance()->addMessage('Tabella pazienti svuotata e tutte quelle collegate', 'success');
         $f3->reroute('@impostazioni');
     }
+
+    public function ConvertiNomi($f3)
+    {
+        Paziente::ConvertiNomi();
+        \App\Flash::instance()->addMessage('Conversione pazienti riuscita', 'success');
+        $f3->reroute('@impostazioni');
+    } 
 }
