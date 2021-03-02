@@ -481,26 +481,31 @@ class Paziente
             $nome = strtoupper($paz["nome"]);
             $datanascita = $paz["datanascita"];
 
-            $anno_in_corso = date("Y");
-
-            $parti = preg_split("/[\/]/", $datanascita);
-            $anno_due_cifre = $parti[2];
-
-            $t1 = intval("19".$anno_due_cifre);
-            $t2 = intval("20".$anno_due_cifre);
-
-            $diff_t1 = $anno_in_corso - $t1;
-            $diff_t2 = $anno_in_corso - $t2;
-
-            if($diff_t2<=3) {
-                $centenario = "19";
+            if (strlen($datanascita) == 10) {
+                // data già completa
+                $datanascita_completa = $datanascita;
             } else {
-                $centenario = "20";
+                // data da correggere
+                $anno_in_corso = date("Y");
+
+                $parti = preg_split("/[\/]/", $datanascita);
+                $anno_due_cifre = $parti[2];
+
+                $t1 = intval("19" . $anno_due_cifre);
+                $t2 = intval("20" . $anno_due_cifre);
+
+                $diff_t1 = $anno_in_corso - $t1;
+                $diff_t2 = $anno_in_corso - $t2;
+
+                if ($diff_t2 <= 3) {
+                    $centenario = "19";
+                } else {
+                    $centenario = "20";
+                }
+                Utilita::Dump([$diff_t1, $diff_t2]);
+
+                $datanascita_completa = substr($datanascita, 0, 6) . $centenario . substr($datanascita, -2);
             }
-
-            Utilita::Dump([$diff_t1, $diff_t2]);
-
-            $datanascita_completa = substr($datanascita, 0, 6) . $centenario . substr($datanascita, -2);
 
             Utilita::Dump($datanascita_completa);
         }
