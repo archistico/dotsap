@@ -469,7 +469,6 @@ class Paziente
     public static function ConvertiNomi()
     {
         $db = (\App\Db::getInstance())->connect();
-        $risposta = [];
 
         $sql = "SELECT id, cognome, nome, datanascita FROM pazienti";
         $pazientiArray = $db->exec($sql);
@@ -497,20 +496,22 @@ class Paziente
                 $diff_t1 = $anno_in_corso - $t1;
                 $diff_t2 = $anno_in_corso - $t2;
 
-                if ($diff_t2 <= 3) {
+                if ($diff_t2 < 6) {
                     $centenario = "19";
                 } else {
                     $centenario = "20";
                 }
-                Utilita::Dump([$diff_t1, $diff_t2]);
-
                 $datanascita_completa = substr($datanascita, 0, 6) . $centenario . substr($datanascita, -2);
             }
 
-            Utilita::Dump($datanascita_completa);
+            $sql = "UPDATE pazienti SET cognome = :cognome, nome = :nome, datanascita = :datanascita  WHERE id=:id;";
+            $result = $db->exec($sql, [
+                ':id' => $id,
+                ':cognome' => $cognome,
+                ':nome' => $nome,
+                ':datanascita' => $datanascita_completa,
+            ]);
         }
-
-        die();
     }
 
     private static function CLEAN_TEXT($text)
