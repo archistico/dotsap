@@ -122,52 +122,37 @@ class Presenza
 
         $anno_precedente = null;
         $mese_precedente = null;
+        $giorno_precedente = null;
 
-        $totale_ore = 0;
-        $totale_minuti = 0;
+        $risposta = [];
 
         // ottengo gli anni da considerare
         foreach ($listaArray as $p) {
             $data = explode("-", $p['data']);
             $anno = $data[0];
             $mese = $data[1];
+            $giorno = $data[2];
 
             $entrata = new \Datetime($p['entrata']);
             $uscita = new \Datetime($p['uscita']);
 
             $ore_lavorate = date_diff($uscita, $entrata);
-            $ore = $ore_lavorate->format("%h");
-            $minuti = $ore_lavorate->format("%i");
+            $oreminuti = explode(":",$ore_lavorate->format("%h:%i"));
+            $ore = $oreminuti[0];
+            $minuti = $oreminuti[1];
+            $totale_ore = round($ore + $minuti / 60, 2);
 
+            if(($anno_precedente != $anno) || ($mese_precedente != $mese)) {
+                $anno_precedente = $anno;
+                $mese_precedente = $mese;
 
-            if (($totale_minuti + $minuti) >= 60) {
-                $totale_ore += 1 + $ore;
-                $totale_minuti += $minuti - 60;
+                $risposta[$anno_precedente][$mese_precedente] = $totale_ore;
             } else {
-                $totale_ore += $ore;
-                $totale_minuti += $minuti;
+                $risposta[$anno_precedente][$mese_precedente] += $totale_ore;
             }
-
-            $risposta[] = [
-                'periodo' => $anno . " " . $mese,
-                'ore' => $totale_ore . ":" . str_pad($totale_minuti, 2, "0", STR_PAD_LEFT)
-            ];
         }
 
-        Utilita::Dump($risposta);
-        Utilita::DumpDie($totale_ore . ":" . str_pad($totale_minuti, 2, "0", STR_PAD_LEFT));
-
+        //Utilita::DumpDie($risposta);
         return $risposta;
-
-        // return [
-        //     [
-        //         "periodo" => "ottobre 2020", 
-        //         "ore" => "80"
-        //     ],
-        //     [
-        //         "periodo" => "novembre 2020", 
-        //         "ore" => "100"
-        //     ],
-        // ];
     }
 }

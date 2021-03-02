@@ -1,4 +1,4 @@
-<h2>STATISTICHE PRESENZE</h2>
+<h2>CONTEGGI PRESENZE</h2>
 <div class="row">
     <div class="col-md-12">
         <!-- table-striped -->
@@ -6,17 +6,24 @@
             <thead>
             <tr>
                 <th scope="col">PERIODO</th>
-                <th scope="col">ORE</th>
+                <th scope="col">TOTALE ORE</th>
             </tr>
             </thead>
             <tbody>
-            <repeat group="{{ @lista }}" value="{{ @d }}">
+            <repeat group="{{ @lista }}"  key="{{ @anno }}" value="{{ @mesi }}">
+                <repeat group="{{ @mesi }}" key="{{ @mese }}" value="{{ @ore }}">
                 <tr>
-                    <td scope="row">{{ @d.periodo }}</td>
-                    <td>{{ @d.ore }}</td>
+                    <td>{{ @anno }}/{{ @mese }}</td>
+                    <td>{{ @ore }}</td>                   
                 </tr>
+                </repeat>
             </repeat>
             </tbody>
         </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'amministrazione' | alias }}">Torna indietro</a>
     </div>
 </div>
