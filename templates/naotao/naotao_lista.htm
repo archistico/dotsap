@@ -66,9 +66,21 @@
                 <tr>
                     <td>{{ @s.cognome }} {{ @s.nome }} ({{ @s.datanascita }})</td>
                     <td>{{ @s.farmaco }}</td>
-                    <td>{{ @s.dataultimiesami | datatodmy }}</td>
-                    <td>{{ @s.allegatocompilato | sino }}</td>
-                    <td>{{ @s.datafollowup | datatodmy }}</td>
+                    <td><check if="{{ @s.dataultimiesami == null }}"><true><span class="text-danger"><i class="fas fa-exclamation-triangle"></i></span></true><false>{{ @s.dataultimiesami | datatodmy }}</false></check></td>
+                    <td><check if="{{ @s.allegatocompilato == 1 }}"><true>Sì</true><false><span class="text-danger"><i class="fas fa-exclamation-triangle"></i></span></false></check></td>
+                    
+                    <td>
+                        <check if="{{ @s.datafollowup == null }}">
+                            <true><span class="text-danger"><i class="fas fa-exclamation-triangle"></i></span></true>
+                            <false>
+                                <check if="{{ @s.datafollowup < @oggi }}">
+                                    <true><span class="text-danger"><i class="fas fa-hourglass-end"></i> {{ @s.datafollowup | datatodmy }}</span></true>
+                                    <false>{{ @s.datafollowup | datatodmy }}</false>
+                                </check>
+                            </false>
+                        </check>
+                    </td>
+
                     <td>{{ @s.esamiprescritti | sino }}</td>
                     <td>{{ @s.convocare | sino }}</td>
                     <td>{{ @s.note }}</td>

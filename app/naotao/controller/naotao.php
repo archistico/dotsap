@@ -123,6 +123,8 @@ class Naotao
       $listapazienti = \App\Paziente::ReadAllName();
       $f3->set('lista_pazienti', $listapazienti);
 
+      $f3->set('oggi', date("Y-m-d"));
+
       $f3->set('titolo', 'Nao/Tao');
       $f3->set('contenuto', 'naotao/naotao_lista.htm');
       $f3->set('script', 'naotao.js');
