@@ -1,0 +1,100 @@
+<div class="row">
+   <div class="col-md-12">
+       <form method="POST" action="{{@BASE}}{{ 'bilancio_nuovo_db' | alias }}">
+
+<div class="row">
+    <div class="col-md-6">
+       <div class="form-group">
+          <label for="entratauscita">Entrata / Uscita</label>
+          <select class="form-control select2" id="entratauscita" name="entratauscita">
+             <repeat group="{{ @entratauscita }}" value="{{ @elemento }}">
+                <option value="{{ @elemento }}">{{ @elemento }}</option>
+             </repeat>
+          </select>
+       </div>
+    </div>
+
+    <div class="col-md-6">
+       <div class="form-group">
+          <label for="lavoroprivato">Lavoro / Privato</label>
+          <select class="form-control select2" id="lavoroprivato" name="lavoroprivato">
+             <repeat group="{{ @lavoroprivato }}" value="{{ @elemento }}">
+                <option value="{{ @elemento }}">{{ @elemento }}</option>
+             </repeat>
+          </select>
+       </div>
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-md-12">
+       <div class="form-group">
+          <label for="tipologia">Tipologia</label>
+          <select class="form-control select2" id="tipologia" name="tipologia">
+             <repeat group="{{ @tipologia }}" value="{{ @elemento }}">
+                <option value="{{ @elemento }}">{{ @elemento }}</option>
+             </repeat>
+          </select>
+       </div>
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-md-4">
+       <div class="form-group">
+          <label for="totale">Totale [€]</label>
+          <input type="number" class="form-control" id="totale" name="totale" value=0 min=0 max=99999 step=0.01>
+       </div>
+    </div>
+ 
+    <div class="col-md-4">
+       <div class="form-group">
+          <label for="tasse">Tasse [€]</label>
+          <input type="number" class="form-control" id="tasse" name="tasse" value=0 min=0 max=99999 step=0.01>
+       </div>
+    </div>
+ 
+    <div class="col-md-4">
+       <div class="form-group">
+          <label for="commissioni">Commissioni [€]</label>
+          <input type="number" class="form-control" id="commissioni" name="commissioni" value=0 min=0 max=99999 step=0.01>
+       </div>
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-md-6">
+       <div class="form-group">
+          <label for="data">Data</label>
+          <input type="date" class="form-control" id="data" name="data">
+       </div>
+    </div>
+    <div class="col-md-6">
+       <div class="form-group">
+          <label for="chi">Chi</label>
+          <select class="form-control select2" id="chi" name="chi">
+             <repeat group="{{ @chi }}" value="{{ @elemento }}">
+                <option value="{{ @elemento }}">{{ @elemento }}</option>
+             </repeat>
+          </select>
+       </div>
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-md-12">
+       <div class="form-group">
+          <label for="note">Note</label>
+          <input type="text" class="form-control" id="note" placeholder="" name="note">
+       </div>
+    </div>
+ </div>
+ <div class="row">
+   <div class="col-md-6">
+       <a class="btn btn-secondary btn-block btn-lg" href="{{@BASE}}{{ 'bilancio' | alias }}">Annulla</a>
+   </div>
+   <div class="col-md-6">
+       <button type="submit" class="btn btn-primary btn-block btn-lg">Registra</button>
+   </div>
+</div>
+
+
+</form>
+</div>
+</div>

@@ -211,7 +211,7 @@ $f3->route('GET  @naotao_cancella:     /naotao/cancella/@id',       '\App\Naotao
 $f3->route('POST @naotao_cancella_db:  /naotao/cancella/@id',       '\App\Naotao\Controller\Naotao->CancellaDb');
 
 // BILANCIO
-$f3->route('GET  @bilancio:              /bilancio',                    '\App\Bilancio\Controller\Bilancio->Home');
+$f3->route('GET  @bilancio:              /bilancio',                    '\App\Bilancio\Controller\Bilancio->Nuovo');
 $f3->route('GET  @bilancio_lista:        /bilancio/lista',              '\App\Bilancio\Controller\Bilancio->Lista');
 $f3->route('GET  @bilancio_nuovo:        /bilancio/nuovo',              '\App\Bilancio\Controller\Bilancio->Nuovo');
 $f3->route('POST @bilancio_nuovo_db:     /bilancio/nuovo',              '\App\Bilancio\Controller\Bilancio->NuovoDb');
