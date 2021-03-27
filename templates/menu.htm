@@ -43,6 +43,11 @@
       </a>
     </li>
     <li class="nav-item">
+      <a class="nav-link <check if=" {{ @titolo=='Bilancio' }} "><true>active</true></check>" href="{{@BASE}}{{ 'bilancio' | alias }}">
+      Bilancio
+      </a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link <check if=" {{ @titolo=='Amministrazione' }} "><true>active</true></check>" href="{{@BASE}}{{ 'amministrazione' | alias }}">
         Amministrazione
       </a>
