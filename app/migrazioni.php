@@ -90,6 +90,8 @@ class Migrazioni
         $this->CreazioneTabella("prenotazioni", "CREATE TABLE 'prenotazioni' ( 'idprenotazione' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'data' TEXT, 'ora' TEXT, 'fkpersona' INTEGER, 'antinfluenzale' TEXT, 'antipneumococco' TEXT, 'fatto' INTEGER );");
         $this->CreazioneTabella("covid", "CREATE TABLE 'covid' ('id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'fkpaziente' INTEGER NOT NULL, 'datascheda' TEXT, 'datatampone' TEXT, 'stato' TEXT, 'clinica' TEXT, 'comorbidita' TEXT, 'presaincarico' TEXT, 'terapia' TEXT, 'o2'	TEXT, 'esami' TEXT, 'note' TEXT);");
         $this->CreazioneTabella("naotao", "CREATE TABLE 'naotao' ('idnaotao' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'fkpaziente' INTEGER NOT NULL, 'farmaco' TEXT, 'dataultimiesami' TEXT, 'allegatocompilato' INTEGER, 'datafollowup' TEXT, 'esamiprescritti' INTEGER, 'convocare' INTEGER, 'note' TEXT);");
+        $this->CreazioneTabella("bilancio", "CREATE TABLE 'bilancio' ('idbilancio' INTEGER NOT NULL UNIQUE, 'entratauscita' TEXT NOT NULL, 'lavoroprivato' TEXT NOT NULL, 'tipologia' TEXT NOT NULL, 'totale' NUMERIC NOT NULL DEFAULT 0, 'tasse' NUMERIC DEFAULT 0, 'commissioni' NUMERIC DEFAULT 0, 'data' TEXT NOT NULL, 'chi' TEXT NOT NULL, 'note' TEXT, PRIMARY KEY('idbilancio' AUTOINCREMENT));");
+        $this->CreazioneTabella("bilanciotipo", "CREATE TABLE 'bilanciotipo' ('idbilanciotipo' INTEGER NOT NULL UNIQUE, 'categoria' TEXT NOT NULL, 'dettaglio' TEXT NOT NULL, PRIMARY KEY('idbilanciotipo' AUTOINCREMENT));");
 
         //$this->CancellaTabella( "richieste_eliminate");
         $this->CreazioneTabella("richieste_eliminate", "CREATE TABLE IF NOT EXISTS 'richieste_eliminate' ( id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'paziente' TEXT NOT NULL, 'data' TEXT NOT NULL, 'farmaco1' TEXT, 'farmaco2' TEXT, 'farmaco3' TEXT, 'farmaco4' TEXT, 'farmaco5' TEXT, 'farmaco6' TEXT, 'farmaco7' TEXT, 'farmaco8' TEXT, 'farmaco9' TEXT, 'note' TEXT );");
@@ -98,13 +100,15 @@ class Migrazioni
         $this->CreazioneTabella("utente", "CREATE TABLE IF NOT EXISTS 'utente' ( 'idutente'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'username' TEXT UNIQUE, 'password' TEXT NOT NULL, 'role' TEXT NOT NULL);");
 
         //----------- UPDATE TABELLE -----------------
+        /*
         $this->AggiornaTabella("pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'lavoro' TEXT;");
         $this->AggiornaTabella("pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'stato' TEXT;");
         $this->AggiornaTabella("pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'note' TEXT;");
         $this->AggiornaTabella("pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'email' TEXT;");
         $this->AggiornaTabella("pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'invioricette' INTEGER NOT NULL DEFAULT 0;");
         $this->AggiornaTabella("pazienti", "ALTER TABLE 'pazienti' ADD COLUMN 'datacovid' TEXT;");
-
+        */
+        
         $f3->set('messaggi', $this->messaggi);
         $f3->set('titolo', 'Migrazioni');
         $f3->set('contenuto', 'migrazioni/migrazioni.htm');

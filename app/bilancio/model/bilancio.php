@@ -32,7 +32,7 @@ class Bilancio
    public function Insert()
    {
       try {
-         $db = (\app\Model\Db::getInstance())->connect();
+         $db = (\app\Db::getInstance())->connect();
          $sql = "INSERT INTO bilancio (idbilancio, entratauscita, lavoroprivato, tipologia, totale, tasse, commissioni, data, chi, note)
          VALUES (:idbilancio, :entratauscita, :lavoroprivato, :tipologia, :totale, :tasse, :commissioni, :data, :chi, :note)";
 
@@ -60,9 +60,8 @@ class Bilancio
    public function Update()
    {
       try {
-         $db = (\app\Model\Db::getInstance())->connect();
+         $db = (\app\Db::getInstance())->connect();
          $sql = "UPDATE bilancio SET 
-            idbilancio = :idbilancio, 
             entratauscita = :entratauscita, 
             lavoroprivato = :lavoroprivato, 
             tipologia = :tipologia, 
@@ -71,7 +70,8 @@ class Bilancio
             commissioni = :commissioni, 
             data = :data, 
             chi = :chi, 
-            note = :note
+            note = :note 
+            WHERE idbilancio = :idbilancio
          ";
 
          $db->begin();
@@ -101,7 +101,7 @@ class Bilancio
 
    public static function SelectById($idbilancio)
    {
-      $db = (\app\Model\Db::getInstance())->connect();
+      $db = (\app\Db::getInstance())->connect();
       $sql = "SELECT * FROM bilancio WHERE idbilancio = :idbilancio";
       $lista = $db->exec($sql, [
          ':idbilancio' => $idbilancio
@@ -111,7 +111,7 @@ class Bilancio
 
    public static function SelectAll()
    {
-      $db = (\app\Model\Db::getInstance())->connect();
+      $db = (\app\Db::getInstance())->connect();
       $sql = "SELECT * FROM bilancio";
       $lista = $db->exec($sql, []);
       return $lista;
@@ -119,7 +119,7 @@ class Bilancio
 
    public static function DeleteById($idbilancio)
    {
-      $db = (\app\Model\Db::getInstance())->connect();
+      $db = (\app\Db::getInstance())->connect();
       $sql = "DELETE FROM bilancio WHERE idbilancio = :idbilancio";
       $db->exec($sql, [
          ':idbilancio' => $idbilancio

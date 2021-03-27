@@ -23,16 +23,16 @@ class Bilancio
       $chi = $f3->get('POST.chi');
       $note = $f3->get('POST.note');
 
-      $bilancio = new \app\Model\Bilancio(null, $entratauscita, $lavoroprivato, $tipologia, $totale, $tasse, $commissioni, $data, $chi, $note);
+      $bilancio = new \app\Bilancio\Model\Bilancio(null, $entratauscita, $lavoroprivato, $tipologia, $totale, $tasse, $commissioni, $data, $chi, $note);
       $bilancio->Insert();
 
-      \app\Helper\Flash::instance()->addMessage('Bilancio aggiunto', 'success');
+      \app\Flash::instance()->addMessage('Bilancio aggiunto', 'success');
       $f3->reroute('@bilancio_lista');
    }
 
    public function Modifica($f3, $params) {
       $idbilancio = $params['id'];
-      $elemento = \app\Model\Bilancio::SelectById($idbilancio);
+      $elemento = \app\Bilancio\Model\Bilancio::SelectById($idbilancio);
       $f3->set('elemento', $elemento);
 
       $f3->set('titolo', 'Bilancio');
@@ -54,15 +54,15 @@ class Bilancio
       $chi = $f3->get('POST.chi');
       $note = $f3->get('POST.note');
 
-      $bilancio = new \app\Model\Bilancio($idbilancio, $entratauscita, $lavoroprivato, $tipologia, $totale, $tasse, $commissioni, $data, $chi, $note);
+      $bilancio = new \app\Bilancio\Model\Bilancio($idbilancio, $entratauscita, $lavoroprivato, $tipologia, $totale, $tasse, $commissioni, $data, $chi, $note);
       $bilancio->Update();
 
-      \app\Helper\Flash::instance()->addMessage('Bilancio modificato', 'success');
+      \app\Flash::instance()->addMessage('Bilancio modificato', 'success');
       $f3->reroute('@bilancio_lista');
    }
 
    public function Lista($f3) {
-      $lista = \app\Model\Bilancio::SelectAll();
+      $lista = \app\Bilancio\Model\Bilancio::SelectAll();
       $f3->set('lista', $lista);
 
       $f3->set('titolo', 'Bilancio');
@@ -73,7 +73,7 @@ class Bilancio
 
    public function Vedi($f3, $params) {
       $idbilancio = $params['id'];
-      $elemento = \app\Model\Bilancio::SelectById($idbilancio);
+      $elemento = \app\Bilancio\Model\Bilancio::SelectById($idbilancio);
       $f3->set('elemento', $elemento);
 
       $f3->set('titolo', 'Bilancio');
@@ -83,7 +83,7 @@ class Bilancio
 
    public function Cancella($f3, $params) {
       $idbilancio = $params['id'];
-      $elemento = \app\Model\Bilancio::SelectById($idbilancio);
+      $elemento = \app\Bilancio\Model\Bilancio::SelectById($idbilancio);
       $f3->set('elemento', $elemento);
 
       $f3->set('titolo', 'Bilancio');
@@ -93,9 +93,9 @@ class Bilancio
 
    public function CancellaDb($f3, $params) {
       $idbilancio = $params['id'];
-      \app\Model\Bilancio::DeleteById($idbilancio);
+      \app\Bilancio\Model\Bilancio::DeleteById($idbilancio);
 
-      \app\Helper\Flash::instance()->addMessage('Bilancio cancellato', 'success');
+      \app\Flash::instance()->addMessage('Bilancio cancellato', 'success');
       $f3->reroute('@bilancio_lista');
    }
 }
