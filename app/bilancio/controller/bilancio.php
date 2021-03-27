@@ -12,6 +12,12 @@ class Bilancio
    }
 
    public function Nuovo($f3) {
+
+      $f3->set('entratauscita', ['Entrata', 'Uscita']);
+      $f3->set('lavoroprivato', ['Lavoro', 'Privato']);
+      $f3->set('tipologia', ['Auto - Carburante']);
+      $f3->set('chi', ['Io', 'Partner', 'Figli', 'Famiglia', 'Amici']);
+
       $f3->set('titolo', 'Bilancio');
       $f3->set('contenuto', 'bilancio/bilancio_nuovo.htm');
       $f3->set('script', 'bilancio_nuovo.js');

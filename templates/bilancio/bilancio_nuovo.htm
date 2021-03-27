@@ -6,7 +6,7 @@
     <div class="col-md-6">
        <div class="form-group">
           <label for="entratauscita">Entrata / Uscita</label>
-          <select class="form-control select2" id="entratauscita" name="entratauscita">
+          <select class="form-control select2" id="entratauscita" name="entratauscita" required>
              <repeat group="{{ @entratauscita }}" value="{{ @elemento }}">
                 <option value="{{ @elemento }}">{{ @elemento }}</option>
              </repeat>
@@ -17,7 +17,7 @@
     <div class="col-md-6">
        <div class="form-group">
           <label for="lavoroprivato">Lavoro / Privato</label>
-          <select class="form-control select2" id="lavoroprivato" name="lavoroprivato">
+          <select class="form-control select2" id="lavoroprivato" name="lavoroprivato" required>
              <repeat group="{{ @lavoroprivato }}" value="{{ @elemento }}">
                 <option value="{{ @elemento }}">{{ @elemento }}</option>
              </repeat>
@@ -29,7 +29,7 @@
     <div class="col-md-12">
        <div class="form-group">
           <label for="tipologia">Tipologia</label>
-          <select class="form-control select2" id="tipologia" name="tipologia">
+          <select class="form-control select2" id="tipologia" name="tipologia" required>
              <repeat group="{{ @tipologia }}" value="{{ @elemento }}">
                 <option value="{{ @elemento }}">{{ @elemento }}</option>
              </repeat>
@@ -63,13 +63,13 @@
     <div class="col-md-6">
        <div class="form-group">
           <label for="data">Data</label>
-          <input type="date" class="form-control" id="data" name="data">
+          <input type="date" class="form-control" id="data" name="data" required>
        </div>
     </div>
     <div class="col-md-6">
        <div class="form-group">
           <label for="chi">Chi</label>
-          <select class="form-control select2" id="chi" name="chi">
+          <select class="form-control select2" id="chi" name="chi" required>
              <repeat group="{{ @chi }}" value="{{ @elemento }}">
                 <option value="{{ @elemento }}">{{ @elemento }}</option>
              </repeat>
