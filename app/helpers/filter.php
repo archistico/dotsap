@@ -6,6 +6,12 @@ use App\Utilita;
 
 class Filter extends \Prefab
 {
+	function euro($qt)
+	{
+		$fmt = new \NumberFormatter('it_IT', \NumberFormatter::CURRENCY);
+		return $fmt->formatCurrency((float)$qt, "EUR");
+	}
+	
 	function sede($val)
 	{
 		if ($val == "1") {

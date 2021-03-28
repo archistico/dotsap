@@ -1,0 +1,62 @@
+<style>
+    .container {
+        max-width: 100%;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- bootstrap style-->
+        <F3:repeat group="{{ \App\Flash::instance()->getMessages() }}" value="{{ @msg }}">
+            <div class="alert alert-{{ @msg.status }} alert-dismissable">
+                {{ @msg.text | esc }}
+            </div>
+        </F3:repeat>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Lista</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-striped" id="bilancio">
+            <thead>
+                <tr>
+                    <th scope="col">Data</th>
+                    <th scope="col">Tipologia</th>                    
+                    <th scope="col">Totale</th>
+                    <th scope="col">Tasse</th>
+                    <th scope="col">Commissioni</th>
+                    <th scope="col">Chi</th>
+                    <th scope="col">Note</th>
+                    <th scope="col" style="width: 50px">#</th>
+                </tr>
+            </thead>
+            <tbody>
+                <repeat group="{{ @lista }}" value="{{ @s }}"></repeat>
+                <tr>
+                    <td>{{ @s.data | datatodmy  }}</td>
+                    <td>{{ @s.entratauscita }} - {{ @s.lavoroprivato }} - {{ @s.tipologia }}</td>
+                    <td>{{ @s.totale | euro }}</td>
+                    <td>{{ @s.tasse | euro }}</td>
+                    <td>{{ @s.commissioni | euro }}</td>
+                    <td>{{ @s.chi }}</td>
+                    <td>{{ @s.note }}</td>
+                    <td scope="row">
+                        <div class="btn-group" role="group" aria-label="Pulsanti">
+                            <a href="{{@BASE}}{{ 'bilancio_modifica', 'id='.@s.idbilancio | alias }}" class="btn btn-warning btn-sm btn-rect"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{@BASE}}{{ 'bilancio_cancella', 'id='.@s.idbilancio | alias }}" class="btn btn-danger btn-sm btn-rect"><i class="fas fa-times"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                </repeat>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+

@@ -80,6 +80,8 @@ class Bilancio
       $f3->set('titolo', 'Bilancio');
       $f3->set('contenuto', 'bilancio/bilancio_lista.htm');
       $f3->set('script', 'bilancio_lista.js');
+      \Template::instance()->filter('datatodmy','\App\Helpers\Filter::instance()->datatodmy');
+      \Template::instance()->filter('euro','\App\Helpers\Filter::instance()->euro');
       echo \Template::instance()->render('templates/base.htm');
    }
 
